@@ -1,5 +1,5 @@
 /**
- * A quant client.
+ * Quant API client.
  */
 
 const request = require('request');
@@ -12,7 +12,7 @@ const querystring = require('querystring');
 import { QuantConfig } from "./config";
 import { QuantURL } from "./helper/quant-url"
 
-export function QuantClient () {
+export function QuantClient() {
 
   const req = util.promisify(request); // eslint-disable-line
   const get = util.promisify(request.get);
@@ -32,7 +32,7 @@ export function QuantClient () {
    * @return {object}
    *   The API response.
    */
-  const handleResponse = function(response) {
+  const handleResponse = function (response) {
     const body = typeof response.body == 'string' ? JSON.parse(response.body) : response.body; // eslint-disable-line max-len
 
     if (typeof body.errors != 'undefined') {
@@ -66,21 +66,21 @@ export function QuantClient () {
     /**
      * Initialize the client
      */
-    init: function() {
-        this.config = {
-            clientid: process.env.QUANT_CUSTOMER,
-            project: process.env.QUANT_PROJECT,
-            token: process.env.QUANT_TOKEN,
-            endpoint: 'https://api.quantcdn.io/v1'
-        };
+    init: function () {
+      this.config = {
+        clientid: process.env.QUANT_CUSTOMER,
+        project: process.env.QUANT_PROJECT,
+        token: process.env.QUANT_TOKEN,
+        endpoint: 'https://api.quantcdn.io/v1'
+      };
 
-        this.headers = {
-            'User-Agent': 'Quant (+http://api.quantcdn.io)',
-            'Quant-Token': this.config.token,
-            'Quant-Customer': this.config.clientid,
-            'Quant-Project': this.config.project,
-            'Content-Type': 'application/json',
-        };
+      this.headers = {
+        'User-Agent': 'Quant (+http://api.quantcdn.io)',
+        'Quant-Token': this.config.token,
+        'Quant-Customer': this.config.clientid,
+        'Quant-Project': this.config.project,
+        'Content-Type': 'application/json',
+      };
     },
     /**
      * Ping the quant API.
@@ -90,15 +90,21 @@ export function QuantClient () {
      *
      * @throws Error.
      */
-    ping: async function() {
-      const options = {
-        url: `${this.config.endpoint}/ping`,
-        json: true,
-        headers,
-      };
+    ping: async function () {
+      try {
+        this.init();
 
-      const res = await get(options);
-      return handleResponse(res);
+        const options = {
+          url: `${this.config.endpoint}/ping`,
+          json: true,
+          headers,
+        };
+
+        const res = await get(options);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -119,61 +125,67 @@ export function QuantClient () {
      * @TODO
      *   - Async iterator for memory 21k items ~ 40mb.
      */
-    meta: async function(unfold = false, exclude=true, extend = {}) {
-      const records = [];
-      const query = Object.assign({
-        page_size: 500,
-        published: true,
-        deleted: false,
-        sort_field: 'last_modified',
-        sort_direction: 'desc',
-      }, extend);
-      const url = `${this.config.endpoint}/global-meta?${querystring.stringify(query)}`;
-      const doUnfold = async function(i) {
-        const res = await get({
-          url: `${url}&page=${i}`,
+    meta: async function (unfold = false, exclude = true, extend = {}) {
+      try {
+        this.init();
+
+        const records = [];
+        const query = Object.assign({
+          page_size: 500,
+          published: true,
+          deleted: false,
+          sort_field: 'last_modified',
+          sort_direction: 'desc',
+        }, extend);
+        const url = `${this.config.endpoint}/global-meta?${querystring.stringify(query)}`;
+        const doUnfold = async function (i) {
+          const res = await get({
+            url: `${url}&page=${i}`,
+            json: true,
+            headers,
+          });
+
+          if (res.body.global_meta && res.body.global_meta.records) {
+            res.body.global_meta.records.map((item) => records.push({ url: item.meta.url, md5: item.meta.md5 }));
+          }
+        };
+
+        let page = 1;
+        const options = {
+          url: `${url}&page=${page}`,
           json: true,
           headers,
-        });
+        };
 
-        if (res.body.global_meta && res.body.global_meta.records) {
-          res.body.global_meta.records.map((item) => records.push({url: item.meta.url, md5: item.meta.md5}));
+        // Seed the record set.
+        const res = await get(options);
+
+        if (!res.body.global_meta) {
+          // If no records have been published then global_meta is not
+          // present in the response.
+          return;
         }
-      };
 
-      let page = 1;
-      const options = {
-        url: `${url}&page=${page}`,
-        json: true,
-        headers,
-      };
+        if (res.body.global_meta.records) {
+          res.body.global_meta.records.map((item) => records.push({ url: item.meta.url, md5: item.meta.md5 }));
+        }
 
-      // Seed the record set.
-      const res = await get(options);
-
-      if (!res.body.global_meta) {
-        // If no records have been published then global_meta is not
-        // present in the response.
-        return;
-      }
-
-      if (res.body.global_meta.records) {
-        res.body.global_meta.records.map((item) => records.push({url: item.meta.url, md5: item.meta.md5}));
-      }
-
-      if (unfold) {
-        page++;
-        while (res.body.global_meta.total_pages >= page) {
-          await doUnfold(page);
+        if (unfold) {
           page++;
+          while (res.body.global_meta.total_pages >= page) {
+            await doUnfold(page);
+            page++;
+          }
         }
-      }
 
-      return {
-        total_pages: res.body.global_meta.total_pages,
-        total_records: res.body.global_meta.total_records,
-        records,
-      };
+        return {
+          total_pages: res.body.global_meta.total_pages,
+          total_records: res.body.global_meta.total_records,
+          records,
+        };
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -199,25 +211,31 @@ export function QuantClient () {
      * @return {object}
      *   The API response.
      */
-    send: async function(file, location, published = true, attachments = false, skipPurge = false, includeIndex = false, extraHeaders = {}, encoding = 'utf-8') {
-      const mimeType = mime.lookup(file);
-      if (mimeType == 'text/html') {
-        if (!location) {
-          const p = path.resolve(process.cwd(), this.config.dir);
-          // If a location isn't given, calculate it.
-          location = path.relative(p, file);
+    send: async function (file, location, published = true, attachments = false, skipPurge = false, includeIndex = false, extraHeaders = {}, encoding = 'utf-8') {
+      try {
+        this.init();
+
+        const mimeType = mime.lookup(file);
+        if (mimeType == 'text/html') {
+          if (!location) {
+            const p = path.resolve(process.cwd(), this.config.dir);
+            // If a location isn't given, calculate it.
+            location = path.relative(p, file);
+          }
+
+          location = QuantURL.prepare(location);
+
+          if (!location.endsWith('.html') && includeIndex) {
+            location = `${location}/index.html`;
+            location = location.replace(/^\/\//, '/');
+          }
+
+          return await this.markup(file, location, published, attachments, extraHeaders, encoding, skipPurge);
+        } else {
+          return await this.file(file, location, false, extraHeaders, skipPurge);
         }
-
-        location = QuantURL.prepare(location);
-
-        if (!location.endsWith('.html') && includeIndex) {
-          location = `${location}/index.html`;
-          location = location.replace(/^\/\//, '/');
-        }
-
-        return await this.markup(file, location, published, attachments, extraHeaders, encoding, skipPurge);
-      } else {
-        return await this.file(file, location, false, extraHeaders, skipPurge);
+      } catch (err) {
+        console.error(err);
       }
     },
 
@@ -242,43 +260,49 @@ export function QuantClient () {
      * @return {object}
      *   The API response.
      */
-    markup: async function(file, location, published = true, attachments = false, extraHeaders = {}, encoding = 'utf-8', skipPurge = false) { // eslint-disable-line max-len
-      if (!Buffer.isBuffer(file)) {
-        if (!location) {
-          const p = path.resolve(process.cwd(), this.config.dir);
-          // If a location isn't given, calculate it.
-          location = path.relative(p, file);
+    markup: async function (file, location, published = true, attachments = false, extraHeaders = {}, encoding = 'utf-8', skipPurge = false) { // eslint-disable-line max-len
+      try {
+        this.init();
+
+        if (!Buffer.isBuffer(file)) {
+          if (!location) {
+            const p = path.resolve(process.cwd(), this.config.dir);
+            // If a location isn't given, calculate it.
+            location = path.relative(p, file);
+          }
+          file = fs.readFileSync(file, [encoding]);
         }
-        file = fs.readFileSync(file, [encoding]);
+
+        const content = file.toString('utf8');
+        location = location.startsWith('/') ? location : `/${location}`;
+
+        if (skipPurge) {
+          headers['Quant-Skip-Purge'] = 'true';
+        }
+
+        const options = {
+          url: `${this.config.endpoint}`,
+          json: true,
+          body: {
+            url: location,
+            find_attachments: attachments,
+            content,
+            published,
+          },
+          headers: {
+            ...headers,
+          },
+        };
+
+        //   if (Object.entries(extraHeaders).length > 0) {
+        //     options.body.headers = extraHeaders;
+        //   }
+
+        const res = await post(options);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
       }
-
-      const content = file.toString('utf8');
-      location = location.startsWith('/') ? location : `/${location}`;
-
-      if (skipPurge) {
-        headers['Quant-Skip-Purge'] = 'true';
-      }
-
-      const options = {
-        url: `${this.config.endpoint}`,
-        json: true,
-        body: {
-          url: location,
-          find_attachments: attachments,
-          content,
-          published,
-        },
-        headers: {
-          ...headers,
-        },
-      };
-
-    //   if (Object.entries(extraHeaders).length > 0) {
-    //     options.body.headers = extraHeaders;
-    //   }
-
-      const res = await post(options);
-      return handleResponse(res);
     },
 
     /**
@@ -300,47 +324,53 @@ export function QuantClient () {
      *
      * @throws Error
      */
-    file: async function(local, location, absolute = false, extraHeaders = {}, skipPurge = false) {
-      if (!Buffer.isBuffer(local)) {
-        if (!location) {
-          const p = path.resolve(process.cwd(), this.config.dir);
-          // If a location isn't given, calculate it.
-          location = path.relative(p, local);
-          location.replace(path.basename(location), '');
+    file: async function (local, location, absolute = false, extraHeaders = {}, skipPurge = false) {
+      try {
+        this.init();
+
+        if (!Buffer.isBuffer(local)) {
+          if (!location) {
+            const p = path.resolve(process.cwd(), this.config.dir);
+            // If a location isn't given, calculate it.
+            location = path.relative(p, local);
+            location.replace(path.basename(location), '');
+          }
+          if (!fs.existsSync(local)) {
+            throw new Error('File is not accessible.');
+          }
+          local = fs.createReadStream(local);
         }
-        if (!fs.existsSync(local)) {
-          throw new Error('File is not accessible.');
+
+        const formData = {
+          data: local,
+        };
+
+        location = location.startsWith('/') ? location : `/${location}`;
+
+        if (skipPurge) {
+          headers['Quant-Skip-Purge'] = 'true';
         }
-        local = fs.createReadStream(local);
+
+        const options = {
+          url: this.config.endpoint,
+          json: true,
+          headers: {
+            ...headers,
+            'Content-Type': 'multipart/form-data',
+            'Quant-File-Url': location,
+          },
+          formData,
+        };
+
+        if (Object.entries(extraHeaders).length > 0) {
+          options.headers['Quant-File-Headers'] = JSON.stringify(extraHeaders);
+        }
+
+        const res = await post(options);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
       }
-
-      const formData = {
-        data: local,
-      };
-
-      location = location.startsWith('/') ? location : `/${location}`;
-
-      if (skipPurge) {
-        headers['Quant-Skip-Purge'] = 'true';
-      }
-
-      const options = {
-        url: this.config.endpoint,
-        json: true,
-        headers: {
-          ...headers,
-          'Content-Type': 'multipart/form-data',
-          'Quant-File-Url': location,
-        },
-        formData,
-      };
-
-      if (Object.entries(extraHeaders).length > 0) {
-        options.headers['Quant-File-Headers'] = JSON.stringify(extraHeaders);
-      }
-
-      const res = await post(options);
-      return handleResponse(res);
     },
 
     /**
@@ -356,23 +386,29 @@ export function QuantClient () {
      *
      * @throws Error.
      */
-    publish: async function(location, revision) {
-      const url = QuantURL.prepare(location);
+    publish: async function (location, revision) {
+      try {
+        this.init();
 
-      if (!revision) {
-        throw Error('Invalid revision ID provided.');
+        const url = QuantURL.prepare(location);
+
+        if (!revision) {
+          throw Error('Invalid revision ID provided.');
+        }
+
+        const options = {
+          url: `${this.config.endpoint}/publish/${revision}`,
+          headers: {
+            ...headers,
+            'Quant-Url': url,
+          },
+          json: true,
+        };
+        const res = await patch(options);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
       }
-
-      const options = {
-        url: `${this.config.endpoint}/publish/${revision}`,
-        headers: {
-          ...headers,
-          'Quant-Url': url,
-        },
-        json: true,
-      };
-      const res = await patch(options);
-      return handleResponse(res);
     },
 
     /**
@@ -385,20 +421,26 @@ export function QuantClient () {
      *
      * @throws Error.
      */
-    unpublish: async function(url) {
-      url = QuantURL.prepare(url);
+    unpublish: async function (url) {
+      try {
+        this.init();
 
-      const options = {
-        url: `${this.config.endpoint}/unpublish`,
-        headers: {
-          ...headers,
-          'Quant-Url': url,
-        },
-        json: true,
-      };
+        url = QuantURL.prepare(url);
 
-      const res = await patch(options);
-      return handleResponse(res);
+        const options = {
+          url: `${this.config.endpoint}/unpublish`,
+          headers: {
+            ...headers,
+            'Quant-Url': url,
+          },
+          json: true,
+        };
+
+        const res = await patch(options);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -417,31 +459,37 @@ export function QuantClient () {
      *
      * @throws Error.
      */
-    redirect: async function(from, to, author, status = 302) {
-      const options = {
-        url: `${this.config.endpoint}/redirect`,
-        headers: {
-          ...headers,
-        },
-        json: true,
-        body: {
-          url: from,
-          redirect_url: to,
-          redirect_http_code: status,
-          published: true,
-        },
-      };
+    redirect: async function (from, to, author, status = 302) {
+      try {
+        this.init();
 
-      if (status < 300 || status > 400) {
-        throw new Error('A valid redirect status code is required');
+        const options = {
+          url: `${this.config.endpoint}/redirect`,
+          headers: {
+            ...headers,
+          },
+          json: true,
+          body: {
+            url: from,
+            redirect_url: to,
+            redirect_http_code: status,
+            published: true,
+          },
+        };
+
+        if (status < 300 || status > 400) {
+          throw new Error('A valid redirect status code is required');
+        }
+
+        //   if (author) {
+        //     options.body.info = {author_user: author};
+        //   }
+
+        const res = await post(options);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
       }
-
-    //   if (author) {
-    //     options.body.info = {author_user: author};
-    //   }
-
-      const res = await post(options);
-      return handleResponse(res);
     },
 
     /**
@@ -463,27 +511,33 @@ export function QuantClient () {
      *
      * @throws Error.
      */
-    proxy: async function(url, destination, published = true, username, password) { // eslint-disable-line max-len
-      const options = {
-        url: `${this.config.endpoint}/proxy`,
-        headers: {
-          ...headers,
-        },
-        json: true,
-        body: {
-          url,
-          destination,
-          published,
-        },
-      };
+    proxy: async function (url, destination, published = true, username, password) { // eslint-disable-line max-len
+      try {
+        this.init();
 
-    //   if (username) {
-    //     options.body.basic_auth_user = username;
-    //     options.body.basic_auth_pass = password;
-    //   }
+        const options = {
+          url: `${this.config.endpoint}/proxy`,
+          headers: {
+            ...headers,
+          },
+          json: true,
+          body: {
+            url,
+            destination,
+            published,
+          },
+        };
 
-      const res = await post(options);
-      return handleResponse(res);
+        //   if (username) {
+        //     options.body.basic_auth_user = username;
+        //     options.body.basic_auth_pass = password;
+        //   }
+
+        const res = await post(options);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -496,19 +550,24 @@ export function QuantClient () {
      *
      * @throw Error.
      */
-    delete: async function(path) {
-      path = path.replace('index.html', '');
+    delete: async function (path) {
+      try {
+        this.init();
+        path = path.replace('index.html', '');
 
-      const options = {
-        url: `${this.config.endpoint}/delete/all`,
-        headers: {
-          ...headers,
-          'Quant-Url': path,
-        },
-      };
+        const options = {
+          url: `${this.config.endpoint}/delete/all`,
+          headers: {
+            ...headers,
+            'Quant-Url': path,
+          },
+        };
 
-      const res = await del(options);
-      return handleResponse(res);
+        const res = await del(options);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -524,23 +583,28 @@ export function QuantClient () {
      *
      * @throws Error.
      */
-    revisions: async function(url, revision = false) {
-      const path = revision ? revision : 'published';
+    revisions: async function (url, revision = false) {
+      try {
+        this.init();
+        const path = revision ? revision : 'published';
 
-      url = url.indexOf('/') == 0 ? url : `/${url}`;
-      url = url.toLowerCase();
-      url = url.replace(/\/?index\.html/, '');
+        url = url.indexOf('/') == 0 ? url : `/${url}`;
+        url = url.toLowerCase();
+        url = url.replace(/\/?index\.html/, '');
 
-      const options = {
-        url: `${this.config.endpoint}/revisions/${path}`,
-        headers: {
-          ...headers,
-          'Quant-Url': url,
-        },
-        json: true,
-      };
-      const res = await get(options);
-      return handleResponse(res);
+        const options = {
+          url: `${this.config.endpoint}/revisions/${path}`,
+          headers: {
+            ...headers,
+            'Quant-Url': url,
+          },
+          json: true,
+        };
+        const res = await get(options);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -550,23 +614,23 @@ export function QuantClient () {
      *
      * @throws Error
      */
-    purge: async function(urlPattern) {
+    purge: async function (urlPattern) {
+      try {
+        this.init();
 
-        try {
-            this.init();
+        const options = {
+          url: `${this.config.endpoint}/purge`,
+          headers: {
+            ...this.headers,
+            'Quant-Url': urlPattern,
+          },
+        };
+        const res = await post(options);
 
-            const options = {
-                url: `${this.config.endpoint}/purge`,
-                headers: {
-                ...this.headers,
-                'Quant-Url': urlPattern,
-                },
-            };
-            const res = await post(options);
-            return handleResponse(res);
-        } catch (err) {
-            console.error(err);
-        }
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -576,28 +640,33 @@ export function QuantClient () {
       *
       * @throws Error
       */
-    searchIndex: async function(filePath) {
-      let data = '';
-
-      // filePath is a JSON file we send the raw content of.
+    searchIndex: async function (filePath) {
       try {
-        data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        this.init();
+        let data = '';
+
+        // filePath is a JSON file we send the raw content of.
+        try {
+          data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        } catch (err) {
+          console.error(err);
+          return;
+        }
+
+        const options = {
+          url: `${this.config.endpoint}/search`,
+          headers: {
+            ...this.headers,
+          },
+          json: true,
+          body: data,
+        };
+        const res = await post(options);
+
+        return handleResponse(res);
       } catch (err) {
         console.error(err);
-        return;
       }
-
-      const options = {
-        url: `${this.config.endpoint}/search`,
-        headers: {
-          ...this.headers,
-        },
-        json: true,
-        body: data,
-      };
-      const res = await post(options);
-
-      return handleResponse(res);
     },
 
     /**
@@ -607,18 +676,23 @@ export function QuantClient () {
       *
       * @throws Error
       */
-    searchRemove: async function(url) {
-      const options = {
-        url: `${this.config.endpoint}/search`,
-        headers: {
-          ...this.headers,
-          'Quant-Url': url,
-        },
-        json: true,
-      };
-      const res = await del(options);
+    searchRemove: async function (url) {
+      try {
+        this.init();
+        const options = {
+          url: `${this.config.endpoint}/search`,
+          headers: {
+            ...this.headers,
+            'Quant-Url': url,
+          },
+          json: true,
+        };
+        const res = await del(options);
 
-      return handleResponse(res);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
+      }
     },
 
 
@@ -627,17 +701,22 @@ export function QuantClient () {
       *
       * @throws Error
       */
-    searchClearIndex: async function() {
-      const options = {
-        url: `${this.config.endpoint}/search/all`,
-        headers: {
-          ...this.headers,
-        },
-        json: true,
-      };
-      const res = await del(options);
+    searchClearIndex: async function () {
+      try {
+        this.init();
+        const options = {
+          url: `${this.config.endpoint}/search/all`,
+          headers: {
+            ...this.headers,
+          },
+          json: true,
+        };
+        const res = await del(options);
 
-      return handleResponse(res);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -645,17 +724,22 @@ export function QuantClient () {
       *
       * @throws Error
       */
-    searchStatus: async function() {
-      const options = {
-        url: `${this.config.endpoint}/search`,
-        headers: {
-          ...this.headers,
-        },
-        json: true,
-      };
-      const res = await get(options);
+    searchStatus: async function () {
+      try {
+        this.init();
+        const options = {
+          url: `${this.config.endpoint}/search`,
+          headers: {
+            ...this.headers,
+          },
+          json: true,
+        };
+        const res = await get(options);
 
-      return handleResponse(res);
+        return handleResponse(res);
+      } catch (err) {
+        console.error(err);
+      }
     },
   };
 };
