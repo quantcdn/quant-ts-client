@@ -7,7 +7,7 @@ Provides a client to common API interfaces on QuantCDN.
 The preferred method for installation is via npm.
 
 ```
-npm i @quantcdn/quant-cli
+npm i @quantcdn/quant-client
 ```
 
 ## Usage
@@ -27,4 +27,4 @@ QuantClient().purge('/path/to/content')
 
 // Purge all QuantCDN edge caches.
 QuantClient().purge('/*')
-``
+```
