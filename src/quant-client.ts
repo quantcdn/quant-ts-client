@@ -67,12 +67,14 @@ export function QuantClient() {
      * Initialize the client
      */
     init: function () {
-      this.config = {
-        clientid: process.env.QUANT_CUSTOMER,
-        project: process.env.QUANT_PROJECT,
-        token: process.env.QUANT_TOKEN,
-        endpoint: 'https://api.quantcdn.io/v1'
-      };
+      if (!('clientid' in this.config)) {
+        this.config = {
+          clientid: process.env.QUANT_CUSTOMER,
+          project: process.env.QUANT_PROJECT,
+          token: process.env.QUANT_TOKEN,
+          endpoint: 'https://api.quantcdn.io/v1'
+        };
+      }
 
       this.headers = {
         'User-Agent': 'Quant (+http://api.quantcdn.io)',
