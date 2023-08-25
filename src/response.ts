@@ -58,9 +58,7 @@ export class PaginatedResponse implements AsyncIterator<any> {
       this.total = body.global_meta.total_pages;
       this.page+=1
       this.hasNext = this.page <= body.global_meta.total_pages
-      const v = JSON.parse(JSON.stringify(body.global_meta));
-      delete v.records
-      console.log(v)
+      // console.log(body.global_meta.records)
       return body.global_meta.records
     } else {
 
@@ -73,7 +71,7 @@ export class PaginatedResponse implements AsyncIterator<any> {
       this.hasNext = this.page <= body.pagination.total_pages;
       this.page+=1
 
-      return body
+      return body.data
     }
   }
 

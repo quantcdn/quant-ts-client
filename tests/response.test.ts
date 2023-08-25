@@ -6,6 +6,8 @@ import * as request from 'request';
 import * as fs from 'fs';
 const stub1 = JSON.parse(fs.readFileSync('./tests/fixtures/stub-page1.json', 'utf8'));
 const stub2 = JSON.parse(fs.readFileSync('./tests/fixtures/stub-page2.json', 'utf8'));
+const metaStub1 = JSON.parse(fs.readFileSync('./tests/fixtures/stub-global-meta-page1.json', 'utf8'));
+const metaStub2 = JSON.parse(fs.readFileSync('./tests/fixtures/stub-global-meta-page2.json', 'utf8'));
 
 class TestClient implements Client {
   public baseUrl:string;
@@ -20,10 +22,18 @@ class TestClient implements Client {
 
   public do(options: request.Options): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (options.qs.page == 1) {
-        resolve(stub1)
+      if (options.url == "https://test.com/meta-test") {
+        if (options.qs.page == 1) {
+          resolve(metaStub1)
+        } else {
+          resolve(metaStub2)
+        }
       } else {
-        resolve(stub2)
+        if (options.qs.page == 1) {
+          resolve(stub1)
+        } else {
+          resolve(stub2)
+        }
       }
     });
   }
@@ -83,19 +93,26 @@ class TestClient implements Client {
 }
 
 describe('response test', () => {
-  test('paginated', async () => {
+  test('global meta paginated', async () => {
     let a = new TestClient('https://test.com', {})
-    let b = await a.get('test')
+    let b = await a.get('meta-test')
     let i = 0
-    for await (const items of b) {
-      i++
-      if (i === 1) {
-        expect(items[0].value).toBe(1)
-      } else {
-        expect(items[0].value).toBe(11)
+    for await (const records of b) {
+      for (const r in records) {
+        i++;
       }
-      expect(items.length).toBe(10)
     }
-    expect(i).toBe(2)
+    expect(i).toBe(20)
+  })
+  test('paginated response', async () => {
+    let a = new TestClient('https://test.com', {})
+    let b = await a.get('paginated')
+    let i = 0
+    for await (const records of b) {
+      for (const r in records) {
+        i++;
+      }
+    }
+    expect(i).toBe(21)
   })
 })

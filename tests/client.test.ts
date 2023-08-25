@@ -110,14 +110,14 @@ describe("Testing QuantClient", () => {
     describe('ping', () => {
       test('success', () => {
         t.project.ping().then(r => {
-          expect(r.url).toBe('https://api.quantcdn.io/api/v1/ping')
+          expect(r.url).toBe('https://api.quantcdn.io/v1/ping')
           expect(r.method).toBe('GET')
         })
       })
     })
     test('meta', () => {
       t.project.meta().then(r => {
-        expect(r.url).toBe('https://api.quantcdn.io/api/v1/meta')
+        expect(r.url).toBe('https://api.quantcdn.io/v1/global-meta')
         expect(r.method).toBe('GET')
       })
     })
@@ -129,7 +129,7 @@ describe("Testing QuantClient", () => {
       }
       test('default', () => {
         t.project.markup(payload).then(r => {
-          expect(r.url).toBe('https://api.quantcdn.io/api/v1/markup')
+          expect(r.url).toBe('https://api.quantcdn.io/v1/markup')
           expect(r.body.content).toBe('this is a test')
           expect(r.body.url).toBe('/test/markup')
           expect(r.body.published).toBe(true)
@@ -163,7 +163,7 @@ describe("Testing QuantClient", () => {
       }
       test('default', () => {
         t.project.publish(payload).then(r => {
-          expect(r.url).toBe('https://api.quantcdn.io/api/v1/publish/1')
+          expect(r.url).toBe('https://api.quantcdn.io/v1/publish/1')
           expect(r.method).toBe('PATCH')
         })
       })
@@ -175,7 +175,7 @@ describe("Testing QuantClient", () => {
       }
       test('default', () => {
         t.project.unpublish(payload).then(r => {
-          expect(r.url).toBe('https://api.quantcdn.io/api/v1/unpublish/1')
+          expect(r.url).toBe('https://api.quantcdn.io/v1/unpublish/1')
           expect(r.method).toBe('PATCH')
         })
       })
@@ -210,7 +210,7 @@ describe("Testing QuantClient", () => {
       }
       test('enabled', () => {
         t.project.proxy(payload).then(r => {
-          expect(r.url).toBe('https://api.quantcdn.io/api/v1/proxy')
+          expect(r.url).toBe('https://api.quantcdn.io/v1/proxy')
           expect(r.method).toBe('POST')
           expect(r.body.destination).toBe('https://location-to-proxy-to.com')
           expect(r.body.url).toBe('/path-to-proxy')
@@ -224,7 +224,7 @@ describe("Testing QuantClient", () => {
       }
       test('default', () => {
         t.project.revisions(payload).then(r => {
-          expect(r.url).toBe('https://api.quantcdn.io/api/v1/revisions/latest')
+          expect(r.url).toBe('https://api.quantcdn.io/v1/revisions/latest')
           expect(r.headers['Quant-Url']).toBe('/test');
         })
       })
@@ -235,7 +235,7 @@ describe("Testing QuantClient", () => {
       }
       test('default', () => {
         t.project.purge(payload).then(r => {
-          expect(r.url).toBe('https://api.quantcdn.io/api/v1/purge')
+          expect(r.url).toBe('https://api.quantcdn.io/v1/purge')
           expect(r.headers['Quant-Url']).toBe('/test');
         })
       })

@@ -1,0 +1,192 @@
+{
+	"global_meta": {
+		"results_limited": false,
+		"page_size": 10,
+		"page": 2,
+		"records": [
+			{
+				"last_modified": "2023-06-29T00:45:36",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "47136c4073fc26a4348ab15e2d7d55da",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1687999536,
+					"byte_length": 29755,
+					"revision_number": 1,
+					"url": "\/about-authority\/authority-meetings",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1687999536
+				}
+			},
+			{
+				"last_modified": "2023-06-29T00:45:36",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "2b131361bd39e12e560bf857bdbb09da",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1687999536,
+					"byte_length": 31433,
+					"revision_number": 1,
+					"url": "\/about-authority\/corporate-documents",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1687999536
+				}
+			},
+			{
+				"last_modified": "2023-06-29T00:45:41",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "08594093ac1e444f68ade17587fe5b14",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1687999541,
+					"byte_length": 36173,
+					"revision_number": 1,
+					"url": "\/about-authority\/information-publication-scheme",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1687999541
+				}
+			},
+			{
+				"last_modified": "2023-06-29T01:58:26",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "30c6769c99864eec0fbe7d1e80e9c97e",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1688003906,
+					"byte_length": 33663,
+					"revision_number": 1,
+					"url": "\/publications",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1688003906
+				}
+			},
+			{
+				"last_modified": "2023-06-29T01:15:57",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "86ba489e6b2a8c87d7b9e224b8a24037",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1688001357,
+					"byte_length": 32157,
+					"revision_number": 1,
+					"url": "\/publications\/targets-progress-advice",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1688001357
+				}
+			},
+			{
+				"last_modified": "2023-06-29T01:16:02",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "17400a89b9e67354606946ac2b4ef0dc",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1688001362,
+					"byte_length": 38344,
+					"revision_number": 1,
+					"url": "\/publications\/legislative-reviews",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1688001362
+				}
+			},
+			{
+				"last_modified": "2023-06-29T01:16:54",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "33b6193568c9c50932d67e3da22df5a7",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1688001414,
+					"byte_length": 38239,
+					"revision_number": 1,
+					"url": "\/publications\/research-reports",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1688001414
+				}
+			},
+			{
+				"last_modified": "2023-06-29T01:18:05",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "7011ba1080dbdf03562c0e2f1fdd576a",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1688001484,
+					"byte_length": 305856,
+					"revision_number": 1,
+					"url": "\/publications\/australias-carbon-sequestration-potential",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1688001485
+				}
+			},
+			{
+				"last_modified": "2023-06-29T01:57:48",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "8118d12874715286d9ad198cfe3dffb4",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1688003867,
+					"byte_length": 33709,
+					"revision_number": 1,
+					"url": "\/publications\/information-climate-change",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1688003868
+				}
+			},
+			{
+				"last_modified": "2023-06-29T01:15:34",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "efcb8e36898b24cea49034e4d86ff091",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1688001334,
+					"byte_length": 30540,
+					"revision_number": 1,
+					"url": "\/public-consultation",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1688001334
+				}
+			}
+		],
+		"total_records": 20,
+		"refine_search": false,
+		"total_pages": 2
+	}
+}
