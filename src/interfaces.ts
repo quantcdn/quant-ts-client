@@ -1,25 +1,23 @@
-import * as types from "./types"
-import * as request from 'request';
+import type * as types from './types'
+import type * as request from 'request'
 
-export interface ClientConstructor {
-  new (baseUrl:string, headers:object): Client
-}
+export type ClientConstructor = new (baseUrl: string, headers: object) => Client
 
 export interface Client {
-  baseUrl:string;
-  headers:object;
+  baseUrl: string
+  headers: object
   do: (options: request.Options) => Promise<any>
-  get: (path:string, qs?: object, headers?: object) => Promise<any>
-  post: (path:string, body?:any, headers?:object, formData?: object, qs?:object) => Promise<any>
-  delete: (path: string, body?:any, headers?:object) => Promise<any>
-  patch: (path:string, body?:any, headers?:object) => Promise<any>
+  get: (path: string, qs?: object, headers?: object) => Promise<any>
+  post: (path: string, body?: any, headers?: object, formData?: object, qs?: object) => Promise<any>
+  delete: (path: string, body?: any, headers?: object) => Promise<any>
+  patch: (path: string, body?: any, headers?: object) => Promise<any>
 }
 
 export interface ProjectApi {
-  ping: () => Promise<any>;
-  meta: () => Promise<any>;
-  markup: (payload:types.MarkupPayload) => Promise<any>;
-  file: (payload:types.FilePayload) => Promise<any>;
+  ping: () => Promise<any>
+  meta: () => Promise<any>
+  markup: (payload: types.MarkupPayload) => Promise<any>
+  file: (payload: types.FilePayload) => Promise<any>
   publish: (payload: types.PublishPayload) => Promise<any>
   unpublish: (payload: types.PublishPayload) => Promise<any>
   redirect: (payload: types.RedirectPayload) => Promise<any>
