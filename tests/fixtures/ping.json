@@ -1,0 +1,21 @@
+{
+	"config": {
+		"fetch": {
+			"user_agent": "Quant Fetch Agent",
+			"use_final_redirect": false,
+			"save_external_redirect_as_content": false,
+			"save_internal_redirect_as_content": true,
+			"redirect_limit": 5
+		},
+		"support_query_param": false,
+		"allow_revision_override": false,
+		"alert": {
+			"enabled": false
+		},
+		"allow_revisions": false,
+		"headers": [],
+		"basic_auth": "",
+		"document_extensions": "doc|docx|pdf|xls|xlsx|ppt|pptx|txt|zip"
+	},
+	"project": "d7"
+}
