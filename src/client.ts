@@ -105,7 +105,8 @@ export class QuantClient {
     })
     this._organization = new Client('https://dashboard.quantcdn.io/api/v1', {
       'User-Agent': 'Quant (+http://api.quantcdn.io)',
-      'Quant-Organization': config.organization,
+      // @todo: Americanise.
+      'Quant-Organisation': config.organization,
       Authorization: `Bearer ${config.bearer}`
     })
   }
@@ -301,7 +302,8 @@ export class QuantClient {
      *   The response object.
      */
     wafLogs: async (payload: types.WafLogsPayload): Promise<any> => {
-      return await this._organization.get('waf/logs')
+      const headers = { 'Quant-Project': payload.project }
+      return await this._organization.get('waf/logs', {}, headers)
     }
   }
 

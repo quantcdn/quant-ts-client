@@ -49,7 +49,9 @@ export interface URLPayload {
 }
 
 // eslint-disable-next-line
-export interface WafLogsPayload {}
+export interface WafLogsPayload {
+  project: string
+}
 
 export interface SearchIndexPayload {
   data: Buffer

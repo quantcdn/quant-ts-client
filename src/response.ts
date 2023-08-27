@@ -52,22 +52,21 @@ export class PaginatedResponse implements AsyncIterator<any> {
       return body
     }
 
-    if ('global_meta' in body) {
-      this.total = body.global_meta.total_pages
-      this.page += 1
-      this.hasNext = this.page <= body.global_meta.total_pages
-      // console.log(body.global_meta.records)
-      return body.global_meta.records
-    } else {
-      if (!('pagination' in body)) {
-        this.total = 0
-        return body
-      }
+    this.page += 1
 
+    if ('global_meta' in body) {
+      // Handle meta responses.
+      this.total = body.global_meta.total_pages
+      this.hasNext = this.page <= body.global_meta.total_pages
+      return body.global_meta.records
+    } else if ('total_records' in body) {
+      // WAFlog responses.
+      this.total = Math.ceil(body.total_reccords % this.per_page)
+      this.hasNext = body.next !== ''
+      return body.data
+    } else {
       this.total = body.pagination.total_pages
       this.hasNext = this.page <= body.pagination.total_pages
-      this.page += 1
-
       return body.data
     }
   }
