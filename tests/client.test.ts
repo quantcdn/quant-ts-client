@@ -101,7 +101,7 @@ describe("Testing QuantClient", () => {
     })
     expect(t.getClient('organization').headers).toMatchObject({
       'User-Agent': 'Quant (+http://api.quantcdn.io)',
-      'Quant-Organization': config.organization,
+      'Quant-Organisation': config.organization,
       'Authorization': `Bearer ${config.bearer}`,
     })
   })
