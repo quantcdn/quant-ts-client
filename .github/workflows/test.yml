@@ -25,20 +25,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-  compile:
-    if: github.ref == 'refs/heads/main'
-    needs: test-lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger the build
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { data: workflows } = await github.actions.listRepoWorkflows();
-            const workflowIdToTrigger = workflows.find(workflow => workflow.name === 'Compile').id;
-
-            await github.actions.createWorkflowDispatch({
-              workflow_id: workflowIdToTrigger,
-            });
