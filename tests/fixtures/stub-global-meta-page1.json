@@ -1,0 +1,187 @@
+{
+	"global_meta": {
+		"results_limited": false,
+		"page_size": 10,
+		"page": 1,
+		"records": [
+			{
+				"last_modified": "2023-06-14T02:43:43",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 1,
+					"transitions": [],
+					"md5": "91b7916ebb231c326c0a62125afd6303",
+					"published": true,
+					"published_revision": 1,
+					"byte_length": 13094,
+					"revision_number": 1,
+					"url": "\/favicon.ico",
+					"type": "file",
+					"highest_revision_number": 1,
+					"date_timestamp": 1686710622
+				}
+			},
+			{
+				"last_modified": "2023-06-29T00:45:32",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "5613b89d6a6a9e9cfdd823587b0700e0",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1687999531,
+					"byte_length": 39079,
+					"revision_number": 1,
+					"url": "\/",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1687999532
+				}
+			},
+			{
+				"last_modified": "2023-06-14T02:43:47",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 1,
+					"transitions": [],
+					"md5": "c756c5b7f8250fd0b848b7f749cb991a",
+					"published": true,
+					"published_revision": 1,
+					"byte_length": 7202,
+					"revision_number": 1,
+					"url": "\/sites\/default\/files\/css\/css_i2pwmac5yghbgrrskuqaasxphuhomy6xwrapi5n1tz0.css",
+					"type": "file",
+					"highest_revision_number": 1,
+					"date_timestamp": 1686710627
+				}
+			},
+			{
+				"last_modified": "2023-06-14T02:43:47",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 1,
+					"transitions": [],
+					"md5": "ab6fb9e2df5cd46824eff117cedb2ad5",
+					"published": true,
+					"published_revision": 1,
+					"byte_length": 2409102,
+					"revision_number": 1,
+					"url": "\/sites\/default\/files\/2020-06\/cca_homepage.jpg",
+					"type": "file",
+					"highest_revision_number": 1,
+					"date_timestamp": 1686710627
+				}
+			},
+			{
+				"last_modified": "2023-06-14T02:43:52",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 1,
+					"transitions": [],
+					"md5": "0c2605a73e42b9ef5e1ec9033c2391ae",
+					"published": true,
+					"published_revision": 1,
+					"byte_length": 276975,
+					"revision_number": 1,
+					"url": "\/sites\/default\/files\/css\/css_ynyu_je65eujw2ln84dqpsz16eyzah3qrf60wmj5ug4.css",
+					"type": "file",
+					"highest_revision_number": 1,
+					"date_timestamp": 1686710632
+				}
+			},
+			{
+				"last_modified": "2023-06-14T02:44:21",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 1,
+					"transitions": [],
+					"md5": "b4be8b29cf658a28f381d5983cf269ae",
+					"published": true,
+					"published_revision": 1,
+					"byte_length": 47101,
+					"revision_number": 1,
+					"url": "\/sites\/default\/files\/inline-images\/climate-change.png",
+					"type": "file",
+					"highest_revision_number": 1,
+					"date_timestamp": 1686710661
+				}
+			},
+			{
+				"last_modified": "2023-06-29T00:45:46",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "c77d7b0bfcd9c063ae7a513a98f4e096",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1687999545,
+					"byte_length": 30824,
+					"revision_number": 1,
+					"url": "\/about-cca",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1687999546
+				}
+			},
+			{
+				"last_modified": "2023-06-29T00:47:39",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "2c1247660a20a193caceabb9c8a2bcc3",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1687999658,
+					"byte_length": 29500,
+					"revision_number": 1,
+					"url": "\/contact-us",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1687999659
+				}
+			},
+			{
+				"last_modified": "2023-06-29T00:45:41",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "3b4a68889f41b5bc4aa8f6a7d10dca75",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1687999541,
+					"byte_length": 32354,
+					"revision_number": 1,
+					"url": "\/about-authority\/employment",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1687999541
+				}
+			},
+			{
+				"last_modified": "2023-06-29T00:45:46",
+				"meta": {
+					"revision_count": 1,
+					"seq_num": 3,
+					"transitions": [],
+					"md5": "056aedbd76608608fa0a2deb4d3ef0c7",
+					"published_revision": 1,
+					"published": true,
+					"content_timestamp": 1687999545,
+					"byte_length": 879958,
+					"revision_number": 1,
+					"url": "\/about-authority\/who-we-are",
+					"type": "content",
+					"highest_revision_number": 1,
+					"date_timestamp": 1687999546
+				}
+			}
+		],
+		"total_records": 20,
+		"refine_search": false,
+		"total_pages": 2
+	}
+}

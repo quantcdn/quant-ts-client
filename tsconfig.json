@@ -3,12 +3,13 @@
     "module": "commonjs",
     "target": "es2015",
     "declaration": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "strictNullChecks": true
   },
   "include": [
     "src/*",
     "src/**/*"
   ],
   "types": [ "node" ],
-  "typeRoots": [ "../node_modules/@types" ] 
+  "typeRoots": [ "../node_modules/@types" ]
 }
