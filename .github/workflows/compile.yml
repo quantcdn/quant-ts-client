@@ -1,9 +1,9 @@
-name: Compile
+name: Publish
 on:
   workflow_dispatch:
   workflow_run:
     workflows:
-      - Test and lint
+      - Test
     types:
       - completed
 
@@ -31,3 +31,4 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
