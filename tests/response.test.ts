@@ -1,7 +1,7 @@
 import { Client } from "../src/interfaces";
 import { PaginatedResponse } from "../src/response";
 
-import * as request from 'request';
+import * as request from '@cypress/request';
 
 import * as fs from 'fs';
 const stub1 = JSON.parse(fs.readFileSync('./tests/fixtures/stub-page1.json', 'utf8'));

@@ -2,7 +2,7 @@
  * Quant API client.
  */
 
-import * as request from 'request'
+import * as request from '@cypress/request'
 import type * as types from './types'
 import type * as interfaces from './interfaces'
 import { PaginatedResponse } from './response'

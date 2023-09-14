@@ -1,5 +1,5 @@
 import type * as types from './types'
-import type * as request from 'request'
+import type * as request from '@cypress/request'
 
 export type ClientConstructor = new (baseUrl: string, headers: object) => Client
 

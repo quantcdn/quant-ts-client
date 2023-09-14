@@ -1,5 +1,5 @@
 import { type Client } from './interfaces'
-import type * as request from 'request'
+import type * as request from '@cypress/request'
 
 export class PaginatedResponse implements AsyncIterator<any> {
   private readonly client: Client

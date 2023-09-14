@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/quantcdn/quant-client#readme",
   "dependencies": {
-    "mime-types": "^2.1.27",
-    "request": "^2.88.2"
+    "@cypress/request": "3.0.1",
+    "mime-types": "^2.1.27"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",

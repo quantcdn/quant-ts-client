@@ -1,7 +1,7 @@
 import { QuantClient } from "../src"
 import * as types from "../src/types"
 import { Client } from "../src/interfaces"
-import * as request from 'request';
+import * as request from '@cypress/request';
 import { Buffer } from "buffer"
 
 class TestClient implements Client {
