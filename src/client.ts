@@ -172,7 +172,7 @@ export class QuantClient {
      * @param payload FilePayload
      *   The file payload data.
      *
-     * @returns Promose<any>
+     * @returns Promise<any>
      *   The repsonse object.
      */
     file: async (payload: types.FilePayload): Promise<any> => {
@@ -314,8 +314,8 @@ export class QuantClient {
      * @param payload types.SearchIndexPayload
      *   The search index paylod.
      *
-     * @returns Promose<any>
-     *   The respose.
+     * @returns Promise<any>
+     *   The response.
      */
     index: async (payload: types.SearchIndexPayload): Promise<any> => {
       return await this._search.post('search', JSON.parse(payload.data.toString()))
