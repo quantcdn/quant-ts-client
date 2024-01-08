@@ -69,3 +69,8 @@ export interface WafLog {
   method: string
   user_agent: string
 }
+
+export interface MetaFilters {
+  sort_field: string
+  sort_direction: string
+}

@@ -15,7 +15,7 @@ export interface Client {
 
 export interface ProjectApi {
   ping: () => Promise<any>
-  meta: () => Promise<any>
+  meta: (filter?: types.MetaFilters) => Promise<any>
   markup: (payload: types.MarkupPayload) => Promise<any>
   file: (payload: types.FilePayload) => Promise<any>
   publish: (payload: types.PublishPayload) => Promise<any>

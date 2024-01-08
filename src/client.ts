@@ -133,8 +133,18 @@ export class QuantClient {
      * @returns Promise<any>
      *   The repsonse object.
      */
-    meta: async (): Promise<any> => {
-      return await this._project.get('global-meta')
+    meta: async (filters?: types.MetaFilters): Promise<any> => {
+      const qs: { sort_direction?: string, sort_field?: string } = {}
+
+      if (filters?.sort_direction != null) {
+        qs.sort_direction = filters.sort_direction
+      }
+
+      if (filters?.sort_field != null) {
+        qs.sort_field = filters.sort_field
+      }
+
+      return await this._project.get('global-meta', qs)
     },
 
     /**
