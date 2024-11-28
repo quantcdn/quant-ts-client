@@ -4,12 +4,15 @@
     "target": "es2015",
     "declaration": true,
     "outDir": "./dist",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "types": ["node", "mocha", "chai"],
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": [
     "src/*",
-    "src/**/*"
-  ],
-  "types": [ "node" ],
-  "typeRoots": [ "../node_modules/@types" ]
+    "src/**/*",
+    "tests/*",
+    "tests/**/*"
+  ]
 }

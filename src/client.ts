@@ -2,7 +2,7 @@
  * Quant API client.
  */
 
-import * as request from '@cypress/request'
+import request = require('@cypress/request')
 import type * as types from './types'
 import type * as interfaces from './interfaces'
 import { PaginatedResponse } from './response'
@@ -124,6 +124,8 @@ export class QuantClient {
      *   The response object.
      */
     ping: async (): Promise<any> => {
+      console.log('ping')
+      console.log(this._project)
       return await this._project.get('ping')
     },
 
@@ -170,7 +172,7 @@ export class QuantClient {
       }
 
       if (typeof payload.findAttachments !== 'undefined') {
-        body.find_attachments = true
+        body.find_attachments = payload.findAttachments
       }
 
       return await this._project.post('markup', body, headers)

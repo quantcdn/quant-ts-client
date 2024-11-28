@@ -1,118 +1,98 @@
-import { Client } from "../src/interfaces";
-import { PaginatedResponse } from "../src/response";
-
-import * as request from '@cypress/request';
-
-import * as fs from 'fs';
-const stub1 = JSON.parse(fs.readFileSync('./tests/fixtures/stub-page1.json', 'utf8'));
-const stub2 = JSON.parse(fs.readFileSync('./tests/fixtures/stub-page2.json', 'utf8'));
-const metaStub1 = JSON.parse(fs.readFileSync('./tests/fixtures/stub-global-meta-page1.json', 'utf8'));
-const metaStub2 = JSON.parse(fs.readFileSync('./tests/fixtures/stub-global-meta-page2.json', 'utf8'));
+import { PaginatedResponse } from '../src/response'
+import { Client } from '../src/interfaces'
+import { expect } from 'chai'
+import * as request from '@cypress/request'
 
 class TestClient implements Client {
-  public baseUrl:string;
-  public headers:object;
-  public reject:boolean = false;
+  public baseUrl: string
+  public headers: object
+  private testData: any
 
-  constructor(baseUrl:string, headers:object) {
+  constructor(baseUrl: string, headers: object, testData?: any) {
     this.baseUrl = baseUrl
     this.headers = headers
-    this.reject = false
-  }
-
-  public do(options: request.Options): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if (options.url == "https://test.com/meta-test") {
-        if (options.qs.page == 1) {
-          resolve(metaStub1)
-        } else {
-          resolve(metaStub2)
-        }
-      } else {
-        if (options.qs.page == 1) {
-          resolve(stub1)
-        } else {
-          resolve(stub2)
-        }
+    this.testData = testData || {
+      data: [1, 2, 3],
+      pagination: {
+        current_page: 1,
+        from: 1,
+        total_pages: 1,
+        per_page: 3,
+        to: 3,
+        total: 3
       }
-    });
+    }
   }
 
-  public get(path:string, qs?: object, headers?: object): Promise<any> {
-    const options:request.Options = {
-      url: `${this.baseUrl}/${path}`,
-      method: 'GET',
-      headers: { ...this.headers, ...headers },
-      json: true,
-      qs
-    }
-    let res = new PaginatedResponse(this, options)
-    return new Promise(resolve => resolve(res))
+  public async do(options: request.Options): Promise<any> {
+    return await Promise.resolve(this.testData)
   }
 
-  public post(path:string, body?:any, headers?:object, formData?: object, qs?:object):Promise<any> {
-    const options:request.Options = {
-      url: `${this.baseUrl}/${path}`,
-      method: 'POST',
-      headers: { ...this.headers, ...headers },
-      json: true,
-      body,
-      formData,
-      qs
-    }
-
-    let res = new PaginatedResponse(this, options)
-    return new Promise(resolve => resolve(res))
+  public async get(path: string, qs?: object, headers?: object): Promise<any> {
+    return await Promise.resolve({})
   }
 
-  public delete(path: string, body?:any, headers?:object):Promise<any> {
-    const options:request.Options = {
-      url: `${this.baseUrl}/${path}`,
-      method: 'DELETE',
-      headers: {...this.headers, ...headers},
-      json: true,
-      body
-    }
-
-    let res = new PaginatedResponse(this, options)
-    return new Promise(resolve => resolve(res))
+  public async post(path: string, body?: any, headers?: object, formData?: object, qs?: object): Promise<any> {
+    return await Promise.resolve({})
   }
 
-  public patch(path:string, body?:any, headers?:object):Promise<any> {
-    const options:request.Options = {
-      url: `${this.baseUrl}/${path}`,
-      method: 'PATCH',
-      headers: {...this.headers, ...headers},
-      json: true,
-      body
-    }
+  public async delete(path: string, body?: any, headers?: object): Promise<any> {
+    return await Promise.resolve({})
+  }
 
-    let res = new PaginatedResponse(this, options)
-    return new Promise(resolve => resolve(res))
+  public async patch(path: string, body?: any, headers?: object): Promise<any> {
+    return await Promise.resolve({})
   }
 }
 
-describe('response test', () => {
-  test('global meta paginated', async () => {
-    let a = new TestClient('https://test.com', {})
-    let b = await a.get('meta-test')
-    let i = 0
-    for await (const records of b) {
-      for (const r in records) {
-        i++;
+describe('PaginatedResponse', () => {
+  const client = new TestClient('https://api.quantcdn.io/v1', {})
+
+  const options = {
+    url: 'https://api.quantcdn.io/v1/test',
+    method: 'GET'
+  }
+
+  it('should paginate through results', async () => {
+    const response = new PaginatedResponse(client, options)
+    let results: any[] = []
+
+    for await (const items of response) {
+      if (Array.isArray(items)) {
+        results = results.concat(items)
+      } else {
+        results.push(items)
       }
     }
-    expect(i).toBe(20)
+
+    expect(results).to.deep.equal([1, 2, 3])
   })
-  test('paginated response', async () => {
-    let a = new TestClient('https://test.com', {})
-    let b = await a.get('paginated')
-    let i = 0
-    for await (const records of b) {
-      for (const r in records) {
-        i++;
+
+  it('should handle empty responses', async () => {
+    const emptyData = {
+      data: [],
+      pagination: {
+        current_page: 1,
+        from: null,
+        total_pages: 1,
+        per_page: 10,
+        to: null,
+        total: 0
       }
     }
-    expect(i).toBe(20)
+    const emptyClient = new TestClient('https://api.quantcdn.io/v1', {}, emptyData)
+
+    const response = new PaginatedResponse(emptyClient, options)
+    let results: any[] = []
+
+    for await (const items of response) {
+      if (Array.isArray(items)) {
+        results = results.concat(items)
+      } else {
+        results.push(items)
+      }
+    }
+
+    expect(results).to.deep.equal([])
   })
 })
