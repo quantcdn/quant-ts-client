@@ -152,7 +152,7 @@ describe("Testing QuantClient", () => {
     })
     test('file', () => {
       const payload:types.FilePayload = {
-        location: "/test/image.jpg",
+        url: "/test/image.jpg",
         data: Buffer.from('image')
       }
     })

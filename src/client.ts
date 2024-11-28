@@ -187,16 +187,24 @@ export class QuantClient {
      */
     file: async (payload: types.FilePayload): Promise<any> => {
       const headers = {
-        'Content-Type': 'multipart/form-data',
-        'Quant-File-Url': payload.location
+        'Quant-File-Url': payload.url
       }
-      const formData = { data: payload.data }
 
       if (typeof payload.skipPurge !== 'undefined') {
         headers['Quant-Skip-Purge'] = 'true'
       }
 
-      return await this._project.post('file', {}, headers, formData)
+      const formData = {
+        file: {
+          value: payload.data,
+          options: {
+            filename: 'file',
+            contentType: 'application/octet-stream'
+          }
+        }
+      }
+
+      return await this._project.post('file', undefined, headers, formData)
     },
 
     /**

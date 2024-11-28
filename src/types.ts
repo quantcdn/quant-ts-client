@@ -23,7 +23,7 @@ export interface MarkupPayload {
 
 export interface FilePayload {
   data: Buffer
-  location: string
+  url: string
   skipPurge?: boolean
 }
 
