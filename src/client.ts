@@ -162,15 +162,15 @@ export class QuantClient {
         url: payload.url,
         content: payload.data.toString('utf-8'),
         published: payload.published,
-        find_attachments: 'false'
+        find_attachments: false
       }
 
       if (typeof payload.skipPurge !== 'undefined') {
-        headers['Quant-Skip-Purge'] = 'true'
+        headers['Quant-Skip-Purge'] = true
       }
 
       if (typeof payload.findAttachments !== 'undefined') {
-        body.find_attachments = 'true'
+        body.find_attachments = true
       }
 
       return await this._project.post('markup', body, headers)

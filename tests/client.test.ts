@@ -133,20 +133,20 @@ describe("Testing QuantClient", () => {
           expect(r.body.content).toBe('this is a test')
           expect(r.body.url).toBe('/test/markup')
           expect(r.body.published).toBe(true)
-          expect(r.body.find_attachments).toBe('false')
+          expect(r.body.find_attachments).toBe(false)
         })
       })
       test('skip cache', () => {
         payload.skipPurge = true
         t.project.markup(payload).then(r => {
-          expect(r.headers['Quant-Skip-Purge']).toBe('true')
+          expect(r.headers['Quant-Skip-Purge']).toBe(true)
         })
         payload.skipPurge = false
       })
       test('find attachments', () => {
         payload.findAttachments = true
         t.project.markup(payload).then(r => {
-          expect(r.body.find_attachments).toBe('true')
+          expect(r.body.find_attachments).toBe(true)
         })
       })
     })
