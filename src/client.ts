@@ -124,8 +124,6 @@ export class QuantClient {
      *   The response object.
      */
     ping: async (): Promise<any> => {
-      console.log('ping')
-      console.log(this._project)
       return await this._project.get('ping')
     },
 
