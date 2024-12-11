@@ -89,14 +89,14 @@ export class QuantClient {
       Client = HttpClient
     }
 
-    this._project = new Client('https://api.quantcdn.io/v1', {
+    this._project = new Client(config.endpoint ?? 'https://api.quantcdn.io/v1', {
       'User-Agent': 'Quant (+http://api.quantcdn.io)',
       'Quant-Token': config.token,
       'Quant-Customer': config.organization,
       'Quant-Project': config.project,
       'Content-Type': 'application/json'
     })
-    this._search = new Client('https://api.quantcdn.io/v1', {
+    this._search = new Client(config.endpoint ?? 'https://api.quantcdn.io/v1', {
       'User-Agent': 'Quant (+http://api.quantcdn.io)',
       'Quant-Token': config.token,
       'Quant-Customer': config.organization,

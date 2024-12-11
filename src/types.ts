@@ -5,6 +5,7 @@ export interface Config {
   token?: string
   project?: string
   bearer?: string
+  endpoint?: string
 }
 
 export interface ProxyPayload {
