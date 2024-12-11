@@ -194,6 +194,10 @@ export class QuantClient {
         headers['Quant-Skip-Purge'] = 'true'
       }
 
+      if (typeof payload.headers !== 'undefined') {
+        headers['Quant-File-Headers'] = payload.headers
+      }
+
       const formData = {
         file: {
           value: payload.data,

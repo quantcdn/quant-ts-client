@@ -26,6 +26,7 @@ export interface FilePayload {
   data: Buffer
   url: string
   skipPurge?: boolean
+  headers?: string
 }
 
 export interface PublishPayload {
