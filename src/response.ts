@@ -4,7 +4,7 @@ import type * as request from '@cypress/request'
 export class PaginatedResponse implements AsyncIterator<any> {
   private readonly client: Client
   private readonly request: request.Options
-  private readonly per_page: number = 10
+  private readonly per_page: number
   private page: number = 0
   private total: number = 0
   private hasNext: boolean = true
@@ -12,7 +12,8 @@ export class PaginatedResponse implements AsyncIterator<any> {
   constructor (client: Client, options: request.Options) {
     this.client = client
     this.request = options
-    this.per_page = 10
+    // Use page_size from query parameters or default to 10
+    this.per_page = (this.request.qs?.page_size as number) ?? 10
     this.page = 1
 
     if (typeof this.request.qs !== 'object') {

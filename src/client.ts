@@ -134,7 +134,7 @@ export class QuantClient {
      *   The repsonse object.
      */
     meta: async (filters?: types.MetaFilters): Promise<any> => {
-      const qs: { sort_direction?: string, sort_field?: string } = {}
+      const qs: { sort_direction?: string, sort_field?: string, quant_type?: string, page_size?: number } = {}
 
       if (filters?.sort_direction != null) {
         qs.sort_direction = filters.sort_direction
@@ -142,6 +142,15 @@ export class QuantClient {
 
       if (filters?.sort_field != null) {
         qs.sort_field = filters.sort_field
+      }
+
+      if (filters?.quant_type != null) {
+        qs.quant_type = filters.quant_type
+      }
+
+      if (filters?.page_size != null) {
+        // Ensure page_size is between 1 and 100
+        qs.page_size = Math.min(Math.max(1, filters.page_size), 100)
       }
 
       return await this._project.get('global-meta', qs)

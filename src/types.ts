@@ -75,4 +75,6 @@ export interface WafLog {
 export interface MetaFilters {
   sort_field: string
   sort_direction: string
+  quant_type?: 'edge_function' | 'redirect' | 'content' | 'file'
+  page_size?: number
 }
