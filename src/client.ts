@@ -18,7 +18,7 @@ class HttpClient implements interfaces.Client {
 
   public async do (options: request.Options): Promise<any> {
     return await new Promise((resolve, reject) => {
-      request(options, (error: any, repsonse: Response, body: any) => {
+      request(options, (error: any, response: Response, body: any) => {
         if (error !== null) {
           reject(error)
         } else {
@@ -230,13 +230,14 @@ export class QuantClient {
      *   The response object.
      */
     publish: async (payload: types.PublishPayload): Promise<any> => {
-      return await this._project.patch(`publish/${payload.revision}`, {}, {
+      const response = await this._project.patch(`publish/${payload.revision}`, {}, {
         'Quant-Url': payload.location
       })
+      return response.first()
     },
 
     /**
-     * Unpublish a revision.
+     * Unpublish the current published revision.
      *
      * @param payload PublishPayload
      *   The payload object.
@@ -245,9 +246,10 @@ export class QuantClient {
      *   The response object.
      */
     unpublish: async (payload: types.PublishPayload): Promise<any> => {
-      return await this._project.patch(`unpublish/${payload.revision}`, {}, {
+      const response = await this._project.patch('unpublish', {}, {
         'Quant-Url': payload.location
       })
+      return response.first()
     },
 
     /**
