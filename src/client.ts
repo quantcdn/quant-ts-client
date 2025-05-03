@@ -288,9 +288,10 @@ export class QuantClient {
      *   The repsonse object.
      */
     delete: async (payload: types.URLPayload): Promise<any> => {
-      return await this._project.delete('delete/all', {}, {
+      const response = await this._project.delete('delete/all', {}, {
         'Quant-Url': payload.url
       })
+      return await response.first()
     },
 
     /**
