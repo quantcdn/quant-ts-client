@@ -291,7 +291,7 @@ export class QuantClient {
       const response = await this._project.delete('delete/all', {}, {
         'Quant-Url': payload.url
       })
-      return await response.first()
+      return response.first()
     },
 
     /**
