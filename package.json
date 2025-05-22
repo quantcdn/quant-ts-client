@@ -2,7 +2,7 @@
   "name": "quant-ts-client",
   "version": "1.0.0",
   "description": "TypeScript client for the QuantCloud API",
-  "type": "module",
+  "type": "commonjs",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
