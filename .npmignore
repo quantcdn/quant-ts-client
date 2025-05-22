@@ -1,0 +1,8 @@
+.git/
+.gitignore
+.openapi-generator/
+.openapi-generator-ignore
+git_push.sh
+node_modules/
+tsconfig.json
+*.tgz 
