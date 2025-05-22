@@ -7,12 +7,10 @@ export * from './container';
 export * from './containerEnvironmentInner';
 export * from './containerImageReference';
 export * from './containerMountPointsInner';
-export * from './createApplicationRequest';
 export * from './createCommandRequest';
 export * from './createCronJob422Response';
 export * from './createCronJobRequest';
 export * from './createEnvironmentRequest';
-export * from './configuration';
 export * from './cron';
 export * from './cronRun';
 export * from './environment';
@@ -46,7 +44,6 @@ import { Container } from './container';
 import { ContainerEnvironmentInner } from './containerEnvironmentInner';
 import { ContainerImageReference } from './containerImageReference';
 import { ContainerMountPointsInner } from './containerMountPointsInner';
-import { CreateApplicationRequest } from './createApplicationRequest';
 import { CreateCommandRequest } from './createCommandRequest';
 import { CreateCronJob422Response } from './createCronJob422Response';
 import { CreateCronJobRequest } from './createCronJobRequest';
@@ -89,7 +86,6 @@ let typeMap: {[index: string]: any} = {
     "ContainerEnvironmentInner": ContainerEnvironmentInner,
     "ContainerImageReference": ContainerImageReference,
     "ContainerMountPointsInner": ContainerMountPointsInner,
-    "CreateApplicationRequest": CreateApplicationRequest,
     "CreateCommandRequest": CreateCommandRequest,
     "CreateCronJob422Response": CreateCronJob422Response,
     "CreateCronJobRequest": CreateCronJobRequest,

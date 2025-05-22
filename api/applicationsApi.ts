@@ -16,7 +16,6 @@ import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { Application } from '../model/application';
-import { CreateApplicationRequest } from '../model/createApplicationRequest';
 import { GetEcrLoginCredentials200Response } from '../model/getEcrLoginCredentials200Response';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -92,9 +91,9 @@ export class ApplicationsApi {
      * 
      * @summary Create a new application
      * @param organisation The organisation ID
-     * @param createApplicationRequest 
+     * @param application 
      */
-    public async createApplication (organisation: string, createApplicationRequest: CreateApplicationRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Application;  }> {
+    public async createApplication (organisation: string, application: Application, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Application;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)));
         let localVarQueryParameters: any = {};
@@ -113,9 +112,9 @@ export class ApplicationsApi {
             throw new Error('Required parameter organisation was null or undefined when calling createApplication.');
         }
 
-        // verify required parameter 'createApplicationRequest' is not null or undefined
-        if (createApplicationRequest === null || createApplicationRequest === undefined) {
-            throw new Error('Required parameter createApplicationRequest was null or undefined when calling createApplication.');
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling createApplication.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -129,7 +128,7 @@ export class ApplicationsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(createApplicationRequest, "CreateApplicationRequest")
+            body: ObjectSerializer.serialize(application, "Application")
         };
 
         let authenticationPromise = Promise.resolve();

@@ -15,18 +15,18 @@ import { RequestFile } from './models';
 export class Application {
     'appName': string;
     'organisation': string;
-    'ecsServiceArn'?: string;
-    'taskDefinitionArn'?: string;
-    'status'?: string;
-    'architecture'?: string;
-    'imageReference'?: object;
+    'database'?: object;
+    'filesystem'?: object;
     'composeDefinition'?: object;
+    'status'?: object;
+    'deploymentInformation'?: object;
+    'imageReference'?: object;
     'containerNames'?: Array<string>;
-    'databaseInstanceIdentifier'?: string;
-    'databaseEndpoint'?: string;
-    'databaseSecretArn'?: string;
-    'serviceDiscoveryDnsName'?: string;
-    'ecrRepositoryUri'?: string;
+    'minCapacity'?: number;
+    'maxCapacity'?: number;
+    'desiredCount'?: object;
+    'runningCount'?: object;
+    'environments'?: object;
 
     static discriminator: string | undefined = undefined;
 
@@ -42,28 +42,13 @@ export class Application {
             "type": "string"
         },
         {
-            "name": "ecsServiceArn",
-            "baseName": "ecsServiceArn",
-            "type": "string"
+            "name": "database",
+            "baseName": "database",
+            "type": "object"
         },
         {
-            "name": "taskDefinitionArn",
-            "baseName": "taskDefinitionArn",
-            "type": "string"
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "string"
-        },
-        {
-            "name": "architecture",
-            "baseName": "architecture",
-            "type": "string"
-        },
-        {
-            "name": "imageReference",
-            "baseName": "imageReference",
+            "name": "filesystem",
+            "baseName": "filesystem",
             "type": "object"
         },
         {
@@ -72,34 +57,49 @@ export class Application {
             "type": "object"
         },
         {
+            "name": "status",
+            "baseName": "status",
+            "type": "object"
+        },
+        {
+            "name": "deploymentInformation",
+            "baseName": "deploymentInformation",
+            "type": "object"
+        },
+        {
+            "name": "imageReference",
+            "baseName": "imageReference",
+            "type": "object"
+        },
+        {
             "name": "containerNames",
             "baseName": "containerNames",
             "type": "Array<string>"
         },
         {
-            "name": "databaseInstanceIdentifier",
-            "baseName": "databaseInstanceIdentifier",
-            "type": "string"
+            "name": "minCapacity",
+            "baseName": "minCapacity",
+            "type": "number"
         },
         {
-            "name": "databaseEndpoint",
-            "baseName": "databaseEndpoint",
-            "type": "string"
+            "name": "maxCapacity",
+            "baseName": "maxCapacity",
+            "type": "number"
         },
         {
-            "name": "databaseSecretArn",
-            "baseName": "databaseSecretArn",
-            "type": "string"
+            "name": "desiredCount",
+            "baseName": "desiredCount",
+            "type": "object"
         },
         {
-            "name": "serviceDiscoveryDnsName",
-            "baseName": "serviceDiscoveryDnsName",
-            "type": "string"
+            "name": "runningCount",
+            "baseName": "runningCount",
+            "type": "object"
         },
         {
-            "name": "ecrRepositoryUri",
-            "baseName": "ecrRepositoryUri",
-            "type": "string"
+            "name": "environments",
+            "baseName": "environments",
+            "type": "object"
         }    ];
 
     static getAttributeTypeMap() {

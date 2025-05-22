@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 api.ts
 api/apis.ts
 api/applicationsApi.ts
@@ -19,7 +18,6 @@ model/container.ts
 model/containerEnvironmentInner.ts
 model/containerImageReference.ts
 model/containerMountPointsInner.ts
-model/createApplicationRequest.ts
 model/createCommandRequest.ts
 model/createCronJob422Response.ts
 model/createCronJobRequest.ts
