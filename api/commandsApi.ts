@@ -16,7 +16,7 @@ import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { Command } from '../model/command';
-import { Model4dd1dde01a2dd974ee9a81b00fbde7f5Request } from '../model/model4dd1dde01a2dd974ee9a81b00fbde7f5Request';
+import { CreateCommandRequest } from '../model/createCommandRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 
@@ -92,9 +92,9 @@ export class CommandsApi {
      * @summary Create a command for an environment
      * @param organisation The organisation ID
      * @param environment The environment ID
-     * @param model4dd1dde01a2dd974ee9a81b00fbde7f5Request 
+     * @param createCommandRequest 
      */
-    public async _4dd1dde01a2dd974ee9a81b00fbde7f5 (organisation: string, environment: string, model4dd1dde01a2dd974ee9a81b00fbde7f5Request: Model4dd1dde01a2dd974ee9a81b00fbde7f5Request, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Command;  }> {
+    public async createCommand (organisation: string, environment: string, createCommandRequest: CreateCommandRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Command;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/environments/{environment}/commands'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
@@ -111,17 +111,17 @@ export class CommandsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _4dd1dde01a2dd974ee9a81b00fbde7f5.');
+            throw new Error('Required parameter organisation was null or undefined when calling createCommand.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _4dd1dde01a2dd974ee9a81b00fbde7f5.');
+            throw new Error('Required parameter environment was null or undefined when calling createCommand.');
         }
 
-        // verify required parameter 'model4dd1dde01a2dd974ee9a81b00fbde7f5Request' is not null or undefined
-        if (model4dd1dde01a2dd974ee9a81b00fbde7f5Request === null || model4dd1dde01a2dd974ee9a81b00fbde7f5Request === undefined) {
-            throw new Error('Required parameter model4dd1dde01a2dd974ee9a81b00fbde7f5Request was null or undefined when calling _4dd1dde01a2dd974ee9a81b00fbde7f5.');
+        // verify required parameter 'createCommandRequest' is not null or undefined
+        if (createCommandRequest === null || createCommandRequest === undefined) {
+            throw new Error('Required parameter createCommandRequest was null or undefined when calling createCommand.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -135,7 +135,7 @@ export class CommandsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(model4dd1dde01a2dd974ee9a81b00fbde7f5Request, "Model4dd1dde01a2dd974ee9a81b00fbde7f5Request")
+            body: ObjectSerializer.serialize(createCommandRequest, "CreateCommandRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -172,14 +172,16 @@ export class CommandsApi {
     }
     /**
      * 
-     * @summary Get all commands for an environment
+     * @summary Get a command
      * @param organisation The organisation ID
      * @param environment The environment ID
+     * @param command The command ID
      */
-    public async _65cf679f3cc54b867f2b791a6e490b16 (organisation: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Command;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/environments/{environment}/commands'
+    public async getCommand (organisation: string, environment: string, command: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Command;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/environments/{environment}/commands/{command}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
+            .replace('{' + 'command' + '}', encodeURIComponent(String(command)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -193,12 +195,17 @@ export class CommandsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _65cf679f3cc54b867f2b791a6e490b16.');
+            throw new Error('Required parameter organisation was null or undefined when calling getCommand.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _65cf679f3cc54b867f2b791a6e490b16.');
+            throw new Error('Required parameter environment was null or undefined when calling getCommand.');
+        }
+
+        // verify required parameter 'command' is not null or undefined
+        if (command === null || command === undefined) {
+            throw new Error('Required parameter command was null or undefined when calling getCommand.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -248,16 +255,14 @@ export class CommandsApi {
     }
     /**
      * 
-     * @summary Get a command
+     * @summary Get all commands for an environment
      * @param organisation The organisation ID
      * @param environment The environment ID
-     * @param command The command ID
      */
-    public async _789e0dc9de90606dabf9c0f68f4ab252 (organisation: string, environment: string, command: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Command;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/environments/{environment}/commands/{command}'
+    public async listCommands (organisation: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Command;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/environments/{environment}/commands'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
-            .replace('{' + 'command' + '}', encodeURIComponent(String(command)));
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -271,17 +276,12 @@ export class CommandsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _789e0dc9de90606dabf9c0f68f4ab252.');
+            throw new Error('Required parameter organisation was null or undefined when calling listCommands.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _789e0dc9de90606dabf9c0f68f4ab252.');
-        }
-
-        // verify required parameter 'command' is not null or undefined
-        if (command === null || command === undefined) {
-            throw new Error('Required parameter command was null or undefined when calling _789e0dc9de90606dabf9c0f68f4ab252.');
+            throw new Error('Required parameter environment was null or undefined when calling listCommands.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

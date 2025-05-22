@@ -1,27 +1,27 @@
 import localVarRequest from 'request';
 
 export * from './application';
-export * from './b7f433dd67508ecac5d4dccf1b7de5d9Request';
-export * from './bfc82010fc344962814feda95595f25f200Response';
-export * from './bfc82010fc344962814feda95595f25fRequest';
 export * from './command';
 export * from './compose';
 export * from './container';
 export * from './containerEnvironmentInner';
 export * from './containerImageReference';
 export * from './containerMountPointsInner';
+export * from './createApplicationRequest';
+export * from './createCommandRequest';
+export * from './createCronJob422Response';
+export * from './createCronJobRequest';
+export * from './createEnvironmentRequest';
 export * from './cron';
 export * from './cronRun';
-export * from './d481164c455528711c302ff5e2b2bf5bRequest';
-export * from './e0cf8adb0a3beb04279230cfb11634dfRequest';
 export * from './environment';
-export * from './model06b225e9857930e3933804092dfa7a4aRequest';
-export * from './model3520dc6b6cb5f65baf4e76d50fb79df9422Response';
-export * from './model3520dc6b6cb5f65baf4e76d50fb79df9Request';
-export * from './model4dd1dde01a2dd974ee9a81b00fbde7f5Request';
+export * from './getEcrLoginCredentials200Response';
 export * from './model76f409a451ed135dbde0839b42c66c76Request';
-export * from './model816747d873ee78401c7116175787b931200Response';
 export * from './scalingPolicy';
+export * from './updateEnvironmentStateRequest';
+export * from './updateEnvironmentVariableRequest';
+export * from './validateCompose200Response';
+export * from './validateComposeRequest';
 export * from './variable';
 export * from './volume';
 
@@ -39,27 +39,27 @@ export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 
 import { Application } from './application';
-import { B7f433dd67508ecac5d4dccf1b7de5d9Request } from './b7f433dd67508ecac5d4dccf1b7de5d9Request';
-import { Bfc82010fc344962814feda95595f25f200Response } from './bfc82010fc344962814feda95595f25f200Response';
-import { Bfc82010fc344962814feda95595f25fRequest } from './bfc82010fc344962814feda95595f25fRequest';
 import { Command } from './command';
 import { Compose } from './compose';
 import { Container } from './container';
 import { ContainerEnvironmentInner } from './containerEnvironmentInner';
 import { ContainerImageReference } from './containerImageReference';
 import { ContainerMountPointsInner } from './containerMountPointsInner';
+import { CreateApplicationRequest } from './createApplicationRequest';
+import { CreateCommandRequest } from './createCommandRequest';
+import { CreateCronJob422Response } from './createCronJob422Response';
+import { CreateCronJobRequest } from './createCronJobRequest';
+import { CreateEnvironmentRequest } from './createEnvironmentRequest';
 import { Cron } from './cron';
 import { CronRun } from './cronRun';
-import { D481164c455528711c302ff5e2b2bf5bRequest } from './d481164c455528711c302ff5e2b2bf5bRequest';
-import { E0cf8adb0a3beb04279230cfb11634dfRequest } from './e0cf8adb0a3beb04279230cfb11634dfRequest';
 import { Environment } from './environment';
-import { Model06b225e9857930e3933804092dfa7a4aRequest } from './model06b225e9857930e3933804092dfa7a4aRequest';
-import { Model3520dc6b6cb5f65baf4e76d50fb79df9422Response } from './model3520dc6b6cb5f65baf4e76d50fb79df9422Response';
-import { Model3520dc6b6cb5f65baf4e76d50fb79df9Request } from './model3520dc6b6cb5f65baf4e76d50fb79df9Request';
-import { Model4dd1dde01a2dd974ee9a81b00fbde7f5Request } from './model4dd1dde01a2dd974ee9a81b00fbde7f5Request';
+import { GetEcrLoginCredentials200Response } from './getEcrLoginCredentials200Response';
 import { Model76f409a451ed135dbde0839b42c66c76Request } from './model76f409a451ed135dbde0839b42c66c76Request';
-import { Model816747d873ee78401c7116175787b931200Response } from './model816747d873ee78401c7116175787b931200Response';
 import { ScalingPolicy } from './scalingPolicy';
+import { UpdateEnvironmentStateRequest } from './updateEnvironmentStateRequest';
+import { UpdateEnvironmentVariableRequest } from './updateEnvironmentVariableRequest';
+import { ValidateCompose200Response } from './validateCompose200Response';
+import { ValidateComposeRequest } from './validateComposeRequest';
 import { Variable } from './variable';
 import { Volume } from './volume';
 
@@ -82,27 +82,27 @@ let enumsMap: {[index: string]: any} = {
 
 let typeMap: {[index: string]: any} = {
     "Application": Application,
-    "B7f433dd67508ecac5d4dccf1b7de5d9Request": B7f433dd67508ecac5d4dccf1b7de5d9Request,
-    "Bfc82010fc344962814feda95595f25f200Response": Bfc82010fc344962814feda95595f25f200Response,
-    "Bfc82010fc344962814feda95595f25fRequest": Bfc82010fc344962814feda95595f25fRequest,
     "Command": Command,
     "Compose": Compose,
     "Container": Container,
     "ContainerEnvironmentInner": ContainerEnvironmentInner,
     "ContainerImageReference": ContainerImageReference,
     "ContainerMountPointsInner": ContainerMountPointsInner,
+    "CreateApplicationRequest": CreateApplicationRequest,
+    "CreateCommandRequest": CreateCommandRequest,
+    "CreateCronJob422Response": CreateCronJob422Response,
+    "CreateCronJobRequest": CreateCronJobRequest,
+    "CreateEnvironmentRequest": CreateEnvironmentRequest,
     "Cron": Cron,
     "CronRun": CronRun,
-    "D481164c455528711c302ff5e2b2bf5bRequest": D481164c455528711c302ff5e2b2bf5bRequest,
-    "E0cf8adb0a3beb04279230cfb11634dfRequest": E0cf8adb0a3beb04279230cfb11634dfRequest,
     "Environment": Environment,
-    "Model06b225e9857930e3933804092dfa7a4aRequest": Model06b225e9857930e3933804092dfa7a4aRequest,
-    "Model3520dc6b6cb5f65baf4e76d50fb79df9422Response": Model3520dc6b6cb5f65baf4e76d50fb79df9422Response,
-    "Model3520dc6b6cb5f65baf4e76d50fb79df9Request": Model3520dc6b6cb5f65baf4e76d50fb79df9Request,
-    "Model4dd1dde01a2dd974ee9a81b00fbde7f5Request": Model4dd1dde01a2dd974ee9a81b00fbde7f5Request,
+    "GetEcrLoginCredentials200Response": GetEcrLoginCredentials200Response,
     "Model76f409a451ed135dbde0839b42c66c76Request": Model76f409a451ed135dbde0839b42c66c76Request,
-    "Model816747d873ee78401c7116175787b931200Response": Model816747d873ee78401c7116175787b931200Response,
     "ScalingPolicy": ScalingPolicy,
+    "UpdateEnvironmentStateRequest": UpdateEnvironmentStateRequest,
+    "UpdateEnvironmentVariableRequest": UpdateEnvironmentVariableRequest,
+    "ValidateCompose200Response": ValidateCompose200Response,
+    "ValidateComposeRequest": ValidateComposeRequest,
     "Variable": Variable,
     "Volume": Volume,
 }

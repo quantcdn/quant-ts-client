@@ -15,9 +15,9 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { Bfc82010fc344962814feda95595f25f200Response } from '../model/bfc82010fc344962814feda95595f25f200Response';
-import { Bfc82010fc344962814feda95595f25fRequest } from '../model/bfc82010fc344962814feda95595f25fRequest';
 import { Compose } from '../model/compose';
+import { ValidateCompose200Response } from '../model/validateCompose200Response';
+import { ValidateComposeRequest } from '../model/validateComposeRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 
@@ -95,7 +95,7 @@ export class ComposeApi {
      * @param application The application ID
      * @param environment The environment ID
      */
-    public async _069d86a42f73b38e7153c404ba2714c4 (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Compose;  }> {
+    public async getEnvironmentCompose (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Compose;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/environments/{environment}/compose'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -113,17 +113,17 @@ export class ComposeApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _069d86a42f73b38e7153c404ba2714c4.');
+            throw new Error('Required parameter organisation was null or undefined when calling getEnvironmentCompose.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _069d86a42f73b38e7153c404ba2714c4.');
+            throw new Error('Required parameter application was null or undefined when calling getEnvironmentCompose.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _069d86a42f73b38e7153c404ba2714c4.');
+            throw new Error('Required parameter environment was null or undefined when calling getEnvironmentCompose.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -179,7 +179,7 @@ export class ComposeApi {
      * @param environment The environment ID
      * @param compose 
      */
-    public async _4c34ac80ed94229f48822225bd9cf0b1 (organisation: string, application: string, environment: string, compose: Compose, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Compose;  }> {
+    public async updateEnvironmentCompose (organisation: string, application: string, environment: string, compose: Compose, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Compose;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/environments/{environment}/compose'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -197,22 +197,22 @@ export class ComposeApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _4c34ac80ed94229f48822225bd9cf0b1.');
+            throw new Error('Required parameter organisation was null or undefined when calling updateEnvironmentCompose.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _4c34ac80ed94229f48822225bd9cf0b1.');
+            throw new Error('Required parameter application was null or undefined when calling updateEnvironmentCompose.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _4c34ac80ed94229f48822225bd9cf0b1.');
+            throw new Error('Required parameter environment was null or undefined when calling updateEnvironmentCompose.');
         }
 
         // verify required parameter 'compose' is not null or undefined
         if (compose === null || compose === undefined) {
-            throw new Error('Required parameter compose was null or undefined when calling _4c34ac80ed94229f48822225bd9cf0b1.');
+            throw new Error('Required parameter compose was null or undefined when calling updateEnvironmentCompose.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -265,9 +265,9 @@ export class ComposeApi {
      * 
      * @summary Validate a compose file
      * @param organisation The organisation ID
-     * @param bfc82010fc344962814feda95595f25fRequest 
+     * @param validateComposeRequest 
      */
-    public async bfc82010fc344962814feda95595f25f (organisation: string, bfc82010fc344962814feda95595f25fRequest: Bfc82010fc344962814feda95595f25fRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Bfc82010fc344962814feda95595f25f200Response;  }> {
+    public async validateCompose (organisation: string, validateComposeRequest: ValidateComposeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ValidateCompose200Response;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/compose/validate'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)));
         let localVarQueryParameters: any = {};
@@ -283,12 +283,12 @@ export class ComposeApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling bfc82010fc344962814feda95595f25f.');
+            throw new Error('Required parameter organisation was null or undefined when calling validateCompose.');
         }
 
-        // verify required parameter 'bfc82010fc344962814feda95595f25fRequest' is not null or undefined
-        if (bfc82010fc344962814feda95595f25fRequest === null || bfc82010fc344962814feda95595f25fRequest === undefined) {
-            throw new Error('Required parameter bfc82010fc344962814feda95595f25fRequest was null or undefined when calling bfc82010fc344962814feda95595f25f.');
+        // verify required parameter 'validateComposeRequest' is not null or undefined
+        if (validateComposeRequest === null || validateComposeRequest === undefined) {
+            throw new Error('Required parameter validateComposeRequest was null or undefined when calling validateCompose.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -302,7 +302,7 @@ export class ComposeApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(bfc82010fc344962814feda95595f25fRequest, "Bfc82010fc344962814feda95595f25fRequest")
+            body: ObjectSerializer.serialize(validateComposeRequest, "ValidateComposeRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -321,13 +321,13 @@ export class ComposeApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Bfc82010fc344962814feda95595f25f200Response;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: ValidateCompose200Response;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Bfc82010fc344962814feda95595f25f200Response");
+                            body = ObjectSerializer.deserialize(body, "ValidateCompose200Response");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

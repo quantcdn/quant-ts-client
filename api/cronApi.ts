@@ -15,10 +15,10 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { CreateCronJob422Response } from '../model/createCronJob422Response';
+import { CreateCronJobRequest } from '../model/createCronJobRequest';
 import { Cron } from '../model/cron';
 import { CronRun } from '../model/cronRun';
-import { Model3520dc6b6cb5f65baf4e76d50fb79df9422Response } from '../model/model3520dc6b6cb5f65baf4e76d50fb79df9422Response';
-import { Model3520dc6b6cb5f65baf4e76d50fb79df9Request } from '../model/model3520dc6b6cb5f65baf4e76d50fb79df9Request';
 import { Model76f409a451ed135dbde0839b42c66c76Request } from '../model/model76f409a451ed135dbde0839b42c66c76Request';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -90,283 +90,6 @@ export class CronApi {
         this.interceptors.push(interceptor);
     }
 
-    /**
-     * 
-     * @summary Create a new cron job
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param environment The environment ID
-     * @param model3520dc6b6cb5f65baf4e76d50fb79df9Request 
-     */
-    public async _3520dc6b6cb5f65baf4e76d50fb79df9 (organisation: string, application: string, environment: string, model3520dc6b6cb5f65baf4e76d50fb79df9Request: Model3520dc6b6cb5f65baf4e76d50fb79df9Request, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Cron;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/cron'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _3520dc6b6cb5f65baf4e76d50fb79df9.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _3520dc6b6cb5f65baf4e76d50fb79df9.');
-        }
-
-        // verify required parameter 'environment' is not null or undefined
-        if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _3520dc6b6cb5f65baf4e76d50fb79df9.');
-        }
-
-        // verify required parameter 'model3520dc6b6cb5f65baf4e76d50fb79df9Request' is not null or undefined
-        if (model3520dc6b6cb5f65baf4e76d50fb79df9Request === null || model3520dc6b6cb5f65baf4e76d50fb79df9Request === undefined) {
-            throw new Error('Required parameter model3520dc6b6cb5f65baf4e76d50fb79df9Request was null or undefined when calling _3520dc6b6cb5f65baf4e76d50fb79df9.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(model3520dc6b6cb5f65baf4e76d50fb79df9Request, "Model3520dc6b6cb5f65baf4e76d50fb79df9Request")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: Cron;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Cron");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Get a cron run
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param environment The environment ID
-     * @param cron The cron job ID
-     * @param run The cron run ID
-     */
-    public async _3c3d38ed49fd2f46c81808fd17404b64 (organisation: string, application: string, environment: string, cron: string, run: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CronRun;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}/runs/{run}'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
-            .replace('{' + 'cron' + '}', encodeURIComponent(String(cron)))
-            .replace('{' + 'run' + '}', encodeURIComponent(String(run)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _3c3d38ed49fd2f46c81808fd17404b64.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _3c3d38ed49fd2f46c81808fd17404b64.');
-        }
-
-        // verify required parameter 'environment' is not null or undefined
-        if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _3c3d38ed49fd2f46c81808fd17404b64.');
-        }
-
-        // verify required parameter 'cron' is not null or undefined
-        if (cron === null || cron === undefined) {
-            throw new Error('Required parameter cron was null or undefined when calling _3c3d38ed49fd2f46c81808fd17404b64.');
-        }
-
-        // verify required parameter 'run' is not null or undefined
-        if (run === null || run === undefined) {
-            throw new Error('Required parameter run was null or undefined when calling _3c3d38ed49fd2f46c81808fd17404b64.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: CronRun;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "CronRun");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Get a cron job
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param environment The environment ID
-     * @param cron The cron job ID
-     */
-    public async _58d82c3816cc4f3149c6bd4762793e31 (organisation: string, application: string, environment: string, cron: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Cron;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
-            .replace('{' + 'cron' + '}', encodeURIComponent(String(cron)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _58d82c3816cc4f3149c6bd4762793e31.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _58d82c3816cc4f3149c6bd4762793e31.');
-        }
-
-        // verify required parameter 'environment' is not null or undefined
-        if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _58d82c3816cc4f3149c6bd4762793e31.');
-        }
-
-        // verify required parameter 'cron' is not null or undefined
-        if (cron === null || cron === undefined) {
-            throw new Error('Required parameter cron was null or undefined when calling _58d82c3816cc4f3149c6bd4762793e31.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: Cron;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Cron");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
     /**
      * 
      * @summary Update a cron job
@@ -466,13 +189,103 @@ export class CronApi {
     }
     /**
      * 
+     * @summary Create a new cron job
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     * @param createCronJobRequest 
+     */
+    public async createCronJob (organisation: string, application: string, environment: string, createCronJobRequest: CreateCronJobRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Cron;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/cron'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling createCronJob.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling createCronJob.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling createCronJob.');
+        }
+
+        // verify required parameter 'createCronJobRequest' is not null or undefined
+        if (createCronJobRequest === null || createCronJobRequest === undefined) {
+            throw new Error('Required parameter createCronJobRequest was null or undefined when calling createCronJob.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(createCronJobRequest, "CreateCronJobRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Cron;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Cron");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Delete a cron job
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
      * @param cron The cron job ID
      */
-    public async _7c28500fe80e81fdbd3a03f71b61be9d (organisation: string, application: string, environment: string, cron: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async deleteCronJob (organisation: string, application: string, environment: string, cron: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -484,22 +297,22 @@ export class CronApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _7c28500fe80e81fdbd3a03f71b61be9d.');
+            throw new Error('Required parameter organisation was null or undefined when calling deleteCronJob.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _7c28500fe80e81fdbd3a03f71b61be9d.');
+            throw new Error('Required parameter application was null or undefined when calling deleteCronJob.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _7c28500fe80e81fdbd3a03f71b61be9d.');
+            throw new Error('Required parameter environment was null or undefined when calling deleteCronJob.');
         }
 
         // verify required parameter 'cron' is not null or undefined
         if (cron === null || cron === undefined) {
-            throw new Error('Required parameter cron was null or undefined when calling _7c28500fe80e81fdbd3a03f71b61be9d.');
+            throw new Error('Required parameter cron was null or undefined when calling deleteCronJob.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -548,13 +361,200 @@ export class CronApi {
     }
     /**
      * 
+     * @summary Get a cron job
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     * @param cron The cron job ID
+     */
+    public async getCronJob (organisation: string, application: string, environment: string, cron: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Cron;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
+            .replace('{' + 'cron' + '}', encodeURIComponent(String(cron)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling getCronJob.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling getCronJob.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling getCronJob.');
+        }
+
+        // verify required parameter 'cron' is not null or undefined
+        if (cron === null || cron === undefined) {
+            throw new Error('Required parameter cron was null or undefined when calling getCronJob.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Cron;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Cron");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Get a cron run
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     * @param cron The cron job ID
+     * @param run The cron run ID
+     */
+    public async getCronRun (organisation: string, application: string, environment: string, cron: string, run: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CronRun;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}/runs/{run}'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
+            .replace('{' + 'cron' + '}', encodeURIComponent(String(cron)))
+            .replace('{' + 'run' + '}', encodeURIComponent(String(run)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling getCronRun.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling getCronRun.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling getCronRun.');
+        }
+
+        // verify required parameter 'cron' is not null or undefined
+        if (cron === null || cron === undefined) {
+            throw new Error('Required parameter cron was null or undefined when calling getCronRun.');
+        }
+
+        // verify required parameter 'run' is not null or undefined
+        if (run === null || run === undefined) {
+            throw new Error('Required parameter run was null or undefined when calling getCronRun.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: CronRun;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "CronRun");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Get all runs for a cron job
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
      * @param cron The cron job ID
      */
-    public async b73d1c146c9965182af6a75e5af9fefc (organisation: string, application: string, environment: string, cron: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<CronRun>;  }> {
+    public async listCronJobRuns (organisation: string, application: string, environment: string, cron: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<CronRun>;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}/runs'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -573,22 +573,22 @@ export class CronApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling b73d1c146c9965182af6a75e5af9fefc.');
+            throw new Error('Required parameter organisation was null or undefined when calling listCronJobRuns.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling b73d1c146c9965182af6a75e5af9fefc.');
+            throw new Error('Required parameter application was null or undefined when calling listCronJobRuns.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling b73d1c146c9965182af6a75e5af9fefc.');
+            throw new Error('Required parameter environment was null or undefined when calling listCronJobRuns.');
         }
 
         // verify required parameter 'cron' is not null or undefined
         if (cron === null || cron === undefined) {
-            throw new Error('Required parameter cron was null or undefined when calling b73d1c146c9965182af6a75e5af9fefc.');
+            throw new Error('Required parameter cron was null or undefined when calling listCronJobRuns.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -643,7 +643,7 @@ export class CronApi {
      * @param application The application ID
      * @param environment The environment ID
      */
-    public async f528d983c418d277836eb88ea3e67555 (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Cron;  }> {
+    public async listCronJobs (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Cron;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/cron'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -661,17 +661,17 @@ export class CronApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling f528d983c418d277836eb88ea3e67555.');
+            throw new Error('Required parameter organisation was null or undefined when calling listCronJobs.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling f528d983c418d277836eb88ea3e67555.');
+            throw new Error('Required parameter application was null or undefined when calling listCronJobs.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling f528d983c418d277836eb88ea3e67555.');
+            throw new Error('Required parameter environment was null or undefined when calling listCronJobs.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

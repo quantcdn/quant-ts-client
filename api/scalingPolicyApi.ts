@@ -88,88 +88,13 @@ export class ScalingPolicyApi {
 
     /**
      * 
-     * @summary Get the scaling policy for an environment
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param environment The environment ID
-     */
-    public async _0a9bd92370931ddb0cef0781aa65b0a8 (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/scaling-policy'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _0a9bd92370931ddb0cef0781aa65b0a8.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _0a9bd92370931ddb0cef0781aa65b0a8.');
-        }
-
-        // verify required parameter 'environment' is not null or undefined
-        if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _0a9bd92370931ddb0cef0781aa65b0a8.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
      * @summary Delete the scaling policy for an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
      * @param policyName The policy name
      */
-    public async a8f77b5e3cce5cefa088c3ed72d007e7 (organisation: string, application: string, environment: string, policyName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async deleteScalingPolicy (organisation: string, application: string, environment: string, policyName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/scaling-policy/{policyName}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -181,22 +106,22 @@ export class ScalingPolicyApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling a8f77b5e3cce5cefa088c3ed72d007e7.');
+            throw new Error('Required parameter organisation was null or undefined when calling deleteScalingPolicy.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling a8f77b5e3cce5cefa088c3ed72d007e7.');
+            throw new Error('Required parameter application was null or undefined when calling deleteScalingPolicy.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling a8f77b5e3cce5cefa088c3ed72d007e7.');
+            throw new Error('Required parameter environment was null or undefined when calling deleteScalingPolicy.');
         }
 
         // verify required parameter 'policyName' is not null or undefined
         if (policyName === null || policyName === undefined) {
-            throw new Error('Required parameter policyName was null or undefined when calling a8f77b5e3cce5cefa088c3ed72d007e7.');
+            throw new Error('Required parameter policyName was null or undefined when calling deleteScalingPolicy.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -245,13 +170,12 @@ export class ScalingPolicyApi {
     }
     /**
      * 
-     * @summary Update the scaling policy for an environment
+     * @summary Get the scaling policy for an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
-     * @param scalingPolicy 
      */
-    public async e562f52be1bd6beac2acd6e54806cc0b (organisation: string, application: string, environment: string, scalingPolicy: ScalingPolicy, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async getScalingPolicy (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/scaling-policy'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -262,22 +186,98 @@ export class ScalingPolicyApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling e562f52be1bd6beac2acd6e54806cc0b.');
+            throw new Error('Required parameter organisation was null or undefined when calling getScalingPolicy.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling e562f52be1bd6beac2acd6e54806cc0b.');
+            throw new Error('Required parameter application was null or undefined when calling getScalingPolicy.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling e562f52be1bd6beac2acd6e54806cc0b.');
+            throw new Error('Required parameter environment was null or undefined when calling getScalingPolicy.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Update the scaling policy for an environment
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     * @param scalingPolicy 
+     */
+    public async updateScalingPolicy (organisation: string, application: string, environment: string, scalingPolicy: ScalingPolicy, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/scaling-policy'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling updateScalingPolicy.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling updateScalingPolicy.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling updateScalingPolicy.');
         }
 
         // verify required parameter 'scalingPolicy' is not null or undefined
         if (scalingPolicy === null || scalingPolicy === undefined) {
-            throw new Error('Required parameter scalingPolicy was null or undefined when calling e562f52be1bd6beac2acd6e54806cc0b.');
+            throw new Error('Required parameter scalingPolicy was null or undefined when calling updateScalingPolicy.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

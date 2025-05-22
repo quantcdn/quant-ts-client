@@ -16,8 +16,8 @@ import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { Application } from '../model/application';
-import { B7f433dd67508ecac5d4dccf1b7de5d9Request } from '../model/b7f433dd67508ecac5d4dccf1b7de5d9Request';
-import { Model816747d873ee78401c7116175787b931200Response } from '../model/model816747d873ee78401c7116175787b931200Response';
+import { CreateApplicationRequest } from '../model/createApplicationRequest';
+import { GetEcrLoginCredentials200Response } from '../model/getEcrLoginCredentials200Response';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 
@@ -90,11 +90,155 @@ export class ApplicationsApi {
 
     /**
      * 
+     * @summary Create a new application
+     * @param organisation The organisation ID
+     * @param createApplicationRequest 
+     */
+    public async createApplication (organisation: string, createApplicationRequest: CreateApplicationRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Application;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling createApplication.');
+        }
+
+        // verify required parameter 'createApplicationRequest' is not null or undefined
+        if (createApplicationRequest === null || createApplicationRequest === undefined) {
+            throw new Error('Required parameter createApplicationRequest was null or undefined when calling createApplication.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(createApplicationRequest, "CreateApplicationRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Application;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Application");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Delete an application
+     * @param organisation The organisation ID
+     * @param application The application ID
+     */
+    public async deleteApplication (organisation: string, application: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling deleteApplication.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling deleteApplication.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'DELETE',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Get a single application
      * @param organisation The organisation ID
      * @param application The application ID
      */
-    public async _454dd7b3a32bedd385178c4b952f99b8 (organisation: string, application: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Application;  }> {
+    public async getApplication (organisation: string, application: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Application;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)));
@@ -111,12 +255,12 @@ export class ApplicationsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _454dd7b3a32bedd385178c4b952f99b8.');
+            throw new Error('Required parameter organisation was null or undefined when calling getApplication.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _454dd7b3a32bedd385178c4b952f99b8.');
+            throw new Error('Required parameter application was null or undefined when calling getApplication.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -169,7 +313,7 @@ export class ApplicationsApi {
      * @summary Get ECR login credentials
      * @param organisation The organisation ID
      */
-    public async _816747d873ee78401c7116175787b931 (organisation: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Model816747d873ee78401c7116175787b931200Response;  }> {
+    public async getEcrLoginCredentials (organisation: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetEcrLoginCredentials200Response;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/ecr-login'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)));
         let localVarQueryParameters: any = {};
@@ -185,7 +329,7 @@ export class ApplicationsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _816747d873ee78401c7116175787b931.');
+            throw new Error('Required parameter organisation was null or undefined when calling getEcrLoginCredentials.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -217,13 +361,13 @@ export class ApplicationsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Model816747d873ee78401c7116175787b931200Response;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: GetEcrLoginCredentials200Response;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Model816747d873ee78401c7116175787b931200Response");
+                            body = ObjectSerializer.deserialize(body, "GetEcrLoginCredentials200Response");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -238,7 +382,7 @@ export class ApplicationsApi {
      * @summary Get all applications for an organisation
      * @param organisation The organisation ID
      */
-    public async _8e6bb76d209ca24898a067af24d84899 (organisation: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<Application>;  }> {
+    public async listApplications (organisation: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<Application>;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)));
         let localVarQueryParameters: any = {};
@@ -254,7 +398,7 @@ export class ApplicationsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _8e6bb76d209ca24898a067af24d84899.');
+            throw new Error('Required parameter organisation was null or undefined when calling listApplications.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -293,150 +437,6 @@ export class ApplicationsApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "Array<Application>");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Delete an application
-     * @param organisation The organisation ID
-     * @param application The application ID
-     */
-    public async ad253568b6d7f39ea2055d05d64f521a (organisation: string, application: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling ad253568b6d7f39ea2055d05d64f521a.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling ad253568b6d7f39ea2055d05d64f521a.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Create a new application
-     * @param organisation The organisation ID
-     * @param b7f433dd67508ecac5d4dccf1b7de5d9Request 
-     */
-    public async b7f433dd67508ecac5d4dccf1b7de5d9 (organisation: string, b7f433dd67508ecac5d4dccf1b7de5d9Request: B7f433dd67508ecac5d4dccf1b7de5d9Request, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Application;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling b7f433dd67508ecac5d4dccf1b7de5d9.');
-        }
-
-        // verify required parameter 'b7f433dd67508ecac5d4dccf1b7de5d9Request' is not null or undefined
-        if (b7f433dd67508ecac5d4dccf1b7de5d9Request === null || b7f433dd67508ecac5d4dccf1b7de5d9Request === undefined) {
-            throw new Error('Required parameter b7f433dd67508ecac5d4dccf1b7de5d9Request was null or undefined when calling b7f433dd67508ecac5d4dccf1b7de5d9.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(b7f433dd67508ecac5d4dccf1b7de5d9Request, "B7f433dd67508ecac5d4dccf1b7de5d9Request")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: Application;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Application");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

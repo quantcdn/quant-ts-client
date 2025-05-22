@@ -88,46 +88,33 @@ export class ContainersApi {
 
     /**
      * 
-     * @summary Update a container in an environment
+     * @summary Get the containers in an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
-     * @param container The container ID
-     * @param container2 
      */
-    public async _43c1b44cff7e514fc48e482bc39ecb82 (organisation: string, application: string, environment: string, container: string, container2: Container, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/containers/{container}'
+    public async listContainers (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/containers'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
-            .replace('{' + 'container' + '}', encodeURIComponent(String(container)));
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         let localVarFormParams: any = {};
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _43c1b44cff7e514fc48e482bc39ecb82.');
+            throw new Error('Required parameter organisation was null or undefined when calling listContainers.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _43c1b44cff7e514fc48e482bc39ecb82.');
+            throw new Error('Required parameter application was null or undefined when calling listContainers.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _43c1b44cff7e514fc48e482bc39ecb82.');
-        }
-
-        // verify required parameter 'container' is not null or undefined
-        if (container === null || container === undefined) {
-            throw new Error('Required parameter container was null or undefined when calling _43c1b44cff7e514fc48e482bc39ecb82.');
-        }
-
-        // verify required parameter 'container2' is not null or undefined
-        if (container2 === null || container2 === undefined) {
-            throw new Error('Required parameter container2 was null or undefined when calling _43c1b44cff7e514fc48e482bc39ecb82.');
+            throw new Error('Required parameter environment was null or undefined when calling listContainers.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -135,13 +122,12 @@ export class ContainersApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(container2, "Container")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -177,33 +163,46 @@ export class ContainersApi {
     }
     /**
      * 
-     * @summary Get the containers in an environment
+     * @summary Update a container in an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
+     * @param container The container ID
+     * @param container2 
      */
-    public async ad41d97d05a753fb4cf319f715c3889a (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/containers'
+    public async updateContainer (organisation: string, application: string, environment: string, container: string, container2: Container, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/containers/{container}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
+            .replace('{' + 'container' + '}', encodeURIComponent(String(container)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         let localVarFormParams: any = {};
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling ad41d97d05a753fb4cf319f715c3889a.');
+            throw new Error('Required parameter organisation was null or undefined when calling updateContainer.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling ad41d97d05a753fb4cf319f715c3889a.');
+            throw new Error('Required parameter application was null or undefined when calling updateContainer.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling ad41d97d05a753fb4cf319f715c3889a.');
+            throw new Error('Required parameter environment was null or undefined when calling updateContainer.');
+        }
+
+        // verify required parameter 'container' is not null or undefined
+        if (container === null || container === undefined) {
+            throw new Error('Required parameter container was null or undefined when calling updateContainer.');
+        }
+
+        // verify required parameter 'container2' is not null or undefined
+        if (container2 === null || container2 === undefined) {
+            throw new Error('Required parameter container2 was null or undefined when calling updateContainer.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -211,12 +210,13 @@ export class ContainersApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(container2, "Container")
         };
 
         let authenticationPromise = Promise.resolve();

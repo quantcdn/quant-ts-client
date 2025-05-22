@@ -15,9 +15,9 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { E0cf8adb0a3beb04279230cfb11634dfRequest } from '../model/e0cf8adb0a3beb04279230cfb11634dfRequest';
+import { CreateEnvironmentRequest } from '../model/createEnvironmentRequest';
 import { Environment } from '../model/environment';
-import { Model06b225e9857930e3933804092dfa7a4aRequest } from '../model/model06b225e9857930e3933804092dfa7a4aRequest';
+import { UpdateEnvironmentStateRequest } from '../model/updateEnvironmentStateRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 
@@ -90,14 +90,96 @@ export class EnvironmentsApi {
 
     /**
      * 
-     * @summary Update the state of an environment
+     * @summary Create a new environment
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param createEnvironmentRequest 
+     */
+    public async createEnvironment (organisation: string, application: string, createEnvironmentRequest: CreateEnvironmentRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Environment;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling createEnvironment.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling createEnvironment.');
+        }
+
+        // verify required parameter 'createEnvironmentRequest' is not null or undefined
+        if (createEnvironmentRequest === null || createEnvironmentRequest === undefined) {
+            throw new Error('Required parameter createEnvironmentRequest was null or undefined when calling createEnvironment.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(createEnvironmentRequest, "CreateEnvironmentRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Environment;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Environment");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Delete an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
-     * @param model06b225e9857930e3933804092dfa7a4aRequest 
      */
-    public async _06b225e9857930e3933804092dfa7a4a (organisation: string, application: string, environment: string, model06b225e9857930e3933804092dfa7a4aRequest: Model06b225e9857930e3933804092dfa7a4aRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/state'
+    public async deleteEnvironment (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
             .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
@@ -107,22 +189,17 @@ export class EnvironmentsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _06b225e9857930e3933804092dfa7a4a.');
+            throw new Error('Required parameter organisation was null or undefined when calling deleteEnvironment.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _06b225e9857930e3933804092dfa7a4a.');
+            throw new Error('Required parameter application was null or undefined when calling deleteEnvironment.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _06b225e9857930e3933804092dfa7a4a.');
-        }
-
-        // verify required parameter 'model06b225e9857930e3933804092dfa7a4aRequest' is not null or undefined
-        if (model06b225e9857930e3933804092dfa7a4aRequest === null || model06b225e9857930e3933804092dfa7a4aRequest === undefined) {
-            throw new Error('Required parameter model06b225e9857930e3933804092dfa7a4aRequest was null or undefined when calling _06b225e9857930e3933804092dfa7a4a.');
+            throw new Error('Required parameter environment was null or undefined when calling deleteEnvironment.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -130,13 +207,245 @@ export class EnvironmentsApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'DELETE',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(model06b225e9857930e3933804092dfa7a4aRequest, "Model06b225e9857930e3933804092dfa7a4aRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Get a single environment
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     */
+    public async getEnvironment (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Environment;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling getEnvironment.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling getEnvironment.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling getEnvironment.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Environment;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Environment");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Get the logs for an environment
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     */
+    public async getEnvironmentLogs (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/logs'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling getEnvironmentLogs.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling getEnvironmentLogs.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling getEnvironmentLogs.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Get the metrics for an environment
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     */
+    public async getEnvironmentMetrics (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/metrics'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling getEnvironmentMetrics.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling getEnvironmentMetrics.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling getEnvironmentMetrics.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -176,7 +485,7 @@ export class EnvironmentsApi {
      * @param organisation The organisation ID
      * @param application The application ID
      */
-    public async _8719e361c3442885af7fd7c603bf5aa3 (organisation: string, application: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<Environment>;  }> {
+    public async listEnvironments (organisation: string, application: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<Environment>;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)));
@@ -193,12 +502,12 @@ export class EnvironmentsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _8719e361c3442885af7fd7c603bf5aa3.');
+            throw new Error('Required parameter organisation was null or undefined when calling listEnvironments.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _8719e361c3442885af7fd7c603bf5aa3.');
+            throw new Error('Required parameter application was null or undefined when calling listEnvironments.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -248,96 +557,14 @@ export class EnvironmentsApi {
     }
     /**
      * 
-     * @summary Get a single environment
+     * @summary Update the state of an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
+     * @param updateEnvironmentStateRequest 
      */
-    public async _9e85602c4d123075e14321a6c58561b1 (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Environment;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _9e85602c4d123075e14321a6c58561b1.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _9e85602c4d123075e14321a6c58561b1.');
-        }
-
-        // verify required parameter 'environment' is not null or undefined
-        if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _9e85602c4d123075e14321a6c58561b1.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: Environment;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Environment");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Get the metrics for an environment
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param environment The environment ID
-     */
-    public async b80f70f733af48687428502f754307fc (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/metrics'
+    public async updateEnvironmentState (organisation: string, application: string, environment: string, updateEnvironmentStateRequest: UpdateEnvironmentStateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/state'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
             .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
@@ -347,17 +574,22 @@ export class EnvironmentsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling b80f70f733af48687428502f754307fc.');
+            throw new Error('Required parameter organisation was null or undefined when calling updateEnvironmentState.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling b80f70f733af48687428502f754307fc.');
+            throw new Error('Required parameter application was null or undefined when calling updateEnvironmentState.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling b80f70f733af48687428502f754307fc.');
+            throw new Error('Required parameter environment was null or undefined when calling updateEnvironmentState.');
+        }
+
+        // verify required parameter 'updateEnvironmentStateRequest' is not null or undefined
+        if (updateEnvironmentStateRequest === null || updateEnvironmentStateRequest === undefined) {
+            throw new Error('Required parameter updateEnvironmentStateRequest was null or undefined when calling updateEnvironmentState.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -365,245 +597,13 @@ export class EnvironmentsApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Delete an environment
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param environment The environment ID
-     */
-    public async c4154effbff4d412df3f6c3ebd5d4125 (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling c4154effbff4d412df3f6c3ebd5d4125.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling c4154effbff4d412df3f6c3ebd5d4125.');
-        }
-
-        // verify required parameter 'environment' is not null or undefined
-        if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling c4154effbff4d412df3f6c3ebd5d4125.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Create a new environment
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param e0cf8adb0a3beb04279230cfb11634dfRequest 
-     */
-    public async e0cf8adb0a3beb04279230cfb11634df (organisation: string, application: string, e0cf8adb0a3beb04279230cfb11634dfRequest: E0cf8adb0a3beb04279230cfb11634dfRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Environment;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling e0cf8adb0a3beb04279230cfb11634df.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling e0cf8adb0a3beb04279230cfb11634df.');
-        }
-
-        // verify required parameter 'e0cf8adb0a3beb04279230cfb11634dfRequest' is not null or undefined
-        if (e0cf8adb0a3beb04279230cfb11634dfRequest === null || e0cf8adb0a3beb04279230cfb11634dfRequest === undefined) {
-            throw new Error('Required parameter e0cf8adb0a3beb04279230cfb11634dfRequest was null or undefined when calling e0cf8adb0a3beb04279230cfb11634df.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(e0cf8adb0a3beb04279230cfb11634dfRequest, "E0cf8adb0a3beb04279230cfb11634dfRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: Environment;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Environment");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Get the logs for an environment
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param environment The environment ID
-     */
-    public async e579656409f0b1ee738c186fdd23b64a (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/logs'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling e579656409f0b1ee738c186fdd23b64a.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling e579656409f0b1ee738c186fdd23b64a.');
-        }
-
-        // verify required parameter 'environment' is not null or undefined
-        if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling e579656409f0b1ee738c186fdd23b64a.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            body: ObjectSerializer.serialize(updateEnvironmentStateRequest, "UpdateEnvironmentStateRequest")
         };
 
         let authenticationPromise = Promise.resolve();

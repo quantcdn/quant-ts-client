@@ -15,7 +15,7 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { D481164c455528711c302ff5e2b2bf5bRequest } from '../model/d481164c455528711c302ff5e2b2bf5bRequest';
+import { UpdateEnvironmentVariableRequest } from '../model/updateEnvironmentVariableRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 
@@ -94,7 +94,7 @@ export class VariablesApi {
      * @param apiEnvironment The environment ID
      * @param apiVariable The variable key
      */
-    public async _44955fb22628c96362249a89facbca92 (apiOrganisation: string, apiApplication: string, apiEnvironment: string, apiVariable: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async deleteEnvironmentVariable (apiOrganisation: string, apiApplication: string, apiEnvironment: string, apiVariable: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables/{api_variable}'
             .replace('{' + 'api_organisation' + '}', encodeURIComponent(String(apiOrganisation)))
             .replace('{' + 'api_application' + '}', encodeURIComponent(String(apiApplication)))
@@ -106,22 +106,22 @@ export class VariablesApi {
 
         // verify required parameter 'apiOrganisation' is not null or undefined
         if (apiOrganisation === null || apiOrganisation === undefined) {
-            throw new Error('Required parameter apiOrganisation was null or undefined when calling _44955fb22628c96362249a89facbca92.');
+            throw new Error('Required parameter apiOrganisation was null or undefined when calling deleteEnvironmentVariable.');
         }
 
         // verify required parameter 'apiApplication' is not null or undefined
         if (apiApplication === null || apiApplication === undefined) {
-            throw new Error('Required parameter apiApplication was null or undefined when calling _44955fb22628c96362249a89facbca92.');
+            throw new Error('Required parameter apiApplication was null or undefined when calling deleteEnvironmentVariable.');
         }
 
         // verify required parameter 'apiEnvironment' is not null or undefined
         if (apiEnvironment === null || apiEnvironment === undefined) {
-            throw new Error('Required parameter apiEnvironment was null or undefined when calling _44955fb22628c96362249a89facbca92.');
+            throw new Error('Required parameter apiEnvironment was null or undefined when calling deleteEnvironmentVariable.');
         }
 
         // verify required parameter 'apiVariable' is not null or undefined
         if (apiVariable === null || apiVariable === undefined) {
-            throw new Error('Required parameter apiVariable was null or undefined when calling _44955fb22628c96362249a89facbca92.');
+            throw new Error('Required parameter apiVariable was null or undefined when calling deleteEnvironmentVariable.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -175,7 +175,7 @@ export class VariablesApi {
      * @param apiApplication The application ID
      * @param apiEnvironment The environment ID
      */
-    public async _73fbde3b871d62621a0851e12ef3044c (apiOrganisation: string, apiApplication: string, apiEnvironment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async listEnvironmentVariables (apiOrganisation: string, apiApplication: string, apiEnvironment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables'
             .replace('{' + 'api_organisation' + '}', encodeURIComponent(String(apiOrganisation)))
             .replace('{' + 'api_application' + '}', encodeURIComponent(String(apiApplication)))
@@ -186,17 +186,17 @@ export class VariablesApi {
 
         // verify required parameter 'apiOrganisation' is not null or undefined
         if (apiOrganisation === null || apiOrganisation === undefined) {
-            throw new Error('Required parameter apiOrganisation was null or undefined when calling _73fbde3b871d62621a0851e12ef3044c.');
+            throw new Error('Required parameter apiOrganisation was null or undefined when calling listEnvironmentVariables.');
         }
 
         // verify required parameter 'apiApplication' is not null or undefined
         if (apiApplication === null || apiApplication === undefined) {
-            throw new Error('Required parameter apiApplication was null or undefined when calling _73fbde3b871d62621a0851e12ef3044c.');
+            throw new Error('Required parameter apiApplication was null or undefined when calling listEnvironmentVariables.');
         }
 
         // verify required parameter 'apiEnvironment' is not null or undefined
         if (apiEnvironment === null || apiEnvironment === undefined) {
-            throw new Error('Required parameter apiEnvironment was null or undefined when calling _73fbde3b871d62621a0851e12ef3044c.');
+            throw new Error('Required parameter apiEnvironment was null or undefined when calling listEnvironmentVariables.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -250,9 +250,9 @@ export class VariablesApi {
      * @param apiApplication The application ID
      * @param apiEnvironment The environment ID
      * @param apiVariable The variable key
-     * @param d481164c455528711c302ff5e2b2bf5bRequest 
+     * @param updateEnvironmentVariableRequest 
      */
-    public async d481164c455528711c302ff5e2b2bf5b (apiOrganisation: string, apiApplication: string, apiEnvironment: string, apiVariable: string, d481164c455528711c302ff5e2b2bf5bRequest: D481164c455528711c302ff5e2b2bf5bRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async updateEnvironmentVariable (apiOrganisation: string, apiApplication: string, apiEnvironment: string, apiVariable: string, updateEnvironmentVariableRequest: UpdateEnvironmentVariableRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables/{api_variable}'
             .replace('{' + 'api_organisation' + '}', encodeURIComponent(String(apiOrganisation)))
             .replace('{' + 'api_application' + '}', encodeURIComponent(String(apiApplication)))
@@ -264,27 +264,27 @@ export class VariablesApi {
 
         // verify required parameter 'apiOrganisation' is not null or undefined
         if (apiOrganisation === null || apiOrganisation === undefined) {
-            throw new Error('Required parameter apiOrganisation was null or undefined when calling d481164c455528711c302ff5e2b2bf5b.');
+            throw new Error('Required parameter apiOrganisation was null or undefined when calling updateEnvironmentVariable.');
         }
 
         // verify required parameter 'apiApplication' is not null or undefined
         if (apiApplication === null || apiApplication === undefined) {
-            throw new Error('Required parameter apiApplication was null or undefined when calling d481164c455528711c302ff5e2b2bf5b.');
+            throw new Error('Required parameter apiApplication was null or undefined when calling updateEnvironmentVariable.');
         }
 
         // verify required parameter 'apiEnvironment' is not null or undefined
         if (apiEnvironment === null || apiEnvironment === undefined) {
-            throw new Error('Required parameter apiEnvironment was null or undefined when calling d481164c455528711c302ff5e2b2bf5b.');
+            throw new Error('Required parameter apiEnvironment was null or undefined when calling updateEnvironmentVariable.');
         }
 
         // verify required parameter 'apiVariable' is not null or undefined
         if (apiVariable === null || apiVariable === undefined) {
-            throw new Error('Required parameter apiVariable was null or undefined when calling d481164c455528711c302ff5e2b2bf5b.');
+            throw new Error('Required parameter apiVariable was null or undefined when calling updateEnvironmentVariable.');
         }
 
-        // verify required parameter 'd481164c455528711c302ff5e2b2bf5bRequest' is not null or undefined
-        if (d481164c455528711c302ff5e2b2bf5bRequest === null || d481164c455528711c302ff5e2b2bf5bRequest === undefined) {
-            throw new Error('Required parameter d481164c455528711c302ff5e2b2bf5bRequest was null or undefined when calling d481164c455528711c302ff5e2b2bf5b.');
+        // verify required parameter 'updateEnvironmentVariableRequest' is not null or undefined
+        if (updateEnvironmentVariableRequest === null || updateEnvironmentVariableRequest === undefined) {
+            throw new Error('Required parameter updateEnvironmentVariableRequest was null or undefined when calling updateEnvironmentVariable.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -298,7 +298,7 @@ export class VariablesApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(d481164c455528711c302ff5e2b2bf5bRequest, "D481164c455528711c302ff5e2b2bf5bRequest")
+            body: ObjectSerializer.serialize(updateEnvironmentVariableRequest, "UpdateEnvironmentVariableRequest")
         };
 
         let authenticationPromise = Promise.resolve();

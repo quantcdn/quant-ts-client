@@ -88,13 +88,96 @@ export class VolumesApi {
 
     /**
      * 
+     * @summary Create a new volume
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     */
+    public async createVolume (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Volume;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/volumes'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling createVolume.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling createVolume.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling createVolume.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Volume;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Volume");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Delete a volume
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
      * @param volume The volume ID
      */
-    public async _3b6422b2f4c50490cd562d915975c993 (organisation: string, application: string, environment: string, volume: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async deleteVolume (organisation: string, application: string, environment: string, volume: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/volumes/{volume}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -106,22 +189,22 @@ export class VolumesApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _3b6422b2f4c50490cd562d915975c993.');
+            throw new Error('Required parameter organisation was null or undefined when calling deleteVolume.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _3b6422b2f4c50490cd562d915975c993.');
+            throw new Error('Required parameter application was null or undefined when calling deleteVolume.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _3b6422b2f4c50490cd562d915975c993.');
+            throw new Error('Required parameter environment was null or undefined when calling deleteVolume.');
         }
 
         // verify required parameter 'volume' is not null or undefined
         if (volume === null || volume === undefined) {
-            throw new Error('Required parameter volume was null or undefined when calling _3b6422b2f4c50490cd562d915975c993.');
+            throw new Error('Required parameter volume was null or undefined when calling deleteVolume.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -176,7 +259,7 @@ export class VolumesApi {
      * @param environment The environment ID
      * @param volume The volume ID
      */
-    public async _51a76398ebec89b4c3c93f9056e0e6a8 (organisation: string, application: string, environment: string, volume: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Volume;  }> {
+    public async getVolume (organisation: string, application: string, environment: string, volume: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Volume;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/volumes/{volume}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -195,22 +278,22 @@ export class VolumesApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _51a76398ebec89b4c3c93f9056e0e6a8.');
+            throw new Error('Required parameter organisation was null or undefined when calling getVolume.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _51a76398ebec89b4c3c93f9056e0e6a8.');
+            throw new Error('Required parameter application was null or undefined when calling getVolume.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _51a76398ebec89b4c3c93f9056e0e6a8.');
+            throw new Error('Required parameter environment was null or undefined when calling getVolume.');
         }
 
         // verify required parameter 'volume' is not null or undefined
         if (volume === null || volume === undefined) {
-            throw new Error('Required parameter volume was null or undefined when calling _51a76398ebec89b4c3c93f9056e0e6a8.');
+            throw new Error('Required parameter volume was null or undefined when calling getVolume.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -265,7 +348,7 @@ export class VolumesApi {
      * @param application The application ID
      * @param environment The environment ID
      */
-    public async _5967ad9294a7b6d1f3a730943c76b3e2 (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Volume;  }> {
+    public async listVolumes (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Volume;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/volumes'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -283,17 +366,17 @@ export class VolumesApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling _5967ad9294a7b6d1f3a730943c76b3e2.');
+            throw new Error('Required parameter organisation was null or undefined when calling listVolumes.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling _5967ad9294a7b6d1f3a730943c76b3e2.');
+            throw new Error('Required parameter application was null or undefined when calling listVolumes.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling _5967ad9294a7b6d1f3a730943c76b3e2.');
+            throw new Error('Required parameter environment was null or undefined when calling listVolumes.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -302,89 +385,6 @@ export class VolumesApi {
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: Volume;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Volume");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Create a new volume
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param environment The environment ID
-     */
-    public async d06ef670801f9b84d2ceab407925997f (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Volume;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/volumes'
-            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
-            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'organisation' is not null or undefined
-        if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling d06ef670801f9b84d2ceab407925997f.');
-        }
-
-        // verify required parameter 'application' is not null or undefined
-        if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling d06ef670801f9b84d2ceab407925997f.');
-        }
-
-        // verify required parameter 'environment' is not null or undefined
-        if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling d06ef670801f9b84d2ceab407925997f.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
