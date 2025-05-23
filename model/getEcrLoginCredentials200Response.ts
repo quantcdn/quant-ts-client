@@ -16,6 +16,7 @@ export class GetEcrLoginCredentials200Response {
     'username'?: string;
     'password'?: string;
     'expiresAt'?: string;
+    'endpoint'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -33,6 +34,11 @@ export class GetEcrLoginCredentials200Response {
         {
             "name": "expiresAt",
             "baseName": "expiresAt",
+            "type": "string"
+        },
+        {
+            "name": "endpoint",
+            "baseName": "endpoint",
             "type": "string"
         }    ];
 
