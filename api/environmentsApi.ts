@@ -17,6 +17,7 @@ import http from 'http';
 /* tslint:disable:no-unused-locals */
 import { CreateEnvironmentRequest } from '../model/createEnvironmentRequest';
 import { Environment } from '../model/environment';
+import { UpdateEnvironmentComposeRequest } from '../model/updateEnvironmentComposeRequest';
 import { UpdateEnvironmentStateRequest } from '../model/updateEnvironmentStateRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -546,6 +547,88 @@ export class EnvironmentsApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "Array<Environment>");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Update the compose for an environment
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     * @param updateEnvironmentComposeRequest 
+     */
+    public async updateEnvironmentCompose (organisation: string, application: string, environment: string, updateEnvironmentComposeRequest: UpdateEnvironmentComposeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/compose'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling updateEnvironmentCompose.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling updateEnvironmentCompose.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling updateEnvironmentCompose.');
+        }
+
+        // verify required parameter 'updateEnvironmentComposeRequest' is not null or undefined
+        if (updateEnvironmentComposeRequest === null || updateEnvironmentComposeRequest === undefined) {
+            throw new Error('Required parameter updateEnvironmentComposeRequest was null or undefined when calling updateEnvironmentCompose.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(updateEnvironmentComposeRequest, "UpdateEnvironmentComposeRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

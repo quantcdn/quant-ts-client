@@ -29,6 +29,7 @@ model/getEcrLoginCredentials200Response.ts
 model/models.ts
 model/scalingPolicy.ts
 model/updateCronJobRequest.ts
+model/updateEnvironmentComposeRequest.ts
 model/updateEnvironmentStateRequest.ts
 model/updateEnvironmentVariableRequest.ts
 model/validateCompose200Response.ts
