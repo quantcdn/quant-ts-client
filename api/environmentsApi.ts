@@ -17,7 +17,7 @@ import http from 'http';
 /* tslint:disable:no-unused-locals */
 import { CreateEnvironmentRequest } from '../model/createEnvironmentRequest';
 import { Environment } from '../model/environment';
-import { UpdateEnvironmentComposeRequest } from '../model/updateEnvironmentComposeRequest';
+import { UpdateEnvironmentRequest } from '../model/updateEnvironmentRequest';
 import { UpdateEnvironmentStateRequest } from '../model/updateEnvironmentStateRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -562,10 +562,10 @@ export class EnvironmentsApi {
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
-     * @param updateEnvironmentComposeRequest 
+     * @param updateEnvironmentRequest 
      */
-    public async updateEnvironmentCompose (organisation: string, application: string, environment: string, updateEnvironmentComposeRequest: UpdateEnvironmentComposeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/compose'
+    public async updateEnvironment (organisation: string, application: string, environment: string, updateEnvironmentRequest: UpdateEnvironmentRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
             .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
@@ -575,22 +575,22 @@ export class EnvironmentsApi {
 
         // verify required parameter 'organisation' is not null or undefined
         if (organisation === null || organisation === undefined) {
-            throw new Error('Required parameter organisation was null or undefined when calling updateEnvironmentCompose.');
+            throw new Error('Required parameter organisation was null or undefined when calling updateEnvironment.');
         }
 
         // verify required parameter 'application' is not null or undefined
         if (application === null || application === undefined) {
-            throw new Error('Required parameter application was null or undefined when calling updateEnvironmentCompose.');
+            throw new Error('Required parameter application was null or undefined when calling updateEnvironment.');
         }
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new Error('Required parameter environment was null or undefined when calling updateEnvironmentCompose.');
+            throw new Error('Required parameter environment was null or undefined when calling updateEnvironment.');
         }
 
-        // verify required parameter 'updateEnvironmentComposeRequest' is not null or undefined
-        if (updateEnvironmentComposeRequest === null || updateEnvironmentComposeRequest === undefined) {
-            throw new Error('Required parameter updateEnvironmentComposeRequest was null or undefined when calling updateEnvironmentCompose.');
+        // verify required parameter 'updateEnvironmentRequest' is not null or undefined
+        if (updateEnvironmentRequest === null || updateEnvironmentRequest === undefined) {
+            throw new Error('Required parameter updateEnvironmentRequest was null or undefined when calling updateEnvironment.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -604,7 +604,7 @@ export class EnvironmentsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(updateEnvironmentComposeRequest, "UpdateEnvironmentComposeRequest")
+            body: ObjectSerializer.serialize(updateEnvironmentRequest, "UpdateEnvironmentRequest")
         };
 
         let authenticationPromise = Promise.resolve();

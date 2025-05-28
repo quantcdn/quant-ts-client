@@ -17,7 +17,7 @@ export * from './environment';
 export * from './getEcrLoginCredentials200Response';
 export * from './scalingPolicy';
 export * from './updateCronJobRequest';
-export * from './updateEnvironmentComposeRequest';
+export * from './updateEnvironmentRequest';
 export * from './updateEnvironmentStateRequest';
 export * from './updateEnvironmentVariableRequest';
 export * from './validateCompose200Response';
@@ -55,7 +55,7 @@ import { Environment } from './environment';
 import { GetEcrLoginCredentials200Response } from './getEcrLoginCredentials200Response';
 import { ScalingPolicy } from './scalingPolicy';
 import { UpdateCronJobRequest } from './updateCronJobRequest';
-import { UpdateEnvironmentComposeRequest } from './updateEnvironmentComposeRequest';
+import { UpdateEnvironmentRequest } from './updateEnvironmentRequest';
 import { UpdateEnvironmentStateRequest } from './updateEnvironmentStateRequest';
 import { UpdateEnvironmentVariableRequest } from './updateEnvironmentVariableRequest';
 import { ValidateCompose200Response } from './validateCompose200Response';
@@ -98,7 +98,7 @@ let typeMap: {[index: string]: any} = {
     "GetEcrLoginCredentials200Response": GetEcrLoginCredentials200Response,
     "ScalingPolicy": ScalingPolicy,
     "UpdateCronJobRequest": UpdateCronJobRequest,
-    "UpdateEnvironmentComposeRequest": UpdateEnvironmentComposeRequest,
+    "UpdateEnvironmentRequest": UpdateEnvironmentRequest,
     "UpdateEnvironmentStateRequest": UpdateEnvironmentStateRequest,
     "UpdateEnvironmentVariableRequest": UpdateEnvironmentVariableRequest,
     "ValidateCompose200Response": ValidateCompose200Response,
