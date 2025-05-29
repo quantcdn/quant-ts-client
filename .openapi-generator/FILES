@@ -26,7 +26,6 @@ model/cron.ts
 model/cronRun.ts
 model/environment.ts
 model/getEcrLoginCredentials200Response.ts
-model/getScalingPolicies200Response.ts
 model/models.ts
 model/scalingPolicy.ts
 model/updateCronJobRequest.ts

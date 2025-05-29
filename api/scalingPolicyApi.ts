@@ -15,7 +15,6 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { GetScalingPolicies200Response } from '../model/getScalingPolicies200Response';
 import { ScalingPolicy } from '../model/scalingPolicy';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -89,11 +88,11 @@ export class ScalingPolicyApi {
 
     /**
      * 
-     * @summary Delete a specific scaling policy for an environment
+     * @summary Delete the scaling policy for an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
-     * @param policyName The policy name to delete
+     * @param policyName The policy name
      */
     public async deleteScalingPolicy (organisation: string, application: string, environment: string, policyName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/scaling-policies/{policyName}'
@@ -171,27 +170,18 @@ export class ScalingPolicyApi {
     }
     /**
      * 
-     * @summary Get all scaling policies for an environment
+     * @summary Get the scaling policies for an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
-     * @param metric Filter by metric type
-     * @param policyName Filter by policy name
      */
-    public async getScalingPolicies (organisation: string, application: string, environment: string, metric?: 'CPUUtilization' | 'MemoryUtilization' | 'RPS', policyName?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetScalingPolicies200Response;  }> {
+    public async getScalingPolicies (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/scaling-policies'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
             .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
         let localVarFormParams: any = {};
 
         // verify required parameter 'organisation' is not null or undefined
@@ -207,14 +197,6 @@ export class ScalingPolicyApi {
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
             throw new Error('Required parameter environment was null or undefined when calling getScalingPolicies.');
-        }
-
-        if (metric !== undefined) {
-            localVarQueryParameters['metric'] = ObjectSerializer.serialize(metric, "'CPUUtilization' | 'MemoryUtilization' | 'RPS'");
-        }
-
-        if (policyName !== undefined) {
-            localVarQueryParameters['policyName'] = ObjectSerializer.serialize(policyName, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -246,13 +228,12 @@ export class ScalingPolicyApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: GetScalingPolicies200Response;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetScalingPolicies200Response");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -264,7 +245,7 @@ export class ScalingPolicyApi {
     }
     /**
      * 
-     * @summary Create or update a scaling policy for an environment
+     * @summary Update the scaling policy for an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID

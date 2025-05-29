@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 
 export class ScalingPolicy {
-    'metric'?: string;
+    'metric'?: ScalingPolicy.MetricEnum;
     'targetValue'?: number;
     'scaleInCooldownSeconds'?: number;
     'scaleOutCooldownSeconds'?: number;
@@ -24,7 +24,7 @@ export class ScalingPolicy {
         {
             "name": "metric",
             "baseName": "metric",
-            "type": "string"
+            "type": "ScalingPolicy.MetricEnum"
         },
         {
             "name": "targetValue",
@@ -47,3 +47,10 @@ export class ScalingPolicy {
     }
 }
 
+export namespace ScalingPolicy {
+    export enum MetricEnum {
+        CpuUtilization = <any> 'CPUUtilization',
+        MemoryUtilization = <any> 'MemoryUtilization',
+        Rps = <any> 'RPS'
+    }
+}
