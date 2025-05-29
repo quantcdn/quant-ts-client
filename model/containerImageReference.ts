@@ -15,6 +15,8 @@ import { RequestFile } from './models';
 export class ContainerImageReference {
     'repository': string;
     'tag': string;
+    'type'?: string;
+    'identifier'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -27,6 +29,16 @@ export class ContainerImageReference {
         {
             "name": "tag",
             "baseName": "tag",
+            "type": "string"
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "string"
+        },
+        {
+            "name": "identifier",
+            "baseName": "identifier",
             "type": "string"
         }    ];
 
