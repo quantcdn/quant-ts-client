@@ -15,6 +15,7 @@ export * from './cron';
 export * from './cronRun';
 export * from './environment';
 export * from './getEcrLoginCredentials200Response';
+export * from './getScalingPolicies200Response';
 export * from './scalingPolicy';
 export * from './updateCronJobRequest';
 export * from './updateEnvironmentRequest';
@@ -53,6 +54,7 @@ import { Cron } from './cron';
 import { CronRun } from './cronRun';
 import { Environment } from './environment';
 import { GetEcrLoginCredentials200Response } from './getEcrLoginCredentials200Response';
+import { GetScalingPolicies200Response } from './getScalingPolicies200Response';
 import { ScalingPolicy } from './scalingPolicy';
 import { UpdateCronJobRequest } from './updateCronJobRequest';
 import { UpdateEnvironmentRequest } from './updateEnvironmentRequest';
@@ -96,6 +98,7 @@ let typeMap: {[index: string]: any} = {
     "CronRun": CronRun,
     "Environment": Environment,
     "GetEcrLoginCredentials200Response": GetEcrLoginCredentials200Response,
+    "GetScalingPolicies200Response": GetScalingPolicies200Response,
     "ScalingPolicy": ScalingPolicy,
     "UpdateCronJobRequest": UpdateCronJobRequest,
     "UpdateEnvironmentRequest": UpdateEnvironmentRequest,
