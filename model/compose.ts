@@ -14,7 +14,7 @@ import { RequestFile } from './models';
 import { Container } from './container';
 
 export class Compose {
-    'containers': Array<Container>;
+    'containers'?: Array<Container>;
     'architecture'?: string;
     'taskCpu'?: number;
     'taskMemory'?: number;
