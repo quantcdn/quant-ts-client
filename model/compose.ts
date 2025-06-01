@@ -15,12 +15,12 @@ import { Container } from './container';
 
 export class Compose {
     'containers'?: Array<Container>;
-    'architecture'?: string;
-    'taskCpu'?: number;
-    'taskMemory'?: number;
-    'taskRoleArn'?: string;
-    'minCapacity'?: number;
-    'maxCapacity'?: number;
+    'architecture'?: string | null;
+    'taskCpu'?: number | null;
+    'taskMemory'?: number | null;
+    'taskRoleArn'?: string | null;
+    'minCapacity'?: number | null;
+    'maxCapacity'?: number | null;
 
     static discriminator: string | undefined = undefined;
 
