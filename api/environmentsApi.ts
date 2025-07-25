@@ -17,6 +17,8 @@ import http from 'http';
 /* tslint:disable:no-unused-locals */
 import { CreateEnvironmentRequest } from '../model/createEnvironmentRequest';
 import { Environment } from '../model/environment';
+import { SyncOperation } from '../model/syncOperation';
+import { SyncToEnvironmentRequest } from '../model/syncToEnvironmentRequest';
 import { UpdateEnvironmentRequest } from '../model/updateEnvironmentRequest';
 import { UpdateEnvironmentStateRequest } from '../model/updateEnvironmentStateRequest';
 
@@ -547,6 +549,193 @@ export class EnvironmentsApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "Array<Environment>");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary List the sync operations for an environment
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     * @param type The sync type
+     */
+    public async listSyncOperations (organisation: string, application: string, environment: string, type: 'database' | 'filesystem', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<SyncOperation>;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/sync/{type}'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
+            .replace('{' + 'type' + '}', encodeURIComponent(String(type)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling listSyncOperations.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling listSyncOperations.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling listSyncOperations.');
+        }
+
+        // verify required parameter 'type' is not null or undefined
+        if (type === null || type === undefined) {
+            throw new Error('Required parameter type was null or undefined when calling listSyncOperations.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Array<SyncOperation>;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Array<SyncOperation>");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Perform a sync operation from a source environment to the current environment
+     * @param organisation The organisation ID
+     * @param application The application ID
+     * @param environment The environment ID
+     * @param type The sync type
+     * @param syncToEnvironmentRequest 
+     */
+    public async syncToEnvironment (organisation: string, application: string, environment: string, type: 'database' | 'filesystem', syncToEnvironmentRequest: SyncToEnvironmentRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SyncOperation;  }> {
+        const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/sync/{type}'
+            .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
+            .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
+            .replace('{' + 'type' + '}', encodeURIComponent(String(type)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'organisation' is not null or undefined
+        if (organisation === null || organisation === undefined) {
+            throw new Error('Required parameter organisation was null or undefined when calling syncToEnvironment.');
+        }
+
+        // verify required parameter 'application' is not null or undefined
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling syncToEnvironment.');
+        }
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new Error('Required parameter environment was null or undefined when calling syncToEnvironment.');
+        }
+
+        // verify required parameter 'type' is not null or undefined
+        if (type === null || type === undefined) {
+            throw new Error('Required parameter type was null or undefined when calling syncToEnvironment.');
+        }
+
+        // verify required parameter 'syncToEnvironmentRequest' is not null or undefined
+        if (syncToEnvironmentRequest === null || syncToEnvironmentRequest === undefined) {
+            throw new Error('Required parameter syncToEnvironmentRequest was null or undefined when calling syncToEnvironment.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(syncToEnvironmentRequest, "SyncToEnvironmentRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: SyncOperation;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "SyncOperation");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
