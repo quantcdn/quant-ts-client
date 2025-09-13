@@ -44,6 +44,7 @@ export interface RedirectPayload {
   redirect_url: string
   redirect_http_code: RedirectStatus
   published: boolean
+  skipPurge?: boolean
 }
 
 export interface URLPayload {

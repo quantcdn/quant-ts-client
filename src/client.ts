@@ -175,7 +175,7 @@ export class QuantClient {
       }
 
       if (typeof payload.skipPurge !== 'undefined') {
-        headers['Quant-Skip-Purge'] = true
+        headers['Quant-Skip-Purge'] = 'true'
       }
 
       if (typeof payload.findAttachments !== 'undefined') {
@@ -262,7 +262,19 @@ export class QuantClient {
      *   The repsonse object.
      */
     redirect: async (payload: types.RedirectPayload): Promise<any> => {
-      return await this._project.post('redirect', payload)
+      const headers = {}
+      const body = {
+        url: payload.url,
+        redirect_url: payload.redirect_url,
+        redirect_http_code: payload.redirect_http_code,
+        published: payload.published
+      }
+
+      if (typeof payload.skipPurge !== 'undefined') {
+        headers['Quant-Skip-Purge'] = 'true'
+      }
+
+      return await this._project.post('redirect', body, headers)
     },
 
     /**
@@ -288,7 +300,7 @@ export class QuantClient {
      *   The repsonse object.
      */
     delete: async (payload: types.URLPayload): Promise<any> => {
-      const response = await this._project.delete('delete/all', {}, {
+      const response = await this._project.delete('delete/all?force_delete=true', {}, {
         'Quant-Url': payload.url
       })
       return response.first()
