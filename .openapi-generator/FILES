@@ -7,6 +7,7 @@ api/composeApi.ts
 api/containersApi.ts
 api/cronApi.ts
 api/environmentsApi.ts
+api/sSHAccessApi.ts
 api/scalingPolicyApi.ts
 api/variablesApi.ts
 api/volumesApi.ts
@@ -26,6 +27,8 @@ model/cron.ts
 model/cronRun.ts
 model/environment.ts
 model/getEcrLoginCredentials200Response.ts
+model/getSshAccessCredentials200Response.ts
+model/getSshAccessCredentials200ResponseCredentials.ts
 model/models.ts
 model/scalingPolicy.ts
 model/syncOperation.ts

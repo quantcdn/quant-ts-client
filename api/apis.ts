@@ -10,6 +10,8 @@ export * from './cronApi';
 import { CronApi } from './cronApi';
 export * from './environmentsApi';
 import { EnvironmentsApi } from './environmentsApi';
+export * from './sSHAccessApi';
+import { SSHAccessApi } from './sSHAccessApi';
 export * from './scalingPolicyApi';
 import { ScalingPolicyApi } from './scalingPolicyApi';
 export * from './variablesApi';
@@ -27,4 +29,4 @@ export class HttpError extends Error {
 
 export { RequestFile } from '../model/models';
 
-export const APIS = [ApplicationsApi, CommandsApi, ComposeApi, ContainersApi, CronApi, EnvironmentsApi, ScalingPolicyApi, VariablesApi, VolumesApi];
+export const APIS = [ApplicationsApi, CommandsApi, ComposeApi, ContainersApi, CronApi, EnvironmentsApi, SSHAccessApi, ScalingPolicyApi, VariablesApi, VolumesApi];

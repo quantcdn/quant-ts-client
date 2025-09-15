@@ -15,6 +15,8 @@ export * from './cron';
 export * from './cronRun';
 export * from './environment';
 export * from './getEcrLoginCredentials200Response';
+export * from './getSshAccessCredentials200Response';
+export * from './getSshAccessCredentials200ResponseCredentials';
 export * from './scalingPolicy';
 export * from './syncOperation';
 export * from './syncToEnvironmentRequest';
@@ -55,6 +57,8 @@ import { Cron } from './cron';
 import { CronRun } from './cronRun';
 import { Environment } from './environment';
 import { GetEcrLoginCredentials200Response } from './getEcrLoginCredentials200Response';
+import { GetSshAccessCredentials200Response } from './getSshAccessCredentials200Response';
+import { GetSshAccessCredentials200ResponseCredentials } from './getSshAccessCredentials200ResponseCredentials';
 import { ScalingPolicy } from './scalingPolicy';
 import { SyncOperation } from './syncOperation';
 import { SyncToEnvironmentRequest } from './syncToEnvironmentRequest';
@@ -101,6 +105,8 @@ let typeMap: {[index: string]: any} = {
     "CronRun": CronRun,
     "Environment": Environment,
     "GetEcrLoginCredentials200Response": GetEcrLoginCredentials200Response,
+    "GetSshAccessCredentials200Response": GetSshAccessCredentials200Response,
+    "GetSshAccessCredentials200ResponseCredentials": GetSshAccessCredentials200ResponseCredentials,
     "ScalingPolicy": ScalingPolicy,
     "SyncOperation": SyncOperation,
     "SyncToEnvironmentRequest": SyncToEnvironmentRequest,
