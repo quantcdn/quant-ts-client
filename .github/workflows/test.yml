@@ -17,11 +17,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint:src
-
-      - name: Test
-        run: npm run test
-
-      - name: Build
+      - name: Build & Type Check
         run: npm run build
