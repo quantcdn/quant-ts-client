@@ -1,16 +1,13 @@
 name: Publish
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - Test
-    types:
-      - completed
+  push:
+    branches:
+      - v3
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/v3'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
