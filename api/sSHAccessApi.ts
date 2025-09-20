@@ -89,9 +89,9 @@ export class SSHAccessApi {
     /**
      * 
      * @summary Get SSH access credentials for an environment
-     * @param organisation The organisation ID
-     * @param application The application ID
-     * @param environment The environment ID
+     * @param organisation The organisation machine name
+     * @param application The application name
+     * @param environment The environment name
      */
     public async getSshAccessCredentials (organisation: string, application: string, environment: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetSshAccessCredentials200Response;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/ssh-access'

@@ -7,16 +7,22 @@ export * from './container';
 export * from './containerEnvironmentInner';
 export * from './containerImageReference';
 export * from './containerMountPointsInner';
+export * from './createBackup202Response';
+export * from './createBackupRequest';
 export * from './createCommandRequest';
 export * from './createCronJob422Response';
 export * from './createCronJobRequest';
 export * from './createEnvironmentRequest';
 export * from './cron';
 export * from './cronRun';
+export * from './deleteBackup200Response';
+export * from './downloadBackup200Response';
 export * from './environment';
 export * from './getEcrLoginCredentials200Response';
 export * from './getSshAccessCredentials200Response';
 export * from './getSshAccessCredentials200ResponseCredentials';
+export * from './listBackups200Response';
+export * from './listBackups200ResponseBackupsInner';
 export * from './scalingPolicy';
 export * from './syncOperation';
 export * from './syncToEnvironmentRequest';
@@ -49,16 +55,22 @@ import { Container } from './container';
 import { ContainerEnvironmentInner } from './containerEnvironmentInner';
 import { ContainerImageReference } from './containerImageReference';
 import { ContainerMountPointsInner } from './containerMountPointsInner';
+import { CreateBackup202Response } from './createBackup202Response';
+import { CreateBackupRequest } from './createBackupRequest';
 import { CreateCommandRequest } from './createCommandRequest';
 import { CreateCronJob422Response } from './createCronJob422Response';
 import { CreateCronJobRequest } from './createCronJobRequest';
 import { CreateEnvironmentRequest } from './createEnvironmentRequest';
 import { Cron } from './cron';
 import { CronRun } from './cronRun';
+import { DeleteBackup200Response } from './deleteBackup200Response';
+import { DownloadBackup200Response } from './downloadBackup200Response';
 import { Environment } from './environment';
 import { GetEcrLoginCredentials200Response } from './getEcrLoginCredentials200Response';
 import { GetSshAccessCredentials200Response } from './getSshAccessCredentials200Response';
 import { GetSshAccessCredentials200ResponseCredentials } from './getSshAccessCredentials200ResponseCredentials';
+import { ListBackups200Response } from './listBackups200Response';
+import { ListBackups200ResponseBackupsInner } from './listBackups200ResponseBackupsInner';
 import { ScalingPolicy } from './scalingPolicy';
 import { SyncOperation } from './syncOperation';
 import { SyncToEnvironmentRequest } from './syncToEnvironmentRequest';
@@ -97,16 +109,22 @@ let typeMap: {[index: string]: any} = {
     "ContainerEnvironmentInner": ContainerEnvironmentInner,
     "ContainerImageReference": ContainerImageReference,
     "ContainerMountPointsInner": ContainerMountPointsInner,
+    "CreateBackup202Response": CreateBackup202Response,
+    "CreateBackupRequest": CreateBackupRequest,
     "CreateCommandRequest": CreateCommandRequest,
     "CreateCronJob422Response": CreateCronJob422Response,
     "CreateCronJobRequest": CreateCronJobRequest,
     "CreateEnvironmentRequest": CreateEnvironmentRequest,
     "Cron": Cron,
     "CronRun": CronRun,
+    "DeleteBackup200Response": DeleteBackup200Response,
+    "DownloadBackup200Response": DownloadBackup200Response,
     "Environment": Environment,
     "GetEcrLoginCredentials200Response": GetEcrLoginCredentials200Response,
     "GetSshAccessCredentials200Response": GetSshAccessCredentials200Response,
     "GetSshAccessCredentials200ResponseCredentials": GetSshAccessCredentials200ResponseCredentials,
+    "ListBackups200Response": ListBackups200Response,
+    "ListBackups200ResponseBackupsInner": ListBackups200ResponseBackupsInner,
     "ScalingPolicy": ScalingPolicy,
     "SyncOperation": SyncOperation,
     "SyncToEnvironmentRequest": SyncToEnvironmentRequest,

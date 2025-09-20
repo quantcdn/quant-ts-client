@@ -1,5 +1,7 @@
 export * from './applicationsApi';
 import { ApplicationsApi } from './applicationsApi';
+export * from './backupManagementApi';
+import { BackupManagementApi } from './backupManagementApi';
 export * from './commandsApi';
 import { CommandsApi } from './commandsApi';
 export * from './composeApi';
@@ -29,4 +31,4 @@ export class HttpError extends Error {
 
 export { RequestFile } from '../model/models';
 
-export const APIS = [ApplicationsApi, CommandsApi, ComposeApi, ContainersApi, CronApi, EnvironmentsApi, SSHAccessApi, ScalingPolicyApi, VariablesApi, VolumesApi];
+export const APIS = [ApplicationsApi, BackupManagementApi, CommandsApi, ComposeApi, ContainersApi, CronApi, EnvironmentsApi, SSHAccessApi, ScalingPolicyApi, VariablesApi, VolumesApi];
