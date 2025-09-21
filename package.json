@@ -1,6 +1,6 @@
 {
   "name": "@quantcdn/quant-client",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "TypeScript client for Quant Cloud API",
   "main": "dist/api.js",
   "types": "dist/api.d.ts",
