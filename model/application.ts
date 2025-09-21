@@ -1,6 +1,6 @@
 /**
- * QuantCloud API
- * QuantCloud API
+ * QuantCDN Unified API
+ * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
  * 

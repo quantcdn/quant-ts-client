@@ -1,5 +1,6 @@
 import localVarRequest from 'request';
 
+export * from './apiError';
 export * from './application';
 export * from './command';
 export * from './compose';
@@ -7,19 +8,78 @@ export * from './container';
 export * from './containerEnvironmentInner';
 export * from './containerImageReference';
 export * from './containerMountPointsInner';
+export * from './createBackup202Response';
+export * from './createBackupRequest';
 export * from './createCommandRequest';
 export * from './createCronJob422Response';
 export * from './createCronJobRequest';
 export * from './createEnvironmentRequest';
 export * from './cron';
 export * from './cronRun';
+export * from './deleteBackup200Response';
+export * from './downloadBackup200Response';
 export * from './environment';
 export * from './getEcrLoginCredentials200Response';
+export * from './getSshAccessCredentials200Response';
+export * from './getSshAccessCredentials200ResponseCredentials';
+export * from './listBackups200Response';
+export * from './listBackups200ResponseBackupsInner';
+export * from './organizationsList200ResponseInner';
+export * from './projectsList200ResponseInner';
+export * from './purgeCreateRequest';
 export * from './scalingPolicy';
+export * from './syncOperation';
+export * from './syncToEnvironmentRequest';
 export * from './updateCronJobRequest';
 export * from './updateEnvironmentRequest';
 export * from './updateEnvironmentStateRequest';
 export * from './updateEnvironmentVariableRequest';
+export * from './v2Crawler';
+export * from './v2CrawlerRequest';
+export * from './v2CrawlerSchedule';
+export * from './v2CrawlerScheduleRequest';
+export * from './v2CustomHeader';
+export * from './v2CustomHeaderRequest';
+export * from './v2Domain';
+export * from './v2DomainRequest';
+export * from './v2Error';
+export * from './v2Organization';
+export * from './v2OrganizationRequest';
+export * from './v2Project';
+export * from './v2ProjectRequest';
+export * from './v2Rule';
+export * from './v2RuleAuth';
+export * from './v2RuleAuthAction';
+export * from './v2RuleAuthRequest';
+export * from './v2RuleBotChallenge';
+export * from './v2RuleBotChallengeAction';
+export * from './v2RuleBotChallengeRequest';
+export * from './v2RuleContentFilter';
+export * from './v2RuleContentFilterAction';
+export * from './v2RuleContentFilterRequest';
+export * from './v2RuleCustomResponse';
+export * from './v2RuleCustomResponseAction';
+export * from './v2RuleCustomResponseRequest';
+export * from './v2RuleFunction';
+export * from './v2RuleFunctionAction';
+export * from './v2RuleFunctionRequest';
+export * from './v2RuleHeader';
+export * from './v2RuleHeaderAction';
+export * from './v2RuleHeaderRequest';
+export * from './v2RuleProxy';
+export * from './v2RuleProxyAction';
+export * from './v2RuleProxyRequest';
+export * from './v2RuleRedirect';
+export * from './v2RuleRedirectAction';
+export * from './v2RuleRedirectRequest';
+export * from './v2RuleRequest';
+export * from './v2RuleServeStatic';
+export * from './v2RuleServeStaticAction';
+export * from './v2RuleServeStaticRequest';
+export * from './v2SecretStore';
+export * from './v2SecretStoreRequest';
+export * from './v2Store';
+export * from './v2StoreRequest';
 export * from './validateCompose200Response';
 export * from './validateComposeRequest';
 export * from './variable';
@@ -38,6 +98,7 @@ export interface RequestDetailedFile {
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 
+import { ApiError } from './apiError';
 import { Application } from './application';
 import { Command } from './command';
 import { Compose } from './compose';
@@ -45,19 +106,78 @@ import { Container } from './container';
 import { ContainerEnvironmentInner } from './containerEnvironmentInner';
 import { ContainerImageReference } from './containerImageReference';
 import { ContainerMountPointsInner } from './containerMountPointsInner';
+import { CreateBackup202Response } from './createBackup202Response';
+import { CreateBackupRequest } from './createBackupRequest';
 import { CreateCommandRequest } from './createCommandRequest';
 import { CreateCronJob422Response } from './createCronJob422Response';
 import { CreateCronJobRequest } from './createCronJobRequest';
 import { CreateEnvironmentRequest } from './createEnvironmentRequest';
 import { Cron } from './cron';
 import { CronRun } from './cronRun';
+import { DeleteBackup200Response } from './deleteBackup200Response';
+import { DownloadBackup200Response } from './downloadBackup200Response';
 import { Environment } from './environment';
 import { GetEcrLoginCredentials200Response } from './getEcrLoginCredentials200Response';
+import { GetSshAccessCredentials200Response } from './getSshAccessCredentials200Response';
+import { GetSshAccessCredentials200ResponseCredentials } from './getSshAccessCredentials200ResponseCredentials';
+import { ListBackups200Response } from './listBackups200Response';
+import { ListBackups200ResponseBackupsInner } from './listBackups200ResponseBackupsInner';
+import { OrganizationsList200ResponseInner } from './organizationsList200ResponseInner';
+import { ProjectsList200ResponseInner } from './projectsList200ResponseInner';
+import { PurgeCreateRequest } from './purgeCreateRequest';
 import { ScalingPolicy } from './scalingPolicy';
+import { SyncOperation } from './syncOperation';
+import { SyncToEnvironmentRequest } from './syncToEnvironmentRequest';
 import { UpdateCronJobRequest } from './updateCronJobRequest';
 import { UpdateEnvironmentRequest } from './updateEnvironmentRequest';
 import { UpdateEnvironmentStateRequest } from './updateEnvironmentStateRequest';
 import { UpdateEnvironmentVariableRequest } from './updateEnvironmentVariableRequest';
+import { V2Crawler } from './v2Crawler';
+import { V2CrawlerRequest } from './v2CrawlerRequest';
+import { V2CrawlerSchedule } from './v2CrawlerSchedule';
+import { V2CrawlerScheduleRequest } from './v2CrawlerScheduleRequest';
+import { V2CustomHeader } from './v2CustomHeader';
+import { V2CustomHeaderRequest } from './v2CustomHeaderRequest';
+import { V2Domain } from './v2Domain';
+import { V2DomainRequest } from './v2DomainRequest';
+import { V2Error } from './v2Error';
+import { V2Organization } from './v2Organization';
+import { V2OrganizationRequest } from './v2OrganizationRequest';
+import { V2Project } from './v2Project';
+import { V2ProjectRequest } from './v2ProjectRequest';
+import { V2Rule } from './v2Rule';
+import { V2RuleAuth } from './v2RuleAuth';
+import { V2RuleAuthAction } from './v2RuleAuthAction';
+import { V2RuleAuthRequest } from './v2RuleAuthRequest';
+import { V2RuleBotChallenge } from './v2RuleBotChallenge';
+import { V2RuleBotChallengeAction } from './v2RuleBotChallengeAction';
+import { V2RuleBotChallengeRequest } from './v2RuleBotChallengeRequest';
+import { V2RuleContentFilter } from './v2RuleContentFilter';
+import { V2RuleContentFilterAction } from './v2RuleContentFilterAction';
+import { V2RuleContentFilterRequest } from './v2RuleContentFilterRequest';
+import { V2RuleCustomResponse } from './v2RuleCustomResponse';
+import { V2RuleCustomResponseAction } from './v2RuleCustomResponseAction';
+import { V2RuleCustomResponseRequest } from './v2RuleCustomResponseRequest';
+import { V2RuleFunction } from './v2RuleFunction';
+import { V2RuleFunctionAction } from './v2RuleFunctionAction';
+import { V2RuleFunctionRequest } from './v2RuleFunctionRequest';
+import { V2RuleHeader } from './v2RuleHeader';
+import { V2RuleHeaderAction } from './v2RuleHeaderAction';
+import { V2RuleHeaderRequest } from './v2RuleHeaderRequest';
+import { V2RuleProxy } from './v2RuleProxy';
+import { V2RuleProxyAction } from './v2RuleProxyAction';
+import { V2RuleProxyRequest } from './v2RuleProxyRequest';
+import { V2RuleRedirect } from './v2RuleRedirect';
+import { V2RuleRedirectAction } from './v2RuleRedirectAction';
+import { V2RuleRedirectRequest } from './v2RuleRedirectRequest';
+import { V2RuleRequest } from './v2RuleRequest';
+import { V2RuleServeStatic } from './v2RuleServeStatic';
+import { V2RuleServeStaticAction } from './v2RuleServeStaticAction';
+import { V2RuleServeStaticRequest } from './v2RuleServeStaticRequest';
+import { V2SecretStore } from './v2SecretStore';
+import { V2SecretStoreRequest } from './v2SecretStoreRequest';
+import { V2Store } from './v2Store';
+import { V2StoreRequest } from './v2StoreRequest';
 import { ValidateCompose200Response } from './validateCompose200Response';
 import { ValidateComposeRequest } from './validateComposeRequest';
 import { Variable } from './variable';
@@ -78,9 +198,11 @@ let primitives = [
 let enumsMap: {[index: string]: any} = {
         "CronRun.RunTypeEnum": CronRun.RunTypeEnum,
         "CronRun.StatusEnum": CronRun.StatusEnum,
+        "ScalingPolicy.MetricEnum": ScalingPolicy.MetricEnum,
 }
 
 let typeMap: {[index: string]: any} = {
+    "ApiError": ApiError,
     "Application": Application,
     "Command": Command,
     "Compose": Compose,
@@ -88,19 +210,78 @@ let typeMap: {[index: string]: any} = {
     "ContainerEnvironmentInner": ContainerEnvironmentInner,
     "ContainerImageReference": ContainerImageReference,
     "ContainerMountPointsInner": ContainerMountPointsInner,
+    "CreateBackup202Response": CreateBackup202Response,
+    "CreateBackupRequest": CreateBackupRequest,
     "CreateCommandRequest": CreateCommandRequest,
     "CreateCronJob422Response": CreateCronJob422Response,
     "CreateCronJobRequest": CreateCronJobRequest,
     "CreateEnvironmentRequest": CreateEnvironmentRequest,
     "Cron": Cron,
     "CronRun": CronRun,
+    "DeleteBackup200Response": DeleteBackup200Response,
+    "DownloadBackup200Response": DownloadBackup200Response,
     "Environment": Environment,
     "GetEcrLoginCredentials200Response": GetEcrLoginCredentials200Response,
+    "GetSshAccessCredentials200Response": GetSshAccessCredentials200Response,
+    "GetSshAccessCredentials200ResponseCredentials": GetSshAccessCredentials200ResponseCredentials,
+    "ListBackups200Response": ListBackups200Response,
+    "ListBackups200ResponseBackupsInner": ListBackups200ResponseBackupsInner,
+    "OrganizationsList200ResponseInner": OrganizationsList200ResponseInner,
+    "ProjectsList200ResponseInner": ProjectsList200ResponseInner,
+    "PurgeCreateRequest": PurgeCreateRequest,
     "ScalingPolicy": ScalingPolicy,
+    "SyncOperation": SyncOperation,
+    "SyncToEnvironmentRequest": SyncToEnvironmentRequest,
     "UpdateCronJobRequest": UpdateCronJobRequest,
     "UpdateEnvironmentRequest": UpdateEnvironmentRequest,
     "UpdateEnvironmentStateRequest": UpdateEnvironmentStateRequest,
     "UpdateEnvironmentVariableRequest": UpdateEnvironmentVariableRequest,
+    "V2Crawler": V2Crawler,
+    "V2CrawlerRequest": V2CrawlerRequest,
+    "V2CrawlerSchedule": V2CrawlerSchedule,
+    "V2CrawlerScheduleRequest": V2CrawlerScheduleRequest,
+    "V2CustomHeader": V2CustomHeader,
+    "V2CustomHeaderRequest": V2CustomHeaderRequest,
+    "V2Domain": V2Domain,
+    "V2DomainRequest": V2DomainRequest,
+    "V2Error": V2Error,
+    "V2Organization": V2Organization,
+    "V2OrganizationRequest": V2OrganizationRequest,
+    "V2Project": V2Project,
+    "V2ProjectRequest": V2ProjectRequest,
+    "V2Rule": V2Rule,
+    "V2RuleAuth": V2RuleAuth,
+    "V2RuleAuthAction": V2RuleAuthAction,
+    "V2RuleAuthRequest": V2RuleAuthRequest,
+    "V2RuleBotChallenge": V2RuleBotChallenge,
+    "V2RuleBotChallengeAction": V2RuleBotChallengeAction,
+    "V2RuleBotChallengeRequest": V2RuleBotChallengeRequest,
+    "V2RuleContentFilter": V2RuleContentFilter,
+    "V2RuleContentFilterAction": V2RuleContentFilterAction,
+    "V2RuleContentFilterRequest": V2RuleContentFilterRequest,
+    "V2RuleCustomResponse": V2RuleCustomResponse,
+    "V2RuleCustomResponseAction": V2RuleCustomResponseAction,
+    "V2RuleCustomResponseRequest": V2RuleCustomResponseRequest,
+    "V2RuleFunction": V2RuleFunction,
+    "V2RuleFunctionAction": V2RuleFunctionAction,
+    "V2RuleFunctionRequest": V2RuleFunctionRequest,
+    "V2RuleHeader": V2RuleHeader,
+    "V2RuleHeaderAction": V2RuleHeaderAction,
+    "V2RuleHeaderRequest": V2RuleHeaderRequest,
+    "V2RuleProxy": V2RuleProxy,
+    "V2RuleProxyAction": V2RuleProxyAction,
+    "V2RuleProxyRequest": V2RuleProxyRequest,
+    "V2RuleRedirect": V2RuleRedirect,
+    "V2RuleRedirectAction": V2RuleRedirectAction,
+    "V2RuleRedirectRequest": V2RuleRedirectRequest,
+    "V2RuleRequest": V2RuleRequest,
+    "V2RuleServeStatic": V2RuleServeStatic,
+    "V2RuleServeStaticAction": V2RuleServeStaticAction,
+    "V2RuleServeStaticRequest": V2RuleServeStaticRequest,
+    "V2SecretStore": V2SecretStore,
+    "V2SecretStoreRequest": V2SecretStoreRequest,
+    "V2Store": V2Store,
+    "V2StoreRequest": V2StoreRequest,
     "ValidateCompose200Response": ValidateCompose200Response,
     "ValidateComposeRequest": ValidateComposeRequest,
     "Variable": Variable,

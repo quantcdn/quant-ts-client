@@ -1,6 +1,6 @@
 /**
- * QuantCloud API
- * QuantCloud API
+ * QuantCDN Unified API
+ * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -22,6 +22,10 @@ export class Environment {
     'minCapacity'?: number;
     'maxCapacity'?: number;
     'cloneConfigurationFrom'?: string;
+    /**
+    * Image tag suffix for cloning
+    */
+    'imageSuffix'?: string;
     'taskDefinition'?: object;
     'service'?: object;
     'loadBalancer'?: object;
@@ -67,6 +71,11 @@ export class Environment {
         {
             "name": "cloneConfigurationFrom",
             "baseName": "cloneConfigurationFrom",
+            "type": "string"
+        },
+        {
+            "name": "imageSuffix",
+            "baseName": "imageSuffix",
             "type": "string"
         },
         {

@@ -1,6 +1,6 @@
 /**
- * QuantCloud API
- * QuantCloud API
+ * QuantCDN Unified API
+ * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -18,7 +18,11 @@ export class CreateEnvironmentRequest {
     'minCapacity'?: number;
     'maxCapacity'?: number;
     'cloneConfigurationFrom'?: string;
-    'composeDefinition': Compose;
+    'composeDefinition'?: Compose;
+    /**
+    * Optional image tag suffix for cloning
+    */
+    'imageSuffix'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -47,6 +51,11 @@ export class CreateEnvironmentRequest {
             "name": "composeDefinition",
             "baseName": "composeDefinition",
             "type": "Compose"
+        },
+        {
+            "name": "imageSuffix",
+            "baseName": "imageSuffix",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
