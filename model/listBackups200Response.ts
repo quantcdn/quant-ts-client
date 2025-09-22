@@ -15,6 +15,8 @@ import { ListBackups200ResponseBackupsInner } from './listBackups200ResponseBack
 
 export class ListBackups200Response {
     'backups'?: Array<ListBackups200ResponseBackupsInner>;
+    'count'?: number;
+    'message'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -23,6 +25,16 @@ export class ListBackups200Response {
             "name": "backups",
             "baseName": "backups",
             "type": "Array<ListBackups200ResponseBackupsInner>"
+        },
+        {
+            "name": "count",
+            "baseName": "count",
+            "type": "number"
+        },
+        {
+            "name": "message",
+            "baseName": "message",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
