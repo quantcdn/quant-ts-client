@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 import { V2Error } from './v2Error';
 
-export class V2CustomHeader extends string {
+export class V2CustomHeader {
     /**
     * Error message
     */
@@ -38,7 +38,7 @@ export class V2CustomHeader extends string {
         }    ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(V2CustomHeader.attributeTypeMap);
+        return V2CustomHeader.attributeTypeMap;
     }
 }
 
