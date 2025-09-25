@@ -2,6 +2,7 @@ import localVarRequest from 'request';
 
 export * from './apiError';
 export * from './application';
+export * from './configuration';
 export * from './command';
 export * from './compose';
 export * from './container';
@@ -100,6 +101,7 @@ export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 import { ApiError } from './apiError';
 import { Application } from './application';
+import { Configuration } from './configuration';
 import { Command } from './command';
 import { Compose } from './compose';
 import { Container } from './container';
@@ -204,6 +206,7 @@ let enumsMap: {[index: string]: any} = {
 let typeMap: {[index: string]: any} = {
     "ApiError": ApiError,
     "Application": Application,
+    "Configuration": Configuration,
     "Command": Command,
     "Compose": Compose,
     "Container": Container,
