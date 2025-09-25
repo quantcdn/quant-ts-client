@@ -24,7 +24,13 @@ export class Configuration {
     } = {}) {
         this.apiKey = config.apiKey;
         
+        // To assist with backwards compatibility we need to remove the /api/v3 
+        // from the base path if it exists as this update moves basePath to
+        // the base of the QuantCDN API to allow v2 resources to be accessed.
         if (config.basePath) {
+            if (config.basePath.endsWith('/api/v3')) {
+                config.basePath = config.basePath.replace('/api/v3', '');
+            }
             this.basePath = config.basePath;
         }
         
