@@ -13,9 +13,15 @@
 import { RequestFile } from './models';
 
 export class ValidateCompose200Response {
-    'message'?: string;
-    'translatedComposeDefinition'?: object;
-    'translationWarnings'?: Array<string>;
+    'message': string;
+    /**
+    * The translated internal compose definition format
+    */
+    'translatedComposeDefinition': object;
+    /**
+    * Optional warnings encountered during translation
+    */
+    'translationWarnings'?: Array<string> | null;
 
     static discriminator: string | undefined = undefined;
 

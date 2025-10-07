@@ -17,6 +17,7 @@ import http from 'http';
 /* tslint:disable:no-unused-locals */
 import { Compose } from '../model/compose';
 import { ValidateCompose200Response } from '../model/validateCompose200Response';
+import { ValidateCompose422Response } from '../model/validateCompose422Response';
 import { ValidateComposeRequest } from '../model/validateComposeRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -172,12 +173,13 @@ export class ComposeApi {
         });
     }
     /**
-     * 
-     * @summary Validate a compose file
+     * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
+     * @summary Validate Docker Compose File
      * @param organisation The organisation ID
-     * @param validateComposeRequest 
+     * @param validateComposeRequest The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
+     * @param imageSuffix Optional. Image tag suffix to apply during translation. Transforms internal image tags to consistent \&#39;{containerName}-{suffix}\&#39; format (e.g., \&#39;nginx-pr-456\&#39;). External images are left unchanged. Useful for feature branch deployments.
      */
-    public async validateCompose (organisation: string, validateComposeRequest: ValidateComposeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ValidateCompose200Response;  }> {
+    public async validateCompose (organisation: string, validateComposeRequest: ValidateComposeRequest, imageSuffix?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ValidateCompose200Response;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/compose/validate'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)));
         let localVarQueryParameters: any = {};
@@ -199,6 +201,10 @@ export class ComposeApi {
         // verify required parameter 'validateComposeRequest' is not null or undefined
         if (validateComposeRequest === null || validateComposeRequest === undefined) {
             throw new Error('Required parameter validateComposeRequest was null or undefined when calling validateCompose.');
+        }
+
+        if (imageSuffix !== undefined) {
+            localVarQueryParameters['imageSuffix'] = ObjectSerializer.serialize(imageSuffix, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

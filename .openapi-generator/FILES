@@ -45,6 +45,7 @@ model/updateEnvironmentRequest.ts
 model/updateEnvironmentStateRequest.ts
 model/updateEnvironmentVariableRequest.ts
 model/validateCompose200Response.ts
+model/validateCompose422Response.ts
 model/validateComposeRequest.ts
 model/variable.ts
 model/volume.ts

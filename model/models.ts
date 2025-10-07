@@ -31,6 +31,7 @@ export * from './updateEnvironmentRequest';
 export * from './updateEnvironmentStateRequest';
 export * from './updateEnvironmentVariableRequest';
 export * from './validateCompose200Response';
+export * from './validateCompose422Response';
 export * from './validateComposeRequest';
 export * from './variable';
 export * from './volume';
@@ -79,6 +80,7 @@ import { UpdateEnvironmentRequest } from './updateEnvironmentRequest';
 import { UpdateEnvironmentStateRequest } from './updateEnvironmentStateRequest';
 import { UpdateEnvironmentVariableRequest } from './updateEnvironmentVariableRequest';
 import { ValidateCompose200Response } from './validateCompose200Response';
+import { ValidateCompose422Response } from './validateCompose422Response';
 import { ValidateComposeRequest } from './validateComposeRequest';
 import { Variable } from './variable';
 import { Volume } from './volume';
@@ -133,6 +135,7 @@ let typeMap: {[index: string]: any} = {
     "UpdateEnvironmentStateRequest": UpdateEnvironmentStateRequest,
     "UpdateEnvironmentVariableRequest": UpdateEnvironmentVariableRequest,
     "ValidateCompose200Response": ValidateCompose200Response,
+    "ValidateCompose422Response": ValidateCompose422Response,
     "ValidateComposeRequest": ValidateComposeRequest,
     "Variable": Variable,
     "Volume": Volume,

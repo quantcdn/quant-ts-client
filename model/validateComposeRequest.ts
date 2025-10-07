@@ -13,7 +13,18 @@
 import { RequestFile } from './models';
 
 export class ValidateComposeRequest {
-    'compose'?: string;
+    /**
+    * The docker-compose.yml file content as a string
+    */
+    'compose': string;
+    /**
+    * Optional image tag suffix (query parameter takes precedence)
+    */
+    'imageSuffix'?: string;
+    /**
+    * Optional application name for context
+    */
+    'application'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -21,6 +32,16 @@ export class ValidateComposeRequest {
         {
             "name": "compose",
             "baseName": "compose",
+            "type": "string"
+        },
+        {
+            "name": "imageSuffix",
+            "baseName": "imageSuffix",
+            "type": "string"
+        },
+        {
+            "name": "application",
+            "baseName": "application",
             "type": "string"
         }    ];
 
