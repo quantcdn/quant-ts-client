@@ -15,7 +15,8 @@
         "test:smoke": "node -e \"const api = require('./dist/api.js'); console.log('✓ SDK loads successfully'); console.log('✓ Exports:', Object.keys(api).length, 'APIs'); process.exit(0);\"",
         "test:unit": "jest --testMatch='**/tests/**/*.test.js'",
         "test:all": "npm run build && npm run test:smoke && npm run test:unit",
-        "prepublishOnly": "npm run build && npm test"
+        "prepublishOnly": "npm run build && npm test",
+        "validate": "scripts/validate-sdk.sh"
     },
     "author": "QuantCDN",
     "license": "MIT",

@@ -29,6 +29,7 @@
 
 # Preserve custom package.json with test scripts and metadata
 package.json
+package-lock.json
 
 # Preserve test infrastructure
 tests/**
