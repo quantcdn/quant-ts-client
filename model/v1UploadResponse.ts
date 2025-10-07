@@ -1,6 +1,6 @@
 /**
- * QuantCloud API
- * QuantCloud API
+ * QuantCDN API
+ * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -11,22 +11,27 @@
  */
 
 import { RequestFile } from './models';
-import { Compose } from './compose';
 
-export class UpdateEnvironmentComposeRequest {
-    'composeDefinition'?: Compose;
+export class V1UploadResponse {
+    'success': boolean;
+    'url': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "composeDefinition",
-            "baseName": "composeDefinition",
-            "type": "Compose"
+            "name": "success",
+            "baseName": "success",
+            "type": "boolean"
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateEnvironmentComposeRequest.attributeTypeMap;
+        return V1UploadResponse.attributeTypeMap;
     }
 }
 

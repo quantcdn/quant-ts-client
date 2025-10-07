@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OpenAPITools/openapi-generator/master/modules/openapi-generator/src/main/resources/config.schema.json",
+  "gitUserId": "quantcdn",
+  "gitRepoId": "quant-ts-client",
+  "npmName": "@quantcdn/quant-client",
+  "npmVersion": "3.0.0",
+  "packageName": "quant-client",
+  "projectName": "quant-client",
+  "projectDescription": "TypeScript client for QuantCDN and QuantCloud Platform APIs",
+  "projectLicense": "MIT",
+  "projectUrl": "https://github.com/quantcdn/quant-ts-client",
+  "author": "QuantCDN",
+  "authorEmail": "support@quantcdn.io",
+  "supportsES6": true,
+  "withInterfaces": false,
+  "useSingleRequestParameter": false
+}
+
