@@ -5,13 +5,13 @@ A TypeScript client for the Quant API.
 ## Installation
 
 ```bash
-npm install quant-ts-client
+npm install @quantcdn/quant-client
 ```
 
 ## Usage
 
 ```typescript
-import { EnvironmentsApi, Configuration } from 'quant-ts-client';
+import { EnvironmentsApi, Configuration } from '@quantcdn/quant-client';
 
 // Create a configuration with your API key
 const config = new Configuration({
