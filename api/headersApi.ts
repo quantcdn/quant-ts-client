@@ -1,5 +1,5 @@
 /**
- * QuantCDN Unified API
+ * QuantCDN API
  * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
@@ -15,7 +15,6 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { V2CustomHeader } from '../model/v2CustomHeader';
 import { V2CustomHeaderRequest } from '../model/v2CustomHeaderRequest';
 import { V2Error } from '../model/v2Error';
 
@@ -31,6 +30,7 @@ let defaultBasePath = 'https://dashboard.quantcdn.io';
 // ===============================================
 
 export enum HeadersApiApiKeys {
+    headerAuth,
 }
 
 export class HeadersApi {
@@ -41,6 +41,7 @@ export class HeadersApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'BearerAuth': new HttpBearerAuth(),
+        'headerAuth': new ApiKeyAuth('header', 'Quant-Token'),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -101,7 +102,7 @@ export class HeadersApi {
      * @param project 
      * @param v2CustomHeaderRequest 
      */
-    public async headersCreate (organization: string, project: string, v2CustomHeaderRequest: V2CustomHeaderRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: V2CustomHeader;  }> {
+    public async headersCreate (organization: string, project: string, v2CustomHeaderRequest: V2CustomHeaderRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: { [key: string]: string; };  }> {
         const localVarPath = this.basePath + '/api/v2/organizations/{organization}/projects/{project}/custom-headers'
             .replace('{' + 'organization' + '}', encodeURIComponent(String(organization)))
             .replace('{' + 'project' + '}', encodeURIComponent(String(project)));
@@ -161,13 +162,13 @@ export class HeadersApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: V2CustomHeader;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: { [key: string]: string; };  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "V2CustomHeader");
+                            body = ObjectSerializer.deserialize(body, "{ [key: string]: string; }");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -265,7 +266,7 @@ export class HeadersApi {
      * @param organization 
      * @param project 
      */
-    public async headersList (organization: string, project: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<V2CustomHeader>;  }> {
+    public async headersList (organization: string, project: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<{ [key: string]: string; }>;  }> {
         const localVarPath = this.basePath + '/api/v2/organizations/{organization}/projects/{project}/custom-headers'
             .replace('{' + 'organization' + '}', encodeURIComponent(String(organization)))
             .replace('{' + 'project' + '}', encodeURIComponent(String(project)));
@@ -319,13 +320,13 @@ export class HeadersApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Array<V2CustomHeader>;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: Array<{ [key: string]: string; }>;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<V2CustomHeader>");
+                            body = ObjectSerializer.deserialize(body, "Array<{ [key: string]: string; }>");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

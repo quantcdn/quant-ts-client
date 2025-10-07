@@ -1,5 +1,5 @@
 /**
- * QuantCDN Unified API
+ * QuantCDN API
  * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
@@ -12,32 +12,32 @@
 
 import { RequestFile } from './models';
 
-export class ApiError {
+export class V1SearchResponse {
     /**
-    * Error message
+    * Search configuration for the index
     */
-    'message': string;
+    'settings'?: object;
     /**
-    * Error flag
+    * Detail related to index size and status
     */
-    'error': boolean;
+    'index'?: object;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
+            "name": "settings",
+            "baseName": "settings",
+            "type": "object"
         },
         {
-            "name": "error",
-            "baseName": "error",
-            "type": "boolean"
+            "name": "index",
+            "baseName": "index",
+            "type": "object"
         }    ];
 
     static getAttributeTypeMap() {
-        return ApiError.attributeTypeMap;
+        return V1SearchResponse.attributeTypeMap;
     }
 }
 

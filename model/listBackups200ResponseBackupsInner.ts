@@ -1,5 +1,5 @@
 /**
- * QuantCDN Unified API
+ * QuantCDN API
  * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
@@ -13,26 +13,18 @@
 import { RequestFile } from './models';
 
 export class ListBackups200ResponseBackupsInner {
-    'backupId'?: string;
+    'id'?: string;
     'status'?: string;
-    'type'?: string;
-    'engine'?: string;
-    'description'?: string;
     'createdAt'?: Date;
-    'updatedAt'?: Date;
-    'taskArn'?: string;
-    's3Key'?: string;
-    'bucketName'?: string;
     'size'?: number;
-    'sizeFormatted'?: string;
-    'fileExists'?: boolean;
+    'metadata'?: object;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "backupId",
-            "baseName": "backupId",
+            "name": "id",
+            "baseName": "id",
             "type": "string"
         },
         {
@@ -41,44 +33,9 @@ export class ListBackups200ResponseBackupsInner {
             "type": "string"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
-        },
-        {
-            "name": "engine",
-            "baseName": "engine",
-            "type": "string"
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string"
-        },
-        {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "Date"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date"
-        },
-        {
-            "name": "taskArn",
-            "baseName": "taskArn",
-            "type": "string"
-        },
-        {
-            "name": "s3Key",
-            "baseName": "s3Key",
-            "type": "string"
-        },
-        {
-            "name": "bucketName",
-            "baseName": "bucketName",
-            "type": "string"
         },
         {
             "name": "size",
@@ -86,14 +43,9 @@ export class ListBackups200ResponseBackupsInner {
             "type": "number"
         },
         {
-            "name": "sizeFormatted",
-            "baseName": "sizeFormatted",
-            "type": "string"
-        },
-        {
-            "name": "fileExists",
-            "baseName": "fileExists",
-            "type": "boolean"
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "object"
         }    ];
 
     static getAttributeTypeMap() {

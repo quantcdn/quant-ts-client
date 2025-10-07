@@ -1,8 +1,6 @@
 import localVarRequest from 'request';
 
-export * from './apiError';
 export * from './application';
-export * from './configuration';
 export * from './command';
 export * from './compose';
 export * from './container';
@@ -15,12 +13,15 @@ export * from './createCommandRequest';
 export * from './createCronJob422Response';
 export * from './createCronJobRequest';
 export * from './createEnvironmentRequest';
+export * from './createSearchItemRequest';
 export * from './cron';
 export * from './cronRun';
 export * from './deleteBackup200Response';
 export * from './downloadBackup200Response';
 export * from './environment';
 export * from './getEcrLoginCredentials200Response';
+export * from './getMetricsMetricsParameter';
+export * from './getSearchItemsFiltersParameter';
 export * from './getSshAccessCredentials200Response';
 export * from './getSshAccessCredentials200ResponseCredentials';
 export * from './listBackups200Response';
@@ -31,15 +32,56 @@ export * from './purgeCreateRequest';
 export * from './scalingPolicy';
 export * from './syncOperation';
 export * from './syncToEnvironmentRequest';
+export * from './testSearchExtractorsRequest';
 export * from './updateCronJobRequest';
 export * from './updateEnvironmentRequest';
 export * from './updateEnvironmentStateRequest';
 export * from './updateEnvironmentVariableRequest';
+export * from './updateSearchItemRequest';
+export * from './v1ContentItem';
+export * from './v1ContentListResponse';
+export * from './v1ContentRequest';
+export * from './v1DeleteResponse';
+export * from './v1Error';
+export * from './v1FormSubmissionItem';
+export * from './v1FormSubmissionListResponse';
+export * from './v1GetMetricSeriesResponse';
+export * from './v1GetMetricSeriesResponseData';
+export * from './v1GetMetricsResponse';
+export * from './v1GetMetricsResponseData';
+export * from './v1GlobalMetaResponse';
+export * from './v1GlobalMetaResponseGlobalMeta';
+export * from './v1Info';
+export * from './v1Meta';
+export * from './v1MetricDayStats';
+export * from './v1MetricMinuteStats';
+export * from './v1MetricMonthStats';
+export * from './v1PingResponse';
+export * from './v1ProxyItem';
+export * from './v1ProxyListResponse';
+export * from './v1RedirectItem';
+export * from './v1RedirectListResponse';
+export * from './v1RedirectRequest';
+export * from './v1RedirectResponse';
+export * from './v1Revision';
+export * from './v1RevisionsResponse';
+export * from './v1SearchHit';
+export * from './v1SearchItemsResponse';
+export * from './v1SearchMutationResponse';
+export * from './v1SearchRecord';
+export * from './v1SearchResponse';
+export * from './v1SeriesPointDay';
+export * from './v1SeriesPointMonth';
+export * from './v1Transition';
+export * from './v1UploadResponse';
+export * from './v1UrlMetaRequest';
+export * from './v1UrlMetaResponse';
+export * from './v1WafLogItem';
+export * from './v1WafLogListResponse';
 export * from './v2Crawler';
 export * from './v2CrawlerRequest';
 export * from './v2CrawlerSchedule';
 export * from './v2CrawlerScheduleRequest';
-export * from './v2CustomHeader';
 export * from './v2CustomHeaderRequest';
 export * from './v2Domain';
 export * from './v2DomainRequest';
@@ -99,9 +141,7 @@ export interface RequestDetailedFile {
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 
-import { ApiError } from './apiError';
 import { Application } from './application';
-import { Configuration } from './configuration';
 import { Command } from './command';
 import { Compose } from './compose';
 import { Container } from './container';
@@ -114,12 +154,15 @@ import { CreateCommandRequest } from './createCommandRequest';
 import { CreateCronJob422Response } from './createCronJob422Response';
 import { CreateCronJobRequest } from './createCronJobRequest';
 import { CreateEnvironmentRequest } from './createEnvironmentRequest';
+import { CreateSearchItemRequest } from './createSearchItemRequest';
 import { Cron } from './cron';
 import { CronRun } from './cronRun';
 import { DeleteBackup200Response } from './deleteBackup200Response';
 import { DownloadBackup200Response } from './downloadBackup200Response';
 import { Environment } from './environment';
 import { GetEcrLoginCredentials200Response } from './getEcrLoginCredentials200Response';
+import { GetMetricsMetricsParameter } from './getMetricsMetricsParameter';
+import { GetSearchItemsFiltersParameter } from './getSearchItemsFiltersParameter';
 import { GetSshAccessCredentials200Response } from './getSshAccessCredentials200Response';
 import { GetSshAccessCredentials200ResponseCredentials } from './getSshAccessCredentials200ResponseCredentials';
 import { ListBackups200Response } from './listBackups200Response';
@@ -130,15 +173,56 @@ import { PurgeCreateRequest } from './purgeCreateRequest';
 import { ScalingPolicy } from './scalingPolicy';
 import { SyncOperation } from './syncOperation';
 import { SyncToEnvironmentRequest } from './syncToEnvironmentRequest';
+import { TestSearchExtractorsRequest } from './testSearchExtractorsRequest';
 import { UpdateCronJobRequest } from './updateCronJobRequest';
 import { UpdateEnvironmentRequest } from './updateEnvironmentRequest';
 import { UpdateEnvironmentStateRequest } from './updateEnvironmentStateRequest';
 import { UpdateEnvironmentVariableRequest } from './updateEnvironmentVariableRequest';
+import { UpdateSearchItemRequest } from './updateSearchItemRequest';
+import { V1ContentItem } from './v1ContentItem';
+import { V1ContentListResponse } from './v1ContentListResponse';
+import { V1ContentRequest } from './v1ContentRequest';
+import { V1DeleteResponse } from './v1DeleteResponse';
+import { V1Error } from './v1Error';
+import { V1FormSubmissionItem } from './v1FormSubmissionItem';
+import { V1FormSubmissionListResponse } from './v1FormSubmissionListResponse';
+import { V1GetMetricSeriesResponse } from './v1GetMetricSeriesResponse';
+import { V1GetMetricSeriesResponseData } from './v1GetMetricSeriesResponseData';
+import { V1GetMetricsResponse } from './v1GetMetricsResponse';
+import { V1GetMetricsResponseData } from './v1GetMetricsResponseData';
+import { V1GlobalMetaResponse } from './v1GlobalMetaResponse';
+import { V1GlobalMetaResponseGlobalMeta } from './v1GlobalMetaResponseGlobalMeta';
+import { V1Info } from './v1Info';
+import { V1Meta } from './v1Meta';
+import { V1MetricDayStats } from './v1MetricDayStats';
+import { V1MetricMinuteStats } from './v1MetricMinuteStats';
+import { V1MetricMonthStats } from './v1MetricMonthStats';
+import { V1PingResponse } from './v1PingResponse';
+import { V1ProxyItem } from './v1ProxyItem';
+import { V1ProxyListResponse } from './v1ProxyListResponse';
+import { V1RedirectItem } from './v1RedirectItem';
+import { V1RedirectListResponse } from './v1RedirectListResponse';
+import { V1RedirectRequest } from './v1RedirectRequest';
+import { V1RedirectResponse } from './v1RedirectResponse';
+import { V1Revision } from './v1Revision';
+import { V1RevisionsResponse } from './v1RevisionsResponse';
+import { V1SearchHit } from './v1SearchHit';
+import { V1SearchItemsResponse } from './v1SearchItemsResponse';
+import { V1SearchMutationResponse } from './v1SearchMutationResponse';
+import { V1SearchRecord } from './v1SearchRecord';
+import { V1SearchResponse } from './v1SearchResponse';
+import { V1SeriesPointDay } from './v1SeriesPointDay';
+import { V1SeriesPointMonth } from './v1SeriesPointMonth';
+import { V1Transition } from './v1Transition';
+import { V1UploadResponse } from './v1UploadResponse';
+import { V1UrlMetaRequest } from './v1UrlMetaRequest';
+import { V1UrlMetaResponse } from './v1UrlMetaResponse';
+import { V1WafLogItem } from './v1WafLogItem';
+import { V1WafLogListResponse } from './v1WafLogListResponse';
 import { V2Crawler } from './v2Crawler';
 import { V2CrawlerRequest } from './v2CrawlerRequest';
 import { V2CrawlerSchedule } from './v2CrawlerSchedule';
 import { V2CrawlerScheduleRequest } from './v2CrawlerScheduleRequest';
-import { V2CustomHeader } from './v2CustomHeader';
 import { V2CustomHeaderRequest } from './v2CustomHeaderRequest';
 import { V2Domain } from './v2Domain';
 import { V2DomainRequest } from './v2DomainRequest';
@@ -201,12 +285,12 @@ let enumsMap: {[index: string]: any} = {
         "CronRun.RunTypeEnum": CronRun.RunTypeEnum,
         "CronRun.StatusEnum": CronRun.StatusEnum,
         "ScalingPolicy.MetricEnum": ScalingPolicy.MetricEnum,
+        "TestSearchExtractorsRequest.TypeEnum": TestSearchExtractorsRequest.TypeEnum,
+        "V1Transition.StateEnum": V1Transition.StateEnum,
 }
 
 let typeMap: {[index: string]: any} = {
-    "ApiError": ApiError,
     "Application": Application,
-    "Configuration": Configuration,
     "Command": Command,
     "Compose": Compose,
     "Container": Container,
@@ -219,12 +303,15 @@ let typeMap: {[index: string]: any} = {
     "CreateCronJob422Response": CreateCronJob422Response,
     "CreateCronJobRequest": CreateCronJobRequest,
     "CreateEnvironmentRequest": CreateEnvironmentRequest,
+    "CreateSearchItemRequest": CreateSearchItemRequest,
     "Cron": Cron,
     "CronRun": CronRun,
     "DeleteBackup200Response": DeleteBackup200Response,
     "DownloadBackup200Response": DownloadBackup200Response,
     "Environment": Environment,
     "GetEcrLoginCredentials200Response": GetEcrLoginCredentials200Response,
+    "GetMetricsMetricsParameter": GetMetricsMetricsParameter,
+    "GetSearchItemsFiltersParameter": GetSearchItemsFiltersParameter,
     "GetSshAccessCredentials200Response": GetSshAccessCredentials200Response,
     "GetSshAccessCredentials200ResponseCredentials": GetSshAccessCredentials200ResponseCredentials,
     "ListBackups200Response": ListBackups200Response,
@@ -235,15 +322,56 @@ let typeMap: {[index: string]: any} = {
     "ScalingPolicy": ScalingPolicy,
     "SyncOperation": SyncOperation,
     "SyncToEnvironmentRequest": SyncToEnvironmentRequest,
+    "TestSearchExtractorsRequest": TestSearchExtractorsRequest,
     "UpdateCronJobRequest": UpdateCronJobRequest,
     "UpdateEnvironmentRequest": UpdateEnvironmentRequest,
     "UpdateEnvironmentStateRequest": UpdateEnvironmentStateRequest,
     "UpdateEnvironmentVariableRequest": UpdateEnvironmentVariableRequest,
+    "UpdateSearchItemRequest": UpdateSearchItemRequest,
+    "V1ContentItem": V1ContentItem,
+    "V1ContentListResponse": V1ContentListResponse,
+    "V1ContentRequest": V1ContentRequest,
+    "V1DeleteResponse": V1DeleteResponse,
+    "V1Error": V1Error,
+    "V1FormSubmissionItem": V1FormSubmissionItem,
+    "V1FormSubmissionListResponse": V1FormSubmissionListResponse,
+    "V1GetMetricSeriesResponse": V1GetMetricSeriesResponse,
+    "V1GetMetricSeriesResponseData": V1GetMetricSeriesResponseData,
+    "V1GetMetricsResponse": V1GetMetricsResponse,
+    "V1GetMetricsResponseData": V1GetMetricsResponseData,
+    "V1GlobalMetaResponse": V1GlobalMetaResponse,
+    "V1GlobalMetaResponseGlobalMeta": V1GlobalMetaResponseGlobalMeta,
+    "V1Info": V1Info,
+    "V1Meta": V1Meta,
+    "V1MetricDayStats": V1MetricDayStats,
+    "V1MetricMinuteStats": V1MetricMinuteStats,
+    "V1MetricMonthStats": V1MetricMonthStats,
+    "V1PingResponse": V1PingResponse,
+    "V1ProxyItem": V1ProxyItem,
+    "V1ProxyListResponse": V1ProxyListResponse,
+    "V1RedirectItem": V1RedirectItem,
+    "V1RedirectListResponse": V1RedirectListResponse,
+    "V1RedirectRequest": V1RedirectRequest,
+    "V1RedirectResponse": V1RedirectResponse,
+    "V1Revision": V1Revision,
+    "V1RevisionsResponse": V1RevisionsResponse,
+    "V1SearchHit": V1SearchHit,
+    "V1SearchItemsResponse": V1SearchItemsResponse,
+    "V1SearchMutationResponse": V1SearchMutationResponse,
+    "V1SearchRecord": V1SearchRecord,
+    "V1SearchResponse": V1SearchResponse,
+    "V1SeriesPointDay": V1SeriesPointDay,
+    "V1SeriesPointMonth": V1SeriesPointMonth,
+    "V1Transition": V1Transition,
+    "V1UploadResponse": V1UploadResponse,
+    "V1UrlMetaRequest": V1UrlMetaRequest,
+    "V1UrlMetaResponse": V1UrlMetaResponse,
+    "V1WafLogItem": V1WafLogItem,
+    "V1WafLogListResponse": V1WafLogListResponse,
     "V2Crawler": V2Crawler,
     "V2CrawlerRequest": V2CrawlerRequest,
     "V2CrawlerSchedule": V2CrawlerSchedule,
     "V2CrawlerScheduleRequest": V2CrawlerScheduleRequest,
-    "V2CustomHeader": V2CustomHeader,
     "V2CustomHeaderRequest": V2CustomHeaderRequest,
     "V2Domain": V2Domain,
     "V2DomainRequest": V2DomainRequest,

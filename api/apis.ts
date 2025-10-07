@@ -8,6 +8,8 @@ export * from './composeApi';
 import { ComposeApi } from './composeApi';
 export * from './containersApi';
 import { ContainersApi } from './containersApi';
+export * from './contentApi';
+import { ContentApi } from './contentApi';
 export * from './crawlerSchedulesApi';
 import { CrawlerSchedulesApi } from './crawlerSchedulesApi';
 export * from './crawlersApi';
@@ -18,10 +20,14 @@ export * from './domainsApi';
 import { DomainsApi } from './domainsApi';
 export * from './environmentsApi';
 import { EnvironmentsApi } from './environmentsApi';
+export * from './formsApi';
+import { FormsApi } from './formsApi';
 export * from './headersApi';
 import { HeadersApi } from './headersApi';
 export * from './kVApi';
 import { KVApi } from './kVApi';
+export * from './metricsApi';
+import { MetricsApi } from './metricsApi';
 export * from './organizationsApi';
 import { OrganizationsApi } from './organizationsApi';
 export * from './projectsApi';
@@ -50,10 +56,16 @@ export * from './sSHAccessApi';
 import { SSHAccessApi } from './sSHAccessApi';
 export * from './scalingPolicyApi';
 import { ScalingPolicyApi } from './scalingPolicyApi';
+export * from './searchApi';
+import { SearchApi } from './searchApi';
+export * from './v1Api';
+import { V1Api } from './v1Api';
 export * from './variablesApi';
 import { VariablesApi } from './variablesApi';
 export * from './volumesApi';
 import { VolumesApi } from './volumesApi';
+export * from './wafApi';
+import { WafApi } from './wafApi';
 import * as http from 'http';
 
 export class HttpError extends Error {
@@ -65,4 +77,4 @@ export class HttpError extends Error {
 
 export { RequestFile } from '../model/models';
 
-export const APIS = [ApplicationsApi, BackupManagementApi, CommandsApi, ComposeApi, ContainersApi, CrawlerSchedulesApi, CrawlersApi, CronApi, DomainsApi, EnvironmentsApi, HeadersApi, KVApi, OrganizationsApi, ProjectsApi, PurgeApi, RulesAuthApi, RulesBotChallengeApi, RulesContentFilterApi, RulesCustomResponseApi, RulesFunctionApi, RulesHeadersApi, RulesProxyApi, RulesRedirectApi, RulesServeStaticApi, SSHAccessApi, ScalingPolicyApi, VariablesApi, VolumesApi];
+export const APIS = [ApplicationsApi, BackupManagementApi, CommandsApi, ComposeApi, ContainersApi, ContentApi, CrawlerSchedulesApi, CrawlersApi, CronApi, DomainsApi, EnvironmentsApi, FormsApi, HeadersApi, KVApi, MetricsApi, OrganizationsApi, ProjectsApi, PurgeApi, RulesAuthApi, RulesBotChallengeApi, RulesContentFilterApi, RulesCustomResponseApi, RulesFunctionApi, RulesHeadersApi, RulesProxyApi, RulesRedirectApi, RulesServeStaticApi, SSHAccessApi, ScalingPolicyApi, SearchApi, V1Api, VariablesApi, VolumesApi, WafApi];

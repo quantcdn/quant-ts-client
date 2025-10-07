@@ -1,5 +1,5 @@
 /**
- * QuantCDN Unified API
+ * QuantCDN API
  * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
@@ -14,14 +14,6 @@ import { RequestFile } from './models';
 
 export class V2CustomHeaderRequest {
     /**
-    * Error message
-    */
-    'message': string;
-    /**
-    * Error flag
-    */
-    'error': boolean;
-    /**
     * Custom headers
     */
     'headers': { [key: string]: string; };
@@ -29,16 +21,6 @@ export class V2CustomHeaderRequest {
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "error",
-            "baseName": "error",
-            "type": "boolean"
-        },
         {
             "name": "headers",
             "baseName": "headers",

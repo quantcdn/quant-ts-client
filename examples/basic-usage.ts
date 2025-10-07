@@ -1,30 +1,26 @@
 import { 
   EnvironmentsApi, 
-  ApplicationsApi,
-  Configuration 
+  ApplicationsApi
 } from '../api';
 
-// Create a configuration with your API key
-const config = new Configuration({
-  apiKey: 'YOUR_API_KEY',
-  basePath: 'https://api.quant.example.com' // Replace with the actual API base URL
-});
+const API_KEY = 'YOUR_API_KEY';
+const BASE_PATH = 'https://dashboard.quantcdn.io';
 
 // Initialize API instances
-const environmentsApi = new EnvironmentsApi(config.basePath);
+const environmentsApi = new EnvironmentsApi(BASE_PATH);
 environmentsApi.setDefaultAuthentication({ 
   applyToRequest: (requestOptions) => {
     if (requestOptions && requestOptions.headers) {
-      requestOptions.headers["Authorization"] = `Bearer ${config.apiKey}`;
+      requestOptions.headers["Quant-Token"] = API_KEY;
     }
   }
 });
 
-const applicationsApi = new ApplicationsApi(config.basePath);
+const applicationsApi = new ApplicationsApi(BASE_PATH);
 applicationsApi.setDefaultAuthentication({ 
   applyToRequest: (requestOptions) => {
     if (requestOptions && requestOptions.headers) {
-      requestOptions.headers["Authorization"] = `Bearer ${config.apiKey}`;
+      requestOptions.headers["Quant-Token"] = API_KEY;
     }
   }
 });

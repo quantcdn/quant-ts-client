@@ -1,6 +1,6 @@
 /**
- * QuantCloud API
- * QuantCloud API
+ * QuantCDN API
+ * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -11,22 +11,22 @@
  */
 
 import { RequestFile } from './models';
-import { ScalingPolicy } from './scalingPolicy';
+import { V1GlobalMetaResponseGlobalMeta } from './v1GlobalMetaResponseGlobalMeta';
 
-export class GetScalingPolicies200Response {
-    'policies'?: Array<ScalingPolicy>;
+export class V1UrlMetaResponse {
+    'globalMeta'?: V1GlobalMetaResponseGlobalMeta;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "policies",
-            "baseName": "policies",
-            "type": "Array<ScalingPolicy>"
+            "name": "globalMeta",
+            "baseName": "global_meta",
+            "type": "V1GlobalMetaResponseGlobalMeta"
         }    ];
 
     static getAttributeTypeMap() {
-        return GetScalingPolicies200Response.attributeTypeMap;
+        return V1UrlMetaResponse.attributeTypeMap;
     }
 }
 

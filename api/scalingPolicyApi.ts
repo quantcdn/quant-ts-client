@@ -1,5 +1,5 @@
 /**
- * QuantCDN Unified API
+ * QuantCDN API
  * Unified API for QuantCDN Admin and QuantCloud Platform services
  *
  * The version of the OpenAPI document: 1.0.0
@@ -29,6 +29,7 @@ let defaultBasePath = 'https://dashboard.quantcdn.io';
 // ===============================================
 
 export enum ScalingPolicyApiApiKeys {
+    headerAuth,
 }
 
 export class ScalingPolicyApi {
@@ -39,6 +40,7 @@ export class ScalingPolicyApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'BearerAuth': new HttpBearerAuth(),
+        'headerAuth': new ApiKeyAuth('header', 'Quant-Token'),
     }
 
     protected interceptors: Interceptor[] = [];

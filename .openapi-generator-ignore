@@ -21,3 +21,24 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+# ============================================================================
+# Custom Quant SDK Configuration
+# Prevent overwriting customised files during SDK regeneration
+# ============================================================================
+
+# Preserve custom package.json with test scripts and metadata
+package.json
+
+# Preserve test infrastructure
+tests/**
+jest.config.js
+
+# Preserve CI/CD workflows
+.github/**
+
+# Preserve documentation customisations
+README.md
+
+# Preserve example code
+examples/**
