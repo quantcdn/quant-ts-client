@@ -17,9 +17,12 @@ model/application.ts
 model/command.ts
 model/compose.ts
 model/container.ts
+model/containerDependsOnInner.ts
 model/containerEnvironmentInner.ts
+model/containerHealthCheck.ts
 model/containerImageReference.ts
 model/containerMountPointsInner.ts
+model/containerSecretsInner.ts
 model/createBackup202Response.ts
 model/createBackupRequest.ts
 model/createCommandRequest.ts
@@ -36,6 +39,7 @@ model/getSshAccessCredentials200Response.ts
 model/getSshAccessCredentials200ResponseCredentials.ts
 model/listBackups200Response.ts
 model/listBackups200ResponseBackupsInner.ts
+model/listBackups422Response.ts
 model/models.ts
 model/scalingPolicy.ts
 model/syncOperation.ts

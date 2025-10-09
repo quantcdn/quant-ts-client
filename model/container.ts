@@ -11,22 +11,59 @@
  */
 
 import { RequestFile } from './models';
+import { ContainerDependsOnInner } from './containerDependsOnInner';
 import { ContainerEnvironmentInner } from './containerEnvironmentInner';
+import { ContainerHealthCheck } from './containerHealthCheck';
 import { ContainerImageReference } from './containerImageReference';
 import { ContainerMountPointsInner } from './containerMountPointsInner';
+import { ContainerSecretsInner } from './containerSecretsInner';
 
 export class Container {
+    /**
+    * Name of the container
+    */
     'name': string;
     'imageReference': ContainerImageReference;
-    'cpu'?: number;
-    'memory'?: number;
-    'memoryReservation'?: number;
-    'exposedPorts'?: Array<number>;
-    'mountPoints'?: Array<ContainerMountPointsInner>;
-    'environment'?: Array<ContainerEnvironmentInner>;
-    'command'?: Array<string>;
-    'entryPoint'?: Array<string>;
-    'essential'?: boolean;
+    /**
+    * Container-level CPU units
+    */
+    'cpu'?: number | null;
+    /**
+    * Container-level memory hard limit (MiB)
+    */
+    'memory'?: number | null;
+    /**
+    * Container-level memory soft limit (MiB)
+    */
+    'memoryReservation'?: number | null;
+    /**
+    * List of container ports to expose
+    */
+    'exposedPorts'?: Array<number> | null;
+    'mountPoints'?: Array<ContainerMountPointsInner> | null;
+    /**
+    * Environment variables specific to this container
+    */
+    'environment'?: Array<ContainerEnvironmentInner> | null;
+    /**
+    * Secrets mapped to environment variables
+    */
+    'secrets'?: Array<ContainerSecretsInner> | null;
+    'healthCheck'?: ContainerHealthCheck | null;
+    /**
+    * Container startup dependencies
+    */
+    'dependsOn'?: Array<ContainerDependsOnInner> | null;
+    'command'?: Array<string> | null;
+    'entryPoint'?: Array<string> | null;
+    'workingDirectory'?: string | null;
+    'essential'?: boolean | null = true;
+    'readonlyRootFilesystem'?: boolean | null = false;
+    'user'?: string | null;
+    /**
+    * Enable origin protection for all exposed ports on this container
+    */
+    'originProtection'?: boolean | null = false;
 
     static discriminator: string | undefined = undefined;
 
@@ -72,6 +109,21 @@ export class Container {
             "type": "Array<ContainerEnvironmentInner>"
         },
         {
+            "name": "secrets",
+            "baseName": "secrets",
+            "type": "Array<ContainerSecretsInner>"
+        },
+        {
+            "name": "healthCheck",
+            "baseName": "healthCheck",
+            "type": "ContainerHealthCheck"
+        },
+        {
+            "name": "dependsOn",
+            "baseName": "dependsOn",
+            "type": "Array<ContainerDependsOnInner>"
+        },
+        {
             "name": "command",
             "baseName": "command",
             "type": "Array<string>"
@@ -82,8 +134,28 @@ export class Container {
             "type": "Array<string>"
         },
         {
+            "name": "workingDirectory",
+            "baseName": "workingDirectory",
+            "type": "string"
+        },
+        {
             "name": "essential",
             "baseName": "essential",
+            "type": "boolean"
+        },
+        {
+            "name": "readonlyRootFilesystem",
+            "baseName": "readonlyRootFilesystem",
+            "type": "boolean"
+        },
+        {
+            "name": "user",
+            "baseName": "user",
+            "type": "string"
+        },
+        {
+            "name": "originProtection",
+            "baseName": "originProtection",
             "type": "boolean"
         }    ];
 

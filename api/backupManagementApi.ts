@@ -20,6 +20,7 @@ import { CreateBackupRequest } from '../model/createBackupRequest';
 import { DeleteBackup200Response } from '../model/deleteBackup200Response';
 import { DownloadBackup200Response } from '../model/downloadBackup200Response';
 import { ListBackups200Response } from '../model/listBackups200Response';
+import { ListBackups422Response } from '../model/listBackups422Response';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 
@@ -377,14 +378,20 @@ export class BackupManagementApi {
         });
     }
     /**
-     * 
+     * Retrieves a list of backups (database or filesystem) for the environment with status, size, and metadata. Supports filtering and ordering via query parameters.
      * @summary List backups for an environment
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
      * @param type The backup type
+     * @param order Sort order for backups by creation date (asc &#x3D; oldest first, desc &#x3D; newest first)
+     * @param limit Maximum number of backups to return (max 100)
+     * @param createdBefore Only return backups created before this ISO 8601 timestamp (e.g., 2025-01-01T00:00:00Z)
+     * @param createdAfter Only return backups created after this ISO 8601 timestamp (e.g., 2024-12-01T00:00:00Z)
+     * @param status Filter backups by status
+     * @param nextToken Token for retrieving the next page of results
      */
-    public async listBackups (organisation: string, application: string, environment: string, type: 'database' | 'filesystem', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ListBackups200Response;  }> {
+    public async listBackups (organisation: string, application: string, environment: string, type: 'database' | 'filesystem', order?: 'asc' | 'desc', limit?: number, createdBefore?: Date, createdAfter?: Date, status?: 'completed' | 'failed' | 'running', nextToken?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ListBackups200Response;  }> {
         const localVarPath = this.basePath + '/organisations/{organisation}/applications/{application}/environments/{environment}/backups/{type}'
             .replace('{' + 'organisation' + '}', encodeURIComponent(String(organisation)))
             .replace('{' + 'application' + '}', encodeURIComponent(String(application)))
@@ -419,6 +426,30 @@ export class BackupManagementApi {
         // verify required parameter 'type' is not null or undefined
         if (type === null || type === undefined) {
             throw new Error('Required parameter type was null or undefined when calling listBackups.');
+        }
+
+        if (order !== undefined) {
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "'asc' | 'desc'");
+        }
+
+        if (limit !== undefined) {
+            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        }
+
+        if (createdBefore !== undefined) {
+            localVarQueryParameters['createdBefore'] = ObjectSerializer.serialize(createdBefore, "Date");
+        }
+
+        if (createdAfter !== undefined) {
+            localVarQueryParameters['createdAfter'] = ObjectSerializer.serialize(createdAfter, "Date");
+        }
+
+        if (status !== undefined) {
+            localVarQueryParameters['status'] = ObjectSerializer.serialize(status, "'completed' | 'failed' | 'running'");
+        }
+
+        if (nextToken !== undefined) {
+            localVarQueryParameters['nextToken'] = ObjectSerializer.serialize(nextToken, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

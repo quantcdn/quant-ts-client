@@ -12,32 +12,20 @@
 
 import { RequestFile } from './models';
 
-export class ContainerEnvironmentInner {
-    /**
-    * Environment variable name
-    */
-    'name': string;
-    /**
-    * Environment variable value
-    */
-    'value': string;
+export class ListBackups422Response {
+    'error'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "value",
-            "baseName": "value",
+            "name": "error",
+            "baseName": "error",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return ContainerEnvironmentInner.attributeTypeMap;
+        return ListBackups422Response.attributeTypeMap;
     }
 }
 

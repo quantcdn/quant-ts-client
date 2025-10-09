@@ -14,7 +14,15 @@ import { RequestFile } from './models';
 import { Compose } from './compose';
 
 export class UpdateEnvironmentRequest {
-    'composeDefinition'?: Compose;
+    'composeDefinition': Compose;
+    /**
+    * Optional. Minimum number of tasks for auto-scaling. If provided at root level, will be merged into composeDefinition.
+    */
+    'minCapacity'?: number | null;
+    /**
+    * Optional. Maximum number of tasks for auto-scaling. If provided at root level, will be merged into composeDefinition.
+    */
+    'maxCapacity'?: number | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -23,6 +31,16 @@ export class UpdateEnvironmentRequest {
             "name": "composeDefinition",
             "baseName": "composeDefinition",
             "type": "Compose"
+        },
+        {
+            "name": "minCapacity",
+            "baseName": "minCapacity",
+            "type": "number"
+        },
+        {
+            "name": "maxCapacity",
+            "baseName": "maxCapacity",
+            "type": "number"
         }    ];
 
     static getAttributeTypeMap() {

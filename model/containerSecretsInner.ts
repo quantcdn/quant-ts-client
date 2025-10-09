@@ -12,38 +12,32 @@
 
 import { RequestFile } from './models';
 
-export class ContainerMountPointsInner {
+export class ContainerSecretsInner {
     /**
-    * The name of the logical volume
+    * The environment variable name to be set in the container
     */
-    'sourceVolume': string;
+    'name': string;
     /**
-    * The path inside the container where the volume is mounted
+    * The key of the secret in the environment\'s \'app-secrets\' store
     */
-    'containerPath': string;
-    'readOnly'?: boolean = false;
+    'valueFrom': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "sourceVolume",
-            "baseName": "sourceVolume",
+            "name": "name",
+            "baseName": "name",
             "type": "string"
         },
         {
-            "name": "containerPath",
-            "baseName": "containerPath",
+            "name": "valueFrom",
+            "baseName": "valueFrom",
             "type": "string"
-        },
-        {
-            "name": "readOnly",
-            "baseName": "readOnly",
-            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
-        return ContainerMountPointsInner.attributeTypeMap;
+        return ContainerSecretsInner.attributeTypeMap;
     }
 }
 

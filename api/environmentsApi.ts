@@ -15,6 +15,7 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { CreateCronJob422Response } from '../model/createCronJob422Response';
 import { CreateEnvironmentRequest } from '../model/createEnvironmentRequest';
 import { Environment } from '../model/environment';
 import { SyncOperation } from '../model/syncOperation';
@@ -746,8 +747,8 @@ export class EnvironmentsApi {
         });
     }
     /**
-     * 
-     * @summary Update the compose for an environment
+     * Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the ECS service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
+     * @summary Update Environment Compose Definition
      * @param organisation The organisation ID
      * @param application The application ID
      * @param environment The environment ID
@@ -760,6 +761,13 @@ export class EnvironmentsApi {
             .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
         let localVarFormParams: any = {};
 
         // verify required parameter 'organisation' is not null or undefined

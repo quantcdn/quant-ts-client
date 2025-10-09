@@ -4,9 +4,12 @@ export * from './application';
 export * from './command';
 export * from './compose';
 export * from './container';
+export * from './containerDependsOnInner';
 export * from './containerEnvironmentInner';
+export * from './containerHealthCheck';
 export * from './containerImageReference';
 export * from './containerMountPointsInner';
+export * from './containerSecretsInner';
 export * from './createBackup202Response';
 export * from './createBackupRequest';
 export * from './createCommandRequest';
@@ -23,6 +26,7 @@ export * from './getSshAccessCredentials200Response';
 export * from './getSshAccessCredentials200ResponseCredentials';
 export * from './listBackups200Response';
 export * from './listBackups200ResponseBackupsInner';
+export * from './listBackups422Response';
 export * from './scalingPolicy';
 export * from './syncOperation';
 export * from './syncToEnvironmentRequest';
@@ -53,9 +57,12 @@ import { Application } from './application';
 import { Command } from './command';
 import { Compose } from './compose';
 import { Container } from './container';
+import { ContainerDependsOnInner } from './containerDependsOnInner';
 import { ContainerEnvironmentInner } from './containerEnvironmentInner';
+import { ContainerHealthCheck } from './containerHealthCheck';
 import { ContainerImageReference } from './containerImageReference';
 import { ContainerMountPointsInner } from './containerMountPointsInner';
+import { ContainerSecretsInner } from './containerSecretsInner';
 import { CreateBackup202Response } from './createBackup202Response';
 import { CreateBackupRequest } from './createBackupRequest';
 import { CreateCommandRequest } from './createCommandRequest';
@@ -72,6 +79,7 @@ import { GetSshAccessCredentials200Response } from './getSshAccessCredentials200
 import { GetSshAccessCredentials200ResponseCredentials } from './getSshAccessCredentials200ResponseCredentials';
 import { ListBackups200Response } from './listBackups200Response';
 import { ListBackups200ResponseBackupsInner } from './listBackups200ResponseBackupsInner';
+import { ListBackups422Response } from './listBackups422Response';
 import { ScalingPolicy } from './scalingPolicy';
 import { SyncOperation } from './syncOperation';
 import { SyncToEnvironmentRequest } from './syncToEnvironmentRequest';
@@ -98,6 +106,8 @@ let primitives = [
                  ];
 
 let enumsMap: {[index: string]: any} = {
+        "ContainerDependsOnInner.ConditionEnum": ContainerDependsOnInner.ConditionEnum,
+        "ContainerImageReference.TypeEnum": ContainerImageReference.TypeEnum,
         "CronRun.RunTypeEnum": CronRun.RunTypeEnum,
         "CronRun.StatusEnum": CronRun.StatusEnum,
         "ScalingPolicy.MetricEnum": ScalingPolicy.MetricEnum,
@@ -108,9 +118,12 @@ let typeMap: {[index: string]: any} = {
     "Command": Command,
     "Compose": Compose,
     "Container": Container,
+    "ContainerDependsOnInner": ContainerDependsOnInner,
     "ContainerEnvironmentInner": ContainerEnvironmentInner,
+    "ContainerHealthCheck": ContainerHealthCheck,
     "ContainerImageReference": ContainerImageReference,
     "ContainerMountPointsInner": ContainerMountPointsInner,
+    "ContainerSecretsInner": ContainerSecretsInner,
     "CreateBackup202Response": CreateBackup202Response,
     "CreateBackupRequest": CreateBackupRequest,
     "CreateCommandRequest": CreateCommandRequest,
@@ -127,6 +140,7 @@ let typeMap: {[index: string]: any} = {
     "GetSshAccessCredentials200ResponseCredentials": GetSshAccessCredentials200ResponseCredentials,
     "ListBackups200Response": ListBackups200Response,
     "ListBackups200ResponseBackupsInner": ListBackups200ResponseBackupsInner,
+    "ListBackups422Response": ListBackups422Response,
     "ScalingPolicy": ScalingPolicy,
     "SyncOperation": SyncOperation,
     "SyncToEnvironmentRequest": SyncToEnvironmentRequest,

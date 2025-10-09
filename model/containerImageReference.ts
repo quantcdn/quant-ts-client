@@ -13,28 +13,22 @@
 import { RequestFile } from './models';
 
 export class ContainerImageReference {
-    'repository': string;
-    'tag': string;
-    'type'?: string;
-    'identifier'?: string;
+    /**
+    * Specifies whether the image is internal (ECR) or external (e.g., Docker Hub)
+    */
+    'type': ContainerImageReference.TypeEnum;
+    /**
+    * The image identifier. For \'internal\' type, this is the image tag. For \'external\' type, this is the full image name.
+    */
+    'identifier': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "repository",
-            "baseName": "repository",
-            "type": "string"
-        },
-        {
-            "name": "tag",
-            "baseName": "tag",
-            "type": "string"
-        },
-        {
             "name": "type",
             "baseName": "type",
-            "type": "string"
+            "type": "ContainerImageReference.TypeEnum"
         },
         {
             "name": "identifier",
@@ -47,3 +41,9 @@ export class ContainerImageReference {
     }
 }
 
+export namespace ContainerImageReference {
+    export enum TypeEnum {
+        Internal = <any> 'internal',
+        External = <any> 'external'
+    }
+}

@@ -16,6 +16,10 @@ import { ListBackups200ResponseBackupsInner } from './listBackups200ResponseBack
 export class ListBackups200Response {
     'backups'?: Array<ListBackups200ResponseBackupsInner>;
     'count'?: number;
+    /**
+    * Token for retrieving the next page of results, if more data is available
+    */
+    'nextToken'?: string | null;
     'message'?: string;
 
     static discriminator: string | undefined = undefined;
@@ -30,6 +34,11 @@ export class ListBackups200Response {
             "name": "count",
             "baseName": "count",
             "type": "number"
+        },
+        {
+            "name": "nextToken",
+            "baseName": "nextToken",
+            "type": "string"
         },
         {
             "name": "message",
