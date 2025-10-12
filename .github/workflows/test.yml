@@ -1,10 +1,8 @@
 name: Test SDK
 
 on:
-  push:
-    branches: [ main, v3 ]
   pull_request:
-    branches: [ main, v3 ]
+    branches: [ v4 ]
 
 jobs:
   test:
