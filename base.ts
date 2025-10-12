@@ -54,6 +54,9 @@ export class BaseAPI {
         if (configuration) {
             this.configuration = configuration;
             this.basePath = configuration.basePath ?? basePath;
+            if (this.basePath.endsWith('/api/v3')) {
+                this.basePath = this.basePath.replace('/api/v3', '');
+            }
         }
     }
 };

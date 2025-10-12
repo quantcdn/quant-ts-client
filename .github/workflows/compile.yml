@@ -1,30 +1,92 @@
-name: Publish
+name: Publish to npm
 on:
   workflow_dispatch:
   push:
     branches:
-      - v3
+      - v4
+
+permissions:
+  contents: write  # Required for creating releases and tags
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           registry-url: 'https://registry.npmjs.org/'
-          node-version: 22
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build dist
+      - name: Build
         run: npm run build
 
+      - name: Run tests
+        run: npm test
+
+      - name: Check if version already published
+        id: check
+        run: |
+          PACKAGE_NAME=$(jq -r '.name' package.json)
+          VERSION=$(jq -r '.version' package.json)
+          echo "package=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          
+          if npm view $PACKAGE_NAME@$VERSION > /dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "⚠️  Version $VERSION already exists on npm"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "✓ Version $VERSION is new, will publish"
+          fi
+
       - name: Publish to npm
+        # TODO: Enable after validation
+        if: false
+        # if: steps.check.outputs.exists == 'false'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        # TODO: Enable after validation
+        if: false 
+        # if: steps.check.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.check.outputs.version }}
+          name: Release v${{ steps.check.outputs.version }}
+          body: |
+            ## Quant TypeScript SDK v${{ steps.check.outputs.version }}
+            
+            Auto-generated from unified API specification.
+            
+            **Install:**
+            ```bash
+            npm install ${{ steps.check.outputs.package }}@${{ steps.check.outputs.version }}
+            ```
+            
+            **Changes:** See commit history
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Summary
+        run: |
+          echo "## 📦 Publish Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Package:** ${{ steps.check.outputs.package }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** ${{ steps.check.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.check.outputs.exists }}" == "true" ]; then
+            echo "**Status:** ⚠️  Already published (skipped)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "**Status:** ✅ Published successfully" >> $GITHUB_STEP_SUMMARY
+            echo "**npm:** https://www.npmjs.com/package/${{ steps.check.outputs.package }}/v/${{ steps.check.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          fi

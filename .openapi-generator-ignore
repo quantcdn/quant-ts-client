@@ -43,6 +43,10 @@ examples/**
 # Preserve changelog
 CHANGELOG.md
 
+# Preserve base.ts with custom backwards compatibility logic
+# Contains logic to strip /api/v3 from basePath for v3 → v4 migration
+base.ts
+
 # Let generator manage these for proper typescript-axios setup
 # package.json - will be regenerated with correct dependencies
 # package-lock.json - will be regenerated after package.json

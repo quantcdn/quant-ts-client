@@ -3,7 +3,7 @@
   "gitUserId": "quantcdn",
   "gitRepoId": "quant-ts-client",
   "npmName": "@quantcdn/quant-client",
-  "npmVersion": "3.0.0",
+  "npmVersion": "4.0.0",
   "packageName": "quant-client",
   "projectName": "quant-client",
   "projectDescription": "TypeScript client for QuantCDN and QuantCloud Platform APIs",
