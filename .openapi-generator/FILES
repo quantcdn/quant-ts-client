@@ -206,5 +206,6 @@ docs/VolumesApi.md
 docs/WafApi.md
 git_push.sh
 index.ts
+package.json
 tsconfig.esm.json
 tsconfig.json

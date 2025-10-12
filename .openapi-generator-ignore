@@ -27,10 +27,6 @@
 # Prevent overwriting customised files during SDK regeneration
 # ============================================================================
 
-# Preserve custom package.json with test scripts and metadata
-package.json
-package-lock.json
-
 # Preserve test infrastructure
 tests/**
 jest.config.js
@@ -41,5 +37,12 @@ jest.config.js
 # Preserve documentation customisations
 README.md
 
-# Preserve example code
+# Preserve example code (will need updating for axios)
 examples/**
+
+# Preserve changelog
+CHANGELOG.md
+
+# Let generator manage these for proper typescript-axios setup
+# package.json - will be regenerated with correct dependencies
+# package-lock.json - will be regenerated after package.json

@@ -1,53 +1,54 @@
 {
-    "name": "@quantcdn/quant-client",
-    "version": "3.0.0",
-    "description": "NodeJS client for QuantCDN and QuantCloud Platform APIs",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/quantcdn/quant-ts-client.git"
-    },
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "clean": "rm -Rf node_modules/ *.js",
-        "build": "tsc",
-        "test": "npm run build && npm run test:smoke",
-        "test:smoke": "node -e \"const api = require('./dist/index.js'); console.log('✓ SDK loads successfully'); console.log('✓ Exports:', Object.keys(api).length, 'APIs'); console.log('✓ Configuration available:', typeof api.Configuration); process.exit(0);\"",
-        "test:unit": "jest --testMatch='**/tests/**/*.test.js'",
-        "test:all": "npm run build && npm run test:smoke && npm run test:unit",
-        "prepublishOnly": "npm run build && npm test",
-        "validate": "scripts/validate-sdk.sh"
-    },
-    "author": "QuantCDN",
-    "license": "MIT",
-    "keywords": [
-        "quant",
-        "quantcdn",
-        "quantcloud",
-        "cdn",
-        "edge",
-        "api",
-        "client",
-        "sdk"
-    ],
-    "files": [
-        "dist/**/*",
-        "api/**/*",
-        "model/**/*",
-        "*.ts",
-        "tsconfig.json",
-        "README.md"
-    ],
-    "dependencies": {
-        "axios": "^1.6.0"
-    },
-    "devDependencies": {
-        "@types/bluebird": "^3.5.33",
-        "@types/jest": "^29.5.0",
-        "@types/node": "^12",
-        "@types/request": "^2.48.8",
-        "jest": "^29.5.0",
-        "ts-jest": "^29.1.0",
-        "typescript": "^4.0 || ^5.0"
-    }
+  "name": "@quantcdn/quant-client",
+  "version": "4.0.0",
+  "description": "TypeScript client for QuantCDN and QuantCloud Platform APIs",
+  "author": "QuantCDN",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quantcdn/quant-ts-client.git"
+  },
+  "keywords": [
+    "quant",
+    "quantcdn",
+    "quantcloud",
+    "cdn",
+    "edge",
+    "api",
+    "client",
+    "sdk",
+    "axios",
+    "typescript",
+    "openapi-client"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "sideEffects": false,
+  "files": [
+    "dist/**/*",
+    "*.ts",
+    "tsconfig.json",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "rm -Rf node_modules/ dist/",
+    "build": "tsc",
+    "test": "npm run build && npm run test:smoke",
+    "test:smoke": "node -e \"const api = require('./dist/index.js'); console.log('✓ SDK loads successfully'); console.log('✓ Exports:', Object.keys(api).length, 'items'); console.log('✓ Configuration available:', typeof api.Configuration); process.exit(0);\"",
+    "test:unit": "jest --testMatch=\"**/tests/**/*.test.js\"",
+    "test:all": "npm run build && npm run test:smoke && npm run test:unit",
+    "prepublishOnly": "npm run build && npm test",
+    "validate": "scripts/validate-sdk.sh"
+  },
+  "dependencies": {
+    "axios": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^12",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^4.0 || ^5.0"
+  }
 }

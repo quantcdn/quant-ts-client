@@ -1,60 +1,86 @@
-import { 
-  EnvironmentsApi, 
-  ApplicationsApi
-} from '../api';
+/**
+ * Basic usage examples for the Quant TypeScript SDK (v4.0 - typescript-axios)
+ */
 
-const API_KEY = 'YOUR_API_KEY';
-const BASE_PATH = 'https://dashboard.quantcdn.io';
+import { Configuration, EnvironmentsApi, ApplicationsApi } from '..';
 
-// Initialize API instances
-const environmentsApi = new EnvironmentsApi(BASE_PATH);
-environmentsApi.setDefaultAuthentication({ 
-  applyToRequest: (requestOptions) => {
-    if (requestOptions && requestOptions.headers) {
-      requestOptions.headers["Quant-Token"] = API_KEY;
-    }
-  }
+// Create configuration with authentication
+const config = new Configuration({
+  basePath: 'https://api.quantcdn.io',
+  accessToken: 'YOUR_API_KEY_HERE' // or use apiKey
 });
 
-const applicationsApi = new ApplicationsApi(BASE_PATH);
-applicationsApi.setDefaultAuthentication({ 
-  applyToRequest: (requestOptions) => {
-    if (requestOptions && requestOptions.headers) {
-      requestOptions.headers["Quant-Token"] = API_KEY;
-    }
-  }
-});
-
-// Example usage: List all environments for an application
+// Example 1: List environments
 async function listEnvironments() {
+  const environmentsApi = new EnvironmentsApi(config);
+  
   try {
-    const response = await environmentsApi.listEnvironments(
-      'your-organisation-id',
-      'your-application-id'
-    );
-    
-    console.log('Environments:', response.body);
-  } catch (error) {
-    console.error('Error listing environments:', error);
+    const response = await environmentsApi.listEnvironments('your-org-id', 'your-app-id');
+    console.log('Environments:', response.data); // Note: .data for axios
+    return response.data;
+  } catch (error: any) {
+    if (error.response) {
+      console.error(`Error ${error.response.status}:`, error.response.data);
+    } else {
+      console.error('Error:', error.message);
+    }
+    throw error;
   }
 }
 
-// Example usage: Get application details
-async function getApplicationDetails() {
+// Example 2: Get application details
+async function getApplication() {
+  const applicationsApi = new ApplicationsApi(config);
+  
   try {
-    const response = await applicationsApi.getApplication(
-      'your-organisation-id',
-      'your-application-id'
-    );
-    
-    console.log('Application details:', response.body);
-  } catch (error) {
-    console.error('Error getting application details:', error);
+    const response = await applicationsApi.getApplication('your-org-id', 'your-app-id');
+    console.log('Application:', response.data); // Note: .data for axios
+    console.log('Response status:', response.status);
+    console.log('Response headers:', response.headers);
+    return response.data;
+  } catch (error: any) {
+    if (error.response) {
+      // Server responded with error status
+      console.error(`Error ${error.response.status}:`, error.response.data);
+    } else if (error.request) {
+      // Request made but no response
+      console.error('No response received');
+    } else {
+      // Error setting up request
+      console.error('Error:', error.message);
+    }
+    throw error;
   }
 }
 
-// Run the examples
-(async () => {
-  await listEnvironments();
-  await getApplicationDetails();
-})(); 
+// Example 3: With custom axios instance
+import axios from 'axios';
+
+const customAxios = axios.create({
+  timeout: 30000,
+  headers: {
+    'X-Custom-Header': 'value'
+  }
+});
+
+const customConfig = new Configuration({
+  basePath: 'https://api.quantcdn.io',
+  accessToken: 'YOUR_API_KEY_HERE',
+  baseOptions: {
+    // Pass custom axios instance options
+    timeout: 30000
+  }
+});
+
+// Run examples
+if (require.main === module) {
+  console.log('Running Quant SDK examples...\n');
+  
+  listEnvironments()
+    .then(() => getApplication())
+    .then(() => console.log('\n✓ Examples completed'))
+    .catch((error) => {
+      console.error('\n✗ Examples failed:', error.message);
+      process.exit(1);
+    });
+}
