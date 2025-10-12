@@ -1,8 +1,1 @@
-.git/
-.gitignore
-.openapi-generator/
-.openapi-generator-ignore
-git_push.sh
-node_modules/
-tsconfig.json
-*.tgz 
+# empty npmignore to ensure all required files (e.g., in the dist folder) are published by npm
