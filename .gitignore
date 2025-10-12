@@ -1,4 +1,4 @@
 wwwroot/*.js
 node_modules
-dist
 typings
+dist

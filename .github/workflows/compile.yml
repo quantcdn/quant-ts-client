@@ -49,17 +49,13 @@ jobs:
           fi
 
       - name: Publish to npm
-        # TODO: Enable after validation
-        if: false
-        # if: steps.check.outputs.exists == 'false'
+        if: steps.check.outputs.exists == 'false'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
-        # TODO: Enable after validation
-        if: false 
-        # if: steps.check.outputs.exists == 'false'
+        if: steps.check.outputs.exists == 'false'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.check.outputs.version }}
