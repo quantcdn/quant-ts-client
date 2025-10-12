@@ -6,6 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **backups** | [**Array&lt;ListBackups200ResponseBackupsInner&gt;**](ListBackups200ResponseBackupsInner.md) |  | [optional] [default to undefined]
+**count** | **number** |  | [optional] [default to undefined]
+**nextToken** | **string** | Token for retrieving the next page of results, if more data is available | [optional] [default to undefined]
+**message** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -14,6 +17,9 @@ import { ListBackups200Response } from '@quantcdn/quant-client';
 
 const instance: ListBackups200Response = {
     backups,
+    count,
+    nextToken,
+    message,
 };
 ```
 

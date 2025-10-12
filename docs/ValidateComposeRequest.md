@@ -5,7 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**compose** | **string** |  | [optional] [default to undefined]
+**compose** | **string** | The docker-compose.yml file content as a string | [default to undefined]
+**imageSuffix** | **string** | Optional image tag suffix (query parameter takes precedence) | [optional] [default to undefined]
+**application** | **string** | Optional application name for context | [optional] [default to undefined]
 
 ## Example
 
@@ -14,6 +16,8 @@ import { ValidateComposeRequest } from '@quantcdn/quant-client';
 
 const instance: ValidateComposeRequest = {
     compose,
+    imageSuffix,
+    application,
 };
 ```
 

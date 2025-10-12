@@ -5,11 +5,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [optional] [default to undefined]
+**backupId** | **string** |  | [optional] [default to undefined]
 **status** | **string** |  | [optional] [default to undefined]
+**type** | **string** |  | [optional] [default to undefined]
+**engine** | **string** |  | [optional] [default to undefined]
+**description** | **string** |  | [optional] [default to undefined]
 **createdAt** | **string** |  | [optional] [default to undefined]
+**updatedAt** | **string** |  | [optional] [default to undefined]
+**taskArn** | **string** |  | [optional] [default to undefined]
+**s3Key** | **string** |  | [optional] [default to undefined]
+**bucketName** | **string** |  | [optional] [default to undefined]
 **size** | **number** |  | [optional] [default to undefined]
-**metadata** | **object** |  | [optional] [default to undefined]
+**sizeFormatted** | **string** |  | [optional] [default to undefined]
+**fileExists** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -17,11 +25,19 @@ Name | Type | Description | Notes
 import { ListBackups200ResponseBackupsInner } from '@quantcdn/quant-client';
 
 const instance: ListBackups200ResponseBackupsInner = {
-    id,
+    backupId,
     status,
+    type,
+    engine,
+    description,
     createdAt,
+    updatedAt,
+    taskArn,
+    s3Key,
+    bucketName,
     size,
-    metadata,
+    sizeFormatted,
+    fileExists,
 };
 ```
 

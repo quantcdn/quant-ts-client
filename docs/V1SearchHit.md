@@ -6,7 +6,7 @@ Generic search hit; fields vary by index
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **string** | The controller for mananging Search integration. | [optional] [default to undefined]
+**title** | **string** | The controller for managing Search integration. | [optional] [default to undefined]
 **url** | **string** |  | [optional] [default to undefined]
 **summary** | **string** |  | [optional] [default to undefined]
 **content** | **string** |  | [optional] [default to undefined]

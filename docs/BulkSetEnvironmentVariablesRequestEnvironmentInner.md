@@ -1,19 +1,19 @@
-# ContainerEnvironmentInner
+# BulkSetEnvironmentVariablesRequestEnvironmentInner
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** | Environment variable name | [default to undefined]
-**value** | **string** | Environment variable value | [default to undefined]
+**name** | **string** |  | [default to undefined]
+**value** | **string** |  | [default to undefined]
 
 ## Example
 
 ```typescript
-import { ContainerEnvironmentInner } from '@quantcdn/quant-client';
+import { BulkSetEnvironmentVariablesRequestEnvironmentInner } from '@quantcdn/quant-client';
 
-const instance: ContainerEnvironmentInner = {
+const instance: BulkSetEnvironmentVariablesRequestEnvironmentInner = {
     name,
     value,
 };

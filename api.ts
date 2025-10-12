@@ -117,6 +117,539 @@ export interface Application {
 /**
  * 
  * @export
+ * @interface BulkSetEnvironmentVariablesRequest
+ */
+export interface BulkSetEnvironmentVariablesRequest {
+    /**
+     * 
+     * @type {Array<BulkSetEnvironmentVariablesRequestEnvironmentInner>}
+     * @memberof BulkSetEnvironmentVariablesRequest
+     */
+    'environment': Array<BulkSetEnvironmentVariablesRequestEnvironmentInner>;
+}
+/**
+ * 
+ * @export
+ * @interface BulkSetEnvironmentVariablesRequestEnvironmentInner
+ */
+export interface BulkSetEnvironmentVariablesRequestEnvironmentInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof BulkSetEnvironmentVariablesRequestEnvironmentInner
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BulkSetEnvironmentVariablesRequestEnvironmentInner
+     */
+    'value': string;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInference200Response
+ */
+export interface ChatInference200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInference200Response
+     */
+    'response'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInference200Response
+     */
+    'model'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof ChatInference200Response
+     */
+    'usage'?: object;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequest
+ */
+export interface ChatInferenceRequest {
+    /**
+     * Array of chat messages. Content can be a simple string or an array of content blocks for multimodal input.
+     * @type {Array<ChatInferenceRequestMessagesInner>}
+     * @memberof ChatInferenceRequest
+     */
+    'messages': Array<ChatInferenceRequestMessagesInner>;
+    /**
+     * Model ID. Use Nova models for multimodal support.
+     * @type {string}
+     * @memberof ChatInferenceRequest
+     */
+    'modelId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatInferenceRequest
+     */
+    'temperature'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatInferenceRequest
+     */
+    'maxTokens'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatInferenceRequest
+     */
+    'topP'?: number;
+    /**
+     * Ignored in buffered mode, always returns complete response
+     * @type {boolean}
+     * @memberof ChatInferenceRequest
+     */
+    'stream'?: boolean;
+    /**
+     * Optional custom system prompt. When tools are enabled, this is prepended with tool usage guidance.
+     * @type {string}
+     * @memberof ChatInferenceRequest
+     */
+    'systemPrompt'?: string;
+    /**
+     * Custom stop sequences
+     * @type {Array<string>}
+     * @memberof ChatInferenceRequest
+     */
+    'stopSequences'?: Array<string>;
+    /**
+     * 
+     * @type {ChatInferenceRequestResponseFormat}
+     * @memberof ChatInferenceRequest
+     */
+    'responseFormat'?: ChatInferenceRequestResponseFormat;
+    /**
+     * 
+     * @type {ChatInferenceRequestToolConfig}
+     * @memberof ChatInferenceRequest
+     */
+    'toolConfig'?: ChatInferenceRequestToolConfig;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInner
+ */
+export interface ChatInferenceRequestMessagesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceRequestMessagesInner
+     */
+    'role': ChatInferenceRequestMessagesInnerRoleEnum;
+    /**
+     * 
+     * @type {ChatInferenceRequestMessagesInnerContent}
+     * @memberof ChatInferenceRequestMessagesInner
+     */
+    'content': ChatInferenceRequestMessagesInnerContent;
+}
+
+export const ChatInferenceRequestMessagesInnerRoleEnum = {
+    User: 'user',
+    Assistant: 'assistant',
+    System: 'system'
+} as const;
+
+export type ChatInferenceRequestMessagesInnerRoleEnum = typeof ChatInferenceRequestMessagesInnerRoleEnum[keyof typeof ChatInferenceRequestMessagesInnerRoleEnum];
+
+/**
+ * @type ChatInferenceRequestMessagesInnerContent
+ * @export
+ */
+export type ChatInferenceRequestMessagesInnerContent = Array<ChatInferenceRequestMessagesInnerContentOneOfInner> | string;
+
+/**
+ * @type ChatInferenceRequestMessagesInnerContentOneOfInner
+ * @export
+ */
+export type ChatInferenceRequestMessagesInnerContentOneOfInner = ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf | ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1 | ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2 | ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3;
+
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf
+     */
+    'text': string;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1 {
+    /**
+     * 
+     * @type {ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1Image}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1
+     */
+    'image': ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1Image;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1Image
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1Image {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1Image
+     */
+    'format': ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageFormatEnum;
+    /**
+     * 
+     * @type {ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageSource}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1Image
+     */
+    'source': ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageSource;
+}
+
+export const ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageFormatEnum = {
+    Png: 'png',
+    Jpeg: 'jpeg',
+    Gif: 'gif',
+    Webp: 'webp'
+} as const;
+
+export type ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageFormatEnum = typeof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageFormatEnum[keyof typeof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageFormatEnum];
+
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageSource
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageSource {
+    /**
+     * Base64-encoded image data
+     * @type {string}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf1ImageSource
+     */
+    'bytes': string;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2 {
+    /**
+     * 
+     * @type {ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2Video}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2
+     */
+    'video': ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2Video;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2Video
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2Video {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2Video
+     */
+    'format': ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoFormatEnum;
+    /**
+     * 
+     * @type {ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoSource}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2Video
+     */
+    'source': ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoSource;
+}
+
+export const ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoFormatEnum = {
+    Mp4: 'mp4',
+    Mov: 'mov',
+    Mkv: 'mkv',
+    Webm: 'webm'
+} as const;
+
+export type ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoFormatEnum = typeof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoFormatEnum[keyof typeof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoFormatEnum];
+
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoSource
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoSource {
+    /**
+     * Base64-encoded video data
+     * @type {string}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf2VideoSource
+     */
+    'bytes': string;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3 {
+    /**
+     * 
+     * @type {ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3Document}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3
+     */
+    'document': ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3Document;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3Document
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3Document {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3Document
+     */
+    'format': ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentFormatEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3Document
+     */
+    'name': string;
+    /**
+     * 
+     * @type {ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentSource}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3Document
+     */
+    'source': ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentSource;
+}
+
+export const ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentFormatEnum = {
+    Pdf: 'pdf',
+    Csv: 'csv',
+    Docx: 'docx',
+    Xlsx: 'xlsx'
+} as const;
+
+export type ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentFormatEnum = typeof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentFormatEnum[keyof typeof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentFormatEnum];
+
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentSource
+ */
+export interface ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentSource {
+    /**
+     * Base64-encoded document data
+     * @type {string}
+     * @memberof ChatInferenceRequestMessagesInnerContentOneOfInnerOneOf3DocumentSource
+     */
+    'bytes': string;
+}
+/**
+ * Structured JSON output (Claude 3.5 Sonnet v1/v2, Nova Pro)
+ * @export
+ * @interface ChatInferenceRequestResponseFormat
+ */
+export interface ChatInferenceRequestResponseFormat {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceRequestResponseFormat
+     */
+    'type'?: ChatInferenceRequestResponseFormatTypeEnum;
+    /**
+     * JSON Schema defining expected structure
+     * @type {object}
+     * @memberof ChatInferenceRequestResponseFormat
+     */
+    'jsonSchema'?: object;
+}
+
+export const ChatInferenceRequestResponseFormatTypeEnum = {
+    Json: 'json'
+} as const;
+
+export type ChatInferenceRequestResponseFormatTypeEnum = typeof ChatInferenceRequestResponseFormatTypeEnum[keyof typeof ChatInferenceRequestResponseFormatTypeEnum];
+
+/**
+ * Function calling configuration (Claude 3+, Nova Pro)
+ * @export
+ * @interface ChatInferenceRequestToolConfig
+ */
+export interface ChatInferenceRequestToolConfig {
+    /**
+     * 
+     * @type {Array<ChatInferenceRequestToolConfigToolsInner>}
+     * @memberof ChatInferenceRequestToolConfig
+     */
+    'tools'?: Array<ChatInferenceRequestToolConfigToolsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestToolConfigToolsInner
+ */
+export interface ChatInferenceRequestToolConfigToolsInner {
+    /**
+     * 
+     * @type {ChatInferenceRequestToolConfigToolsInnerToolSpec}
+     * @memberof ChatInferenceRequestToolConfigToolsInner
+     */
+    'toolSpec'?: ChatInferenceRequestToolConfigToolsInnerToolSpec;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestToolConfigToolsInnerToolSpec
+ */
+export interface ChatInferenceRequestToolConfigToolsInnerToolSpec {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceRequestToolConfigToolsInnerToolSpec
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceRequestToolConfigToolsInnerToolSpec
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {ChatInferenceRequestToolConfigToolsInnerToolSpecInputSchema}
+     * @memberof ChatInferenceRequestToolConfigToolsInnerToolSpec
+     */
+    'inputSchema'?: ChatInferenceRequestToolConfigToolsInnerToolSpecInputSchema;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceRequestToolConfigToolsInnerToolSpecInputSchema
+ */
+export interface ChatInferenceRequestToolConfigToolsInnerToolSpecInputSchema {
+    /**
+     * JSON Schema for function parameters
+     * @type {object}
+     * @memberof ChatInferenceRequestToolConfigToolsInnerToolSpecInputSchema
+     */
+    'json'?: object;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceStreamRequest
+ */
+export interface ChatInferenceStreamRequest {
+    /**
+     * Array of chat messages. Content can be a simple string or an array of content blocks for multimodal input.
+     * @type {Array<ChatInferenceStreamRequestMessagesInner>}
+     * @memberof ChatInferenceStreamRequest
+     */
+    'messages': Array<ChatInferenceStreamRequestMessagesInner>;
+    /**
+     * Model ID. Use Nova models for multimodal support.
+     * @type {string}
+     * @memberof ChatInferenceStreamRequest
+     */
+    'modelId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatInferenceStreamRequest
+     */
+    'temperature'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatInferenceStreamRequest
+     */
+    'maxTokens'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatInferenceStreamRequest
+     */
+    'topP'?: number;
+    /**
+     * Optional custom system prompt. When tools are enabled, this is prepended with tool usage guidance.
+     * @type {string}
+     * @memberof ChatInferenceStreamRequest
+     */
+    'systemPrompt'?: string;
+    /**
+     * Custom stop sequences
+     * @type {Array<string>}
+     * @memberof ChatInferenceStreamRequest
+     */
+    'stopSequences'?: Array<string>;
+    /**
+     * 
+     * @type {ChatInferenceRequestResponseFormat}
+     * @memberof ChatInferenceStreamRequest
+     */
+    'responseFormat'?: ChatInferenceRequestResponseFormat;
+    /**
+     * 
+     * @type {ChatInferenceRequestToolConfig}
+     * @memberof ChatInferenceStreamRequest
+     */
+    'toolConfig'?: ChatInferenceRequestToolConfig;
+}
+/**
+ * 
+ * @export
+ * @interface ChatInferenceStreamRequestMessagesInner
+ */
+export interface ChatInferenceStreamRequestMessagesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInferenceStreamRequestMessagesInner
+     */
+    'role': ChatInferenceStreamRequestMessagesInnerRoleEnum;
+    /**
+     * 
+     * @type {ChatInferenceStreamRequestMessagesInnerContent}
+     * @memberof ChatInferenceStreamRequestMessagesInner
+     */
+    'content': ChatInferenceStreamRequestMessagesInnerContent;
+}
+
+export const ChatInferenceStreamRequestMessagesInnerRoleEnum = {
+    User: 'user',
+    Assistant: 'assistant',
+    System: 'system'
+} as const;
+
+export type ChatInferenceStreamRequestMessagesInnerRoleEnum = typeof ChatInferenceStreamRequestMessagesInnerRoleEnum[keyof typeof ChatInferenceStreamRequestMessagesInnerRoleEnum];
+
+/**
+ * @type ChatInferenceStreamRequestMessagesInnerContent
+ * @export
+ */
+export type ChatInferenceStreamRequestMessagesInnerContent = Array<object> | string;
+
+/**
+ * 
+ * @export
  * @interface Command
  */
 export interface Command {
@@ -237,7 +770,7 @@ export interface Compose {
  */
 export interface Container {
     /**
-     * 
+     * Name of the container
      * @type {string}
      * @memberof Container
      */
@@ -249,60 +782,131 @@ export interface Container {
      */
     'imageReference': ContainerImageReference;
     /**
-     * 
+     * Container-level CPU units
      * @type {number}
      * @memberof Container
      */
-    'cpu'?: number;
+    'cpu'?: number | null;
     /**
-     * 
+     * Container-level memory hard limit (MiB)
      * @type {number}
      * @memberof Container
      */
-    'memory'?: number;
+    'memory'?: number | null;
     /**
-     * 
+     * Container-level memory soft limit (MiB)
      * @type {number}
      * @memberof Container
      */
-    'memoryReservation'?: number;
+    'memoryReservation'?: number | null;
     /**
-     * 
+     * List of container ports to expose
      * @type {Array<number>}
      * @memberof Container
      */
-    'exposedPorts'?: Array<number>;
+    'exposedPorts'?: Array<number> | null;
     /**
      * 
      * @type {Array<ContainerMountPointsInner>}
      * @memberof Container
      */
-    'mountPoints'?: Array<ContainerMountPointsInner>;
+    'mountPoints'?: Array<ContainerMountPointsInner> | null;
     /**
-     * 
+     * Environment variables specific to this container
      * @type {Array<ContainerEnvironmentInner>}
      * @memberof Container
      */
-    'environment'?: Array<ContainerEnvironmentInner>;
+    'environment'?: Array<ContainerEnvironmentInner> | null;
+    /**
+     * Secrets mapped to environment variables
+     * @type {Array<ContainerSecretsInner>}
+     * @memberof Container
+     */
+    'secrets'?: Array<ContainerSecretsInner> | null;
+    /**
+     * 
+     * @type {ContainerHealthCheck}
+     * @memberof Container
+     */
+    'healthCheck'?: ContainerHealthCheck | null;
+    /**
+     * Container startup dependencies
+     * @type {Array<ContainerDependsOnInner>}
+     * @memberof Container
+     */
+    'dependsOn'?: Array<ContainerDependsOnInner> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof Container
      */
-    'command'?: Array<string>;
+    'command'?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof Container
      */
-    'entryPoint'?: Array<string>;
+    'entryPoint'?: Array<string> | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Container
+     */
+    'workingDirectory'?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof Container
      */
-    'essential'?: boolean;
+    'essential'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Container
+     */
+    'readonlyRootFilesystem'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Container
+     */
+    'user'?: string | null;
+    /**
+     * Enable origin protection for all exposed ports on this container
+     * @type {boolean}
+     * @memberof Container
+     */
+    'originProtection'?: boolean | null;
 }
+/**
+ * 
+ * @export
+ * @interface ContainerDependsOnInner
+ */
+export interface ContainerDependsOnInner {
+    /**
+     * The name of the container this container depends on
+     * @type {string}
+     * @memberof ContainerDependsOnInner
+     */
+    'containerName': string;
+    /**
+     * The condition to wait for on the dependency
+     * @type {string}
+     * @memberof ContainerDependsOnInner
+     */
+    'condition'?: ContainerDependsOnInnerConditionEnum;
+}
+
+export const ContainerDependsOnInnerConditionEnum = {
+    Start: 'START',
+    Healthy: 'HEALTHY',
+    Complete: 'COMPLETE',
+    Success: 'SUCCESS'
+} as const;
+
+export type ContainerDependsOnInnerConditionEnum = typeof ContainerDependsOnInnerConditionEnum[keyof typeof ContainerDependsOnInnerConditionEnum];
+
 /**
  * 
  * @export
@@ -310,17 +914,54 @@ export interface Container {
  */
 export interface ContainerEnvironmentInner {
     /**
-     * 
+     * Environment variable name
      * @type {string}
      * @memberof ContainerEnvironmentInner
      */
     'name': string;
     /**
-     * 
+     * Environment variable value
      * @type {string}
      * @memberof ContainerEnvironmentInner
      */
     'value': string;
+}
+/**
+ * Container health check configuration
+ * @export
+ * @interface ContainerHealthCheck
+ */
+export interface ContainerHealthCheck {
+    /**
+     * The command to run to determine if the container is healthy
+     * @type {Array<string>}
+     * @memberof ContainerHealthCheck
+     */
+    'command'?: Array<string>;
+    /**
+     * Time period (seconds) between health checks
+     * @type {number}
+     * @memberof ContainerHealthCheck
+     */
+    'interval'?: number;
+    /**
+     * Time period (seconds) to wait for a health check to return
+     * @type {number}
+     * @memberof ContainerHealthCheck
+     */
+    'timeout'?: number;
+    /**
+     * Number of times to retry a failed health check
+     * @type {number}
+     * @memberof ContainerHealthCheck
+     */
+    'retries'?: number;
+    /**
+     * Grace period (seconds) to ignore unhealthy checks after container starts
+     * @type {number}
+     * @memberof ContainerHealthCheck
+     */
+    'startPeriod'?: number | null;
 }
 /**
  * 
@@ -329,30 +970,26 @@ export interface ContainerEnvironmentInner {
  */
 export interface ContainerImageReference {
     /**
-     * 
+     * Specifies whether the image is internal (ECR) or external (e.g., Docker Hub)
      * @type {string}
      * @memberof ContainerImageReference
      */
-    'repository': string;
+    'type': ContainerImageReferenceTypeEnum;
     /**
-     * 
+     * The image identifier. For \'internal\' type, this is the image tag. For \'external\' type, this is the full image name.
      * @type {string}
      * @memberof ContainerImageReference
      */
-    'tag': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerImageReference
-     */
-    'type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerImageReference
-     */
-    'identifier'?: string;
+    'identifier': string;
 }
+
+export const ContainerImageReferenceTypeEnum = {
+    Internal: 'internal',
+    External: 'external'
+} as const;
+
+export type ContainerImageReferenceTypeEnum = typeof ContainerImageReferenceTypeEnum[keyof typeof ContainerImageReferenceTypeEnum];
+
 /**
  * 
  * @export
@@ -360,13 +997,13 @@ export interface ContainerImageReference {
  */
 export interface ContainerMountPointsInner {
     /**
-     * 
+     * The name of the logical volume
      * @type {string}
      * @memberof ContainerMountPointsInner
      */
     'sourceVolume': string;
     /**
-     * 
+     * The path inside the container where the volume is mounted
      * @type {string}
      * @memberof ContainerMountPointsInner
      */
@@ -377,6 +1014,87 @@ export interface ContainerMountPointsInner {
      * @memberof ContainerMountPointsInner
      */
     'readOnly'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface ContainerSecretsInner
+ */
+export interface ContainerSecretsInner {
+    /**
+     * The environment variable name to be set in the container
+     * @type {string}
+     * @memberof ContainerSecretsInner
+     */
+    'name': string;
+    /**
+     * The key of the secret in the environment\'s \'app-secrets\' store
+     * @type {string}
+     * @memberof ContainerSecretsInner
+     */
+    'valueFrom': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateAISession201Response
+ */
+export interface CreateAISession201Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAISession201Response
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAISession201Response
+     */
+    'model'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAISession201Response
+     */
+    'title'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateAISessionRequest
+ */
+export interface CreateAISessionRequest {
+    /**
+     * Model ID to use for this session
+     * @type {string}
+     * @memberof CreateAISessionRequest
+     */
+    'model': string;
+    /**
+     * Optional session title
+     * @type {string}
+     * @memberof CreateAISessionRequest
+     */
+    'title'?: string;
+    /**
+     * Optional system prompt
+     * @type {string}
+     * @memberof CreateAISessionRequest
+     */
+    'system_prompt'?: string;
+    /**
+     * Optional max tokens
+     * @type {number}
+     * @memberof CreateAISessionRequest
+     */
+    'max_tokens'?: number;
+    /**
+     * Optional temperature
+     * @type {number}
+     * @memberof CreateAISessionRequest
+     */
+    'temperature'?: number;
 }
 /**
  * 
@@ -702,6 +1420,19 @@ export type CronRunStatusEnum = typeof CronRunStatusEnum[keyof typeof CronRunSta
 /**
  * 
  * @export
+ * @interface DeleteAISession200Response
+ */
+export interface DeleteAISession200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof DeleteAISession200Response
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
  * @interface DeleteBackup200Response
  */
 export interface DeleteBackup200Response {
@@ -849,6 +1580,99 @@ export interface Environment {
 /**
  * 
  * @export
+ * @interface GetAIConfig200Response
+ */
+export interface GetAIConfig200Response {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetAIConfig200Response
+     */
+    'enabled_models'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIConfig200Response
+     */
+    'default_model'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAIConfig200Response
+     */
+    'max_tokens'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAIConfig200Response
+     */
+    'temperature'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface GetAISession200Response
+ */
+export interface GetAISession200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAISession200Response
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAISession200Response
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAISession200Response
+     */
+    'model'?: string;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof GetAISession200Response
+     */
+    'messages'?: Array<object>;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAISession200Response
+     */
+    'created_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetAIUsageStats200Response
+ */
+export interface GetAIUsageStats200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAIUsageStats200Response
+     */
+    'total_requests'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAIUsageStats200Response
+     */
+    'total_tokens'?: number;
+    /**
+     * 
+     * @type {object}
+     * @memberof GetAIUsageStats200Response
+     */
+    'by_model'?: object;
+}
+/**
+ * 
+ * @export
  * @interface GetEcrLoginCredentials200Response
  */
 export interface GetEcrLoginCredentials200Response {
@@ -984,6 +1808,74 @@ export interface GetSshAccessCredentials200ResponseCredentials {
 /**
  * 
  * @export
+ * @interface ListAIModels200ResponseInner
+ */
+export interface ListAIModels200ResponseInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIModels200ResponseInner
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIModels200ResponseInner
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIModels200ResponseInner
+     */
+    'provider'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ListAIModels200ResponseInner
+     */
+    'capabilities'?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface ListAISessions200ResponseInner
+ */
+export interface ListAISessions200ResponseInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAISessions200ResponseInner
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAISessions200ResponseInner
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAISessions200ResponseInner
+     */
+    'model'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAISessions200ResponseInner
+     */
+    'created_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAISessions200ResponseInner
+     */
+    'updated_at'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ListBackups200Response
  */
 export interface ListBackups200Response {
@@ -993,6 +1885,24 @@ export interface ListBackups200Response {
      * @memberof ListBackups200Response
      */
     'backups'?: Array<ListBackups200ResponseBackupsInner>;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListBackups200Response
+     */
+    'count'?: number;
+    /**
+     * Token for retrieving the next page of results, if more data is available
+     * @type {string}
+     * @memberof ListBackups200Response
+     */
+    'nextToken'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBackups200Response
+     */
+    'message'?: string;
 }
 /**
  * 
@@ -1005,7 +1915,7 @@ export interface ListBackups200ResponseBackupsInner {
      * @type {string}
      * @memberof ListBackups200ResponseBackupsInner
      */
-    'id'?: string;
+    'backupId'?: string;
     /**
      * 
      * @type {string}
@@ -1017,7 +1927,49 @@ export interface ListBackups200ResponseBackupsInner {
      * @type {string}
      * @memberof ListBackups200ResponseBackupsInner
      */
+    'type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBackups200ResponseBackupsInner
+     */
+    'engine'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBackups200ResponseBackupsInner
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBackups200ResponseBackupsInner
+     */
     'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBackups200ResponseBackupsInner
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBackups200ResponseBackupsInner
+     */
+    'taskArn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBackups200ResponseBackupsInner
+     */
+    's3Key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBackups200ResponseBackupsInner
+     */
+    'bucketName'?: string;
     /**
      * 
      * @type {number}
@@ -1026,10 +1978,29 @@ export interface ListBackups200ResponseBackupsInner {
     'size'?: number;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof ListBackups200ResponseBackupsInner
      */
-    'metadata'?: object;
+    'sizeFormatted'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ListBackups200ResponseBackupsInner
+     */
+    'fileExists'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface ListBackups422Response
+ */
+export interface ListBackups422Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBackups422Response
+     */
+    'error'?: string;
 }
 /**
  * 
@@ -1244,6 +2215,37 @@ export type TestSearchExtractorsRequestTypeEnum = typeof TestSearchExtractorsReq
 /**
  * 
  * @export
+ * @interface UpdateAIConfigRequest
+ */
+export interface UpdateAIConfigRequest {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateAIConfigRequest
+     */
+    'enabled_models'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAIConfigRequest
+     */
+    'default_model'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateAIConfigRequest
+     */
+    'max_tokens'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateAIConfigRequest
+     */
+    'temperature'?: number;
+}
+/**
+ * 
+ * @export
  * @interface UpdateCronJobRequest
  */
 export interface UpdateCronJobRequest {
@@ -1289,7 +2291,19 @@ export interface UpdateEnvironmentRequest {
      * @type {Compose}
      * @memberof UpdateEnvironmentRequest
      */
-    'composeDefinition'?: Compose;
+    'composeDefinition': Compose;
+    /**
+     * Optional. Minimum number of tasks for auto-scaling. If provided at root level, will be merged into composeDefinition.
+     * @type {number}
+     * @memberof UpdateEnvironmentRequest
+     */
+    'minCapacity'?: number | null;
+    /**
+     * Optional. Maximum number of tasks for auto-scaling. If provided at root level, will be merged into composeDefinition.
+     * @type {number}
+     * @memberof UpdateEnvironmentRequest
+     */
+    'maxCapacity'?: number | null;
 }
 /**
  * 
@@ -2352,7 +3366,7 @@ export interface V1RevisionsResponse {
  */
 export interface V1SearchHit {
     /**
-     * The controller for mananging Search integration.
+     * The controller for managing Search integration.
      * @type {string}
      * @memberof V1SearchHit
      */
@@ -9670,19 +10684,32 @@ export interface ValidateCompose200Response {
      * @type {string}
      * @memberof ValidateCompose200Response
      */
-    'message'?: string;
+    'message': string;
     /**
-     * 
+     * The translated internal compose definition format
      * @type {object}
      * @memberof ValidateCompose200Response
      */
-    'translatedComposeDefinition'?: object;
+    'translatedComposeDefinition': object;
     /**
-     * 
+     * Optional warnings encountered during translation
      * @type {Array<string>}
      * @memberof ValidateCompose200Response
      */
-    'translationWarnings'?: Array<string>;
+    'translationWarnings'?: Array<string> | null;
+}
+/**
+ * 
+ * @export
+ * @interface ValidateCompose422Response
+ */
+export interface ValidateCompose422Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof ValidateCompose422Response
+     */
+    'error'?: string;
 }
 /**
  * 
@@ -9691,11 +10718,23 @@ export interface ValidateCompose200Response {
  */
 export interface ValidateComposeRequest {
     /**
-     * 
+     * The docker-compose.yml file content as a string
      * @type {string}
      * @memberof ValidateComposeRequest
      */
-    'compose'?: string;
+    'compose': string;
+    /**
+     * Optional image tag suffix (query parameter takes precedence)
+     * @type {string}
+     * @memberof ValidateComposeRequest
+     */
+    'imageSuffix'?: string;
+    /**
+     * Optional application name for context
+     * @type {string}
+     * @memberof ValidateComposeRequest
+     */
+    'application'?: string;
 }
 /**
  * 
@@ -9771,6 +10810,817 @@ export interface Volume {
      */
     'accessPointArn'?: string;
 }
+
+/**
+ * AIServicesApi - axios parameter creator
+ * @export
+ */
+export const AIServicesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size
+         * @summary Chat inference via API Gateway (buffered responses) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatInference: async (organisation: string, chatInferenceRequest: ChatInferenceRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('chatInference', 'organisation', organisation)
+            // verify required parameter 'chatInferenceRequest' is not null or undefined
+            assertParamExists('chatInference', 'chatInferenceRequest', chatInferenceRequest)
+            const localVarPath = `/organisations/{organisation}/ai/chat`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(chatInferenceRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
+         * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatInferenceStream: async (organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('chatInferenceStream', 'organisation', organisation)
+            // verify required parameter 'chatInferenceStreamRequest' is not null or undefined
+            assertParamExists('chatInferenceStream', 'chatInferenceStreamRequest', chatInferenceStreamRequest)
+            const localVarPath = `/organisations/{organisation}/ai/chat/stream`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(chatInferenceStreamRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a new chat session
+         * @param {string} organisation The organisation ID
+         * @param {CreateAISessionRequest} createAISessionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAISession: async (organisation: string, createAISessionRequest: CreateAISessionRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('createAISession', 'organisation', organisation)
+            // verify required parameter 'createAISessionRequest' is not null or undefined
+            assertParamExists('createAISession', 'createAISessionRequest', createAISessionRequest)
+            const localVarPath = `/organisations/{organisation}/ai/sessions`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createAISessionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete a chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAISession: async (organisation: string, sessionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('deleteAISession', 'organisation', organisation)
+            // verify required parameter 'sessionId' is not null or undefined
+            assertParamExists('deleteAISession', 'sessionId', sessionId)
+            const localVarPath = `/organisations/{organisation}/ai/sessions/{sessionId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get AI configuration for an organization
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIConfig: async (organisation: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getAIConfig', 'organisation', organisation)
+            const localVarPath = `/organisations/{organisation}/ai/config`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get a specific chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAISession: async (organisation: string, sessionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getAISession', 'organisation', organisation)
+            // verify required parameter 'sessionId' is not null or undefined
+            assertParamExists('getAISession', 'sessionId', sessionId)
+            const localVarPath = `/organisations/{organisation}/ai/sessions/{sessionId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get AI usage statistics
+         * @param {string} organisation The organisation ID
+         * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIUsageStats: async (organisation: string, month?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getAIUsageStats', 'organisation', organisation)
+            const localVarPath = `/organisations/{organisation}/ai/usage`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (month !== undefined) {
+                localVarQueryParameter['month'] = month;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List available AI models for an organization
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAIModels: async (organisation: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listAIModels', 'organisation', organisation)
+            const localVarPath = `/organisations/{organisation}/ai/models`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List chat sessions for an organization
+         * @param {string} organisation The organisation ID
+         * @param {number} [limit] Maximum number of sessions to return
+         * @param {number} [offset] Offset for pagination
+         * @param {string} [model] Filter by model ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAISessions: async (organisation: string, limit?: number, offset?: number, model?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listAISessions', 'organisation', organisation)
+            const localVarPath = `/organisations/{organisation}/ai/sessions`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (model !== undefined) {
+                localVarQueryParameter['model'] = model;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update AI configuration for an organization
+         * @param {string} organisation The organisation ID
+         * @param {UpdateAIConfigRequest} updateAIConfigRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAIConfig: async (organisation: string, updateAIConfigRequest: UpdateAIConfigRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('updateAIConfig', 'organisation', organisation)
+            // verify required parameter 'updateAIConfigRequest' is not null or undefined
+            assertParamExists('updateAIConfig', 'updateAIConfigRequest', updateAIConfigRequest)
+            const localVarPath = `/organisations/{organisation}/ai/config`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateAIConfigRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AIServicesApi - functional programming interface
+ * @export
+ */
+export const AIServicesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AIServicesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size
+         * @summary Chat inference via API Gateway (buffered responses) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatInference(organisation: string, chatInferenceRequest: ChatInferenceRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatInference200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatInference(organisation, chatInferenceRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.chatInference']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
+         * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatInferenceStream(organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatInferenceStream(organisation, chatInferenceStreamRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.chatInferenceStream']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create a new chat session
+         * @param {string} organisation The organisation ID
+         * @param {CreateAISessionRequest} createAISessionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createAISession(organisation: string, createAISessionRequest: CreateAISessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateAISession201Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAISession(organisation, createAISessionRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.createAISession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete a chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteAISession200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAISession(organisation, sessionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.deleteAISession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get AI configuration for an organization
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAIConfig(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAIConfig200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAIConfig(organisation, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.getAIConfig']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get a specific chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAISession200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAISession(organisation, sessionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.getAISession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get AI usage statistics
+         * @param {string} organisation The organisation ID
+         * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAIUsageStats(organisation: string, month?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAIUsageStats200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAIUsageStats(organisation, month, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.getAIUsageStats']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List available AI models for an organization
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAIModels(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListAIModels200ResponseInner>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAIModels(organisation, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listAIModels']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List chat sessions for an organization
+         * @param {string} organisation The organisation ID
+         * @param {number} [limit] Maximum number of sessions to return
+         * @param {number} [offset] Offset for pagination
+         * @param {string} [model] Filter by model ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAISessions(organisation: string, limit?: number, offset?: number, model?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListAISessions200ResponseInner>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAISessions(organisation, limit, offset, model, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listAISessions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update AI configuration for an organization
+         * @param {string} organisation The organisation ID
+         * @param {UpdateAIConfigRequest} updateAIConfigRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateAIConfig(organisation: string, updateAIConfigRequest: UpdateAIConfigRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAIConfig(organisation, updateAIConfigRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.updateAIConfig']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AIServicesApi - factory interface
+ * @export
+ */
+export const AIServicesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AIServicesApiFp(configuration)
+    return {
+        /**
+         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size
+         * @summary Chat inference via API Gateway (buffered responses) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatInference(organisation: string, chatInferenceRequest: ChatInferenceRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChatInference200Response> {
+            return localVarFp.chatInference(organisation, chatInferenceRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
+         * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatInferenceStream(organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
+            return localVarFp.chatInferenceStream(organisation, chatInferenceStreamRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a new chat session
+         * @param {string} organisation The organisation ID
+         * @param {CreateAISessionRequest} createAISessionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAISession(organisation: string, createAISessionRequest: CreateAISessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateAISession201Response> {
+            return localVarFp.createAISession(organisation, createAISessionRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): AxiosPromise<DeleteAISession200Response> {
+            return localVarFp.deleteAISession(organisation, sessionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get AI configuration for an organization
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIConfig(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAIConfig200Response> {
+            return localVarFp.getAIConfig(organisation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get a specific chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAISession200Response> {
+            return localVarFp.getAISession(organisation, sessionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get AI usage statistics
+         * @param {string} organisation The organisation ID
+         * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIUsageStats(organisation: string, month?: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAIUsageStats200Response> {
+            return localVarFp.getAIUsageStats(organisation, month, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List available AI models for an organization
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAIModels(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ListAIModels200ResponseInner>> {
+            return localVarFp.listAIModels(organisation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List chat sessions for an organization
+         * @param {string} organisation The organisation ID
+         * @param {number} [limit] Maximum number of sessions to return
+         * @param {number} [offset] Offset for pagination
+         * @param {string} [model] Filter by model ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAISessions(organisation: string, limit?: number, offset?: number, model?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ListAISessions200ResponseInner>> {
+            return localVarFp.listAISessions(organisation, limit, offset, model, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update AI configuration for an organization
+         * @param {string} organisation The organisation ID
+         * @param {UpdateAIConfigRequest} updateAIConfigRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAIConfig(organisation: string, updateAIConfigRequest: UpdateAIConfigRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.updateAIConfig(organisation, updateAIConfigRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AIServicesApi - object-oriented interface
+ * @export
+ * @class AIServicesApi
+ * @extends {BaseAPI}
+ */
+export class AIServicesApi extends BaseAPI {
+    /**
+     * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size
+     * @summary Chat inference via API Gateway (buffered responses) with multimodal support
+     * @param {string} organisation The organisation ID
+     * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public chatInference(organisation: string, chatInferenceRequest: ChatInferenceRequest, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).chatInference(organisation, chatInferenceRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
+     * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
+     * @param {string} organisation The organisation ID
+     * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public chatInferenceStream(organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).chatInferenceStream(organisation, chatInferenceStreamRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a new chat session
+     * @param {string} organisation The organisation ID
+     * @param {CreateAISessionRequest} createAISessionRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public createAISession(organisation: string, createAISessionRequest: CreateAISessionRequest, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).createAISession(organisation, createAISessionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a chat session
+     * @param {string} organisation The organisation ID
+     * @param {string} sessionId The session ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public deleteAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).deleteAISession(organisation, sessionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get AI configuration for an organization
+     * @param {string} organisation The organisation ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public getAIConfig(organisation: string, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).getAIConfig(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get a specific chat session
+     * @param {string} organisation The organisation ID
+     * @param {string} sessionId The session ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public getAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).getAISession(organisation, sessionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get AI usage statistics
+     * @param {string} organisation The organisation ID
+     * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public getAIUsageStats(organisation: string, month?: string, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).getAIUsageStats(organisation, month, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List available AI models for an organization
+     * @param {string} organisation The organisation ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public listAIModels(organisation: string, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).listAIModels(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List chat sessions for an organization
+     * @param {string} organisation The organisation ID
+     * @param {number} [limit] Maximum number of sessions to return
+     * @param {number} [offset] Offset for pagination
+     * @param {string} [model] Filter by model ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public listAISessions(organisation: string, limit?: number, offset?: number, model?: string, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).listAISessions(organisation, limit, offset, model, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update AI configuration for an organization
+     * @param {string} organisation The organisation ID
+     * @param {UpdateAIConfigRequest} updateAIConfigRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public updateAIConfig(organisation: string, updateAIConfigRequest: UpdateAIConfigRequest, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).updateAIConfig(organisation, updateAIConfigRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
 
 /**
  * ApplicationsApi - axios parameter creator
@@ -10336,16 +12186,22 @@ export const BackupManagementApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
-         * 
+         * Retrieves a list of backups (database or filesystem) for the environment with status, size, and metadata. Supports filtering and ordering via query parameters.
          * @summary List backups for an environment
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
          * @param {ListBackupsTypeEnum} type The backup type
+         * @param {ListBackupsOrderEnum} [order] Sort order for backups by creation date (asc &#x3D; oldest first, desc &#x3D; newest first)
+         * @param {number} [limit] Maximum number of backups to return (max 100)
+         * @param {string} [createdBefore] Only return backups created before this ISO 8601 timestamp (e.g., 2025-01-01T00:00:00Z)
+         * @param {string} [createdAfter] Only return backups created after this ISO 8601 timestamp (e.g., 2024-12-01T00:00:00Z)
+         * @param {ListBackupsStatusEnum} [status] Filter backups by status
+         * @param {string} [nextToken] Token for retrieving the next page of results
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listBackups: async (organisation: string, application: string, environment: string, type: ListBackupsTypeEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listBackups: async (organisation: string, application: string, environment: string, type: ListBackupsTypeEnum, order?: ListBackupsOrderEnum, limit?: number, createdBefore?: string, createdAfter?: string, status?: ListBackupsStatusEnum, nextToken?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organisation' is not null or undefined
             assertParamExists('listBackups', 'organisation', organisation)
             // verify required parameter 'application' is not null or undefined
@@ -10369,6 +12225,34 @@ export const BackupManagementApiAxiosParamCreator = function (configuration?: Co
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (order !== undefined) {
+                localVarQueryParameter['order'] = order;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (createdBefore !== undefined) {
+                localVarQueryParameter['createdBefore'] = (createdBefore as any instanceof Date) ?
+                    (createdBefore as any).toISOString() :
+                    createdBefore;
+            }
+
+            if (createdAfter !== undefined) {
+                localVarQueryParameter['createdAfter'] = (createdAfter as any instanceof Date) ?
+                    (createdAfter as any).toISOString() :
+                    createdAfter;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
+            }
 
 
     
@@ -10443,17 +12327,23 @@ export const BackupManagementApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieves a list of backups (database or filesystem) for the environment with status, size, and metadata. Supports filtering and ordering via query parameters.
          * @summary List backups for an environment
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
          * @param {ListBackupsTypeEnum} type The backup type
+         * @param {ListBackupsOrderEnum} [order] Sort order for backups by creation date (asc &#x3D; oldest first, desc &#x3D; newest first)
+         * @param {number} [limit] Maximum number of backups to return (max 100)
+         * @param {string} [createdBefore] Only return backups created before this ISO 8601 timestamp (e.g., 2025-01-01T00:00:00Z)
+         * @param {string} [createdAfter] Only return backups created after this ISO 8601 timestamp (e.g., 2024-12-01T00:00:00Z)
+         * @param {ListBackupsStatusEnum} [status] Filter backups by status
+         * @param {string} [nextToken] Token for retrieving the next page of results
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listBackups(organisation: string, application: string, environment: string, type: ListBackupsTypeEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListBackups200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listBackups(organisation, application, environment, type, options);
+        async listBackups(organisation: string, application: string, environment: string, type: ListBackupsTypeEnum, order?: ListBackupsOrderEnum, limit?: number, createdBefore?: string, createdAfter?: string, status?: ListBackupsStatusEnum, nextToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListBackups200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listBackups(organisation, application, environment, type, order, limit, createdBefore, createdAfter, status, nextToken, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BackupManagementApi.listBackups']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -10511,17 +12401,23 @@ export const BackupManagementApiFactory = function (configuration?: Configuratio
             return localVarFp.downloadBackup(organisation, application, environment, type, backupId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieves a list of backups (database or filesystem) for the environment with status, size, and metadata. Supports filtering and ordering via query parameters.
          * @summary List backups for an environment
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
          * @param {ListBackupsTypeEnum} type The backup type
+         * @param {ListBackupsOrderEnum} [order] Sort order for backups by creation date (asc &#x3D; oldest first, desc &#x3D; newest first)
+         * @param {number} [limit] Maximum number of backups to return (max 100)
+         * @param {string} [createdBefore] Only return backups created before this ISO 8601 timestamp (e.g., 2025-01-01T00:00:00Z)
+         * @param {string} [createdAfter] Only return backups created after this ISO 8601 timestamp (e.g., 2024-12-01T00:00:00Z)
+         * @param {ListBackupsStatusEnum} [status] Filter backups by status
+         * @param {string} [nextToken] Token for retrieving the next page of results
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listBackups(organisation: string, application: string, environment: string, type: ListBackupsTypeEnum, options?: RawAxiosRequestConfig): AxiosPromise<ListBackups200Response> {
-            return localVarFp.listBackups(organisation, application, environment, type, options).then((request) => request(axios, basePath));
+        listBackups(organisation: string, application: string, environment: string, type: ListBackupsTypeEnum, order?: ListBackupsOrderEnum, limit?: number, createdBefore?: string, createdAfter?: string, status?: ListBackupsStatusEnum, nextToken?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListBackups200Response> {
+            return localVarFp.listBackups(organisation, application, environment, type, order, limit, createdBefore, createdAfter, status, nextToken, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -10582,18 +12478,24 @@ export class BackupManagementApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieves a list of backups (database or filesystem) for the environment with status, size, and metadata. Supports filtering and ordering via query parameters.
      * @summary List backups for an environment
      * @param {string} organisation The organisation ID
      * @param {string} application The application ID
      * @param {string} environment The environment ID
      * @param {ListBackupsTypeEnum} type The backup type
+     * @param {ListBackupsOrderEnum} [order] Sort order for backups by creation date (asc &#x3D; oldest first, desc &#x3D; newest first)
+     * @param {number} [limit] Maximum number of backups to return (max 100)
+     * @param {string} [createdBefore] Only return backups created before this ISO 8601 timestamp (e.g., 2025-01-01T00:00:00Z)
+     * @param {string} [createdAfter] Only return backups created after this ISO 8601 timestamp (e.g., 2024-12-01T00:00:00Z)
+     * @param {ListBackupsStatusEnum} [status] Filter backups by status
+     * @param {string} [nextToken] Token for retrieving the next page of results
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupManagementApi
      */
-    public listBackups(organisation: string, application: string, environment: string, type: ListBackupsTypeEnum, options?: RawAxiosRequestConfig) {
-        return BackupManagementApiFp(this.configuration).listBackups(organisation, application, environment, type, options).then((request) => request(this.axios, this.basePath));
+    public listBackups(organisation: string, application: string, environment: string, type: ListBackupsTypeEnum, order?: ListBackupsOrderEnum, limit?: number, createdBefore?: string, createdAfter?: string, status?: ListBackupsStatusEnum, nextToken?: string, options?: RawAxiosRequestConfig) {
+        return BackupManagementApiFp(this.configuration).listBackups(organisation, application, environment, type, order, limit, createdBefore, createdAfter, status, nextToken, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -10629,6 +12531,23 @@ export const ListBackupsTypeEnum = {
     Filesystem: 'filesystem'
 } as const;
 export type ListBackupsTypeEnum = typeof ListBackupsTypeEnum[keyof typeof ListBackupsTypeEnum];
+/**
+ * @export
+ */
+export const ListBackupsOrderEnum = {
+    Asc: 'asc',
+    Desc: 'desc'
+} as const;
+export type ListBackupsOrderEnum = typeof ListBackupsOrderEnum[keyof typeof ListBackupsOrderEnum];
+/**
+ * @export
+ */
+export const ListBackupsStatusEnum = {
+    Completed: 'completed',
+    Failed: 'failed',
+    Running: 'running'
+} as const;
+export type ListBackupsStatusEnum = typeof ListBackupsStatusEnum[keyof typeof ListBackupsStatusEnum];
 
 
 /**
@@ -10963,14 +12882,15 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
          * @summary Validate a compose file
          * @param {string} organisation The organisation ID
-         * @param {ValidateComposeRequest} validateComposeRequest 
+         * @param {ValidateComposeRequest} validateComposeRequest The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
+         * @param {string} [imageSuffix] Optional. Image tag suffix to apply during translation. Transforms internal image tags to consistent \&#39;{containerName}-{suffix}\&#39; format (e.g., \&#39;nginx-pr-456\&#39;). External images are left unchanged. Useful for feature branch deployments.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validateCompose: async (organisation: string, validateComposeRequest: ValidateComposeRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        validateCompose: async (organisation: string, validateComposeRequest: ValidateComposeRequest, imageSuffix?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organisation' is not null or undefined
             assertParamExists('validateCompose', 'organisation', organisation)
             // verify required parameter 'validateComposeRequest' is not null or undefined
@@ -10987,6 +12907,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (imageSuffix !== undefined) {
+                localVarQueryParameter['imageSuffix'] = imageSuffix;
+            }
 
 
     
@@ -11028,15 +12952,16 @@ export const ComposeApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
          * @summary Validate a compose file
          * @param {string} organisation The organisation ID
-         * @param {ValidateComposeRequest} validateComposeRequest 
+         * @param {ValidateComposeRequest} validateComposeRequest The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
+         * @param {string} [imageSuffix] Optional. Image tag suffix to apply during translation. Transforms internal image tags to consistent \&#39;{containerName}-{suffix}\&#39; format (e.g., \&#39;nginx-pr-456\&#39;). External images are left unchanged. Useful for feature branch deployments.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validateCompose(organisation: string, validateComposeRequest: ValidateComposeRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidateCompose200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.validateCompose(organisation, validateComposeRequest, options);
+        async validateCompose(organisation: string, validateComposeRequest: ValidateComposeRequest, imageSuffix?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidateCompose200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.validateCompose(organisation, validateComposeRequest, imageSuffix, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.validateCompose']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -11064,15 +12989,16 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getEnvironmentCompose(organisation, application, environment, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
          * @summary Validate a compose file
          * @param {string} organisation The organisation ID
-         * @param {ValidateComposeRequest} validateComposeRequest 
+         * @param {ValidateComposeRequest} validateComposeRequest The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
+         * @param {string} [imageSuffix] Optional. Image tag suffix to apply during translation. Transforms internal image tags to consistent \&#39;{containerName}-{suffix}\&#39; format (e.g., \&#39;nginx-pr-456\&#39;). External images are left unchanged. Useful for feature branch deployments.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validateCompose(organisation: string, validateComposeRequest: ValidateComposeRequest, options?: RawAxiosRequestConfig): AxiosPromise<ValidateCompose200Response> {
-            return localVarFp.validateCompose(organisation, validateComposeRequest, options).then((request) => request(axios, basePath));
+        validateCompose(organisation: string, validateComposeRequest: ValidateComposeRequest, imageSuffix?: string, options?: RawAxiosRequestConfig): AxiosPromise<ValidateCompose200Response> {
+            return localVarFp.validateCompose(organisation, validateComposeRequest, imageSuffix, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -11099,16 +13025,17 @@ export class ComposeApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
      * @summary Validate a compose file
      * @param {string} organisation The organisation ID
-     * @param {ValidateComposeRequest} validateComposeRequest 
+     * @param {ValidateComposeRequest} validateComposeRequest The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
+     * @param {string} [imageSuffix] Optional. Image tag suffix to apply during translation. Transforms internal image tags to consistent \&#39;{containerName}-{suffix}\&#39; format (e.g., \&#39;nginx-pr-456\&#39;). External images are left unchanged. Useful for feature branch deployments.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public validateCompose(organisation: string, validateComposeRequest: ValidateComposeRequest, options?: RawAxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).validateCompose(organisation, validateComposeRequest, options).then((request) => request(this.axios, this.basePath));
+    public validateCompose(organisation: string, validateComposeRequest: ValidateComposeRequest, imageSuffix?: string, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).validateCompose(organisation, validateComposeRequest, imageSuffix, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -11333,370 +13260,6 @@ export class ContainersApi extends BaseAPI {
     }
 }
 
-
-
-/**
- * ContentApi - axios parameter creator
- * @export
- */
-export const ContentApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Retrieve content via API.
-         * @summary List content by type
-         * @param {ListContentTypeEnum} type 
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listContent: async (type: ListContentTypeEnum, body?: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'type' is not null or undefined
-            assertParamExists('listContent', 'type', type)
-            const localVarPath = `/api/v1/content/{type}`
-                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication headerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Quant-Token", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Retrieve proxies via API.
-         * @summary List proxies
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listProxies: async (body?: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/proxy`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication headerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Quant-Token", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Retrieve redirects via API.
-         * @summary List redirects
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listRedirects: async (body?: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/redirect`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication headerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Quant-Token", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Upload a file via API.
-         * @summary Upload a file
-         * @param {string} quantUri 
-         * @param {string} [quantPrefix] 
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadFile: async (quantUri: string, quantPrefix?: string, body?: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'quantUri' is not null or undefined
-            assertParamExists('uploadFile', 'quantUri', quantUri)
-            const localVarPath = `/api/v1/upload`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication headerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Quant-Token", configuration)
-
-            if (quantUri !== undefined) {
-                localVarQueryParameter['quant_uri'] = quantUri;
-            }
-
-            if (quantPrefix !== undefined) {
-                localVarQueryParameter['quant_prefix'] = quantPrefix;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ContentApi - functional programming interface
- * @export
- */
-export const ContentApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ContentApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Retrieve content via API.
-         * @summary List content by type
-         * @param {ListContentTypeEnum} type 
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listContent(type: ListContentTypeEnum, body?: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ContentListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listContent(type, body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ContentApi.listContent']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Retrieve proxies via API.
-         * @summary List proxies
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listProxies(body?: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ProxyListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listProxies(body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ContentApi.listProxies']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Retrieve redirects via API.
-         * @summary List redirects
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listRedirects(body?: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1RedirectListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listRedirects(body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ContentApi.listRedirects']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Upload a file via API.
-         * @summary Upload a file
-         * @param {string} quantUri 
-         * @param {string} [quantPrefix] 
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async uploadFile(quantUri: string, quantPrefix?: string, body?: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1UploadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFile(quantUri, quantPrefix, body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ContentApi.uploadFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ContentApi - factory interface
- * @export
- */
-export const ContentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ContentApiFp(configuration)
-    return {
-        /**
-         * Retrieve content via API.
-         * @summary List content by type
-         * @param {ListContentTypeEnum} type 
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listContent(type: ListContentTypeEnum, body?: object, options?: RawAxiosRequestConfig): AxiosPromise<V1ContentListResponse> {
-            return localVarFp.listContent(type, body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Retrieve proxies via API.
-         * @summary List proxies
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listProxies(body?: object, options?: RawAxiosRequestConfig): AxiosPromise<V1ProxyListResponse> {
-            return localVarFp.listProxies(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Retrieve redirects via API.
-         * @summary List redirects
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listRedirects(body?: object, options?: RawAxiosRequestConfig): AxiosPromise<V1RedirectListResponse> {
-            return localVarFp.listRedirects(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Upload a file via API.
-         * @summary Upload a file
-         * @param {string} quantUri 
-         * @param {string} [quantPrefix] 
-         * @param {object} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadFile(quantUri: string, quantPrefix?: string, body?: object, options?: RawAxiosRequestConfig): AxiosPromise<V1UploadResponse> {
-            return localVarFp.uploadFile(quantUri, quantPrefix, body, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ContentApi - object-oriented interface
- * @export
- * @class ContentApi
- * @extends {BaseAPI}
- */
-export class ContentApi extends BaseAPI {
-    /**
-     * Retrieve content via API.
-     * @summary List content by type
-     * @param {ListContentTypeEnum} type 
-     * @param {object} [body] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ContentApi
-     */
-    public listContent(type: ListContentTypeEnum, body?: object, options?: RawAxiosRequestConfig) {
-        return ContentApiFp(this.configuration).listContent(type, body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Retrieve proxies via API.
-     * @summary List proxies
-     * @param {object} [body] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ContentApi
-     */
-    public listProxies(body?: object, options?: RawAxiosRequestConfig) {
-        return ContentApiFp(this.configuration).listProxies(body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Retrieve redirects via API.
-     * @summary List redirects
-     * @param {object} [body] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ContentApi
-     */
-    public listRedirects(body?: object, options?: RawAxiosRequestConfig) {
-        return ContentApiFp(this.configuration).listRedirects(body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Upload a file via API.
-     * @summary Upload a file
-     * @param {string} quantUri 
-     * @param {string} [quantPrefix] 
-     * @param {object} [body] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ContentApi
-     */
-    public uploadFile(quantUri: string, quantPrefix?: string, body?: object, options?: RawAxiosRequestConfig) {
-        return ContentApiFp(this.configuration).uploadFile(quantUri, quantPrefix, body, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-/**
- * @export
- */
-export const ListContentTypeEnum = {
-    Content: 'content',
-    Redirect: 'redirect',
-    File: 'file',
-    EdgeFunction: 'edge_function',
-    EdgeFilter: 'edge_filter',
-    EdgeAuth: 'edge_auth'
-} as const;
-export type ListContentTypeEnum = typeof ListContentTypeEnum[keyof typeof ListContentTypeEnum];
 
 
 /**
@@ -14127,8 +15690,8 @@ export const EnvironmentsApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * 
-         * @summary Update the compose for an environment
+         * Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the ECS service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
+         * @summary Update Environment Compose Definition
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
@@ -14355,8 +15918,8 @@ export const EnvironmentsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Update the compose for an environment
+         * Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the ECS service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
+         * @summary Update Environment Compose Definition
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
@@ -14495,8 +16058,8 @@ export const EnvironmentsApiFactory = function (configuration?: Configuration, b
             return localVarFp.syncToEnvironment(organisation, application, environment, type, syncToEnvironmentRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Update the compose for an environment
+         * Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the ECS service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
+         * @summary Update Environment Compose Definition
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
@@ -14645,8 +16208,8 @@ export class EnvironmentsApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Update the compose for an environment
+     * Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the ECS service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
+     * @summary Update Environment Compose Definition
      * @param {string} organisation The organisation ID
      * @param {string} application The application ID
      * @param {string} environment The environment ID
@@ -22477,6 +24040,54 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
+         * @summary Bulk set/replace environment variables
+         * @param {string} apiOrganisation The organisation ID
+         * @param {string} apiApplication The application ID
+         * @param {string} apiEnvironment The environment ID
+         * @param {BulkSetEnvironmentVariablesRequest} bulkSetEnvironmentVariablesRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bulkSetEnvironmentVariables: async (apiOrganisation: string, apiApplication: string, apiEnvironment: string, bulkSetEnvironmentVariablesRequest: BulkSetEnvironmentVariablesRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'apiOrganisation' is not null or undefined
+            assertParamExists('bulkSetEnvironmentVariables', 'apiOrganisation', apiOrganisation)
+            // verify required parameter 'apiApplication' is not null or undefined
+            assertParamExists('bulkSetEnvironmentVariables', 'apiApplication', apiApplication)
+            // verify required parameter 'apiEnvironment' is not null or undefined
+            assertParamExists('bulkSetEnvironmentVariables', 'apiEnvironment', apiEnvironment)
+            // verify required parameter 'bulkSetEnvironmentVariablesRequest' is not null or undefined
+            assertParamExists('bulkSetEnvironmentVariables', 'bulkSetEnvironmentVariablesRequest', bulkSetEnvironmentVariablesRequest)
+            const localVarPath = `/api/v3/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables`
+                .replace(`{${"api_organisation"}}`, encodeURIComponent(String(apiOrganisation)))
+                .replace(`{${"api_application"}}`, encodeURIComponent(String(apiApplication)))
+                .replace(`{${"api_environment"}}`, encodeURIComponent(String(apiEnvironment)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(bulkSetEnvironmentVariablesRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Delete a variable
          * @param {string} apiOrganisation The organisation ID
          * @param {string} apiApplication The application ID
@@ -22627,6 +24238,22 @@ export const VariablesApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Bulk set/replace environment variables
+         * @param {string} apiOrganisation The organisation ID
+         * @param {string} apiApplication The application ID
+         * @param {string} apiEnvironment The environment ID
+         * @param {BulkSetEnvironmentVariablesRequest} bulkSetEnvironmentVariablesRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bulkSetEnvironmentVariables(apiOrganisation: string, apiApplication: string, apiEnvironment: string, bulkSetEnvironmentVariablesRequest: BulkSetEnvironmentVariablesRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkSetEnvironmentVariables(apiOrganisation, apiApplication, apiEnvironment, bulkSetEnvironmentVariablesRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VariablesApi.bulkSetEnvironmentVariables']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Delete a variable
          * @param {string} apiOrganisation The organisation ID
          * @param {string} apiApplication The application ID
@@ -22685,6 +24312,19 @@ export const VariablesApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
+         * @summary Bulk set/replace environment variables
+         * @param {string} apiOrganisation The organisation ID
+         * @param {string} apiApplication The application ID
+         * @param {string} apiEnvironment The environment ID
+         * @param {BulkSetEnvironmentVariablesRequest} bulkSetEnvironmentVariablesRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bulkSetEnvironmentVariables(apiOrganisation: string, apiApplication: string, apiEnvironment: string, bulkSetEnvironmentVariablesRequest: BulkSetEnvironmentVariablesRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.bulkSetEnvironmentVariables(apiOrganisation, apiApplication, apiEnvironment, bulkSetEnvironmentVariablesRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Delete a variable
          * @param {string} apiOrganisation The organisation ID
          * @param {string} apiApplication The application ID
@@ -22732,6 +24372,21 @@ export const VariablesApiFactory = function (configuration?: Configuration, base
  * @extends {BaseAPI}
  */
 export class VariablesApi extends BaseAPI {
+    /**
+     * 
+     * @summary Bulk set/replace environment variables
+     * @param {string} apiOrganisation The organisation ID
+     * @param {string} apiApplication The application ID
+     * @param {string} apiEnvironment The environment ID
+     * @param {BulkSetEnvironmentVariablesRequest} bulkSetEnvironmentVariablesRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VariablesApi
+     */
+    public bulkSetEnvironmentVariables(apiOrganisation: string, apiApplication: string, apiEnvironment: string, bulkSetEnvironmentVariablesRequest: BulkSetEnvironmentVariablesRequest, options?: RawAxiosRequestConfig) {
+        return VariablesApiFp(this.configuration).bulkSetEnvironmentVariables(apiOrganisation, apiApplication, apiEnvironment, bulkSetEnvironmentVariablesRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary Delete a variable

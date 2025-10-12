@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sourceVolume** | **string** |  | [default to undefined]
-**containerPath** | **string** |  | [default to undefined]
-**readOnly** | **boolean** |  | [optional] [default to undefined]
+**sourceVolume** | **string** | The name of the logical volume | [default to undefined]
+**containerPath** | **string** | The path inside the container where the volume is mounted | [default to undefined]
+**readOnly** | **boolean** |  | [optional] [default to false]
 
 ## Example
 

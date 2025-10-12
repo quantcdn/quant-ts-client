@@ -4,9 +4,70 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**bulkSetEnvironmentVariables**](#bulksetenvironmentvariables) | **PUT** /api/v3/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables | Bulk set/replace environment variables|
 |[**deleteEnvironmentVariable**](#deleteenvironmentvariable) | **DELETE** /api/v3/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables/{api_variable} | Delete a variable|
 |[**listEnvironmentVariables**](#listenvironmentvariables) | **GET** /api/v3/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables | Get all variables for an environment|
 |[**updateEnvironmentVariable**](#updateenvironmentvariable) | **PUT** /api/v3/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables/{api_variable} | Update a variable|
+
+# **bulkSetEnvironmentVariables**
+> bulkSetEnvironmentVariables(bulkSetEnvironmentVariablesRequest)
+
+
+### Example
+
+```typescript
+import {
+    VariablesApi,
+    Configuration,
+    BulkSetEnvironmentVariablesRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new VariablesApi(configuration);
+
+let apiOrganisation: string; //The organisation ID (default to undefined)
+let apiApplication: string; //The application ID (default to undefined)
+let apiEnvironment: string; //The environment ID (default to undefined)
+let bulkSetEnvironmentVariablesRequest: BulkSetEnvironmentVariablesRequest; //
+
+const { status, data } = await apiInstance.bulkSetEnvironmentVariables(
+    apiOrganisation,
+    apiApplication,
+    apiEnvironment,
+    bulkSetEnvironmentVariablesRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **bulkSetEnvironmentVariablesRequest** | **BulkSetEnvironmentVariablesRequest**|  | |
+| **apiOrganisation** | [**string**] | The organisation ID | defaults to undefined|
+| **apiApplication** | [**string**] | The application ID | defaults to undefined|
+| **apiEnvironment** | [**string**] | The environment ID | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Environment variables set/replaced successfully |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteEnvironmentVariable**
 > deleteEnvironmentVariable()

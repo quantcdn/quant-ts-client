@@ -67,6 +67,7 @@ No authorization required
 # **validateCompose**
 > ValidateCompose200Response validateCompose(validateComposeRequest)
 
+Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
 
 ### Example
 
@@ -81,11 +82,13 @@ const configuration = new Configuration();
 const apiInstance = new ComposeApi(configuration);
 
 let organisation: string; //The organisation ID (default to undefined)
-let validateComposeRequest: ValidateComposeRequest; //
+let validateComposeRequest: ValidateComposeRequest; //The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
+let imageSuffix: string; //Optional. Image tag suffix to apply during translation. Transforms internal image tags to consistent \'{containerName}-{suffix}\' format (e.g., \'nginx-pr-456\'). External images are left unchanged. Useful for feature branch deployments. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.validateCompose(
     organisation,
-    validateComposeRequest
+    validateComposeRequest,
+    imageSuffix
 );
 ```
 
@@ -93,8 +96,9 @@ const { status, data } = await apiInstance.validateCompose(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **validateComposeRequest** | **ValidateComposeRequest**|  | |
+| **validateComposeRequest** | **ValidateComposeRequest**| The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided. | |
 | **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **imageSuffix** | [**string**] | Optional. Image tag suffix to apply during translation. Transforms internal image tags to consistent \&#39;{containerName}-{suffix}\&#39; format (e.g., \&#39;nginx-pr-456\&#39;). External images are left unchanged. Useful for feature branch deployments. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -114,7 +118,8 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The validated compose file |  -  |
+|**200** | Validation successful. Body contains the translated compose definition and any warnings. |  -  |
+|**422** | Invalid YAML input or validation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

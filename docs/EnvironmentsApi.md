@@ -12,7 +12,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**listEnvironments**](#listenvironments) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments | Get all environments for an application|
 |[**listSyncOperations**](#listsyncoperations) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | List the sync operations for an environment|
 |[**syncToEnvironment**](#synctoenvironment) | **POST** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | Perform a sync operation from a source environment to the current environment|
-|[**updateEnvironment**](#updateenvironment) | **PUT** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment} | Update the compose for an environment|
+|[**updateEnvironment**](#updateenvironment) | **PUT** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment} | Update Environment Compose Definition|
 |[**updateEnvironmentState**](#updateenvironmentstate) | **PUT** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/state | Update the state of an environment|
 
 # **createEnvironment**
@@ -478,6 +478,7 @@ No authorization required
 # **updateEnvironment**
 > updateEnvironment(updateEnvironmentRequest)
 
+Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the ECS service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
 
 ### Example
 
@@ -525,14 +526,15 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**202** | The compose updated |  -  |
-|**400** | The compose data is invalid |  -  |
+|**202** | Request accepted, compose definition update is processing. |  -  |
+|**400** | Invalid compose definition or validation failed. |  -  |
+|**404** | Application or environment not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

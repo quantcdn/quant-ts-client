@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** |  | [optional] [default to undefined]
-**translatedComposeDefinition** | **object** |  | [optional] [default to undefined]
-**translationWarnings** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**message** | **string** |  | [default to undefined]
+**translatedComposeDefinition** | **object** | The translated internal compose definition format | [default to undefined]
+**translationWarnings** | **Array&lt;string&gt;** | Optional warnings encountered during translation | [optional] [default to undefined]
 
 ## Example
 
