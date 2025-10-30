@@ -4,10 +4,10 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createBackup**](#createbackup) | **POST** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/backups/{type} | Create a backup for an environment|
-|[**deleteBackup**](#deletebackup) | **DELETE** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/backups/{type}/{backupId} | Delete a backup|
-|[**downloadBackup**](#downloadbackup) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/backups/{type}/{backupId}/download | Generate a download URL for a backup|
-|[**listBackups**](#listbackups) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/backups/{type} | List backups for an environment|
+|[**createBackup**](#createbackup) | **POST** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{type} | Create a backup for an environment|
+|[**deleteBackup**](#deletebackup) | **DELETE** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{type}/{backupId} | Delete a backup|
+|[**downloadBackup**](#downloadbackup) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{type}/{backupId}/download | Generate a download URL for a backup|
+|[**listBackups**](#listbackups) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{type} | List backups for an environment|
 
 # **createBackup**
 > CreateBackup202Response createBackup()

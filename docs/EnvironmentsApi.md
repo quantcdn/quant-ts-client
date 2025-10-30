@@ -4,16 +4,16 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createEnvironment**](#createenvironment) | **POST** /api/v3/organisations/{organisation}/applications/{application}/environments | Create a new environment|
-|[**deleteEnvironment**](#deleteenvironment) | **DELETE** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment} | Delete an environment|
-|[**getEnvironment**](#getenvironment) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment} | Get a single environment|
-|[**getEnvironmentLogs**](#getenvironmentlogs) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/logs | Get the logs for an environment|
-|[**getEnvironmentMetrics**](#getenvironmentmetrics) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/metrics | Get the metrics for an environment|
-|[**listEnvironments**](#listenvironments) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments | Get all environments for an application|
-|[**listSyncOperations**](#listsyncoperations) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | List the sync operations for an environment|
-|[**syncToEnvironment**](#synctoenvironment) | **POST** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | Perform a sync operation from a source environment to the current environment|
-|[**updateEnvironment**](#updateenvironment) | **PUT** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment} | Update Environment Compose Definition|
-|[**updateEnvironmentState**](#updateenvironmentstate) | **PUT** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/state | Update the state of an environment|
+|[**createEnvironment**](#createenvironment) | **POST** /api/v3/organizations/{organisation}/applications/{application}/environments | Create a new environment|
+|[**deleteEnvironment**](#deleteenvironment) | **DELETE** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment} | Delete an environment|
+|[**getEnvironment**](#getenvironment) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment} | Get a single environment|
+|[**getEnvironmentLogs**](#getenvironmentlogs) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/logs | Get the logs for an environment|
+|[**getEnvironmentMetrics**](#getenvironmentmetrics) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/metrics | Get the metrics for an environment|
+|[**listEnvironments**](#listenvironments) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments | Get all environments for an application|
+|[**listSyncOperations**](#listsyncoperations) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | List the sync operations for an environment|
+|[**syncToEnvironment**](#synctoenvironment) | **POST** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | Perform a sync operation from a source environment to the current environment|
+|[**updateEnvironment**](#updateenvironment) | **PUT** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment} | Update Environment Compose Definition|
+|[**updateEnvironmentState**](#updateenvironmentstate) | **PUT** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/state | Update the state of an environment|
 
 # **createEnvironment**
 > Environment createEnvironment(createEnvironmentRequest)
@@ -188,8 +188,9 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getEnvironmentLogs**
-> getEnvironmentLogs()
+> GetEnvironmentLogs200Response getEnvironmentLogs()
 
+Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and pattern matching. Supports pagination via nextToken.
 
 ### Example
 
@@ -205,11 +206,23 @@ const apiInstance = new EnvironmentsApi(configuration);
 let organisation: string; //The organisation ID (default to undefined)
 let application: string; //The application ID (default to undefined)
 let environment: string; //The environment ID (default to undefined)
+let startTime: string; //Start time for log retrieval (ISO 8601 format or Unix timestamp) (optional) (default to undefined)
+let endTime: string; //End time for log retrieval (ISO 8601 format or Unix timestamp) (optional) (default to undefined)
+let containerName: string; //Filter logs by specific container name (optional) (default to undefined)
+let filterPattern: string; //CloudWatch Logs filter pattern for searching log content (optional) (default to undefined)
+let limit: number; //Maximum number of log entries to return per page (optional) (default to undefined)
+let nextToken: string; //Pagination token from previous response for retrieving next page of results (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getEnvironmentLogs(
     organisation,
     application,
-    environment
+    environment,
+    startTime,
+    endTime,
+    containerName,
+    filterPattern,
+    limit,
+    nextToken
 );
 ```
 
@@ -220,11 +233,17 @@ const { status, data } = await apiInstance.getEnvironmentLogs(
 | **organisation** | [**string**] | The organisation ID | defaults to undefined|
 | **application** | [**string**] | The application ID | defaults to undefined|
 | **environment** | [**string**] | The environment ID | defaults to undefined|
+| **startTime** | [**string**] | Start time for log retrieval (ISO 8601 format or Unix timestamp) | (optional) defaults to undefined|
+| **endTime** | [**string**] | End time for log retrieval (ISO 8601 format or Unix timestamp) | (optional) defaults to undefined|
+| **containerName** | [**string**] | Filter logs by specific container name | (optional) defaults to undefined|
+| **filterPattern** | [**string**] | CloudWatch Logs filter pattern for searching log content | (optional) defaults to undefined|
+| **limit** | [**number**] | Maximum number of log entries to return per page | (optional) defaults to undefined|
+| **nextToken** | [**string**] | Pagination token from previous response for retrieving next page of results | (optional) defaults to undefined|
 
 
 ### Return type
 
-void (empty response body)
+**GetEnvironmentLogs200Response**
 
 ### Authorization
 
@@ -233,19 +252,22 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The logs |  -  |
+|**404** | The environment not found |  -  |
+|**422** | Validation error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getEnvironmentMetrics**
-> getEnvironmentMetrics()
+> object getEnvironmentMetrics()
 
+Retrieves CloudWatch metrics for the specified environment with optional filtering by time range, container, and metric configuration.
 
 ### Example
 
@@ -261,11 +283,21 @@ const apiInstance = new EnvironmentsApi(configuration);
 let organisation: string; //The organisation ID (default to undefined)
 let application: string; //The application ID (default to undefined)
 let environment: string; //The environment ID (default to undefined)
+let startTime: number; //Start time for metrics retrieval (Unix timestamp in milliseconds) (optional) (default to undefined)
+let endTime: number; //End time for metrics retrieval (Unix timestamp in milliseconds) (optional) (default to undefined)
+let period: number; //Period in seconds for metric aggregation (e.g., 60 for 1 minute, 300 for 5 minutes) (optional) (default to undefined)
+let statistics: string; //Comma-separated list of CloudWatch statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) (optional) (default to undefined)
+let containerName: string; //Filter metrics by specific container name (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getEnvironmentMetrics(
     organisation,
     application,
-    environment
+    environment,
+    startTime,
+    endTime,
+    period,
+    statistics,
+    containerName
 );
 ```
 
@@ -276,11 +308,16 @@ const { status, data } = await apiInstance.getEnvironmentMetrics(
 | **organisation** | [**string**] | The organisation ID | defaults to undefined|
 | **application** | [**string**] | The application ID | defaults to undefined|
 | **environment** | [**string**] | The environment ID | defaults to undefined|
+| **startTime** | [**number**] | Start time for metrics retrieval (Unix timestamp in milliseconds) | (optional) defaults to undefined|
+| **endTime** | [**number**] | End time for metrics retrieval (Unix timestamp in milliseconds) | (optional) defaults to undefined|
+| **period** | [**number**] | Period in seconds for metric aggregation (e.g., 60 for 1 minute, 300 for 5 minutes) | (optional) defaults to undefined|
+| **statistics** | [**string**] | Comma-separated list of CloudWatch statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) | (optional) defaults to undefined|
+| **containerName** | [**string**] | Filter metrics by specific container name | (optional) defaults to undefined|
 
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -289,13 +326,15 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The metrics |  -  |
+|**404** | The environment not found |  -  |
+|**422** | Validation error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

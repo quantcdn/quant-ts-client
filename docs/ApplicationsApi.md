@@ -4,11 +4,11 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createApplication**](#createapplication) | **POST** /api/v3/organisations/{organisation}/applications | Create a new application|
-|[**deleteApplication**](#deleteapplication) | **DELETE** /api/v3/organisations/{organisation}/applications/{application} | Delete an application|
-|[**getApplication**](#getapplication) | **GET** /api/v3/organisations/{organisation}/applications/{application} | Get a single application|
-|[**getEcrLoginCredentials**](#getecrlogincredentials) | **GET** /api/v3/organisations/{organisation}/applications/ecr-login | Get ECR login credentials|
-|[**listApplications**](#listapplications) | **GET** /api/v3/organisations/{organisation}/applications | Get all applications for an organisation|
+|[**createApplication**](#createapplication) | **POST** /api/v3/organizations/{organisation}/applications | Create a new application|
+|[**deleteApplication**](#deleteapplication) | **DELETE** /api/v3/organizations/{organisation}/applications/{application} | Delete an application|
+|[**getApplication**](#getapplication) | **GET** /api/v3/organizations/{organisation}/applications/{application} | Get a single application|
+|[**getEcrLoginCredentials**](#getecrlogincredentials) | **GET** /api/v3/organizations/{organisation}/applications/ecr-login | Get ECR login credentials|
+|[**listApplications**](#listapplications) | **GET** /api/v3/organizations/{organisation}/applications | Get all applications for an organisation|
 
 # **createApplication**
 > Application createApplication(application)

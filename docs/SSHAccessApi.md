@@ -4,7 +4,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getSshAccessCredentials**](#getsshaccesscredentials) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/ssh-access | Get SSH access credentials for an environment|
+|[**getSshAccessCredentials**](#getsshaccesscredentials) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/ssh-access | Get SSH access credentials for an environment|
 
 # **getSshAccessCredentials**
 > GetSshAccessCredentials200Response getSshAccessCredentials()

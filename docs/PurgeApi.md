@@ -4,7 +4,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**purgeCreate**](#purgecreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/purge | Purge cache keys from a project|
+|[**purgeCreate**](#purgecreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/purge | Purge cache via URL or cache keys|
 
 # **purgeCreate**
 > string purgeCreate(purgeCreateRequest)

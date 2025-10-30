@@ -4,8 +4,8 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**listContainers**](#listcontainers) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/containers | Get the containers in an environment|
-|[**updateContainer**](#updatecontainer) | **PUT** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/containers/{container} | Update a container in an environment|
+|[**listContainers**](#listcontainers) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/containers | Get the containers in an environment|
+|[**updateContainer**](#updatecontainer) | **PUT** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/containers/{container} | Update a container in an environment|
 
 # **listContainers**
 > listContainers()

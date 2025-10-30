@@ -4,12 +4,12 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createSearchItem**](#createsearchitem) | **POST** /api/v1/search/item | Create a new search index item.|
-|[**deleteSearchItem**](#deletesearchitem) | **DELETE** /api/v1/search/item | Delete a search index item.|
-|[**getSearchItem**](#getsearchitem) | **GET** /api/v1/search/item | Get a single search index item.|
-|[**getSearchItems**](#getsearchitems) | **GET** /api/v1/search/items | List search index items.|
-|[**testSearchExtractors**](#testsearchextractors) | **POST** /api/v1/search/test-extractors | Test search extractors.|
-|[**updateSearchItem**](#updatesearchitem) | **PUT** /api/v1/search/item | Update an existing search index item.|
+|[**createSearchItem**](#createsearchitem) | **POST** /api/v1/search/item | Create a new search index item|
+|[**deleteSearchItem**](#deletesearchitem) | **DELETE** /api/v1/search/item | Delete a search index item|
+|[**getSearchItem**](#getsearchitem) | **GET** /api/v1/search/item | Get a single search index item|
+|[**getSearchItems**](#getsearchitems) | **GET** /api/v1/search/items | List search index items|
+|[**testSearchExtractors**](#testsearchextractors) | **POST** /api/v1/search/test-extractors | Test search extractors|
+|[**updateSearchItem**](#updatesearchitem) | **PUT** /api/v1/search/item | Update an existing search index item|
 
 # **createSearchItem**
 > V1SearchMutationResponse createSearchItem(createSearchItemRequest)

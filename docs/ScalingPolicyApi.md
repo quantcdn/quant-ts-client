@@ -4,9 +4,9 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**deleteScalingPolicy**](#deletescalingpolicy) | **DELETE** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/scaling-policies/{policyName} | Delete the scaling policy for an environment|
-|[**getScalingPolicies**](#getscalingpolicies) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/scaling-policies | Get the scaling policies for an environment|
-|[**updateScalingPolicy**](#updatescalingpolicy) | **PUT** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/scaling-policies | Update the scaling policy for an environment|
+|[**deleteScalingPolicy**](#deletescalingpolicy) | **DELETE** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies/{policyName} | Delete the scaling policy for an environment|
+|[**getScalingPolicies**](#getscalingpolicies) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies | Get the scaling policies for an environment|
+|[**updateScalingPolicy**](#updatescalingpolicy) | **PUT** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies | Update the scaling policy for an environment|
 
 # **deleteScalingPolicy**
 > deleteScalingPolicy()

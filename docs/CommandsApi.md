@@ -4,9 +4,9 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createCommand**](#createcommand) | **POST** /api/v3/organisations/{organisation}/environments/{environment}/commands | Create a command for an environment|
-|[**getCommand**](#getcommand) | **GET** /api/v3/organisations/{organisation}/environments/{environment}/commands/{command} | Get a command|
-|[**listCommands**](#listcommands) | **GET** /api/v3/organisations/{organisation}/environments/{environment}/commands | Get all commands for an environment|
+|[**createCommand**](#createcommand) | **POST** /api/v3/organizations/{organisation}/environments/{environment}/commands | Create a command for an environment|
+|[**getCommand**](#getcommand) | **GET** /api/v3/organizations/{organisation}/environments/{environment}/commands/{command} | Get a command|
+|[**listCommands**](#listcommands) | **GET** /api/v3/organizations/{organisation}/environments/{environment}/commands | Get all commands for an environment|
 
 # **createCommand**
 > Command createCommand(createCommandRequest)

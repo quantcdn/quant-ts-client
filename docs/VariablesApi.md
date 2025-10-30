@@ -4,10 +4,10 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**bulkSetEnvironmentVariables**](#bulksetenvironmentvariables) | **PUT** /api/v3/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables | Bulk set/replace environment variables|
-|[**deleteEnvironmentVariable**](#deleteenvironmentvariable) | **DELETE** /api/v3/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables/{api_variable} | Delete a variable|
-|[**listEnvironmentVariables**](#listenvironmentvariables) | **GET** /api/v3/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables | Get all variables for an environment|
-|[**updateEnvironmentVariable**](#updateenvironmentvariable) | **PUT** /api/v3/organisations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables/{api_variable} | Update a variable|
+|[**bulkSetEnvironmentVariables**](#bulksetenvironmentvariables) | **PUT** /api/v3/organizations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables | Bulk set/replace environment variables|
+|[**deleteEnvironmentVariable**](#deleteenvironmentvariable) | **DELETE** /api/v3/organizations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables/{api_variable} | Delete a variable|
+|[**listEnvironmentVariables**](#listenvironmentvariables) | **GET** /api/v3/organizations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables | Get all variables for an environment|
+|[**updateEnvironmentVariable**](#updateenvironmentvariable) | **PUT** /api/v3/organizations/{api_organisation}/applications/{api_application}/environments/{api_environment}/variables/{api_variable} | Update a variable|
 
 # **bulkSetEnvironmentVariables**
 > bulkSetEnvironmentVariables(bulkSetEnvironmentVariablesRequest)

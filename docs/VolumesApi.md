@@ -4,10 +4,10 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createVolume**](#createvolume) | **POST** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/volumes | Create a new volume|
-|[**deleteVolume**](#deletevolume) | **DELETE** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/volumes/{volume} | Delete a volume|
-|[**getVolume**](#getvolume) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/volumes/{volume} | Get a volume|
-|[**listVolumes**](#listvolumes) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/volumes | Get all volumes for an environment|
+|[**createVolume**](#createvolume) | **POST** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/volumes | Create a new volume|
+|[**deleteVolume**](#deletevolume) | **DELETE** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/volumes/{volume} | Delete a volume|
+|[**getVolume**](#getvolume) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/volumes/{volume} | Get a volume|
+|[**listVolumes**](#listvolumes) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/volumes | Get all volumes for an environment|
 
 # **createVolume**
 > Volume createVolume()

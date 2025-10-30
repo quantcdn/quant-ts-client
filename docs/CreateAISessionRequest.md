@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**model** | **string** | Model ID to use for this session | [default to undefined]
-**title** | **string** | Optional session title | [optional] [default to undefined]
-**system_prompt** | **string** | Optional system prompt | [optional] [default to undefined]
-**max_tokens** | **number** | Optional max tokens | [optional] [default to undefined]
-**temperature** | **number** | Optional temperature | [optional] [default to undefined]
+**userId** | **string** | User identifier for this session | [default to undefined]
+**sessionGroup** | **string** | Optional user-defined grouping identifier (e.g., app name, environment, tenant). Use any format that makes sense for your application. | [optional] [default to undefined]
+**metadata** | **{ [key: string]: any; }** | Optional custom metadata for additional context | [optional] [default to undefined]
+**expirationMinutes** | **number** | Session expiration in minutes | [optional] [default to 60]
+**initialMessages** | [**Array&lt;CreateAISessionRequestInitialMessagesInner&gt;**](CreateAISessionRequestInitialMessagesInner.md) | Initial conversation messages (e.g., system prompt) | [optional] [default to undefined]
 
 ## Example
 
@@ -17,11 +17,11 @@ Name | Type | Description | Notes
 import { CreateAISessionRequest } from '@quantcdn/quant-client';
 
 const instance: CreateAISessionRequest = {
-    model,
-    title,
-    system_prompt,
-    max_tokens,
-    temperature,
+    userId,
+    sessionGroup,
+    metadata,
+    expirationMinutes,
+    initialMessages,
 };
 ```
 

@@ -4,13 +4,13 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createCronJob**](#createcronjob) | **POST** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/cron | Create a new cron job|
-|[**deleteCronJob**](#deletecronjob) | **DELETE** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron} | Delete a cron job|
-|[**getCronJob**](#getcronjob) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron} | Get a cron job|
-|[**getCronRun**](#getcronrun) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}/runs/{run} | Get a cron run|
-|[**listCronJobRuns**](#listcronjobruns) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}/runs | Get all runs for a cron job|
-|[**listCronJobs**](#listcronjobs) | **GET** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/cron | Get all cron jobs for an environment|
-|[**updateCronJob**](#updatecronjob) | **PATCH** /api/v3/organisations/{organisation}/applications/{application}/environments/{environment}/cron/{cron} | Update a cron job|
+|[**createCronJob**](#createcronjob) | **POST** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/cron | Create a new cron job|
+|[**deleteCronJob**](#deletecronjob) | **DELETE** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/cron/{cron} | Delete a cron job|
+|[**getCronJob**](#getcronjob) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/cron/{cron} | Get a cron job|
+|[**getCronRun**](#getcronrun) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}/runs/{run} | Get a cron run|
+|[**listCronJobRuns**](#listcronjobruns) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/cron/{cron}/runs | Get all runs for a cron job|
+|[**listCronJobs**](#listcronjobs) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/cron | Get all cron jobs for an environment|
+|[**updateCronJob**](#updatecronjob) | **PATCH** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/cron/{cron} | Update a cron job|
 
 # **createCronJob**
 > Cron createCronJob(createCronJobRequest)

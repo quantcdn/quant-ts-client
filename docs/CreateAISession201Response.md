@@ -5,9 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [optional] [default to undefined]
-**model** | **string** |  | [optional] [default to undefined]
-**title** | **string** |  | [optional] [default to undefined]
+**sessionId** | **string** |  | [optional] [default to undefined]
+**status** | **string** |  | [optional] [default to undefined]
+**expiresAt** | **string** |  | [optional] [default to undefined]
+**createdAt** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -15,9 +16,10 @@ Name | Type | Description | Notes
 import { CreateAISession201Response } from '@quantcdn/quant-client';
 
 const instance: CreateAISession201Response = {
-    id,
-    model,
-    title,
+    sessionId,
+    status,
+    expiresAt,
+    createdAt,
 };
 ```
 
