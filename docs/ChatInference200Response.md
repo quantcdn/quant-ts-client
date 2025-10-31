@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | **string** |  | [optional] [default to undefined]
-**model** | **string** |  | [optional] [default to undefined]
-**usage** | **object** |  | [optional] [default to undefined]
+**response** | **string** | Generated response text or JSON | [optional] [default to undefined]
+**model** | **string** | Model used for generation | [optional] [default to undefined]
+**usage** | [**ChatInference200ResponseUsage**](ChatInference200ResponseUsage.md) |  | [optional] [default to undefined]
 
 ## Example
 

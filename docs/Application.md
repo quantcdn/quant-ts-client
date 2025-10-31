@@ -5,20 +5,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**appName** | **string** |  | [default to undefined]
-**organisation** | **string** |  | [default to undefined]
-**database** | **object** |  | [optional] [default to undefined]
-**filesystem** | **object** |  | [optional] [default to undefined]
-**composeDefinition** | **object** |  | [optional] [default to undefined]
-**status** | **object** |  | [optional] [default to undefined]
-**deploymentInformation** | **object** |  | [optional] [default to undefined]
-**imageReference** | **object** |  | [optional] [default to undefined]
-**containerNames** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
-**minCapacity** | **number** |  | [optional] [default to undefined]
-**maxCapacity** | **number** |  | [optional] [default to undefined]
-**desiredCount** | **object** |  | [optional] [default to undefined]
-**runningCount** | **object** |  | [optional] [default to undefined]
-**environments** | **object** |  | [optional] [default to undefined]
+**appName** | **string** | Application name | [default to undefined]
+**organisation** | **string** | Organisation machine name | [default to undefined]
+**database** | [**ApplicationDatabase**](ApplicationDatabase.md) |  | [optional] [default to undefined]
+**filesystem** | [**ApplicationFilesystem**](ApplicationFilesystem.md) |  | [optional] [default to undefined]
+**composeDefinition** | [**Compose**](Compose.md) |  | [optional] [default to undefined]
+**status** | **string** | Application status | [optional] [default to undefined]
+**deploymentInformation** | [**Array&lt;ApplicationDeploymentInformationInner&gt;**](ApplicationDeploymentInformationInner.md) | Deployment history | [optional] [default to undefined]
+**imageReference** | [**ApplicationImageReference**](ApplicationImageReference.md) |  | [optional] [default to undefined]
+**containerNames** | **Array&lt;string&gt;** | List of container names | [optional] [default to undefined]
+**minCapacity** | **number** | Minimum task count for auto-scaling | [optional] [default to undefined]
+**maxCapacity** | **number** | Maximum task count for auto-scaling | [optional] [default to undefined]
+**desiredCount** | **number** | Desired task count | [optional] [default to undefined]
+**runningCount** | **number** | Currently running task count | [optional] [default to undefined]
+**environments** | [**Array&lt;ApplicationEnvironmentsInner&gt;**](ApplicationEnvironmentsInner.md) | List of environments | [optional] [default to undefined]
 
 ## Example
 

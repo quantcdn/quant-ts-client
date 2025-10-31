@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **string** |  | [optional] [default to undefined]
 **name** | **string** |  | [optional] [default to undefined]
 **provider** | **string** |  | [optional] [default to undefined]
-**capabilities** | **object** |  | [optional] [default to undefined]
+**capabilities** | [**ListAIModels200ResponseModelsInnerCapabilities**](ListAIModels200ResponseModelsInnerCapabilities.md) |  | [optional] [default to undefined]
 
 ## Example
 

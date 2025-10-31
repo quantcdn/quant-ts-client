@@ -1,5 +1,6 @@
-# V2StoreItemUpdateRequest
+# WafConfig
 
+Web Application Firewall configuration
 
 ## Properties
 
@@ -19,14 +20,13 @@ Name | Type | Description | Notes
 **httpbl** | [**WafConfigHttpbl**](WafConfigHttpbl.md) |  | [optional] [default to undefined]
 **block_lists** | [**WafConfigBlockLists**](WafConfigBlockLists.md) |  | [optional] [default to undefined]
 **thresholds** | [**Array&lt;WafConfigThresholdsInner&gt;**](WafConfigThresholdsInner.md) | Rate limiting thresholds | [optional] [default to undefined]
-**value** | **string** | Item value (can be JSON string) | [default to undefined]
 
 ## Example
 
 ```typescript
-import { V2StoreItemUpdateRequest } from '@quantcdn/quant-client';
+import { WafConfig } from '@quantcdn/quant-client';
 
-const instance: V2StoreItemUpdateRequest = {
+const instance: WafConfig = {
     mode,
     paranoia_level,
     allow_rules,
@@ -41,7 +41,6 @@ const instance: V2StoreItemUpdateRequest = {
     httpbl,
     block_lists,
     thresholds,
-    value,
 };
 ```
 

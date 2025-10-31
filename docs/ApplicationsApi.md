@@ -11,7 +11,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**listApplications**](#listapplications) | **GET** /api/v3/organizations/{organisation}/applications | Get all applications for an organisation|
 
 # **createApplication**
-> Application createApplication(application)
+> Application createApplication(createApplicationRequest)
 
 
 ### Example
@@ -20,18 +20,18 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 import {
     ApplicationsApi,
     Configuration,
-    Application
+    CreateApplicationRequest
 } from '@quantcdn/quant-client';
 
 const configuration = new Configuration();
 const apiInstance = new ApplicationsApi(configuration);
 
 let organisation: string; //The organisation ID (default to undefined)
-let application: Application; //
+let createApplicationRequest: CreateApplicationRequest; //
 
 const { status, data } = await apiInstance.createApplication(
     organisation,
-    application
+    createApplicationRequest
 );
 ```
 
@@ -39,7 +39,7 @@ const { status, data } = await apiInstance.createApplication(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **application** | **Application**|  | |
+| **createApplicationRequest** | **CreateApplicationRequest**|  | |
 | **organisation** | [**string**] | The organisation ID | defaults to undefined|
 
 

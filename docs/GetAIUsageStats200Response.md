@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_requests** | **number** |  | [optional] [default to undefined]
-**total_tokens** | **number** |  | [optional] [default to undefined]
-**by_model** | **object** |  | [optional] [default to undefined]
+**total_requests** | **number** | Total number of API requests | [optional] [default to undefined]
+**total_tokens** | **number** | Total tokens consumed across all requests | [optional] [default to undefined]
+**by_model** | [**{ [key: string]: GetAIUsageStats200ResponseByModelValue; }**](GetAIUsageStats200ResponseByModelValue.md) | Usage breakdown by model ID | [optional] [default to undefined]
 
 ## Example
 

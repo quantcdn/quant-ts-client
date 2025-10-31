@@ -1,0 +1,21 @@
+# V2RuleProxyActionAllOfNotifyConfig
+
+Notification configuration (required when notify is slack)
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**webhook_url** | **string** | Slack webhook URL | [optional] [default to undefined]
+
+## Example
+
+```typescript
+import { V2RuleProxyActionAllOfNotifyConfig } from '@quantcdn/quant-client';
+
+const instance: V2RuleProxyActionAllOfNotifyConfig = {
+    webhook_url,
+};
+```
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

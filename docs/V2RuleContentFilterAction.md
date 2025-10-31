@@ -5,8 +5,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
+**mode** | **string** | WAF operation mode | [optional] [default to ModeEnum_Report]
+**paranoia_level** | **number** | OWASP paranoia level | [optional] [default to 1]
+**allow_rules** | **Array&lt;string&gt;** | WAF rule IDs to allow/whitelist | [optional] [default to undefined]
+**allow_ip** | **Array&lt;string&gt;** | IP addresses to allow | [optional] [default to undefined]
+**block_ip** | **Array&lt;string&gt;** | IP addresses to block | [optional] [default to undefined]
+**block_asn** | **Array&lt;string&gt;** | ASN numbers to block | [optional] [default to undefined]
+**block_ua** | **Array&lt;string&gt;** | User agent patterns to block | [optional] [default to undefined]
+**block_referer** | **Array&lt;string&gt;** | Referer patterns to block | [optional] [default to undefined]
+**notify_slack** | **string** | Slack webhook URL for notifications | [optional] [default to undefined]
+**notify_slack_hits_rpm** | **number** | Minimum hits per minute to trigger Slack notification | [optional] [default to undefined]
+**notify_email** | **Array&lt;string&gt;** | Email addresses for notifications | [optional] [default to undefined]
+**httpbl** | [**WafConfigHttpbl**](WafConfigHttpbl.md) |  | [optional] [default to undefined]
+**block_lists** | [**WafConfigBlockLists**](WafConfigBlockLists.md) |  | [optional] [default to undefined]
+**thresholds** | [**Array&lt;WafConfigThresholdsInner&gt;**](WafConfigThresholdsInner.md) | Rate limiting thresholds | [optional] [default to undefined]
 **to** | **string** | Target URL to proxy to | [default to undefined]
 **host** | **string** | Host header override | [optional] [default to undefined]
 **auth_user** | **string** | Basic auth username | [optional] [default to undefined]
@@ -22,13 +34,13 @@ Name | Type | Description | Notes
 **failover_origin_ttfb** | **string** | Failover TTFB threshold | [optional] [default to '2000']
 **failover_origin_status_codes** | **Array&lt;string&gt;** | Status codes for failover (default: 200,404,301,302,304) | [optional] [default to undefined]
 **failover_lifetime** | **string** | Failover cache lifetime | [optional] [default to '300']
-**notify** | **string** | Notification type | [optional] [default to undefined]
-**notify_config** | **object** | Notification configuration | [optional] [default to undefined]
+**notify** | **string** | Notification type (none, slack) | [optional] [default to NotifyEnum_None]
+**notify_config** | [**V2RuleProxyActionAllOfNotifyConfig**](V2RuleProxyActionAllOfNotifyConfig.md) |  | [optional] [default to undefined]
 **waf_enabled** | **boolean** | WAF enabled | [optional] [default to false]
-**waf_config** | **object** | WAF configuration | [optional] [default to undefined]
+**waf_config** | [**WafConfig**](WafConfig.md) |  | [optional] [default to undefined]
 **proxy_alert_enabled** | **boolean** | Proxy alert enabled | [optional] [default to undefined]
 **proxy_inline_fn_enabled** | **boolean** | Proxy inline function enabled | [optional] [default to false]
-**quant_cloud_selection** | **object** | QuantCloud selection | [optional] [readonly] [default to undefined]
+**quant_cloud_selection** | [**V2RuleProxyActionAllOfQuantCloudSelection**](V2RuleProxyActionAllOfQuantCloudSelection.md) |  | [optional] [default to undefined]
 **fn_uuid** | **string** | Function UUID | [default to undefined]
 
 ## Example
@@ -37,8 +49,20 @@ Name | Type | Description | Notes
 import { V2RuleContentFilterAction } from '@quantcdn/quant-client';
 
 const instance: V2RuleContentFilterAction = {
-    message,
-    error,
+    mode,
+    paranoia_level,
+    allow_rules,
+    allow_ip,
+    block_ip,
+    block_asn,
+    block_ua,
+    block_referer,
+    notify_slack,
+    notify_slack_hits_rpm,
+    notify_email,
+    httpbl,
+    block_lists,
+    thresholds,
     to,
     host,
     auth_user,
