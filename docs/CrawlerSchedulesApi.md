@@ -55,7 +55,7 @@ const { status, data } = await apiInstance.crawlerSchedulesAdd(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -116,7 +116,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -178,7 +178,7 @@ const { status, data } = await apiInstance.crawlerSchedulesEdit(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -236,7 +236,7 @@ const { status, data } = await apiInstance.crawlerSchedulesList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -297,7 +297,7 @@ const { status, data } = await apiInstance.crawlerSchedulesShow(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

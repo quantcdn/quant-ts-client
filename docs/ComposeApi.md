@@ -48,7 +48,7 @@ const { status, data } = await apiInstance.getEnvironmentCompose(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -107,7 +107,7 @@ const { status, data } = await apiInstance.validateCompose(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

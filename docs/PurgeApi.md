@@ -48,7 +48,7 @@ const { status, data } = await apiInstance.purgeCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

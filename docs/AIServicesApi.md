@@ -57,7 +57,7 @@ const { status, data } = await apiInstance.chatInference(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -113,7 +113,7 @@ const { status, data } = await apiInstance.chatInferenceStream(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -169,7 +169,7 @@ const { status, data } = await apiInstance.createAISession(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -224,7 +224,7 @@ const { status, data } = await apiInstance.deleteAISession(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -280,7 +280,7 @@ const { status, data } = await apiInstance.embeddings(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -333,7 +333,7 @@ const { status, data } = await apiInstance.getAIConfig(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -387,7 +387,7 @@ const { status, data } = await apiInstance.getAISession(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -441,7 +441,7 @@ const { status, data } = await apiInstance.getAIUsageStats(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -497,7 +497,7 @@ const { status, data } = await apiInstance.imageGeneration(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -553,7 +553,7 @@ const { status, data } = await apiInstance.listAIModels(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -620,7 +620,7 @@ const { status, data } = await apiInstance.listAISessions(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -675,7 +675,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

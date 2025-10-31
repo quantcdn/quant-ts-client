@@ -57,7 +57,7 @@ const { status, data } = await apiInstance.createBackup(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -119,7 +119,7 @@ const { status, data } = await apiInstance.deleteBackup(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -181,7 +181,7 @@ const { status, data } = await apiInstance.downloadBackup(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -259,7 +259,7 @@ const { status, data } = await apiInstance.listBackups(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

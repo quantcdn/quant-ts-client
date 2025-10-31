@@ -92,7 +92,7 @@ const { status, data } = await apiInstance.rulesAuthCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -150,7 +150,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -205,7 +205,7 @@ const { status, data } = await apiInstance.rulesAuthList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -263,7 +263,7 @@ const { status, data } = await apiInstance.rulesAuthRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -325,7 +325,7 @@ const { status, data } = await apiInstance.rulesAuthUpdate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -384,7 +384,7 @@ const { status, data } = await apiInstance.rulesBotChallengeCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -442,7 +442,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -497,7 +497,7 @@ const { status, data } = await apiInstance.rulesBotChallengeList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -555,7 +555,7 @@ const { status, data } = await apiInstance.rulesBotChallengeRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -617,7 +617,7 @@ const { status, data } = await apiInstance.rulesBotChallengeUpdate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -676,7 +676,7 @@ const { status, data } = await apiInstance.rulesContentFilterCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -734,7 +734,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -789,7 +789,7 @@ const { status, data } = await apiInstance.rulesContentFilterList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -847,7 +847,7 @@ const { status, data } = await apiInstance.rulesContentFilterRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -909,7 +909,7 @@ const { status, data } = await apiInstance.rulesContentFilterUpdate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -968,7 +968,7 @@ const { status, data } = await apiInstance.rulesCustomResponseCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1026,7 +1026,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1081,7 +1081,7 @@ const { status, data } = await apiInstance.rulesCustomResponseList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1139,7 +1139,7 @@ const { status, data } = await apiInstance.rulesCustomResponseRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1201,7 +1201,7 @@ const { status, data } = await apiInstance.rulesCustomResponseUpdate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1260,7 +1260,7 @@ const { status, data } = await apiInstance.rulesFunctionCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1318,7 +1318,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1373,7 +1373,7 @@ const { status, data } = await apiInstance.rulesFunctionList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1431,7 +1431,7 @@ const { status, data } = await apiInstance.rulesFunctionRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1493,7 +1493,7 @@ const { status, data } = await apiInstance.rulesFunctionUpdate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1552,7 +1552,7 @@ const { status, data } = await apiInstance.rulesHeadersCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1610,7 +1610,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1665,7 +1665,7 @@ const { status, data } = await apiInstance.rulesHeadersList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1723,7 +1723,7 @@ const { status, data } = await apiInstance.rulesHeadersRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1785,7 +1785,7 @@ const { status, data } = await apiInstance.rulesHeadersUpdate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1844,7 +1844,7 @@ const { status, data } = await apiInstance.rulesProxyCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1902,7 +1902,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1957,7 +1957,7 @@ const { status, data } = await apiInstance.rulesProxyList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2015,7 +2015,7 @@ const { status, data } = await apiInstance.rulesProxyRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2077,7 +2077,7 @@ const { status, data } = await apiInstance.rulesProxyUpdate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2136,7 +2136,7 @@ const { status, data } = await apiInstance.rulesRedirectCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2194,7 +2194,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2249,7 +2249,7 @@ const { status, data } = await apiInstance.rulesRedirectList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2307,7 +2307,7 @@ const { status, data } = await apiInstance.rulesRedirectRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2369,7 +2369,7 @@ const { status, data } = await apiInstance.rulesRedirectUpdate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2428,7 +2428,7 @@ const { status, data } = await apiInstance.rulesServeStaticCreate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2486,7 +2486,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2541,7 +2541,7 @@ const { status, data } = await apiInstance.rulesServeStaticList(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2599,7 +2599,7 @@ const { status, data } = await apiInstance.rulesServeStaticRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -2661,7 +2661,7 @@ const { status, data } = await apiInstance.rulesServeStaticUpdate(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

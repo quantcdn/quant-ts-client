@@ -47,7 +47,7 @@ const { status, data } = await apiInstance.getSshAccessCredentials(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

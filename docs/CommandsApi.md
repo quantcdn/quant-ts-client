@@ -50,7 +50,7 @@ const { status, data } = await apiInstance.createCommand(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -106,7 +106,7 @@ const { status, data } = await apiInstance.getCommand(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -159,7 +159,7 @@ const { status, data } = await apiInstance.listCommands(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

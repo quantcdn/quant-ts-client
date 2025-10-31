@@ -49,7 +49,7 @@ const { status, data } = await apiInstance.createApplication(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -103,7 +103,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -157,7 +157,7 @@ const { status, data } = await apiInstance.getApplication(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -208,7 +208,7 @@ const { status, data } = await apiInstance.getEcrLoginCredentials(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -258,7 +258,7 @@ const { status, data } = await apiInstance.listApplications(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

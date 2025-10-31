@@ -35,7 +35,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -87,7 +87,7 @@ const { status, data } = await apiInstance.organizationsRead(
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
