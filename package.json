@@ -26,7 +26,6 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsc && tsc -p tsconfig.esm.json",
-    "prepare": "npm run build",
     "clean": "rm -Rf dist/",
     "test": "npm run test:smoke",
     "test:smoke": "node -e \"const api = require('./dist/index.js'); console.log('✓ SDK loads successfully'); console.log('✓ Exports:', Object.keys(api).length, 'items'); console.log('✓ Configuration available:', typeof api.Configuration); process.exit(0);\"",
