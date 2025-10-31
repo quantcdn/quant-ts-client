@@ -48,7 +48,7 @@ The client provides access to the following API endpoints:
 - `EnvironmentsApi` - Manage environments
 - `ContainersApi` - Manage containers
 - `CommandsApi` - Execute commands
-- `ComposeApi` - Docker Compose management
+- `ComposeApi` - Docker Compose and container definitions
 
 ### Scheduling & Automation
 - `CronApi` - Manage cron jobs
@@ -67,21 +67,16 @@ The client provides access to the following API endpoints:
 - `ProjectsApi` - Project management
 
 ### Rules & Traffic Management
-- `RulesAuthApi` - Authentication rules
-- `RulesBotChallengeApi` - Bot challenge rules
-- `RulesContentFilterApi` - Content filtering rules
-- `RulesCustomResponseApi` - Custom response rules
-- `RulesFunctionApi` - Function-based rules
-- `RulesHeadersApi` - Header manipulation rules
-- `RulesProxyApi` - Proxy rules
-- `RulesRedirectApi` - Redirect rules
-- `RulesServeStaticApi` - Static file serving rules
+- `RulesApi` - Unified rules management (auth, redirects, proxies, headers, etc.)
 
-### Infrastructure
+### Infrastructure & Performance
 - `DomainsApi` - Domain management
 - `HeadersApi` - Custom headers
 - `PurgeApi` - Cache purging
 - `ScalingPolicyApi` - Auto-scaling policies
+
+### AI & Advanced Features
+- `AIServicesApi` - AI services integration
 
 ## Examples
 
@@ -192,3 +187,4 @@ try {
 ## License
 
 MIT 
+
