@@ -1,4 +1,4 @@
-# WafApi
+# WAFApi
 
 All URIs are relative to *https://dashboard.quantcdn.io*
 
@@ -14,12 +14,12 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 ```typescript
 import {
-    WafApi,
+    WAFApi,
     Configuration
 } from '@quantcdn/quant-client';
 
 const configuration = new Configuration();
-const apiInstance = new WafApi(configuration);
+const apiInstance = new WAFApi(configuration);
 
 let body: object; // (optional)
 

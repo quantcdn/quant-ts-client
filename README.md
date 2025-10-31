@@ -16,7 +16,7 @@ import { EnvironmentsApi, Configuration } from 'quant-ts-client';
 // Create a configuration with your API key
 const config = new Configuration({
   apiKey: 'YOUR_API_KEY',
-  basePath: 'https://api.quant.example.com' // Replace with your actual API base URL
+  basePath: 'https://dashboard.quantcdn.io'
 });
 
 // Initialize an API instance
@@ -113,8 +113,7 @@ envsApi.setDefaultAuthentication(auth);
 
 // Create an environment
 const env = await envsApi.createEnvironment('org-id', 'app-id', {
-  name: 'production',
-  region: 'us-east-1'
+  name: 'production'
 });
 
 // Get environment logs
