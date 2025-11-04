@@ -1641,12 +1641,6 @@ export interface CreateBackupRequest {
      * @memberof CreateBackupRequest
      */
     'description'?: string;
-    /**
-     * Optional retention period in days
-     * @type {number}
-     * @memberof CreateBackupRequest
-     */
-    'retentionDays'?: number;
 }
 /**
  * 

@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **string** | Optional backup description | [optional] [default to undefined]
-**retentionDays** | **number** | Optional retention period in days | [optional] [default to undefined]
 
 ## Example
 
@@ -15,7 +14,6 @@ import { CreateBackupRequest } from '@quantcdn/quant-client';
 
 const instance: CreateBackupRequest = {
     description,
-    retentionDays,
 };
 ```
 
