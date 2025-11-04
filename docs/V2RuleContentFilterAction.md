@@ -5,20 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**mode** | **string** | WAF operation mode | [optional] [default to ModeEnum_Report]
-**paranoia_level** | **number** | OWASP paranoia level | [optional] [default to 1]
-**allow_rules** | **Array&lt;string&gt;** | WAF rule IDs to allow/whitelist | [optional] [default to undefined]
-**allow_ip** | **Array&lt;string&gt;** | IP addresses to allow | [optional] [default to undefined]
-**block_ip** | **Array&lt;string&gt;** | IP addresses to block | [optional] [default to undefined]
-**block_asn** | **Array&lt;string&gt;** | ASN numbers to block | [optional] [default to undefined]
-**block_ua** | **Array&lt;string&gt;** | User agent patterns to block | [optional] [default to undefined]
-**block_referer** | **Array&lt;string&gt;** | Referer patterns to block | [optional] [default to undefined]
-**notify_slack** | **string** | Slack webhook URL for notifications | [optional] [default to undefined]
-**notify_slack_hits_rpm** | **number** | Minimum hits per minute to trigger Slack notification | [optional] [default to undefined]
-**notify_email** | **Array&lt;string&gt;** | Email addresses for notifications | [optional] [default to undefined]
-**httpbl** | [**WafConfigHttpbl**](WafConfigHttpbl.md) |  | [optional] [default to undefined]
-**block_lists** | [**WafConfigBlockLists**](WafConfigBlockLists.md) |  | [optional] [default to undefined]
-**thresholds** | [**Array&lt;WafConfigThresholdsInner&gt;**](WafConfigThresholdsInner.md) | Rate limiting thresholds | [optional] [default to undefined]
+**message** | **string** | Error message | [default to undefined]
+**error** | **boolean** | Error flag | [default to undefined]
 **to** | **string** | Target URL to proxy to | [default to undefined]
 **host** | **string** | Host header override | [optional] [default to undefined]
 **auth_user** | **string** | Basic auth username | [optional] [default to undefined]
@@ -49,20 +37,8 @@ Name | Type | Description | Notes
 import { V2RuleContentFilterAction } from '@quantcdn/quant-client';
 
 const instance: V2RuleContentFilterAction = {
-    mode,
-    paranoia_level,
-    allow_rules,
-    allow_ip,
-    block_ip,
-    block_asn,
-    block_ua,
-    block_referer,
-    notify_slack,
-    notify_slack_hits_rpm,
-    notify_email,
-    httpbl,
-    block_lists,
-    thresholds,
+    message,
+    error,
     to,
     host,
     auth_user,

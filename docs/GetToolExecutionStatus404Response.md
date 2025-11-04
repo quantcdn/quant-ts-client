@@ -1,23 +1,21 @@
-# V2StoreRequest
+# GetToolExecutionStatus404Response
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
-**name** | **string** | Store name | [default to undefined]
+**error** | **string** |  | [optional] [default to undefined]
+**executionId** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { V2StoreRequest } from '@quantcdn/quant-client';
+import { GetToolExecutionStatus404Response } from '@quantcdn/quant-client';
 
-const instance: V2StoreRequest = {
-    message,
+const instance: GetToolExecutionStatus404Response = {
     error,
-    name,
+    executionId,
 };
 ```
 

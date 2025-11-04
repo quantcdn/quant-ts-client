@@ -306,11 +306,11 @@ export interface BulkSetEnvironmentVariablesRequestEnvironmentInner {
  */
 export interface ChatInference200Response {
     /**
-     * Generated response text or JSON
-     * @type {string}
+     * 
+     * @type {ChatInference200ResponseResponse}
      * @memberof ChatInference200Response
      */
-    'response'?: string;
+    'response'?: ChatInference200ResponseResponse;
     /**
      * Model used for generation
      * @type {string}
@@ -318,11 +318,187 @@ export interface ChatInference200Response {
      */
     'model'?: string;
     /**
+     * Unique request identifier
+     * @type {string}
+     * @memberof ChatInference200Response
+     */
+    'requestId'?: string;
+    /**
+     * Why the model stopped generating
+     * @type {string}
+     * @memberof ChatInference200Response
+     */
+    'finishReason'?: ChatInference200ResponseFinishReasonEnum;
+    /**
      * 
      * @type {ChatInference200ResponseUsage}
      * @memberof ChatInference200Response
      */
     'usage'?: ChatInference200ResponseUsage;
+}
+
+export const ChatInference200ResponseFinishReasonEnum = {
+    Stop: 'stop',
+    Length: 'length',
+    ContentFilter: 'content_filter',
+    ToolUse: 'tool_use'
+} as const;
+
+export type ChatInference200ResponseFinishReasonEnum = typeof ChatInference200ResponseFinishReasonEnum[keyof typeof ChatInference200ResponseFinishReasonEnum];
+
+/**
+ * Assistant\'s response message. May contain text content and/or tool use requests.
+ * @export
+ * @interface ChatInference200ResponseResponse
+ */
+export interface ChatInference200ResponseResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInference200ResponseResponse
+     */
+    'role'?: ChatInference200ResponseResponseRoleEnum;
+    /**
+     * Text response content
+     * @type {string}
+     * @memberof ChatInference200ResponseResponse
+     */
+    'content'?: string;
+    /**
+     * 
+     * @type {ChatInference200ResponseResponseToolUse}
+     * @memberof ChatInference200ResponseResponse
+     */
+    'toolUse'?: ChatInference200ResponseResponseToolUse;
+}
+
+export const ChatInference200ResponseResponseRoleEnum = {
+    Assistant: 'assistant'
+} as const;
+
+export type ChatInference200ResponseResponseRoleEnum = typeof ChatInference200ResponseResponseRoleEnum[keyof typeof ChatInference200ResponseResponseRoleEnum];
+
+/**
+ * @type ChatInference200ResponseResponseToolUse
+ * Tool use request(s). Can be a single object or array of objects. Only present when AI requests tools.
+ * @export
+ */
+export type ChatInference200ResponseResponseToolUse = Array<ChatInference200ResponseResponseToolUseOneOf1Inner> | ChatInference200ResponseResponseToolUseOneOf;
+
+/**
+ * Single tool request
+ * @export
+ * @interface ChatInference200ResponseResponseToolUseOneOf
+ */
+export interface ChatInference200ResponseResponseToolUseOneOf {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf
+     */
+    'toolUseId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf
+     */
+    'input'?: object;
+    /**
+     * Present for async tools with autoExecute
+     * @type {string}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf
+     */
+    'executionId'?: string;
+    /**
+     * Present for async tools with autoExecute
+     * @type {string}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf
+     */
+    'status'?: ChatInference200ResponseResponseToolUseOneOfStatusEnum;
+    /**
+     * 
+     * @type {ChatInference200ResponseResponseToolUseOneOfResult}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf
+     */
+    'result'?: ChatInference200ResponseResponseToolUseOneOfResult;
+}
+
+export const ChatInference200ResponseResponseToolUseOneOfStatusEnum = {
+    Pending: 'pending',
+    Running: 'running',
+    Complete: 'complete',
+    Failed: 'failed'
+} as const;
+
+export type ChatInference200ResponseResponseToolUseOneOfStatusEnum = typeof ChatInference200ResponseResponseToolUseOneOfStatusEnum[keyof typeof ChatInference200ResponseResponseToolUseOneOfStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface ChatInference200ResponseResponseToolUseOneOf1Inner
+ */
+export interface ChatInference200ResponseResponseToolUseOneOf1Inner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf1Inner
+     */
+    'toolUseId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf1Inner
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf1Inner
+     */
+    'input'?: object;
+    /**
+     * Present for async tools with autoExecute
+     * @type {string}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf1Inner
+     */
+    'executionId'?: string;
+    /**
+     * Present for async tools with autoExecute
+     * @type {string}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf1Inner
+     */
+    'status'?: string;
+    /**
+     * Present when status=\'complete\' for sync tools
+     * @type {object}
+     * @memberof ChatInference200ResponseResponseToolUseOneOf1Inner
+     */
+    'result'?: object;
+}
+/**
+ * Tool execution result (only present when status=\'complete\' for sync auto-executed tools). For async tools, poll /tools/executions/{executionId}
+ * @export
+ * @interface ChatInference200ResponseResponseToolUseOneOfResult
+ */
+export interface ChatInference200ResponseResponseToolUseOneOfResult {
+    /**
+     * Base64 data URIs for images
+     * @type {Array<string>}
+     * @memberof ChatInference200ResponseResponseToolUseOneOfResult
+     */
+    'images'?: Array<string>;
+    /**
+     * Signed S3 URLs for downloads
+     * @type {Array<string>}
+     * @memberof ChatInference200ResponseResponseToolUseOneOfResult
+     */
+    's3Urls'?: Array<string>;
 }
 /**
  * Token usage information
@@ -678,6 +854,18 @@ export interface ChatInferenceRequestToolConfig {
      * @memberof ChatInferenceRequestToolConfig
      */
     'tools'?: Array<ChatInferenceRequestToolConfigToolsInner>;
+    /**
+     * When true, backend automatically executes tools and feeds results back to AI. For async tools (e.g., image generation), returns executionId for polling. Security: Use allowedTools to whitelist which tools can auto-execute.
+     * @type {boolean}
+     * @memberof ChatInferenceRequestToolConfig
+     */
+    'autoExecute'?: boolean;
+    /**
+     * Whitelist of tool names that can be auto-executed. Required when autoExecute is true for security. Example: [\'get_weather\', \'generate_image\']
+     * @type {Array<string>}
+     * @memberof ChatInferenceRequestToolConfig
+     */
+    'allowedTools'?: Array<string>;
 }
 /**
  * 
@@ -2229,6 +2417,115 @@ export interface GetSshAccessCredentials200ResponseCredentials {
 /**
  * 
  * @export
+ * @interface GetToolExecutionStatus200Response
+ */
+export interface GetToolExecutionStatus200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetToolExecutionStatus200Response
+     */
+    'executionId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetToolExecutionStatus200Response
+     */
+    'toolName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetToolExecutionStatus200Response
+     */
+    'status': GetToolExecutionStatus200ResponseStatusEnum;
+    /**
+     * 
+     * @type {GetToolExecutionStatus200ResponseResult}
+     * @memberof GetToolExecutionStatus200Response
+     */
+    'result'?: GetToolExecutionStatus200ResponseResult;
+    /**
+     * Error message (only present when status=\'failed\')
+     * @type {string}
+     * @memberof GetToolExecutionStatus200Response
+     */
+    'error'?: string;
+    /**
+     * Unix timestamp when execution was created
+     * @type {number}
+     * @memberof GetToolExecutionStatus200Response
+     */
+    'createdAt': number;
+    /**
+     * Unix timestamp when execution started (if status >= \'running\')
+     * @type {number}
+     * @memberof GetToolExecutionStatus200Response
+     */
+    'startedAt'?: number;
+    /**
+     * Unix timestamp when execution completed (if status in [\'complete\', \'failed\'])
+     * @type {number}
+     * @memberof GetToolExecutionStatus200Response
+     */
+    'completedAt'?: number;
+    /**
+     * Execution duration in seconds (if completed)
+     * @type {number}
+     * @memberof GetToolExecutionStatus200Response
+     */
+    'duration'?: number;
+}
+
+export const GetToolExecutionStatus200ResponseStatusEnum = {
+    Pending: 'pending',
+    Running: 'running',
+    Complete: 'complete',
+    Failed: 'failed'
+} as const;
+
+export type GetToolExecutionStatus200ResponseStatusEnum = typeof GetToolExecutionStatus200ResponseStatusEnum[keyof typeof GetToolExecutionStatus200ResponseStatusEnum];
+
+/**
+ * Tool execution result (only present when status=\'complete\'). Structure varies by tool type.
+ * @export
+ * @interface GetToolExecutionStatus200ResponseResult
+ */
+export interface GetToolExecutionStatus200ResponseResult {
+    /**
+     * For image generation: Array of base64-encoded data URIs for inline display/preview
+     * @type {Array<string>}
+     * @memberof GetToolExecutionStatus200ResponseResult
+     */
+    'images'?: Array<string>;
+    /**
+     * For image generation: Array of signed S3 URLs for high-quality downloads (expire after 1 hour)
+     * @type {Array<string>}
+     * @memberof GetToolExecutionStatus200ResponseResult
+     */
+    's3Urls'?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface GetToolExecutionStatus404Response
+ */
+export interface GetToolExecutionStatus404Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetToolExecutionStatus404Response
+     */
+    'error'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetToolExecutionStatus404Response
+     */
+    'executionId'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ImageGeneration200Response
  */
 export interface ImageGeneration200Response {
@@ -2818,6 +3115,95 @@ export interface ListAISessions200ResponseInner {
 /**
  * 
  * @export
+ * @interface ListAIToolNames200Response
+ */
+export interface ListAIToolNames200Response {
+    /**
+     * Array of tool names
+     * @type {Array<string>}
+     * @memberof ListAIToolNames200Response
+     */
+    'tools': Array<string>;
+    /**
+     * Number of tools
+     * @type {number}
+     * @memberof ListAIToolNames200Response
+     */
+    'count': number;
+}
+/**
+ * 
+ * @export
+ * @interface ListAITools200Response
+ */
+export interface ListAITools200Response {
+    /**
+     * Array of available tool specifications
+     * @type {Array<ListAITools200ResponseToolsInner>}
+     * @memberof ListAITools200Response
+     */
+    'tools': Array<ListAITools200ResponseToolsInner>;
+    /**
+     * Number of available tools
+     * @type {number}
+     * @memberof ListAITools200Response
+     */
+    'count': number;
+}
+/**
+ * 
+ * @export
+ * @interface ListAITools200ResponseToolsInner
+ */
+export interface ListAITools200ResponseToolsInner {
+    /**
+     * 
+     * @type {ListAITools200ResponseToolsInnerToolSpec}
+     * @memberof ListAITools200ResponseToolsInner
+     */
+    'toolSpec'?: ListAITools200ResponseToolsInnerToolSpec;
+}
+/**
+ * 
+ * @export
+ * @interface ListAITools200ResponseToolsInnerToolSpec
+ */
+export interface ListAITools200ResponseToolsInnerToolSpec {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAITools200ResponseToolsInnerToolSpec
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAITools200ResponseToolsInnerToolSpec
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {ListAITools200ResponseToolsInnerToolSpecInputSchema}
+     * @memberof ListAITools200ResponseToolsInnerToolSpec
+     */
+    'inputSchema'?: ListAITools200ResponseToolsInnerToolSpecInputSchema;
+}
+/**
+ * 
+ * @export
+ * @interface ListAITools200ResponseToolsInnerToolSpecInputSchema
+ */
+export interface ListAITools200ResponseToolsInnerToolSpecInputSchema {
+    /**
+     * JSON Schema defining function parameters
+     * @type {object}
+     * @memberof ListAITools200ResponseToolsInnerToolSpecInputSchema
+     */
+    'json'?: object;
+}
+/**
+ * 
+ * @export
  * @interface ListBackups200Response
  */
 export interface ListBackups200Response {
@@ -2944,6 +3330,84 @@ export interface ListBackups422Response {
      */
     'error'?: string;
 }
+/**
+ * 
+ * @export
+ * @interface ListToolExecutions200Response
+ */
+export interface ListToolExecutions200Response {
+    /**
+     * 
+     * @type {Array<ListToolExecutions200ResponseExecutionsInner>}
+     * @memberof ListToolExecutions200Response
+     */
+    'executions': Array<ListToolExecutions200ResponseExecutionsInner>;
+    /**
+     * Number of executions returned
+     * @type {number}
+     * @memberof ListToolExecutions200Response
+     */
+    'count': number;
+    /**
+     * Organization identifier
+     * @type {string}
+     * @memberof ListToolExecutions200Response
+     */
+    'orgId': string;
+    /**
+     * Filter applied (or \'all\')
+     * @type {string}
+     * @memberof ListToolExecutions200Response
+     */
+    'status'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ListToolExecutions200ResponseExecutionsInner
+ */
+export interface ListToolExecutions200ResponseExecutionsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListToolExecutions200ResponseExecutionsInner
+     */
+    'executionId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListToolExecutions200ResponseExecutionsInner
+     */
+    'toolName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListToolExecutions200ResponseExecutionsInner
+     */
+    'status'?: ListToolExecutions200ResponseExecutionsInnerStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListToolExecutions200ResponseExecutionsInner
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListToolExecutions200ResponseExecutionsInner
+     */
+    'completedAt'?: string;
+}
+
+export const ListToolExecutions200ResponseExecutionsInnerStatusEnum = {
+    Pending: 'pending',
+    Running: 'running',
+    Complete: 'complete',
+    Failed: 'failed'
+} as const;
+
+export type ListToolExecutions200ResponseExecutionsInnerStatusEnum = typeof ListToolExecutions200ResponseExecutionsInnerStatusEnum[keyof typeof ListToolExecutions200ResponseExecutionsInnerStatusEnum];
+
 /**
  * 
  * @export
@@ -4571,90 +5035,6 @@ export interface V1WafLogListResponse {
  */
 export interface V2Crawler {
     /**
-     * WAF operation mode
-     * @type {string}
-     * @memberof V2Crawler
-     */
-    'mode'?: V2CrawlerModeEnum;
-    /**
-     * OWASP paranoia level
-     * @type {number}
-     * @memberof V2Crawler
-     */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2Crawler
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2Crawler
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2Crawler
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2Crawler
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2Crawler
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2Crawler
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2Crawler
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2Crawler
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2Crawler
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2Crawler
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2Crawler
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2Crawler
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
-    /**
      * Crawler ID
      * @type {number}
      * @memberof V2Crawler
@@ -4721,104 +5101,12 @@ export interface V2Crawler {
      */
     'deleted_at'?: string;
 }
-
-export const V2CrawlerModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2CrawlerModeEnum = typeof V2CrawlerModeEnum[keyof typeof V2CrawlerModeEnum];
-
 /**
  * 
  * @export
  * @interface V2CrawlerRequest
  */
 export interface V2CrawlerRequest {
-    /**
-     * WAF operation mode
-     * @type {string}
-     * @memberof V2CrawlerRequest
-     */
-    'mode'?: V2CrawlerRequestModeEnum;
-    /**
-     * OWASP paranoia level
-     * @type {number}
-     * @memberof V2CrawlerRequest
-     */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2CrawlerRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2CrawlerRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2CrawlerRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2CrawlerRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2CrawlerRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2CrawlerRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2CrawlerRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2CrawlerRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
     /**
      * Crawler name
      * @type {string}
@@ -4958,14 +5246,6 @@ export interface V2CrawlerRequest {
      */
     'max_errors'?: number;
 }
-
-export const V2CrawlerRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2CrawlerRequestModeEnum = typeof V2CrawlerRequestModeEnum[keyof typeof V2CrawlerRequestModeEnum];
-
 /**
  * 
  * @export
@@ -4973,89 +5253,17 @@ export type V2CrawlerRequestModeEnum = typeof V2CrawlerRequestModeEnum[keyof typ
  */
 export interface V2CrawlerSchedule {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2CrawlerSchedule
      */
-    'mode'?: V2CrawlerScheduleModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2CrawlerSchedule
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2CrawlerSchedule
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2CrawlerSchedule
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerSchedule
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerSchedule
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerSchedule
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerSchedule
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2CrawlerSchedule
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2CrawlerSchedule
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2CrawlerSchedule
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2CrawlerSchedule
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2CrawlerSchedule
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2CrawlerSchedule
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Schedule ID
      * @type {number}
@@ -5105,14 +5313,6 @@ export interface V2CrawlerSchedule {
      */
     'updated_at'?: string;
 }
-
-export const V2CrawlerScheduleModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2CrawlerScheduleModeEnum = typeof V2CrawlerScheduleModeEnum[keyof typeof V2CrawlerScheduleModeEnum];
-
 /**
  * 
  * @export
@@ -5120,89 +5320,17 @@ export type V2CrawlerScheduleModeEnum = typeof V2CrawlerScheduleModeEnum[keyof t
  */
 export interface V2CrawlerScheduleRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2CrawlerScheduleRequest
      */
-    'mode'?: V2CrawlerScheduleRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2CrawlerScheduleRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Schedule name
      * @type {string}
@@ -5216,14 +5344,6 @@ export interface V2CrawlerScheduleRequest {
      */
     'schedule_cron_string': string;
 }
-
-export const V2CrawlerScheduleRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2CrawlerScheduleRequestModeEnum = typeof V2CrawlerScheduleRequestModeEnum[keyof typeof V2CrawlerScheduleRequestModeEnum];
-
 /**
  * 
  * @export
@@ -5244,89 +5364,17 @@ export interface V2CustomHeaderRequest {
  */
 export interface V2Domain {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2Domain
      */
-    'mode'?: V2DomainModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2Domain
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2Domain
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2Domain
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2Domain
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2Domain
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2Domain
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2Domain
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2Domain
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2Domain
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2Domain
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2Domain
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2Domain
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2Domain
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain ID
      * @type {number}
@@ -5346,14 +5394,6 @@ export interface V2Domain {
      */
     'dns_engaged': number;
 }
-
-export const V2DomainModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2DomainModeEnum = typeof V2DomainModeEnum[keyof typeof V2DomainModeEnum];
-
 /**
  * 
  * @export
@@ -5361,89 +5401,17 @@ export type V2DomainModeEnum = typeof V2DomainModeEnum[keyof typeof V2DomainMode
  */
 export interface V2DomainRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2DomainRequest
      */
-    'mode'?: V2DomainRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2DomainRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2DomainRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2DomainRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2DomainRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2DomainRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2DomainRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2DomainRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2DomainRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2DomainRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2DomainRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2DomainRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2DomainRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2DomainRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain name
      * @type {string}
@@ -5451,14 +5419,6 @@ export interface V2DomainRequest {
      */
     'domain': string;
 }
-
-export const V2DomainRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2DomainRequestModeEnum = typeof V2DomainRequestModeEnum[keyof typeof V2DomainRequestModeEnum];
-
 /**
  * 
  * @export
@@ -5485,89 +5445,17 @@ export interface V2Error {
  */
 export interface V2Organization {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2Organization
      */
-    'mode'?: V2OrganizationModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2Organization
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2Organization
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2Organization
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2Organization
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2Organization
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2Organization
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2Organization
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2Organization
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2Organization
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2Organization
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2Organization
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2Organization
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2Organization
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Organization name
      * @type {string}
@@ -5611,14 +5499,6 @@ export interface V2Organization {
      */
     'updated_at'?: string;
 }
-
-export const V2OrganizationModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2OrganizationModeEnum = typeof V2OrganizationModeEnum[keyof typeof V2OrganizationModeEnum];
-
 /**
  * 
  * @export
@@ -5626,89 +5506,17 @@ export type V2OrganizationModeEnum = typeof V2OrganizationModeEnum[keyof typeof 
  */
 export interface V2OrganizationRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2OrganizationRequest
      */
-    'mode'?: V2OrganizationRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2OrganizationRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2OrganizationRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2OrganizationRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2OrganizationRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2OrganizationRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2OrganizationRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2OrganizationRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2OrganizationRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2OrganizationRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2OrganizationRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2OrganizationRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2OrganizationRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2OrganizationRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Organization name
      * @type {string}
@@ -5722,14 +5530,6 @@ export interface V2OrganizationRequest {
      */
     'machine_name': string;
 }
-
-export const V2OrganizationRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2OrganizationRequestModeEnum = typeof V2OrganizationRequestModeEnum[keyof typeof V2OrganizationRequestModeEnum];
-
 /**
  * 
  * @export
@@ -5737,89 +5537,17 @@ export type V2OrganizationRequestModeEnum = typeof V2OrganizationRequestModeEnum
  */
 export interface V2Project {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2Project
      */
-    'mode'?: V2ProjectModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2Project
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2Project
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2Project
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2Project
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2Project
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2Project
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2Project
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2Project
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2Project
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2Project
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2Project
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2Project
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2Project
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Project name
      * @type {string}
@@ -5833,14 +5561,6 @@ export interface V2Project {
      */
     'machine_name': string;
 }
-
-export const V2ProjectModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2ProjectModeEnum = typeof V2ProjectModeEnum[keyof typeof V2ProjectModeEnum];
-
 /**
  * 
  * @export
@@ -5848,89 +5568,17 @@ export type V2ProjectModeEnum = typeof V2ProjectModeEnum[keyof typeof V2ProjectM
  */
 export interface V2ProjectRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2ProjectRequest
      */
-    'mode'?: V2ProjectRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2ProjectRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2ProjectRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2ProjectRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2ProjectRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2ProjectRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2ProjectRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2ProjectRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2ProjectRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2ProjectRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2ProjectRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2ProjectRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2ProjectRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2ProjectRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Project name
      * @type {string}
@@ -5974,14 +5622,6 @@ export interface V2ProjectRequest {
      */
     'basic_auth_password'?: string;
 }
-
-export const V2ProjectRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2ProjectRequestModeEnum = typeof V2ProjectRequestModeEnum[keyof typeof V2ProjectRequestModeEnum];
-
 /**
  * 
  * @export
@@ -5989,89 +5629,17 @@ export type V2ProjectRequestModeEnum = typeof V2ProjectRequestModeEnum[keyof typ
  */
 export interface V2Rule {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2Rule
      */
-    'mode'?: V2RuleModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2Rule
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2Rule
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2Rule
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2Rule
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2Rule
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2Rule
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2Rule
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2Rule
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2Rule
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2Rule
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2Rule
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2Rule
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2Rule
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -6181,14 +5749,6 @@ export interface V2Rule {
      */
     'action': string;
 }
-
-export const V2RuleModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleModeEnum = typeof V2RuleModeEnum[keyof typeof V2RuleModeEnum];
-
 /**
  * 
  * @export
@@ -6196,89 +5756,17 @@ export type V2RuleModeEnum = typeof V2RuleModeEnum[keyof typeof V2RuleModeEnum];
  */
 export interface V2RuleAuth {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleAuth
      */
-    'mode'?: V2RuleAuthModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleAuth
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleAuth
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleAuth
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuth
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuth
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuth
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuth
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleAuth
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleAuth
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleAuth
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleAuth
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleAuth
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleAuth
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -6527,12 +6015,6 @@ export interface V2RuleAuth {
     'action_config': V2RuleAuthAction;
 }
 
-export const V2RuleAuthModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleAuthModeEnum = typeof V2RuleAuthModeEnum[keyof typeof V2RuleAuthModeEnum];
 export const V2RuleAuthNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -6547,89 +6029,17 @@ export type V2RuleAuthNotifyEnum = typeof V2RuleAuthNotifyEnum[keyof typeof V2Ru
  */
 export interface V2RuleAuthAction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleAuthAction
      */
-    'mode'?: V2RuleAuthActionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleAuthAction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleAuthAction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleAuthAction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuthAction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuthAction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuthAction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuthAction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleAuthAction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleAuthAction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleAuthAction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleAuthAction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleAuthAction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleAuthAction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Target URL to proxy to
      * @type {string}
@@ -6764,12 +6174,6 @@ export interface V2RuleAuthAction {
     'quant_cloud_selection'?: V2RuleProxyActionAllOfQuantCloudSelection | null;
 }
 
-export const V2RuleAuthActionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleAuthActionModeEnum = typeof V2RuleAuthActionModeEnum[keyof typeof V2RuleAuthActionModeEnum];
 export const V2RuleAuthActionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -6784,89 +6188,17 @@ export type V2RuleAuthActionNotifyEnum = typeof V2RuleAuthActionNotifyEnum[keyof
  */
 export interface V2RuleAuthRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleAuthRequest
      */
-    'mode'?: V2RuleAuthRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleAuthRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleAuthRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleAuthRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuthRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuthRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuthRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleAuthRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleAuthRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleAuthRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleAuthRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleAuthRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleAuthRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleAuthRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -7091,12 +6423,6 @@ export interface V2RuleAuthRequest {
     'quant_cloud_selection'?: V2RuleProxyActionAllOfQuantCloudSelection | null;
 }
 
-export const V2RuleAuthRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleAuthRequestModeEnum = typeof V2RuleAuthRequestModeEnum[keyof typeof V2RuleAuthRequestModeEnum];
 export const V2RuleAuthRequestNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -7111,89 +6437,17 @@ export type V2RuleAuthRequestNotifyEnum = typeof V2RuleAuthRequestNotifyEnum[key
  */
 export interface V2RuleBotChallenge {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleBotChallenge
      */
-    'mode'?: V2RuleBotChallengeModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleBotChallenge
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallenge
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallenge
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallenge
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallenge
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallenge
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallenge
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleBotChallenge
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleBotChallenge
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallenge
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleBotChallenge
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleBotChallenge
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleBotChallenge
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -7442,12 +6696,6 @@ export interface V2RuleBotChallenge {
     'action_config': V2RuleBotChallengeAction;
 }
 
-export const V2RuleBotChallengeModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleBotChallengeModeEnum = typeof V2RuleBotChallengeModeEnum[keyof typeof V2RuleBotChallengeModeEnum];
 export const V2RuleBotChallengeNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -7462,89 +6710,17 @@ export type V2RuleBotChallengeNotifyEnum = typeof V2RuleBotChallengeNotifyEnum[k
  */
 export interface V2RuleBotChallengeAction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleBotChallengeAction
      */
-    'mode'?: V2RuleBotChallengeActionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleBotChallengeAction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Target URL to proxy to
      * @type {string}
@@ -7697,12 +6873,6 @@ export interface V2RuleBotChallengeAction {
     'robot_challenge_challenge_ttl'?: number;
 }
 
-export const V2RuleBotChallengeActionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleBotChallengeActionModeEnum = typeof V2RuleBotChallengeActionModeEnum[keyof typeof V2RuleBotChallengeActionModeEnum];
 export const V2RuleBotChallengeActionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -7717,89 +6887,17 @@ export type V2RuleBotChallengeActionNotifyEnum = typeof V2RuleBotChallengeAction
  */
 export interface V2RuleBotChallengeRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleBotChallengeRequest
      */
-    'mode'?: V2RuleBotChallengeRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleBotChallengeRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -8042,12 +7140,6 @@ export interface V2RuleBotChallengeRequest {
     'robot_challenge_challenge_ttl'?: number;
 }
 
-export const V2RuleBotChallengeRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleBotChallengeRequestModeEnum = typeof V2RuleBotChallengeRequestModeEnum[keyof typeof V2RuleBotChallengeRequestModeEnum];
 export const V2RuleBotChallengeRequestNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -8062,89 +7154,17 @@ export type V2RuleBotChallengeRequestNotifyEnum = typeof V2RuleBotChallengeReque
  */
 export interface V2RuleContentFilter {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleContentFilter
      */
-    'mode'?: V2RuleContentFilterModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleContentFilter
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilter
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilter
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilter
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilter
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilter
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilter
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleContentFilter
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleContentFilter
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilter
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleContentFilter
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleContentFilter
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleContentFilter
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -8393,12 +7413,6 @@ export interface V2RuleContentFilter {
     'action_config': V2RuleContentFilterAction;
 }
 
-export const V2RuleContentFilterModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleContentFilterModeEnum = typeof V2RuleContentFilterModeEnum[keyof typeof V2RuleContentFilterModeEnum];
 export const V2RuleContentFilterNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -8413,89 +7427,17 @@ export type V2RuleContentFilterNotifyEnum = typeof V2RuleContentFilterNotifyEnum
  */
 export interface V2RuleContentFilterAction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleContentFilterAction
      */
-    'mode'?: V2RuleContentFilterActionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleContentFilterAction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterAction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterAction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterAction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterAction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterAction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterAction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleContentFilterAction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleContentFilterAction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterAction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleContentFilterAction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleContentFilterAction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleContentFilterAction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Target URL to proxy to
      * @type {string}
@@ -8636,12 +7578,6 @@ export interface V2RuleContentFilterAction {
     'fn_uuid': string;
 }
 
-export const V2RuleContentFilterActionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleContentFilterActionModeEnum = typeof V2RuleContentFilterActionModeEnum[keyof typeof V2RuleContentFilterActionModeEnum];
 export const V2RuleContentFilterActionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -8656,89 +7592,17 @@ export type V2RuleContentFilterActionNotifyEnum = typeof V2RuleContentFilterActi
  */
 export interface V2RuleContentFilterRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleContentFilterRequest
      */
-    'mode'?: V2RuleContentFilterRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleContentFilterRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -8969,12 +7833,6 @@ export interface V2RuleContentFilterRequest {
     'fn_uuid': string;
 }
 
-export const V2RuleContentFilterRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleContentFilterRequestModeEnum = typeof V2RuleContentFilterRequestModeEnum[keyof typeof V2RuleContentFilterRequestModeEnum];
 export const V2RuleContentFilterRequestNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -8989,89 +7847,17 @@ export type V2RuleContentFilterRequestNotifyEnum = typeof V2RuleContentFilterReq
  */
 export interface V2RuleCustomResponse {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleCustomResponse
      */
-    'mode'?: V2RuleCustomResponseModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleCustomResponse
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponse
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponse
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponse
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponse
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponse
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponse
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleCustomResponse
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleCustomResponse
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponse
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleCustomResponse
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleCustomResponse
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleCustomResponse
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -9320,12 +8106,6 @@ export interface V2RuleCustomResponse {
     'action_config'?: V2RuleCustomResponseAction;
 }
 
-export const V2RuleCustomResponseModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleCustomResponseModeEnum = typeof V2RuleCustomResponseModeEnum[keyof typeof V2RuleCustomResponseModeEnum];
 export const V2RuleCustomResponseNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -9340,89 +8120,17 @@ export type V2RuleCustomResponseNotifyEnum = typeof V2RuleCustomResponseNotifyEn
  */
 export interface V2RuleCustomResponseAction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleCustomResponseAction
      */
-    'mode'?: V2RuleCustomResponseActionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleCustomResponseAction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Target URL to proxy to
      * @type {string}
@@ -9569,12 +8277,6 @@ export interface V2RuleCustomResponseAction {
     'custom_response_status_code'?: number;
 }
 
-export const V2RuleCustomResponseActionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleCustomResponseActionModeEnum = typeof V2RuleCustomResponseActionModeEnum[keyof typeof V2RuleCustomResponseActionModeEnum];
 export const V2RuleCustomResponseActionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -9589,89 +8291,17 @@ export type V2RuleCustomResponseActionNotifyEnum = typeof V2RuleCustomResponseAc
  */
 export interface V2RuleCustomResponseRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleCustomResponseRequest
      */
-    'mode'?: V2RuleCustomResponseRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleCustomResponseRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -9920,12 +8550,6 @@ export interface V2RuleCustomResponseRequest {
     'body'?: string;
 }
 
-export const V2RuleCustomResponseRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleCustomResponseRequestModeEnum = typeof V2RuleCustomResponseRequestModeEnum[keyof typeof V2RuleCustomResponseRequestModeEnum];
 export const V2RuleCustomResponseRequestNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -9940,89 +8564,17 @@ export type V2RuleCustomResponseRequestNotifyEnum = typeof V2RuleCustomResponseR
  */
 export interface V2RuleFunction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleFunction
      */
-    'mode'?: V2RuleFunctionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleFunction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleFunction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleFunction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleFunction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleFunction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleFunction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleFunction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleFunction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleFunction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -10271,12 +8823,6 @@ export interface V2RuleFunction {
     'action_config': V2RuleFunctionAction;
 }
 
-export const V2RuleFunctionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleFunctionModeEnum = typeof V2RuleFunctionModeEnum[keyof typeof V2RuleFunctionModeEnum];
 export const V2RuleFunctionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -10291,89 +8837,17 @@ export type V2RuleFunctionNotifyEnum = typeof V2RuleFunctionNotifyEnum[keyof typ
  */
 export interface V2RuleFunctionAction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleFunctionAction
      */
-    'mode'?: V2RuleFunctionActionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleFunctionAction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionAction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionAction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionAction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionAction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionAction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionAction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleFunctionAction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleFunctionAction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionAction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleFunctionAction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleFunctionAction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleFunctionAction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Target URL to proxy to
      * @type {string}
@@ -10514,12 +8988,6 @@ export interface V2RuleFunctionAction {
     'fn_uuid': string;
 }
 
-export const V2RuleFunctionActionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleFunctionActionModeEnum = typeof V2RuleFunctionActionModeEnum[keyof typeof V2RuleFunctionActionModeEnum];
 export const V2RuleFunctionActionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -10534,89 +9002,17 @@ export type V2RuleFunctionActionNotifyEnum = typeof V2RuleFunctionActionNotifyEn
  */
 export interface V2RuleFunctionRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleFunctionRequest
      */
-    'mode'?: V2RuleFunctionRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleFunctionRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleFunctionRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleFunctionRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleFunctionRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleFunctionRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleFunctionRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleFunctionRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -10847,12 +9243,6 @@ export interface V2RuleFunctionRequest {
     'fn_uuid': string;
 }
 
-export const V2RuleFunctionRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleFunctionRequestModeEnum = typeof V2RuleFunctionRequestModeEnum[keyof typeof V2RuleFunctionRequestModeEnum];
 export const V2RuleFunctionRequestNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -10867,89 +9257,17 @@ export type V2RuleFunctionRequestNotifyEnum = typeof V2RuleFunctionRequestNotify
  */
 export interface V2RuleHeader {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleHeader
      */
-    'mode'?: V2RuleHeaderModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleHeader
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleHeader
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleHeader
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeader
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeader
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeader
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeader
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleHeader
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleHeader
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleHeader
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleHeader
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleHeader
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleHeader
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -11198,12 +9516,6 @@ export interface V2RuleHeader {
     'action_config': V2RuleHeaderAction;
 }
 
-export const V2RuleHeaderModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleHeaderModeEnum = typeof V2RuleHeaderModeEnum[keyof typeof V2RuleHeaderModeEnum];
 export const V2RuleHeaderNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -11218,89 +9530,17 @@ export type V2RuleHeaderNotifyEnum = typeof V2RuleHeaderNotifyEnum[keyof typeof 
  */
 export interface V2RuleHeaderAction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleHeaderAction
      */
-    'mode'?: V2RuleHeaderActionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleHeaderAction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderAction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderAction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderAction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderAction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderAction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderAction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleHeaderAction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleHeaderAction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderAction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleHeaderAction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleHeaderAction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleHeaderAction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Target URL to proxy to
      * @type {string}
@@ -11441,12 +9681,6 @@ export interface V2RuleHeaderAction {
     'headers': { [key: string]: string; };
 }
 
-export const V2RuleHeaderActionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleHeaderActionModeEnum = typeof V2RuleHeaderActionModeEnum[keyof typeof V2RuleHeaderActionModeEnum];
 export const V2RuleHeaderActionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -11461,89 +9695,17 @@ export type V2RuleHeaderActionNotifyEnum = typeof V2RuleHeaderActionNotifyEnum[k
  */
 export interface V2RuleHeaderRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleHeaderRequest
      */
-    'mode'?: V2RuleHeaderRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleHeaderRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleHeaderRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleHeaderRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleHeaderRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleHeaderRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleHeaderRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleHeaderRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -11774,12 +9936,6 @@ export interface V2RuleHeaderRequest {
     'headers': { [key: string]: string; };
 }
 
-export const V2RuleHeaderRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleHeaderRequestModeEnum = typeof V2RuleHeaderRequestModeEnum[keyof typeof V2RuleHeaderRequestModeEnum];
 export const V2RuleHeaderRequestNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -11794,89 +9950,17 @@ export type V2RuleHeaderRequestNotifyEnum = typeof V2RuleHeaderRequestNotifyEnum
  */
 export interface V2RuleProxy {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleProxy
      */
-    'mode'?: V2RuleProxyModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleProxy
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleProxy
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleProxy
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxy
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxy
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxy
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxy
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleProxy
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleProxy
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleProxy
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleProxy
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleProxy
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleProxy
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -12125,12 +10209,6 @@ export interface V2RuleProxy {
     'action_config': V2RuleProxyAction;
 }
 
-export const V2RuleProxyModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleProxyModeEnum = typeof V2RuleProxyModeEnum[keyof typeof V2RuleProxyModeEnum];
 export const V2RuleProxyNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -12145,89 +10223,17 @@ export type V2RuleProxyNotifyEnum = typeof V2RuleProxyNotifyEnum[keyof typeof V2
  */
 export interface V2RuleProxyAction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleProxyAction
      */
-    'mode'?: V2RuleProxyActionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleProxyAction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleProxyAction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleProxyAction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxyAction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxyAction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxyAction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxyAction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleProxyAction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleProxyAction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleProxyAction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleProxyAction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleProxyAction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleProxyAction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Target URL to proxy to
      * @type {string}
@@ -12362,12 +10368,6 @@ export interface V2RuleProxyAction {
     'quant_cloud_selection'?: V2RuleProxyActionAllOfQuantCloudSelection | null;
 }
 
-export const V2RuleProxyActionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleProxyActionModeEnum = typeof V2RuleProxyActionModeEnum[keyof typeof V2RuleProxyActionModeEnum];
 export const V2RuleProxyActionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -12426,89 +10426,17 @@ export interface V2RuleProxyActionAllOfQuantCloudSelection {
  */
 export interface V2RuleProxyRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleProxyRequest
      */
-    'mode'?: V2RuleProxyRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleProxyRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleProxyRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleProxyRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxyRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxyRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxyRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleProxyRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleProxyRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleProxyRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleProxyRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleProxyRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleProxyRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleProxyRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -12775,12 +10703,6 @@ export interface V2RuleProxyRequest {
     'application_port'?: number;
 }
 
-export const V2RuleProxyRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleProxyRequestModeEnum = typeof V2RuleProxyRequestModeEnum[keyof typeof V2RuleProxyRequestModeEnum];
 export const V2RuleProxyRequestNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -12795,89 +10717,17 @@ export type V2RuleProxyRequestNotifyEnum = typeof V2RuleProxyRequestNotifyEnum[k
  */
 export interface V2RuleRedirect {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleRedirect
      */
-    'mode'?: V2RuleRedirectModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleRedirect
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleRedirect
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleRedirect
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirect
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirect
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirect
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirect
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleRedirect
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleRedirect
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleRedirect
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleRedirect
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleRedirect
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleRedirect
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -13126,12 +10976,6 @@ export interface V2RuleRedirect {
     'action_config'?: V2RuleRedirectAction;
 }
 
-export const V2RuleRedirectModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleRedirectModeEnum = typeof V2RuleRedirectModeEnum[keyof typeof V2RuleRedirectModeEnum];
 export const V2RuleRedirectNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -13146,89 +10990,17 @@ export type V2RuleRedirectNotifyEnum = typeof V2RuleRedirectNotifyEnum[keyof typ
  */
 export interface V2RuleRedirectAction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleRedirectAction
      */
-    'mode'?: V2RuleRedirectActionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleRedirectAction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectAction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectAction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectAction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectAction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectAction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectAction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleRedirectAction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleRedirectAction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectAction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleRedirectAction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleRedirectAction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleRedirectAction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Redirect destination URL
      * @type {string}
@@ -13369,12 +11141,6 @@ export interface V2RuleRedirectAction {
     'status_code'?: string;
 }
 
-export const V2RuleRedirectActionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleRedirectActionModeEnum = typeof V2RuleRedirectActionModeEnum[keyof typeof V2RuleRedirectActionModeEnum];
 export const V2RuleRedirectActionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -13389,89 +11155,17 @@ export type V2RuleRedirectActionNotifyEnum = typeof V2RuleRedirectActionNotifyEn
  */
 export interface V2RuleRedirectRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleRedirectRequest
      */
-    'mode'?: V2RuleRedirectRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleRedirectRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleRedirectRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleRedirectRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleRedirectRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -13708,12 +11402,6 @@ export interface V2RuleRedirectRequest {
     'redirect_code'?: string;
 }
 
-export const V2RuleRedirectRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleRedirectRequestModeEnum = typeof V2RuleRedirectRequestModeEnum[keyof typeof V2RuleRedirectRequestModeEnum];
 export const V2RuleRedirectRequestNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -13728,89 +11416,17 @@ export type V2RuleRedirectRequestNotifyEnum = typeof V2RuleRedirectRequestNotify
  */
 export interface V2RuleRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleRequest
      */
-    'mode'?: V2RuleRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -13902,14 +11518,6 @@ export interface V2RuleRequest {
      */
     'ip_is_not'?: Array<string>;
 }
-
-export const V2RuleRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleRequestModeEnum = typeof V2RuleRequestModeEnum[keyof typeof V2RuleRequestModeEnum];
-
 /**
  * 
  * @export
@@ -13917,89 +11525,17 @@ export type V2RuleRequestModeEnum = typeof V2RuleRequestModeEnum[keyof typeof V2
  */
 export interface V2RuleServeStatic {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleServeStatic
      */
-    'mode'?: V2RuleServeStaticModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleServeStatic
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleServeStatic
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleServeStatic
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStatic
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStatic
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStatic
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStatic
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleServeStatic
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleServeStatic
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleServeStatic
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleServeStatic
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleServeStatic
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleServeStatic
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Rule name
      * @type {string}
@@ -14248,12 +11784,6 @@ export interface V2RuleServeStatic {
     'action_config': V2RuleServeStaticAction;
 }
 
-export const V2RuleServeStaticModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleServeStaticModeEnum = typeof V2RuleServeStaticModeEnum[keyof typeof V2RuleServeStaticModeEnum];
 export const V2RuleServeStaticNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -14268,89 +11798,17 @@ export type V2RuleServeStaticNotifyEnum = typeof V2RuleServeStaticNotifyEnum[key
  */
 export interface V2RuleServeStaticAction {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleServeStaticAction
      */
-    'mode'?: V2RuleServeStaticActionModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleServeStaticAction
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticAction
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticAction
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticAction
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticAction
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticAction
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticAction
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleServeStaticAction
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleServeStaticAction
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticAction
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleServeStaticAction
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleServeStaticAction
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleServeStaticAction
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Target URL to proxy to
      * @type {string}
@@ -14491,12 +11949,6 @@ export interface V2RuleServeStaticAction {
     'static_file_path': string;
 }
 
-export const V2RuleServeStaticActionModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleServeStaticActionModeEnum = typeof V2RuleServeStaticActionModeEnum[keyof typeof V2RuleServeStaticActionModeEnum];
 export const V2RuleServeStaticActionNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -14511,89 +11963,17 @@ export type V2RuleServeStaticActionNotifyEnum = typeof V2RuleServeStaticActionNo
  */
 export interface V2RuleServeStaticRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2RuleServeStaticRequest
      */
-    'mode'?: V2RuleServeStaticRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2RuleServeStaticRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Domain patterns (default: any)
      * @type {Array<string>}
@@ -14824,12 +12204,6 @@ export interface V2RuleServeStaticRequest {
     'static_file_path': string;
 }
 
-export const V2RuleServeStaticRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2RuleServeStaticRequestModeEnum = typeof V2RuleServeStaticRequestModeEnum[keyof typeof V2RuleServeStaticRequestModeEnum];
 export const V2RuleServeStaticRequestNotifyEnum = {
     None: 'none',
     Slack: 'slack'
@@ -14844,89 +12218,17 @@ export type V2RuleServeStaticRequestNotifyEnum = typeof V2RuleServeStaticRequest
  */
 export interface V2SecretStore {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2SecretStore
      */
-    'mode'?: V2SecretStoreModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2SecretStore
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2SecretStore
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2SecretStore
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2SecretStore
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2SecretStore
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2SecretStore
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2SecretStore
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2SecretStore
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2SecretStore
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2SecretStore
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2SecretStore
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2SecretStore
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2SecretStore
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Secret store ID
      * @type {string}
@@ -14940,14 +12242,6 @@ export interface V2SecretStore {
      */
     'name': string;
 }
-
-export const V2SecretStoreModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2SecretStoreModeEnum = typeof V2SecretStoreModeEnum[keyof typeof V2SecretStoreModeEnum];
-
 /**
  * 
  * @export
@@ -14955,89 +12249,17 @@ export type V2SecretStoreModeEnum = typeof V2SecretStoreModeEnum[keyof typeof V2
  */
 export interface V2SecretStoreRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2SecretStoreRequest
      */
-    'mode'?: V2SecretStoreRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2SecretStoreRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2SecretStoreRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2SecretStoreRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2SecretStoreRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2SecretStoreRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2SecretStoreRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2SecretStoreRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2SecretStoreRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2SecretStoreRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2SecretStoreRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2SecretStoreRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2SecretStoreRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2SecretStoreRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Secret store name
      * @type {string}
@@ -15045,14 +12267,6 @@ export interface V2SecretStoreRequest {
      */
     'name': string;
 }
-
-export const V2SecretStoreRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2SecretStoreRequestModeEnum = typeof V2SecretStoreRequestModeEnum[keyof typeof V2SecretStoreRequestModeEnum];
-
 /**
  * 
  * @export
@@ -15060,89 +12274,17 @@ export type V2SecretStoreRequestModeEnum = typeof V2SecretStoreRequestModeEnum[k
  */
 export interface V2Store {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2Store
      */
-    'mode'?: V2StoreModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2Store
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2Store
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2Store
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2Store
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2Store
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2Store
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2Store
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2Store
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2Store
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2Store
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2Store
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2Store
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2Store
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Store ID
      * @type {string}
@@ -15156,14 +12298,6 @@ export interface V2Store {
      */
     'name': string;
 }
-
-export const V2StoreModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2StoreModeEnum = typeof V2StoreModeEnum[keyof typeof V2StoreModeEnum];
-
 /**
  * 
  * @export
@@ -15171,89 +12305,17 @@ export type V2StoreModeEnum = typeof V2StoreModeEnum[keyof typeof V2StoreModeEnu
  */
 export interface V2StoreItem {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2StoreItem
      */
-    'mode'?: V2StoreItemModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2StoreItem
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2StoreItem
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2StoreItem
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2StoreItem
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2StoreItem
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreItem
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreItem
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2StoreItem
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2StoreItem
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2StoreItem
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2StoreItem
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2StoreItem
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2StoreItem
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Item key
      * @type {string}
@@ -15267,14 +12329,6 @@ export interface V2StoreItem {
      */
     'value': string;
 }
-
-export const V2StoreItemModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2StoreItemModeEnum = typeof V2StoreItemModeEnum[keyof typeof V2StoreItemModeEnum];
-
 /**
  * 
  * @export
@@ -15282,89 +12336,17 @@ export type V2StoreItemModeEnum = typeof V2StoreItemModeEnum[keyof typeof V2Stor
  */
 export interface V2StoreItemRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2StoreItemRequest
      */
-    'mode'?: V2StoreItemRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2StoreItemRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2StoreItemRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2StoreItemRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2StoreItemRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2StoreItemRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2StoreItemRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2StoreItemRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2StoreItemRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2StoreItemRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Item key
      * @type {string}
@@ -15378,14 +12360,6 @@ export interface V2StoreItemRequest {
      */
     'value': string;
 }
-
-export const V2StoreItemRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2StoreItemRequestModeEnum = typeof V2StoreItemRequestModeEnum[keyof typeof V2StoreItemRequestModeEnum];
-
 /**
  * 
  * @export
@@ -15393,89 +12367,17 @@ export type V2StoreItemRequestModeEnum = typeof V2StoreItemRequestModeEnum[keyof
  */
 export interface V2StoreItemUpdateRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2StoreItemUpdateRequest
      */
-    'mode'?: V2StoreItemUpdateRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2StoreItemUpdateRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Item value (can be JSON string)
      * @type {string}
@@ -15483,14 +12385,6 @@ export interface V2StoreItemUpdateRequest {
      */
     'value': string;
 }
-
-export const V2StoreItemUpdateRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2StoreItemUpdateRequestModeEnum = typeof V2StoreItemUpdateRequestModeEnum[keyof typeof V2StoreItemUpdateRequestModeEnum];
-
 /**
  * 
  * @export
@@ -15498,89 +12392,17 @@ export type V2StoreItemUpdateRequestModeEnum = typeof V2StoreItemUpdateRequestMo
  */
 export interface V2StoreItemsListResponse {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2StoreItemsListResponse
      */
-    'mode'?: V2StoreItemsListResponseModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2StoreItemsListResponse
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2StoreItemsListResponse
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2StoreItemsListResponse
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemsListResponse
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemsListResponse
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemsListResponse
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreItemsListResponse
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2StoreItemsListResponse
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2StoreItemsListResponse
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2StoreItemsListResponse
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2StoreItemsListResponse
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2StoreItemsListResponse
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2StoreItemsListResponse
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * List of item keys
      * @type {Array<string>}
@@ -15594,14 +12416,6 @@ export interface V2StoreItemsListResponse {
      */
     'next_cursor'?: string | null;
 }
-
-export const V2StoreItemsListResponseModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2StoreItemsListResponseModeEnum = typeof V2StoreItemsListResponseModeEnum[keyof typeof V2StoreItemsListResponseModeEnum];
-
 /**
  * 
  * @export
@@ -15609,89 +12423,17 @@ export type V2StoreItemsListResponseModeEnum = typeof V2StoreItemsListResponseMo
  */
 export interface V2StoreRequest {
     /**
-     * WAF operation mode
+     * Error message
      * @type {string}
      * @memberof V2StoreRequest
      */
-    'mode'?: V2StoreRequestModeEnum;
+    'message': string;
     /**
-     * OWASP paranoia level
-     * @type {number}
+     * Error flag
+     * @type {boolean}
      * @memberof V2StoreRequest
      */
-    'paranoia_level'?: number;
-    /**
-     * WAF rule IDs to allow/whitelist
-     * @type {Array<string>}
-     * @memberof V2StoreRequest
-     */
-    'allow_rules'?: Array<string>;
-    /**
-     * IP addresses to allow
-     * @type {Array<string>}
-     * @memberof V2StoreRequest
-     */
-    'allow_ip'?: Array<string>;
-    /**
-     * IP addresses to block
-     * @type {Array<string>}
-     * @memberof V2StoreRequest
-     */
-    'block_ip'?: Array<string>;
-    /**
-     * ASN numbers to block
-     * @type {Array<string>}
-     * @memberof V2StoreRequest
-     */
-    'block_asn'?: Array<string>;
-    /**
-     * User agent patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreRequest
-     */
-    'block_ua'?: Array<string>;
-    /**
-     * Referer patterns to block
-     * @type {Array<string>}
-     * @memberof V2StoreRequest
-     */
-    'block_referer'?: Array<string>;
-    /**
-     * Slack webhook URL for notifications
-     * @type {string}
-     * @memberof V2StoreRequest
-     */
-    'notify_slack'?: string;
-    /**
-     * Minimum hits per minute to trigger Slack notification
-     * @type {number}
-     * @memberof V2StoreRequest
-     */
-    'notify_slack_hits_rpm'?: number;
-    /**
-     * Email addresses for notifications
-     * @type {Array<string>}
-     * @memberof V2StoreRequest
-     */
-    'notify_email'?: Array<string>;
-    /**
-     * 
-     * @type {WafConfigHttpbl}
-     * @memberof V2StoreRequest
-     */
-    'httpbl'?: WafConfigHttpbl;
-    /**
-     * 
-     * @type {WafConfigBlockLists}
-     * @memberof V2StoreRequest
-     */
-    'block_lists'?: WafConfigBlockLists;
-    /**
-     * Rate limiting thresholds
-     * @type {Array<WafConfigThresholdsInner>}
-     * @memberof V2StoreRequest
-     */
-    'thresholds'?: Array<WafConfigThresholdsInner>;
+    'error': boolean;
     /**
      * Store name
      * @type {string}
@@ -15699,14 +12441,6 @@ export interface V2StoreRequest {
      */
     'name': string;
 }
-
-export const V2StoreRequestModeEnum = {
-    Report: 'report',
-    Block: 'block'
-} as const;
-
-export type V2StoreRequestModeEnum = typeof V2StoreRequestModeEnum[keyof typeof V2StoreRequestModeEnum];
-
 /**
  * 
  * @export
@@ -16096,7 +12830,7 @@ export type WafConfigThresholdsInnerModeEnum = typeof WafConfigThresholdsInnerMo
 export const AIServicesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size
+         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
          * @summary Chat inference via API Gateway (buffered responses) with multimodal support
          * @param {string} organisation The organisation ID
          * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
@@ -16437,6 +13171,48 @@ export const AIServicesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
+         * @summary Get async tool execution status and result
+         * @param {string} organisation The organisation ID
+         * @param {string} executionId Tool execution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getToolExecutionStatus: async (organisation: string, executionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getToolExecutionStatus', 'organisation', organisation)
+            // verify required parameter 'executionId' is not null or undefined
+            assertParamExists('getToolExecutionStatus', 'executionId', executionId)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/tools/executions/{executionId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"executionId"}}`, encodeURIComponent(String(executionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
          * @summary Generate images with Amazon Nova Canvas
          * @param {string} organisation The organisation ID
@@ -16587,6 +13363,130 @@ export const AIServicesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Retrieves just the names of available built-in tools. Useful for quick validation or UI dropdown population without the full tool specifications.
+         * @summary List tool names only (lightweight response)
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAIToolNames: async (organisation: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listAIToolNames', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/tools/names`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieves all available built-in tools that can be used with function calling. These tools can be included in `toolConfig` when making AI inference requests.      *      * **Available Built-in Tools:**      * - `get_weather`: Get current weather for a location using Open-Meteo API      * - `calculate`: Perform basic mathematical calculations (add, subtract, multiply, divide)      * - `search_web`: Search the web for information (mock implementation)      * - `generate_image`: Generate images with Amazon Nova Canvas (async execution, 10-15s typical runtime)      *      * **Use Cases:**      * - Discover available tools dynamically without hardcoding      * - Get complete tool specifications including input schemas      * - Build UI for tool selection      * - Validate tool names before sending requests      *      * **Dynamic Tool Discovery:**      * This endpoint enables clients to:      * 1. Fetch all available tools on page load      * 2. Display tool capabilities to users      * 3. Filter tools based on user permissions      * 4. Use `allowedTools` whitelist for security      *      * **Alternative Endpoint:**      * - `GET /ai/tools/names` - Returns only tool names (faster, lighter response)
+         * @summary List available built-in tools for function calling
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAITools: async (organisation: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listAITools', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/tools`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
+         * @summary List tool executions for monitoring and debugging
+         * @param {string} organisation The organisation ID
+         * @param {ListToolExecutionsStatusEnum} [status] Filter by execution status
+         * @param {number} [limit] Maximum number of executions to return
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listToolExecutions: async (organisation: string, status?: ListToolExecutionsStatusEnum, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listToolExecutions', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/tools/executions`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Update AI configuration for an organization
          * @param {string} organisation The organisation ID
@@ -16641,7 +13541,7 @@ export const AIServicesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AIServicesApiAxiosParamCreator(configuration)
     return {
         /**
-         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size
+         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
          * @summary Chat inference via API Gateway (buffered responses) with multimodal support
          * @param {string} organisation The organisation ID
          * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
@@ -16752,6 +13652,20 @@ export const AIServicesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
+         * @summary Get async tool execution status and result
+         * @param {string} organisation The organisation ID
+         * @param {string} executionId Tool execution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getToolExecutionStatus(organisation: string, executionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetToolExecutionStatus200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getToolExecutionStatus(organisation, executionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.getToolExecutionStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
          * @summary Generate images with Amazon Nova Canvas
          * @param {string} organisation The organisation ID
@@ -16798,6 +13712,47 @@ export const AIServicesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieves just the names of available built-in tools. Useful for quick validation or UI dropdown population without the full tool specifications.
+         * @summary List tool names only (lightweight response)
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAIToolNames(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAIToolNames200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAIToolNames(organisation, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listAIToolNames']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieves all available built-in tools that can be used with function calling. These tools can be included in `toolConfig` when making AI inference requests.      *      * **Available Built-in Tools:**      * - `get_weather`: Get current weather for a location using Open-Meteo API      * - `calculate`: Perform basic mathematical calculations (add, subtract, multiply, divide)      * - `search_web`: Search the web for information (mock implementation)      * - `generate_image`: Generate images with Amazon Nova Canvas (async execution, 10-15s typical runtime)      *      * **Use Cases:**      * - Discover available tools dynamically without hardcoding      * - Get complete tool specifications including input schemas      * - Build UI for tool selection      * - Validate tool names before sending requests      *      * **Dynamic Tool Discovery:**      * This endpoint enables clients to:      * 1. Fetch all available tools on page load      * 2. Display tool capabilities to users      * 3. Filter tools based on user permissions      * 4. Use `allowedTools` whitelist for security      *      * **Alternative Endpoint:**      * - `GET /ai/tools/names` - Returns only tool names (faster, lighter response)
+         * @summary List available built-in tools for function calling
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAITools(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAITools200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAITools(organisation, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listAITools']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
+         * @summary List tool executions for monitoring and debugging
+         * @param {string} organisation The organisation ID
+         * @param {ListToolExecutionsStatusEnum} [status] Filter by execution status
+         * @param {number} [limit] Maximum number of executions to return
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listToolExecutions(organisation: string, status?: ListToolExecutionsStatusEnum, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListToolExecutions200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listToolExecutions(organisation, status, limit, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listToolExecutions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Update AI configuration for an organization
          * @param {string} organisation The organisation ID
@@ -16822,7 +13777,7 @@ export const AIServicesApiFactory = function (configuration?: Configuration, bas
     const localVarFp = AIServicesApiFp(configuration)
     return {
         /**
-         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size
+         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
          * @summary Chat inference via API Gateway (buffered responses) with multimodal support
          * @param {string} organisation The organisation ID
          * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
@@ -16909,6 +13864,17 @@ export const AIServicesApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getAIUsageStats(organisation, month, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
+         * @summary Get async tool execution status and result
+         * @param {string} organisation The organisation ID
+         * @param {string} executionId Tool execution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getToolExecutionStatus(organisation: string, executionId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetToolExecutionStatus200Response> {
+            return localVarFp.getToolExecutionStatus(organisation, executionId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
          * @summary Generate images with Amazon Nova Canvas
          * @param {string} organisation The organisation ID
@@ -16946,6 +13912,38 @@ export const AIServicesApiFactory = function (configuration?: Configuration, bas
             return localVarFp.listAISessions(organisation, userId, sessionGroup, limit, offset, model, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieves just the names of available built-in tools. Useful for quick validation or UI dropdown population without the full tool specifications.
+         * @summary List tool names only (lightweight response)
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAIToolNames(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<ListAIToolNames200Response> {
+            return localVarFp.listAIToolNames(organisation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieves all available built-in tools that can be used with function calling. These tools can be included in `toolConfig` when making AI inference requests.      *      * **Available Built-in Tools:**      * - `get_weather`: Get current weather for a location using Open-Meteo API      * - `calculate`: Perform basic mathematical calculations (add, subtract, multiply, divide)      * - `search_web`: Search the web for information (mock implementation)      * - `generate_image`: Generate images with Amazon Nova Canvas (async execution, 10-15s typical runtime)      *      * **Use Cases:**      * - Discover available tools dynamically without hardcoding      * - Get complete tool specifications including input schemas      * - Build UI for tool selection      * - Validate tool names before sending requests      *      * **Dynamic Tool Discovery:**      * This endpoint enables clients to:      * 1. Fetch all available tools on page load      * 2. Display tool capabilities to users      * 3. Filter tools based on user permissions      * 4. Use `allowedTools` whitelist for security      *      * **Alternative Endpoint:**      * - `GET /ai/tools/names` - Returns only tool names (faster, lighter response)
+         * @summary List available built-in tools for function calling
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAITools(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<ListAITools200Response> {
+            return localVarFp.listAITools(organisation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
+         * @summary List tool executions for monitoring and debugging
+         * @param {string} organisation The organisation ID
+         * @param {ListToolExecutionsStatusEnum} [status] Filter by execution status
+         * @param {number} [limit] Maximum number of executions to return
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listToolExecutions(organisation: string, status?: ListToolExecutionsStatusEnum, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListToolExecutions200Response> {
+            return localVarFp.listToolExecutions(organisation, status, limit, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Update AI configuration for an organization
          * @param {string} organisation The organisation ID
@@ -16967,7 +13965,7 @@ export const AIServicesApiFactory = function (configuration?: Configuration, bas
  */
 export class AIServicesApi extends BaseAPI {
     /**
-     * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size
+     * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
      * @summary Chat inference via API Gateway (buffered responses) with multimodal support
      * @param {string} organisation The organisation ID
      * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
@@ -17070,6 +14068,19 @@ export class AIServicesApi extends BaseAPI {
     }
 
     /**
+     * Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
+     * @summary Get async tool execution status and result
+     * @param {string} organisation The organisation ID
+     * @param {string} executionId Tool execution identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public getToolExecutionStatus(organisation: string, executionId: string, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).getToolExecutionStatus(organisation, executionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
      * @summary Generate images with Amazon Nova Canvas
      * @param {string} organisation The organisation ID
@@ -17113,6 +14124,44 @@ export class AIServicesApi extends BaseAPI {
     }
 
     /**
+     * Retrieves just the names of available built-in tools. Useful for quick validation or UI dropdown population without the full tool specifications.
+     * @summary List tool names only (lightweight response)
+     * @param {string} organisation The organisation ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public listAIToolNames(organisation: string, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).listAIToolNames(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieves all available built-in tools that can be used with function calling. These tools can be included in `toolConfig` when making AI inference requests.      *      * **Available Built-in Tools:**      * - `get_weather`: Get current weather for a location using Open-Meteo API      * - `calculate`: Perform basic mathematical calculations (add, subtract, multiply, divide)      * - `search_web`: Search the web for information (mock implementation)      * - `generate_image`: Generate images with Amazon Nova Canvas (async execution, 10-15s typical runtime)      *      * **Use Cases:**      * - Discover available tools dynamically without hardcoding      * - Get complete tool specifications including input schemas      * - Build UI for tool selection      * - Validate tool names before sending requests      *      * **Dynamic Tool Discovery:**      * This endpoint enables clients to:      * 1. Fetch all available tools on page load      * 2. Display tool capabilities to users      * 3. Filter tools based on user permissions      * 4. Use `allowedTools` whitelist for security      *      * **Alternative Endpoint:**      * - `GET /ai/tools/names` - Returns only tool names (faster, lighter response)
+     * @summary List available built-in tools for function calling
+     * @param {string} organisation The organisation ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public listAITools(organisation: string, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).listAITools(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
+     * @summary List tool executions for monitoring and debugging
+     * @param {string} organisation The organisation ID
+     * @param {ListToolExecutionsStatusEnum} [status] Filter by execution status
+     * @param {number} [limit] Maximum number of executions to return
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIServicesApi
+     */
+    public listToolExecutions(organisation: string, status?: ListToolExecutionsStatusEnum, limit?: number, options?: RawAxiosRequestConfig) {
+        return AIServicesApiFp(this.configuration).listToolExecutions(organisation, status, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * 
      * @summary Update AI configuration for an organization
      * @param {string} organisation The organisation ID
@@ -17137,6 +14186,16 @@ export const ListAIModelsFeatureEnum = {
     All: 'all'
 } as const;
 export type ListAIModelsFeatureEnum = typeof ListAIModelsFeatureEnum[keyof typeof ListAIModelsFeatureEnum];
+/**
+ * @export
+ */
+export const ListToolExecutionsStatusEnum = {
+    Pending: 'pending',
+    Running: 'running',
+    Complete: 'complete',
+    Failed: 'failed'
+} as const;
+export type ListToolExecutionsStatusEnum = typeof ListToolExecutionsStatusEnum[keyof typeof ListToolExecutionsStatusEnum];
 
 
 /**
@@ -18420,7 +15479,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('getEnvironmentCompose', 'application', application)
             // verify required parameter 'environment' is not null or undefined
             assertParamExists('getEnvironmentCompose', 'environment', environment)
-            const localVarPath = `/api/v3/organizations/{organisation}/environments/{environment}/compose`
+            const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/compose`
                 .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
                 .replace(`{${"application"}}`, encodeURIComponent(String(application)))
                 .replace(`{${"environment"}}`, encodeURIComponent(String(environment)));

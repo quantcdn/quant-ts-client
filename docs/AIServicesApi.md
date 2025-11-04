@@ -12,15 +12,19 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**getAIConfig**](#getaiconfig) | **GET** /api/v3/organizations/{organisation}/ai/config | Get AI configuration for an organization|
 |[**getAISession**](#getaisession) | **GET** /api/v3/organizations/{organisation}/ai/sessions/{sessionId} | Get a specific chat session|
 |[**getAIUsageStats**](#getaiusagestats) | **GET** /api/v3/organizations/{organisation}/ai/usage | Get AI usage statistics|
+|[**getToolExecutionStatus**](#gettoolexecutionstatus) | **GET** /api/v3/organizations/{organisation}/ai/tools/executions/{executionId} | Get async tool execution status and result|
 |[**imageGeneration**](#imagegeneration) | **POST** /api/v3/organizations/{organisation}/ai/image-generation | Generate images with Amazon Nova Canvas|
 |[**listAIModels**](#listaimodels) | **GET** /api/v3/organizations/{organisation}/ai/models | List available AI models for an organization|
 |[**listAISessions**](#listaisessions) | **GET** /api/v3/organizations/{organisation}/ai/sessions | List chat sessions with multi-tenant filtering|
+|[**listAIToolNames**](#listaitoolnames) | **GET** /api/v3/organizations/{organisation}/ai/tools/names | List tool names only (lightweight response)|
+|[**listAITools**](#listaitools) | **GET** /api/v3/organizations/{organisation}/ai/tools | List available built-in tools for function calling|
+|[**listToolExecutions**](#listtoolexecutions) | **GET** /api/v3/organizations/{organisation}/ai/tools/executions | List tool executions for monitoring and debugging|
 |[**updateAIConfig**](#updateaiconfig) | **PUT** /api/v3/organizations/{organisation}/ai/config | Update AI configuration for an organization|
 
 # **chatInference**
 > ChatInference200Response chatInference(chatInferenceRequest)
 
-Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size
+Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
 
 ### Example
 
@@ -68,7 +72,7 @@ const { status, data } = await apiInstance.chatInference(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Chat inference completed |  -  |
+|**200** | Chat inference completed (buffered response) |  -  |
 |**500** | Failed to perform chat inference |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -457,6 +461,63 @@ const { status, data } = await apiInstance.getAIUsageStats(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getToolExecutionStatus**
+> GetToolExecutionStatus200Response getToolExecutionStatus()
+
+Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
+
+### Example
+
+```typescript
+import {
+    AIServicesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIServicesApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+let executionId: string; //Tool execution identifier (default to undefined)
+
+const { status, data } = await apiInstance.getToolExecutionStatus(
+    organisation,
+    executionId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **executionId** | [**string**] | Tool execution identifier | defaults to undefined|
+
+
+### Return type
+
+**GetToolExecutionStatus200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Tool execution status retrieved successfully |  -  |
+|**404** | Execution not found (may have expired after 24h) |  -  |
+|**403** | Access denied |  -  |
+|**500** | Failed to retrieve execution status |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **imageGeneration**
 > ImageGeneration200Response imageGeneration(imageGenerationRequest)
 
@@ -633,6 +694,172 @@ const { status, data } = await apiInstance.listAISessions(
 |-------------|-------------|------------------|
 |**200** | List of chat sessions |  -  |
 |**500** | Failed to fetch sessions |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listAIToolNames**
+> ListAIToolNames200Response listAIToolNames()
+
+Retrieves just the names of available built-in tools. Useful for quick validation or UI dropdown population without the full tool specifications.
+
+### Example
+
+```typescript
+import {
+    AIServicesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIServicesApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+
+const { status, data } = await apiInstance.listAIToolNames(
+    organisation
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+
+
+### Return type
+
+**ListAIToolNames200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Tool names retrieved successfully |  -  |
+|**403** | Access denied |  -  |
+|**500** | Failed to fetch tool names |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listAITools**
+> ListAITools200Response listAITools()
+
+Retrieves all available built-in tools that can be used with function calling. These tools can be included in `toolConfig` when making AI inference requests.      *      * **Available Built-in Tools:**      * - `get_weather`: Get current weather for a location using Open-Meteo API      * - `calculate`: Perform basic mathematical calculations (add, subtract, multiply, divide)      * - `search_web`: Search the web for information (mock implementation)      * - `generate_image`: Generate images with Amazon Nova Canvas (async execution, 10-15s typical runtime)      *      * **Use Cases:**      * - Discover available tools dynamically without hardcoding      * - Get complete tool specifications including input schemas      * - Build UI for tool selection      * - Validate tool names before sending requests      *      * **Dynamic Tool Discovery:**      * This endpoint enables clients to:      * 1. Fetch all available tools on page load      * 2. Display tool capabilities to users      * 3. Filter tools based on user permissions      * 4. Use `allowedTools` whitelist for security      *      * **Alternative Endpoint:**      * - `GET /ai/tools/names` - Returns only tool names (faster, lighter response)
+
+### Example
+
+```typescript
+import {
+    AIServicesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIServicesApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+
+const { status, data } = await apiInstance.listAITools(
+    organisation
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+
+
+### Return type
+
+**ListAITools200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Available tools retrieved successfully |  -  |
+|**403** | Access denied |  -  |
+|**500** | Failed to fetch tools |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listToolExecutions**
+> ListToolExecutions200Response listToolExecutions()
+
+Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
+
+### Example
+
+```typescript
+import {
+    AIServicesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIServicesApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+let status: 'pending' | 'running' | 'complete' | 'failed'; //Filter by execution status (optional) (default to undefined)
+let limit: number; //Maximum number of executions to return (optional) (default to 50)
+
+const { status, data } = await apiInstance.listToolExecutions(
+    organisation,
+    status,
+    limit
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **status** | [**&#39;pending&#39; | &#39;running&#39; | &#39;complete&#39; | &#39;failed&#39;**]**Array<&#39;pending&#39; &#124; &#39;running&#39; &#124; &#39;complete&#39; &#124; &#39;failed&#39;>** | Filter by execution status | (optional) defaults to undefined|
+| **limit** | [**number**] | Maximum number of executions to return | (optional) defaults to 50|
+
+
+### Return type
+
+**ListToolExecutions200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Tool executions retrieved successfully |  -  |
+|**400** | Invalid parameters |  -  |
+|**403** | Access denied |  -  |
+|**500** | Failed to retrieve executions |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

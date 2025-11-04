@@ -5,8 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | **string** | Generated response text or JSON | [optional] [default to undefined]
+**response** | [**ChatInference200ResponseResponse**](ChatInference200ResponseResponse.md) |  | [optional] [default to undefined]
 **model** | **string** | Model used for generation | [optional] [default to undefined]
+**requestId** | **string** | Unique request identifier | [optional] [default to undefined]
+**finishReason** | **string** | Why the model stopped generating | [optional] [default to undefined]
 **usage** | [**ChatInference200ResponseUsage**](ChatInference200ResponseUsage.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -17,6 +19,8 @@ import { ChatInference200Response } from '@quantcdn/quant-client';
 const instance: ChatInference200Response = {
     response,
     model,
+    requestId,
+    finishReason,
     usage,
 };
 ```

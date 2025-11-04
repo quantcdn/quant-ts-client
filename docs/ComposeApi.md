@@ -4,7 +4,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getEnvironmentCompose**](#getenvironmentcompose) | **GET** /api/v3/organizations/{organisation}/environments/{environment}/compose | Get the compose file for an environment|
+|[**getEnvironmentCompose**](#getenvironmentcompose) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/compose | Get the compose file for an environment|
 |[**validateCompose**](#validatecompose) | **POST** /api/v3/organizations/{organisation}/compose/validate | Validate a compose file|
 
 # **getEnvironmentCompose**
