@@ -134,6 +134,7 @@ docs/RulesApi.md
 docs/SSHAccessApi.md
 docs/ScalingPolicy.md
 docs/ScalingPolicyApi.md
+docs/SpotConfiguration.md
 docs/SyncOperation.md
 docs/SyncToEnvironmentRequest.md
 docs/UpdateAIConfigRequest.md

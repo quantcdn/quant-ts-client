@@ -1093,41 +1093,41 @@ export interface Compose {
      */
     'containers'?: Array<Container>;
     /**
-     * 
+     * CPU architecture (X86_64 or ARM64)
      * @type {string}
      * @memberof Compose
      */
     'architecture'?: string;
     /**
-     * 
+     * Task-level CPU units (e.g., 256, 512, 1024)
      * @type {number}
      * @memberof Compose
      */
     'taskCpu'?: number;
     /**
-     * 
+     * Task-level memory in MB
      * @type {number}
      * @memberof Compose
      */
     'taskMemory'?: number;
     /**
-     * 
-     * @type {string}
-     * @memberof Compose
-     */
-    'taskRoleArn'?: string;
-    /**
-     * 
+     * Minimum number of instances
      * @type {number}
      * @memberof Compose
      */
     'minCapacity'?: number;
     /**
-     * 
+     * Maximum number of instances
      * @type {number}
      * @memberof Compose
      */
     'maxCapacity'?: number;
+    /**
+     * 
+     * @type {SpotConfiguration}
+     * @memberof Compose
+     */
+    'spotConfiguration'?: SpotConfiguration;
 }
 /**
  * 
@@ -1724,25 +1724,25 @@ export interface CreateCronJobRequest {
  */
 export interface CreateEnvironmentRequest {
     /**
-     * 
+     * Environment name (e.g., \'staging\', \'development\')
      * @type {string}
      * @memberof CreateEnvironmentRequest
      */
     'envName': string;
     /**
-     * 
+     * Minimum number of instances
      * @type {number}
      * @memberof CreateEnvironmentRequest
      */
     'minCapacity'?: number;
     /**
-     * 
+     * Maximum number of instances
      * @type {number}
      * @memberof CreateEnvironmentRequest
      */
     'maxCapacity'?: number;
     /**
-     * 
+     * Clone configuration from an existing environment
      * @type {string}
      * @memberof CreateEnvironmentRequest
      */
@@ -1759,6 +1759,12 @@ export interface CreateEnvironmentRequest {
      * @memberof CreateEnvironmentRequest
      */
     'imageSuffix'?: string;
+    /**
+     * 
+     * @type {SpotConfiguration}
+     * @memberof CreateEnvironmentRequest
+     */
+    'spotConfiguration'?: SpotConfiguration;
 }
 /**
  * 
@@ -3510,6 +3516,29 @@ export const ScalingPolicyMetricEnum = {
 } as const;
 
 export type ScalingPolicyMetricEnum = typeof ScalingPolicyMetricEnum[keyof typeof ScalingPolicyMetricEnum];
+
+/**
+ * Spot instance strategy configuration for controlling cost vs reliability. Spot instances provide significant cost savings (~70%) but may be interrupted by AWS. Available for non-production environments.
+ * @export
+ * @interface SpotConfiguration
+ */
+export interface SpotConfiguration {
+    /**
+     * Spot instance strategy. \'off\' = On-Demand only (highest reliability, no savings). \'spot-only\' = 100% Spot instances (~70% savings, default for non-prod). \'mixed-safe\' = 50% Spot instances (~35% savings, requires multiple instances). \'mixed-aggressive\' = 80% Spot instances (~56% savings, requires multiple instances).
+     * @type {string}
+     * @memberof SpotConfiguration
+     */
+    'strategy': SpotConfigurationStrategyEnum;
+}
+
+export const SpotConfigurationStrategyEnum = {
+    Off: 'off',
+    SpotOnly: 'spot-only',
+    MixedSafe: 'mixed-safe',
+    MixedAggressive: 'mixed-aggressive'
+} as const;
+
+export type SpotConfigurationStrategyEnum = typeof SpotConfigurationStrategyEnum[keyof typeof SpotConfigurationStrategyEnum];
 
 /**
  * 

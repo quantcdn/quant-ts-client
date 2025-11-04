@@ -5,12 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**envName** | **string** |  | [default to undefined]
-**minCapacity** | **number** |  | [optional] [default to undefined]
-**maxCapacity** | **number** |  | [optional] [default to undefined]
-**cloneConfigurationFrom** | **string** |  | [optional] [default to undefined]
+**envName** | **string** | Environment name (e.g., \&#39;staging\&#39;, \&#39;development\&#39;) | [default to undefined]
+**minCapacity** | **number** | Minimum number of instances | [optional] [default to undefined]
+**maxCapacity** | **number** | Maximum number of instances | [optional] [default to undefined]
+**cloneConfigurationFrom** | **string** | Clone configuration from an existing environment | [optional] [default to undefined]
 **composeDefinition** | [**Compose**](Compose.md) |  | [optional] [default to undefined]
 **imageSuffix** | **string** | Optional image tag suffix for cloning | [optional] [default to undefined]
+**spotConfiguration** | [**SpotConfiguration**](SpotConfiguration.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -24,6 +25,7 @@ const instance: CreateEnvironmentRequest = {
     cloneConfigurationFrom,
     composeDefinition,
     imageSuffix,
+    spotConfiguration,
 };
 ```
 
