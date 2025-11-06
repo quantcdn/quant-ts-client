@@ -15533,7 +15533,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
+         * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Quant Cloud provides comprehensive support for standard Docker Compose features including commands, entrypoints, health checks, dependencies, volume mounts, resource limits, and more. For detailed documentation on supported features and examples, see: https://docs.quantcdn.io/introduction-to-quant-cloud/importing-docker-compose/. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
          * @summary Validate a compose file
          * @param {string} organisation The organisation ID
          * @param {ValidateComposeRequest} validateComposeRequest The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
@@ -15607,7 +15607,7 @@ export const ComposeApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
+         * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Quant Cloud provides comprehensive support for standard Docker Compose features including commands, entrypoints, health checks, dependencies, volume mounts, resource limits, and more. For detailed documentation on supported features and examples, see: https://docs.quantcdn.io/introduction-to-quant-cloud/importing-docker-compose/. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
          * @summary Validate a compose file
          * @param {string} organisation The organisation ID
          * @param {ValidateComposeRequest} validateComposeRequest The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
@@ -15644,7 +15644,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getEnvironmentCompose(organisation, application, environment, options).then((request) => request(axios, basePath));
         },
         /**
-         * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
+         * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Quant Cloud provides comprehensive support for standard Docker Compose features including commands, entrypoints, health checks, dependencies, volume mounts, resource limits, and more. For detailed documentation on supported features and examples, see: https://docs.quantcdn.io/introduction-to-quant-cloud/importing-docker-compose/. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
          * @summary Validate a compose file
          * @param {string} organisation The organisation ID
          * @param {ValidateComposeRequest} validateComposeRequest The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
@@ -15680,7 +15680,7 @@ export class ComposeApi extends BaseAPI {
     }
 
     /**
-     * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
+     * Accepts a docker-compose.yml file content, translates it into the internal compose definition format, and validates it. Quant Cloud provides comprehensive support for standard Docker Compose features including commands, entrypoints, health checks, dependencies, volume mounts, resource limits, and more. For detailed documentation on supported features and examples, see: https://docs.quantcdn.io/introduction-to-quant-cloud/importing-docker-compose/. Supports image tag suffixing via the imageSuffix query parameter or by sending a JSON wrapper with yamlContent and imageSuffix fields. When provided, internal image tags are transformed to {containerName}-{suffix} format (e.g., \'nginx-feature-xyz\').
      * @summary Validate a compose file
      * @param {string} organisation The organisation ID
      * @param {ValidateComposeRequest} validateComposeRequest The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
