@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **domain** | **Array&lt;string&gt;** | Domain patterns (default: any) | [default to undefined]
 **name** | **string** | Rule name | [optional] [default to undefined]
 **uuid** | **string** | Rule UUID | [optional] [default to undefined]
@@ -30,8 +28,6 @@ Name | Type | Description | Notes
 import { V2RuleContentFilterRequest } from '@quantcdn/quant-client';
 
 const instance: V2RuleContentFilterRequest = {
-    message,
-    error,
     domain,
     name,
     uuid,

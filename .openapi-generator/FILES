@@ -215,8 +215,8 @@ docs/V2RuleHeaderAction.md
 docs/V2RuleHeaderRequest.md
 docs/V2RuleProxy.md
 docs/V2RuleProxyAction.md
-docs/V2RuleProxyActionAllOfNotifyConfig.md
-docs/V2RuleProxyActionAllOfQuantCloudSelection.md
+docs/V2RuleProxyActionNotifyConfig.md
+docs/V2RuleProxyActionQuantCloudSelection.md
 docs/V2RuleProxyRequest.md
 docs/V2RuleRedirect.md
 docs/V2RuleRedirectAction.md

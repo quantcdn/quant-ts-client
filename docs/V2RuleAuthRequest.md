@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **domain** | **Array&lt;string&gt;** | Domain patterns (default: any) | [default to undefined]
 **name** | **string** | Rule name | [optional] [default to undefined]
 **uuid** | **string** | Rule UUID | [optional] [default to undefined]
@@ -22,28 +20,10 @@ Name | Type | Description | Notes
 **ip** | **string** | IP filter type (ip_is, ip_is_not, any) | [optional] [default to undefined]
 **ip_is** | **Array&lt;string&gt;** | Allowed IP addresses | [optional] [default to undefined]
 **ip_is_not** | **Array&lt;string&gt;** | Excluded IP addresses | [optional] [default to undefined]
-**to** | **string** | Target URL to proxy to | [default to undefined]
-**host** | **string** | Host header override | [optional] [default to undefined]
+**message** | **string** | Error message | [default to undefined]
+**error** | **boolean** | Error flag | [default to undefined]
 **auth_user** | **string** | Authentication username | [default to undefined]
 **auth_pass** | **string** | Authentication password | [default to undefined]
-**disable_ssl_verify** | **boolean** | Disable SSL verification | [optional] [default to false]
-**cache_lifetime** | **string** | Cache lifetime | [optional] [default to undefined]
-**only_proxy_404** | **boolean** | Only proxy 404 responses | [optional] [default to false]
-**inject_headers** | **{ [key: string]: string; }** | Headers to inject | [optional] [default to undefined]
-**proxy_strip_headers** | **Array&lt;string&gt;** | Headers to strip from response | [optional] [default to undefined]
-**proxy_strip_request_headers** | **Array&lt;string&gt;** | Headers to strip from request | [optional] [default to undefined]
-**origin_timeout** | **string** | Origin timeout | [optional] [default to undefined]
-**failover_mode** | **boolean** | Enable failover mode | [optional] [default to false]
-**failover_origin_ttfb** | **string** | Failover TTFB threshold | [optional] [default to '2000']
-**failover_origin_status_codes** | **Array&lt;string&gt;** | Status codes for failover (default: 200,404,301,302,304) | [optional] [default to undefined]
-**failover_lifetime** | **string** | Failover cache lifetime | [optional] [default to '300']
-**notify** | **string** | Notification type (none, slack) | [optional] [default to NotifyEnum_None]
-**notify_config** | [**V2RuleProxyActionAllOfNotifyConfig**](V2RuleProxyActionAllOfNotifyConfig.md) |  | [optional] [default to undefined]
-**waf_enabled** | **boolean** | WAF enabled | [optional] [default to false]
-**waf_config** | [**WafConfig**](WafConfig.md) |  | [optional] [default to undefined]
-**proxy_alert_enabled** | **boolean** | Proxy alert enabled | [optional] [default to undefined]
-**proxy_inline_fn_enabled** | **boolean** | Proxy inline function enabled | [optional] [default to false]
-**quant_cloud_selection** | [**V2RuleProxyActionAllOfQuantCloudSelection**](V2RuleProxyActionAllOfQuantCloudSelection.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -51,8 +31,6 @@ Name | Type | Description | Notes
 import { V2RuleAuthRequest } from '@quantcdn/quant-client';
 
 const instance: V2RuleAuthRequest = {
-    message,
-    error,
     domain,
     name,
     uuid,
@@ -68,28 +46,10 @@ const instance: V2RuleAuthRequest = {
     ip,
     ip_is,
     ip_is_not,
-    to,
-    host,
+    message,
+    error,
     auth_user,
     auth_pass,
-    disable_ssl_verify,
-    cache_lifetime,
-    only_proxy_404,
-    inject_headers,
-    proxy_strip_headers,
-    proxy_strip_request_headers,
-    origin_timeout,
-    failover_mode,
-    failover_origin_ttfb,
-    failover_origin_status_codes,
-    failover_lifetime,
-    notify,
-    notify_config,
-    waf_enabled,
-    waf_config,
-    proxy_alert_enabled,
-    proxy_inline_fn_enabled,
-    quant_cloud_selection,
 };
 ```
 

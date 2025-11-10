@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **to** | **string** | Target URL to proxy to | [default to undefined]
 **host** | **string** | Host header override | [optional] [default to undefined]
 **auth_user** | **string** | Basic auth username | [optional] [default to undefined]
@@ -23,12 +21,12 @@ Name | Type | Description | Notes
 **failover_origin_status_codes** | **Array&lt;string&gt;** | Status codes for failover (default: 200,404,301,302,304) | [optional] [default to undefined]
 **failover_lifetime** | **string** | Failover cache lifetime | [optional] [default to '300']
 **notify** | **string** | Notification type (none, slack) | [optional] [default to NotifyEnum_None]
-**notify_config** | [**V2RuleProxyActionAllOfNotifyConfig**](V2RuleProxyActionAllOfNotifyConfig.md) |  | [optional] [default to undefined]
+**notify_config** | [**V2RuleProxyActionNotifyConfig**](V2RuleProxyActionNotifyConfig.md) |  | [optional] [default to undefined]
 **waf_enabled** | **boolean** | WAF enabled | [optional] [default to false]
 **waf_config** | [**WafConfig**](WafConfig.md) |  | [optional] [default to undefined]
 **proxy_alert_enabled** | **boolean** | Proxy alert enabled | [optional] [default to undefined]
 **proxy_inline_fn_enabled** | **boolean** | Proxy inline function enabled | [optional] [default to false]
-**quant_cloud_selection** | [**V2RuleProxyActionAllOfQuantCloudSelection**](V2RuleProxyActionAllOfQuantCloudSelection.md) |  | [optional] [default to undefined]
+**quant_cloud_selection** | [**V2RuleProxyActionQuantCloudSelection**](V2RuleProxyActionQuantCloudSelection.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -36,8 +34,6 @@ Name | Type | Description | Notes
 import { V2RuleProxyAction } from '@quantcdn/quant-client';
 
 const instance: V2RuleProxyAction = {
-    message,
-    error,
     to,
     host,
     auth_user,
