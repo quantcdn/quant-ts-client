@@ -8,16 +8,16 @@
     "url": "https://github.com/quantcdn/quant-ts-client.git"
   },
   "keywords": [
+    "@quantcdn/quant-client",
     "axios",
-    "typescript",
+    "cdn",
+    "edge",
     "openapi-client",
     "openapi-generator",
-    "@quantcdn/quant-client",
     "quant",
     "quantcdn",
     "quantcloud",
-    "cdn",
-    "edge"
+    "typescript"
   ],
   "license": "MIT",
   "main": "./dist/index.js",
