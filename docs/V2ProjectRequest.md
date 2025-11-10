@@ -5,10 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
-**name** | **string** | Project name | [default to undefined]
-**machine_name** | **string** | Project machine name | [default to undefined]
+**name** | **string** | Project name | [optional] [default to undefined]
+**machine_name** | **string** | Project machine name | [optional] [default to undefined]
 **region** | **string** | Project region | [optional] [default to undefined]
 **allow_query_params** | **boolean** | Allow query parameters | [optional] [default to undefined]
 **disable_revisions** | **boolean** | Disable revisions | [optional] [default to undefined]
@@ -21,8 +19,6 @@ Name | Type | Description | Notes
 import { V2ProjectRequest } from '@quantcdn/quant-client';
 
 const instance: V2ProjectRequest = {
-    message,
-    error,
     name,
     machine_name,
     region,

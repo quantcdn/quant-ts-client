@@ -5560,18 +5560,6 @@ export interface V2OrganizationRequest {
  */
 export interface V2Project {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2Project
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2Project
-     */
-    'error': boolean;
-    /**
      * Project name
      * @type {string}
      * @memberof V2Project
@@ -5591,29 +5579,17 @@ export interface V2Project {
  */
 export interface V2ProjectRequest {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2ProjectRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2ProjectRequest
-     */
-    'error': boolean;
-    /**
      * Project name
      * @type {string}
      * @memberof V2ProjectRequest
      */
-    'name': string;
+    'name'?: string;
     /**
      * Project machine name
      * @type {string}
      * @memberof V2ProjectRequest
      */
-    'machine_name': string;
+    'machine_name'?: string;
     /**
      * Project region
      * @type {string}
