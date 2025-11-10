@@ -15579,7 +15579,7 @@ export const HeadersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async headersList(organization: string, project: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<{ [key: string]: string; }>>> {
+        async headersList(organization: string, project: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: string; }>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.headersList(organization, project, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['HeadersApi.headersList']?.[localVarOperationServerIndex]?.url;
@@ -15627,7 +15627,7 @@ export const HeadersApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        headersList(organization: string, project: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<{ [key: string]: string; }>> {
+        headersList(organization: string, project: string, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: string; }> {
             return localVarFp.headersList(organization, project, options).then((request) => request(axios, basePath));
         },
     };

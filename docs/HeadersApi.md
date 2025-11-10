@@ -127,7 +127,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **headersList**
-> Array<{ [key: string]: string; }> headersList()
+> { [key: string]: string; } headersList()
 
 
 ### Example
@@ -160,7 +160,7 @@ const { status, data } = await apiInstance.headersList(
 
 ### Return type
 
-**Array<{ [key: string]: string; }>**
+**{ [key: string]: string; }**
 
 ### Authorization
 
