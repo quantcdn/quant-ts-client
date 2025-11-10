@@ -12380,7 +12380,7 @@ export const CrawlerSchedulesApiAxiosParamCreator = function (configuration?: Co
             assertParamExists('crawlerSchedulesDelete', 'crawler', crawler)
             // verify required parameter 'crawlerSchedule' is not null or undefined
             assertParamExists('crawlerSchedulesDelete', 'crawlerSchedule', crawlerSchedule)
-            const localVarPath = `/api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules`
+            const localVarPath = `/api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule}`
                 .replace(`{${"organization"}}`, encodeURIComponent(String(organization)))
                 .replace(`{${"project"}}`, encodeURIComponent(String(project)))
                 .replace(`{${"crawler"}}`, encodeURIComponent(String(crawler)))
@@ -12417,23 +12417,27 @@ export const CrawlerSchedulesApiAxiosParamCreator = function (configuration?: Co
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
          * @param {string} crawler Crawler identifier
+         * @param {string} crawlerSchedule Crawler schedule identifier
          * @param {V2CrawlerScheduleRequest} v2CrawlerScheduleRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        crawlerSchedulesEdit: async (organization: string, project: string, crawler: string, v2CrawlerScheduleRequest: V2CrawlerScheduleRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        crawlerSchedulesEdit: async (organization: string, project: string, crawler: string, crawlerSchedule: string, v2CrawlerScheduleRequest: V2CrawlerScheduleRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organization' is not null or undefined
             assertParamExists('crawlerSchedulesEdit', 'organization', organization)
             // verify required parameter 'project' is not null or undefined
             assertParamExists('crawlerSchedulesEdit', 'project', project)
             // verify required parameter 'crawler' is not null or undefined
             assertParamExists('crawlerSchedulesEdit', 'crawler', crawler)
+            // verify required parameter 'crawlerSchedule' is not null or undefined
+            assertParamExists('crawlerSchedulesEdit', 'crawlerSchedule', crawlerSchedule)
             // verify required parameter 'v2CrawlerScheduleRequest' is not null or undefined
             assertParamExists('crawlerSchedulesEdit', 'v2CrawlerScheduleRequest', v2CrawlerScheduleRequest)
-            const localVarPath = `/api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules`
+            const localVarPath = `/api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule}`
                 .replace(`{${"organization"}}`, encodeURIComponent(String(organization)))
                 .replace(`{${"project"}}`, encodeURIComponent(String(project)))
-                .replace(`{${"crawler"}}`, encodeURIComponent(String(crawler)));
+                .replace(`{${"crawler"}}`, encodeURIComponent(String(crawler)))
+                .replace(`{${"crawler_schedule"}}`, encodeURIComponent(String(crawlerSchedule)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12607,12 +12611,13 @@ export const CrawlerSchedulesApiFp = function(configuration?: Configuration) {
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
          * @param {string} crawler Crawler identifier
+         * @param {string} crawlerSchedule Crawler schedule identifier
          * @param {V2CrawlerScheduleRequest} v2CrawlerScheduleRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async crawlerSchedulesEdit(organization: string, project: string, crawler: string, v2CrawlerScheduleRequest: V2CrawlerScheduleRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V2CrawlerSchedule>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.crawlerSchedulesEdit(organization, project, crawler, v2CrawlerScheduleRequest, options);
+        async crawlerSchedulesEdit(organization: string, project: string, crawler: string, crawlerSchedule: string, v2CrawlerScheduleRequest: V2CrawlerScheduleRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V2CrawlerSchedule>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.crawlerSchedulesEdit(organization, project, crawler, crawlerSchedule, v2CrawlerScheduleRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CrawlerSchedulesApi.crawlerSchedulesEdit']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -12690,12 +12695,13 @@ export const CrawlerSchedulesApiFactory = function (configuration?: Configuratio
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
          * @param {string} crawler Crawler identifier
+         * @param {string} crawlerSchedule Crawler schedule identifier
          * @param {V2CrawlerScheduleRequest} v2CrawlerScheduleRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        crawlerSchedulesEdit(organization: string, project: string, crawler: string, v2CrawlerScheduleRequest: V2CrawlerScheduleRequest, options?: RawAxiosRequestConfig): AxiosPromise<V2CrawlerSchedule> {
-            return localVarFp.crawlerSchedulesEdit(organization, project, crawler, v2CrawlerScheduleRequest, options).then((request) => request(axios, basePath));
+        crawlerSchedulesEdit(organization: string, project: string, crawler: string, crawlerSchedule: string, v2CrawlerScheduleRequest: V2CrawlerScheduleRequest, options?: RawAxiosRequestConfig): AxiosPromise<V2CrawlerSchedule> {
+            return localVarFp.crawlerSchedulesEdit(organization, project, crawler, crawlerSchedule, v2CrawlerScheduleRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12768,13 +12774,14 @@ export class CrawlerSchedulesApi extends BaseAPI {
      * @param {string} organization Organization identifier
      * @param {string} project Project identifier
      * @param {string} crawler Crawler identifier
+     * @param {string} crawlerSchedule Crawler schedule identifier
      * @param {V2CrawlerScheduleRequest} v2CrawlerScheduleRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CrawlerSchedulesApi
      */
-    public crawlerSchedulesEdit(organization: string, project: string, crawler: string, v2CrawlerScheduleRequest: V2CrawlerScheduleRequest, options?: RawAxiosRequestConfig) {
-        return CrawlerSchedulesApiFp(this.configuration).crawlerSchedulesEdit(organization, project, crawler, v2CrawlerScheduleRequest, options).then((request) => request(this.axios, this.basePath));
+    public crawlerSchedulesEdit(organization: string, project: string, crawler: string, crawlerSchedule: string, v2CrawlerScheduleRequest: V2CrawlerScheduleRequest, options?: RawAxiosRequestConfig) {
+        return CrawlerSchedulesApiFp(this.configuration).crawlerSchedulesEdit(organization, project, crawler, crawlerSchedule, v2CrawlerScheduleRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

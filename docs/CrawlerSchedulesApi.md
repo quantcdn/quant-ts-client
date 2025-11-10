@@ -5,8 +5,8 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**crawlerSchedulesAdd**](#crawlerschedulesadd) | **POST** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | Add a new schedule|
-|[**crawlerSchedulesDelete**](#crawlerschedulesdelete) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | Delete a schedule|
-|[**crawlerSchedulesEdit**](#crawlerschedulesedit) | **PATCH** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | Edit a schedule|
+|[**crawlerSchedulesDelete**](#crawlerschedulesdelete) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | Delete a schedule|
+|[**crawlerSchedulesEdit**](#crawlerschedulesedit) | **PATCH** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | Edit a schedule|
 |[**crawlerSchedulesList**](#crawlerscheduleslist) | **GET** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | List schedules for a crawler|
 |[**crawlerSchedulesShow**](#crawlerschedulesshow) | **GET** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | Show a specific schedule|
 
@@ -152,12 +152,14 @@ const apiInstance = new CrawlerSchedulesApi(configuration);
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
 let crawler: string; //Crawler identifier (default to undefined)
+let crawlerSchedule: string; //Crawler schedule identifier (default to undefined)
 let v2CrawlerScheduleRequest: V2CrawlerScheduleRequest; //
 
 const { status, data } = await apiInstance.crawlerSchedulesEdit(
     organization,
     project,
     crawler,
+    crawlerSchedule,
     v2CrawlerScheduleRequest
 );
 ```
@@ -170,6 +172,7 @@ const { status, data } = await apiInstance.crawlerSchedulesEdit(
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
 | **crawler** | [**string**] | Crawler identifier | defaults to undefined|
+| **crawlerSchedule** | [**string**] | Crawler schedule identifier | defaults to undefined|
 
 
 ### Return type
