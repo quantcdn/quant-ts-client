@@ -35,22 +35,8 @@ Name | Type | Description | Notes
 **origin_timeout** | **string** | Origin timeout | [optional] [default to undefined]
 **failover_mode** | **boolean** | Enable failover mode | [optional] [default to false]
 **failover_origin_ttfb** | **string** | Failover TTFB threshold | [optional] [default to '2000']
-**failover_origin_status_codes** | **Array&lt;string&gt;** | Status codes for failover (default: 200,404,301,302,304) | [optional] [default to undefined]
-**failover_lifetime** | **string** | Failover cache lifetime | [optional] [default to '300']
-**notify** | **string** | Notification type (none, slack) | [optional] [default to NotifyEnum_None]
-**notify_config** | [**V2RuleProxyActionAllOfNotifyConfig**](V2RuleProxyActionAllOfNotifyConfig.md) |  | [optional] [default to undefined]
-**waf_enabled** | **boolean** | WAF enabled | [optional] [default to false]
-**waf_config** | [**WafConfig**](WafConfig.md) |  | [optional] [default to undefined]
-**proxy_alert_enabled** | **boolean** | Proxy alert enabled | [optional] [default to undefined]
-**proxy_inline_fn_enabled** | **boolean** | Proxy inline function enabled | [optional] [default to false]
-**quant_cloud_selection** | [**V2RuleProxyActionAllOfQuantCloudSelection**](V2RuleProxyActionAllOfQuantCloudSelection.md) |  | [optional] [default to undefined]
-**static_error_page** | **string** | Static error page | [optional] [default to undefined]
-**static_error_page_status_codes** | **Array&lt;string&gt;** | Status codes for static error page | [optional] [default to undefined]
-**application_proxy** | **boolean** | Application proxy enabled | [optional] [default to false]
-**application_name** | **string** | Application name | [optional] [default to undefined]
-**application_environment** | **string** | Application environment | [optional] [default to undefined]
-**application_container** | **string** | Application container | [optional] [default to undefined]
-**application_port** | **number** | Application port | [optional] [default to undefined]
+**failover_s3_bucket** | **string** | Failover S3 bucket | [optional] [default to undefined]
+**failover_s3_region** | **string** | Failover S3 region | [optional] [default to undefined]
 
 ## Example
 
@@ -88,22 +74,8 @@ const instance: V2RuleProxyRequest = {
     origin_timeout,
     failover_mode,
     failover_origin_ttfb,
-    failover_origin_status_codes,
-    failover_lifetime,
-    notify,
-    notify_config,
-    waf_enabled,
-    waf_config,
-    proxy_alert_enabled,
-    proxy_inline_fn_enabled,
-    quant_cloud_selection,
-    static_error_page,
-    static_error_page_status_codes,
-    application_proxy,
-    application_name,
-    application_environment,
-    application_container,
-    application_port,
+    failover_s3_bucket,
+    failover_s3_region,
 };
 ```
 

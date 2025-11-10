@@ -5276,18 +5276,6 @@ export interface V2CrawlerRequest {
  */
 export interface V2CrawlerSchedule {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2CrawlerSchedule
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2CrawlerSchedule
-     */
-    'error': boolean;
-    /**
      * Schedule ID
      * @type {number}
      * @memberof V2CrawlerSchedule
@@ -5343,18 +5331,6 @@ export interface V2CrawlerSchedule {
  */
 export interface V2CrawlerScheduleRequest {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2CrawlerScheduleRequest
-     */
-    'error': boolean;
-    /**
      * Schedule name
      * @type {string}
      * @memberof V2CrawlerScheduleRequest
@@ -5387,18 +5363,6 @@ export interface V2CustomHeaderRequest {
  */
 export interface V2Domain {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2Domain
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2Domain
-     */
-    'error': boolean;
-    /**
      * Domain ID
      * @type {number}
      * @memberof V2Domain
@@ -5423,18 +5387,6 @@ export interface V2Domain {
  * @interface V2DomainRequest
  */
 export interface V2DomainRequest {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2DomainRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2DomainRequest
-     */
-    'error': boolean;
     /**
      * Domain name
      * @type {string}
@@ -7693,152 +7645,12 @@ export interface V2RuleContentFilterRequest {
      */
     'ip_is_not'?: Array<string>;
     /**
-     * Target URL to proxy to
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'to': string;
-    /**
-     * Host header override
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'host'?: string;
-    /**
-     * Basic auth username
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'auth_user'?: string;
-    /**
-     * Basic auth password
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'auth_pass'?: string;
-    /**
-     * Disable SSL verification
-     * @type {boolean}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'disable_ssl_verify'?: boolean;
-    /**
-     * Cache lifetime
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'cache_lifetime'?: string | null;
-    /**
-     * Only proxy 404 responses
-     * @type {boolean}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'only_proxy_404'?: boolean;
-    /**
-     * Headers to inject
-     * @type {{ [key: string]: string; }}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'inject_headers'?: { [key: string]: string; } | null;
-    /**
-     * Headers to strip from response
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'proxy_strip_headers'?: Array<string>;
-    /**
-     * Headers to strip from request
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'proxy_strip_request_headers'?: Array<string>;
-    /**
-     * Origin timeout
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'origin_timeout'?: string;
-    /**
-     * Enable failover mode
-     * @type {boolean}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'failover_mode'?: boolean;
-    /**
-     * Failover TTFB threshold
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'failover_origin_ttfb'?: string;
-    /**
-     * Status codes for failover (default: 200,404,301,302,304)
-     * @type {Array<string>}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'failover_origin_status_codes'?: Array<string>;
-    /**
-     * Failover cache lifetime
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'failover_lifetime'?: string;
-    /**
-     * Notification type (none, slack)
-     * @type {string}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'notify'?: V2RuleContentFilterRequestNotifyEnum;
-    /**
-     * 
-     * @type {V2RuleProxyActionAllOfNotifyConfig}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'notify_config'?: V2RuleProxyActionAllOfNotifyConfig | null;
-    /**
-     * WAF enabled
-     * @type {boolean}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'waf_enabled'?: boolean;
-    /**
-     * 
-     * @type {WafConfig}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'waf_config'?: WafConfig;
-    /**
-     * Proxy alert enabled
-     * @type {boolean}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'proxy_alert_enabled'?: boolean;
-    /**
-     * Proxy inline function enabled
-     * @type {boolean}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'proxy_inline_fn_enabled'?: boolean;
-    /**
-     * 
-     * @type {V2RuleProxyActionAllOfQuantCloudSelection}
-     * @memberof V2RuleContentFilterRequest
-     */
-    'quant_cloud_selection'?: V2RuleProxyActionAllOfQuantCloudSelection | null;
-    /**
      * Function UUID
      * @type {string}
      * @memberof V2RuleContentFilterRequest
      */
     'fn_uuid': string;
 }
-
-export const V2RuleContentFilterRequestNotifyEnum = {
-    None: 'none',
-    Slack: 'slack'
-} as const;
-
-export type V2RuleContentFilterRequestNotifyEnum = typeof V2RuleContentFilterRequestNotifyEnum[keyof typeof V2RuleContentFilterRequestNotifyEnum];
-
 /**
  * 
  * @export
@@ -8392,138 +8204,6 @@ export interface V2RuleCustomResponseRequest {
      */
     'ip_is_not'?: Array<string>;
     /**
-     * Target URL to proxy to
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'to': string;
-    /**
-     * Host header override
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'host'?: string;
-    /**
-     * Basic auth username
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'auth_user'?: string;
-    /**
-     * Basic auth password
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'auth_pass'?: string;
-    /**
-     * Disable SSL verification
-     * @type {boolean}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'disable_ssl_verify'?: boolean;
-    /**
-     * Cache lifetime
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'cache_lifetime'?: string | null;
-    /**
-     * Only proxy 404 responses
-     * @type {boolean}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'only_proxy_404'?: boolean;
-    /**
-     * Headers to inject
-     * @type {{ [key: string]: string; }}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'inject_headers'?: { [key: string]: string; } | null;
-    /**
-     * Headers to strip from response
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'proxy_strip_headers'?: Array<string>;
-    /**
-     * Headers to strip from request
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'proxy_strip_request_headers'?: Array<string>;
-    /**
-     * Origin timeout
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'origin_timeout'?: string;
-    /**
-     * Enable failover mode
-     * @type {boolean}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'failover_mode'?: boolean;
-    /**
-     * Failover TTFB threshold
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'failover_origin_ttfb'?: string;
-    /**
-     * Status codes for failover (default: 200,404,301,302,304)
-     * @type {Array<string>}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'failover_origin_status_codes'?: Array<string>;
-    /**
-     * Failover cache lifetime
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'failover_lifetime'?: string;
-    /**
-     * Notification type (none, slack)
-     * @type {string}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'notify'?: V2RuleCustomResponseRequestNotifyEnum;
-    /**
-     * 
-     * @type {V2RuleProxyActionAllOfNotifyConfig}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'notify_config'?: V2RuleProxyActionAllOfNotifyConfig | null;
-    /**
-     * WAF enabled
-     * @type {boolean}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'waf_enabled'?: boolean;
-    /**
-     * 
-     * @type {WafConfig}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'waf_config'?: WafConfig;
-    /**
-     * Proxy alert enabled
-     * @type {boolean}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'proxy_alert_enabled'?: boolean;
-    /**
-     * Proxy inline function enabled
-     * @type {boolean}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'proxy_inline_fn_enabled'?: boolean;
-    /**
-     * 
-     * @type {V2RuleProxyActionAllOfQuantCloudSelection}
-     * @memberof V2RuleCustomResponseRequest
-     */
-    'quant_cloud_selection'?: V2RuleProxyActionAllOfQuantCloudSelection | null;
-    /**
      * Custom response body content
      * @type {string}
      * @memberof V2RuleCustomResponseRequest
@@ -8548,14 +8228,6 @@ export interface V2RuleCustomResponseRequest {
      */
     'body'?: string;
 }
-
-export const V2RuleCustomResponseRequestNotifyEnum = {
-    None: 'none',
-    Slack: 'slack'
-} as const;
-
-export type V2RuleCustomResponseRequestNotifyEnum = typeof V2RuleCustomResponseRequestNotifyEnum[keyof typeof V2RuleCustomResponseRequestNotifyEnum];
-
 /**
  * 
  * @export
@@ -10605,110 +10277,18 @@ export interface V2RuleProxyRequest {
      */
     'failover_origin_ttfb'?: string;
     /**
-     * Status codes for failover (default: 200,404,301,302,304)
-     * @type {Array<string>}
-     * @memberof V2RuleProxyRequest
-     */
-    'failover_origin_status_codes'?: Array<string>;
-    /**
-     * Failover cache lifetime
+     * Failover S3 bucket
      * @type {string}
      * @memberof V2RuleProxyRequest
      */
-    'failover_lifetime'?: string;
+    'failover_s3_bucket'?: string;
     /**
-     * Notification type (none, slack)
+     * Failover S3 region
      * @type {string}
      * @memberof V2RuleProxyRequest
      */
-    'notify'?: V2RuleProxyRequestNotifyEnum;
-    /**
-     * 
-     * @type {V2RuleProxyActionAllOfNotifyConfig}
-     * @memberof V2RuleProxyRequest
-     */
-    'notify_config'?: V2RuleProxyActionAllOfNotifyConfig | null;
-    /**
-     * WAF enabled
-     * @type {boolean}
-     * @memberof V2RuleProxyRequest
-     */
-    'waf_enabled'?: boolean;
-    /**
-     * 
-     * @type {WafConfig}
-     * @memberof V2RuleProxyRequest
-     */
-    'waf_config'?: WafConfig | null;
-    /**
-     * Proxy alert enabled
-     * @type {boolean}
-     * @memberof V2RuleProxyRequest
-     */
-    'proxy_alert_enabled'?: boolean;
-    /**
-     * Proxy inline function enabled
-     * @type {boolean}
-     * @memberof V2RuleProxyRequest
-     */
-    'proxy_inline_fn_enabled'?: boolean;
-    /**
-     * 
-     * @type {V2RuleProxyActionAllOfQuantCloudSelection}
-     * @memberof V2RuleProxyRequest
-     */
-    'quant_cloud_selection'?: V2RuleProxyActionAllOfQuantCloudSelection | null;
-    /**
-     * Static error page
-     * @type {string}
-     * @memberof V2RuleProxyRequest
-     */
-    'static_error_page'?: string;
-    /**
-     * Status codes for static error page
-     * @type {Array<string>}
-     * @memberof V2RuleProxyRequest
-     */
-    'static_error_page_status_codes'?: Array<string>;
-    /**
-     * Application proxy enabled
-     * @type {boolean}
-     * @memberof V2RuleProxyRequest
-     */
-    'application_proxy'?: boolean;
-    /**
-     * Application name
-     * @type {string}
-     * @memberof V2RuleProxyRequest
-     */
-    'application_name'?: string;
-    /**
-     * Application environment
-     * @type {string}
-     * @memberof V2RuleProxyRequest
-     */
-    'application_environment'?: string;
-    /**
-     * Application container
-     * @type {string}
-     * @memberof V2RuleProxyRequest
-     */
-    'application_container'?: string;
-    /**
-     * Application port
-     * @type {number}
-     * @memberof V2RuleProxyRequest
-     */
-    'application_port'?: number;
+    'failover_s3_region'?: string;
 }
-
-export const V2RuleProxyRequestNotifyEnum = {
-    None: 'none',
-    Slack: 'slack'
-} as const;
-
-export type V2RuleProxyRequestNotifyEnum = typeof V2RuleProxyRequestNotifyEnum[keyof typeof V2RuleProxyRequestNotifyEnum];
-
 /**
  * 
  * @export
@@ -11256,138 +10836,6 @@ export interface V2RuleRedirectRequest {
      */
     'ip_is_not'?: Array<string>;
     /**
-     * Target URL to proxy to
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'to': string;
-    /**
-     * Host header override
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'host'?: string;
-    /**
-     * Basic auth username
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'auth_user'?: string;
-    /**
-     * Basic auth password
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'auth_pass'?: string;
-    /**
-     * Disable SSL verification
-     * @type {boolean}
-     * @memberof V2RuleRedirectRequest
-     */
-    'disable_ssl_verify'?: boolean;
-    /**
-     * Cache lifetime
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'cache_lifetime'?: string | null;
-    /**
-     * Only proxy 404 responses
-     * @type {boolean}
-     * @memberof V2RuleRedirectRequest
-     */
-    'only_proxy_404'?: boolean;
-    /**
-     * Headers to inject
-     * @type {{ [key: string]: string; }}
-     * @memberof V2RuleRedirectRequest
-     */
-    'inject_headers'?: { [key: string]: string; } | null;
-    /**
-     * Headers to strip from response
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'proxy_strip_headers'?: Array<string>;
-    /**
-     * Headers to strip from request
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'proxy_strip_request_headers'?: Array<string>;
-    /**
-     * Origin timeout
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'origin_timeout'?: string;
-    /**
-     * Enable failover mode
-     * @type {boolean}
-     * @memberof V2RuleRedirectRequest
-     */
-    'failover_mode'?: boolean;
-    /**
-     * Failover TTFB threshold
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'failover_origin_ttfb'?: string;
-    /**
-     * Status codes for failover (default: 200,404,301,302,304)
-     * @type {Array<string>}
-     * @memberof V2RuleRedirectRequest
-     */
-    'failover_origin_status_codes'?: Array<string>;
-    /**
-     * Failover cache lifetime
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'failover_lifetime'?: string;
-    /**
-     * Notification type (none, slack)
-     * @type {string}
-     * @memberof V2RuleRedirectRequest
-     */
-    'notify'?: V2RuleRedirectRequestNotifyEnum;
-    /**
-     * 
-     * @type {V2RuleProxyActionAllOfNotifyConfig}
-     * @memberof V2RuleRedirectRequest
-     */
-    'notify_config'?: V2RuleProxyActionAllOfNotifyConfig | null;
-    /**
-     * WAF enabled
-     * @type {boolean}
-     * @memberof V2RuleRedirectRequest
-     */
-    'waf_enabled'?: boolean;
-    /**
-     * 
-     * @type {WafConfig}
-     * @memberof V2RuleRedirectRequest
-     */
-    'waf_config'?: WafConfig;
-    /**
-     * Proxy alert enabled
-     * @type {boolean}
-     * @memberof V2RuleRedirectRequest
-     */
-    'proxy_alert_enabled'?: boolean;
-    /**
-     * Proxy inline function enabled
-     * @type {boolean}
-     * @memberof V2RuleRedirectRequest
-     */
-    'proxy_inline_fn_enabled'?: boolean;
-    /**
-     * 
-     * @type {V2RuleProxyActionAllOfQuantCloudSelection}
-     * @memberof V2RuleRedirectRequest
-     */
-    'quant_cloud_selection'?: V2RuleProxyActionAllOfQuantCloudSelection | null;
-    /**
      * Redirect destination URL
      * @type {string}
      * @memberof V2RuleRedirectRequest
@@ -11400,14 +10848,6 @@ export interface V2RuleRedirectRequest {
      */
     'redirect_code'?: string;
 }
-
-export const V2RuleRedirectRequestNotifyEnum = {
-    None: 'none',
-    Slack: 'slack'
-} as const;
-
-export type V2RuleRedirectRequestNotifyEnum = typeof V2RuleRedirectRequestNotifyEnum[keyof typeof V2RuleRedirectRequestNotifyEnum];
-
 /**
  * 
  * @export

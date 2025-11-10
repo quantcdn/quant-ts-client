@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **domain** | **string** | Domain name | [default to undefined]
 
 ## Example
@@ -15,8 +13,6 @@ Name | Type | Description | Notes
 import { V2DomainRequest } from '@quantcdn/quant-client';
 
 const instance: V2DomainRequest = {
-    message,
-    error,
     domain,
 };
 ```

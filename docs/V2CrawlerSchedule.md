@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **id** | **number** | Schedule ID | [default to undefined]
 **name** | **string** | Schedule name | [optional] [default to undefined]
 **crawler_config_id** | **number** | Crawler config ID | [default to undefined]
@@ -22,8 +20,6 @@ Name | Type | Description | Notes
 import { V2CrawlerSchedule } from '@quantcdn/quant-client';
 
 const instance: V2CrawlerSchedule = {
-    message,
-    error,
     id,
     name,
     crawler_config_id,
