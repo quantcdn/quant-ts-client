@@ -7867,6 +7867,18 @@ export interface V2RuleProxyRequest {
      */
     'failover_origin_ttfb'?: string;
     /**
+     * Status codes for failover (default: 200,404,301,302,304)
+     * @type {Array<string>}
+     * @memberof V2RuleProxyRequest
+     */
+    'failover_origin_status_codes'?: Array<string>;
+    /**
+     * Failover cache lifetime
+     * @type {string}
+     * @memberof V2RuleProxyRequest
+     */
+    'failover_lifetime'?: string;
+    /**
      * Failover S3 bucket
      * @type {string}
      * @memberof V2RuleProxyRequest
@@ -7878,6 +7890,54 @@ export interface V2RuleProxyRequest {
      * @memberof V2RuleProxyRequest
      */
     'failover_s3_region'?: string;
+    /**
+     * Proxy alert enabled
+     * @type {boolean}
+     * @memberof V2RuleProxyRequest
+     */
+    'proxy_alert_enabled'?: boolean;
+    /**
+     * WAF enabled
+     * @type {boolean}
+     * @memberof V2RuleProxyRequest
+     */
+    'waf_enabled'?: boolean;
+    /**
+     * 
+     * @type {WafConfig}
+     * @memberof V2RuleProxyRequest
+     */
+    'waf_config'?: WafConfig | null;
+    /**
+     * Enable Quant Cloud application proxy mode
+     * @type {boolean}
+     * @memberof V2RuleProxyRequest
+     */
+    'application_proxy'?: boolean;
+    /**
+     * Quant Cloud application name (required when application_proxy is true)
+     * @type {string}
+     * @memberof V2RuleProxyRequest
+     */
+    'application_name'?: string;
+    /**
+     * Quant Cloud application environment (required when application_proxy is true)
+     * @type {string}
+     * @memberof V2RuleProxyRequest
+     */
+    'application_environment'?: string;
+    /**
+     * Quant Cloud application container (required when application_proxy is true)
+     * @type {string}
+     * @memberof V2RuleProxyRequest
+     */
+    'application_container'?: string;
+    /**
+     * Quant Cloud application port (required when application_proxy is true)
+     * @type {number}
+     * @memberof V2RuleProxyRequest
+     */
+    'application_port'?: number;
 }
 /**
  * 
