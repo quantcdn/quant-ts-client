@@ -5106,6 +5106,132 @@ export interface V2Crawler {
      */
     'urls_list'?: string;
     /**
+     * Webhook URL for notifications
+     * @type {string}
+     * @memberof V2Crawler
+     */
+    'webhook_url'?: string;
+    /**
+     * Authorization header for webhook
+     * @type {string}
+     * @memberof V2Crawler
+     */
+    'webhook_auth_header'?: string;
+    /**
+     * Extra variables for webhook
+     * @type {string}
+     * @memberof V2Crawler
+     */
+    'webhook_extra_vars'?: string;
+    /**
+     * Browser mode enabled
+     * @type {boolean}
+     * @memberof V2Crawler
+     */
+    'browser_mode'?: boolean;
+    /**
+     * Execute JavaScript during asset collection
+     * @type {boolean}
+     * @memberof V2Crawler
+     */
+    'execute_js'?: boolean;
+    /**
+     * Number of concurrent workers
+     * @type {number}
+     * @memberof V2Crawler
+     */
+    'workers'?: number;
+    /**
+     * Delay between requests in seconds
+     * @type {number}
+     * @memberof V2Crawler
+     */
+    'delay'?: number;
+    /**
+     * Maximum crawl depth
+     * @type {number}
+     * @memberof V2Crawler
+     */
+    'depth'?: number;
+    /**
+     * Maximum total requests
+     * @type {number}
+     * @memberof V2Crawler
+     */
+    'max_hits'?: number;
+    /**
+     * Maximum HTML pages
+     * @type {number}
+     * @memberof V2Crawler
+     */
+    'max_html'?: number;
+    /**
+     * HTTP status codes for content capture
+     * @type {Array<number>}
+     * @memberof V2Crawler
+     */
+    'status_ok'?: Array<number>;
+    /**
+     * Custom user agent
+     * @type {string}
+     * @memberof V2Crawler
+     */
+    'user_agent'?: string;
+    /**
+     * Maximum errors before stopping
+     * @type {number}
+     * @memberof V2Crawler
+     */
+    'max_errors'?: number;
+    /**
+     * Starting URLs
+     * @type {Array<string>}
+     * @memberof V2Crawler
+     */
+    'start_urls'?: Array<string>;
+    /**
+     * URLs list
+     * @type {Array<string>}
+     * @memberof V2Crawler
+     */
+    'urls'?: Array<string>;
+    /**
+     * Custom headers
+     * @type {{ [key: string]: string; }}
+     * @memberof V2Crawler
+     */
+    'headers'?: { [key: string]: string; };
+    /**
+     * URL patterns to exclude
+     * @type {Array<string>}
+     * @memberof V2Crawler
+     */
+    'exclude'?: Array<string>;
+    /**
+     * URL patterns to include
+     * @type {Array<string>}
+     * @memberof V2Crawler
+     */
+    'include'?: Array<string>;
+    /**
+     * Sitemap configuration
+     * @type {Array<object>}
+     * @memberof V2Crawler
+     */
+    'sitemap'?: Array<object>;
+    /**
+     * Allowed domains
+     * @type {Array<string>}
+     * @memberof V2Crawler
+     */
+    'allowed_domains'?: Array<string>;
+    /**
+     * Asset harvesting configuration
+     * @type {object}
+     * @memberof V2Crawler
+     */
+    'assets'?: object;
+    /**
      * Creation timestamp
      * @type {string}
      * @memberof V2Crawler
@@ -5203,67 +5329,67 @@ export interface V2CrawlerRequest {
      */
     'webhook_extra_vars'?: string;
     /**
-     * Number of concurrent workers (verified domains only)
+     * Number of concurrent workers (default: 2, non-default requires verification)
      * @type {number}
      * @memberof V2CrawlerRequest
      */
     'workers'?: number;
     /**
-     * Delay between requests in seconds (verified domains only)
+     * Delay between requests in seconds (default: 4, non-default requires verification)
      * @type {number}
      * @memberof V2CrawlerRequest
      */
     'delay'?: number;
     /**
-     * Maximum crawl depth, -1 for unlimited (verified domains only)
+     * Maximum crawl depth, -1 for unlimited
      * @type {number}
      * @memberof V2CrawlerRequest
      */
     'depth'?: number;
     /**
-     * Maximum total requests, 0 for unlimited (verified domains only)
+     * Maximum total requests, 0 for unlimited (default: 0, non-default requires verification)
      * @type {number}
      * @memberof V2CrawlerRequest
      */
     'max_hits'?: number;
     /**
-     * Maximum HTML pages, 0 for unlimited (verified domains only)
+     * Maximum HTML pages, 0 for unlimited (default: org limit, non-default requires verification)
      * @type {number}
      * @memberof V2CrawlerRequest
      */
     'max_html'?: number;
     /**
-     * HTTP status codes that will result in content being captured and pushed to Quant (verified domains only)
+     * HTTP status codes that will result in content being captured and pushed to Quant
      * @type {Array<number>}
      * @memberof V2CrawlerRequest
      */
     'status_ok'?: Array<number>;
     /**
-     * Sitemap configuration (verified domains only)
+     * Sitemap configuration
      * @type {Array<object>}
      * @memberof V2CrawlerRequest
      */
     'sitemap'?: Array<object>;
     /**
-     * Allowed domains for multi-domain crawling, automatically enables merge_domains (verified domains only)
+     * Allowed domains for multi-domain crawling, automatically enables merge_domains
      * @type {Array<string>}
      * @memberof V2CrawlerRequest
      */
     'allowed_domains'?: Array<string>;
     /**
-     * Custom user agent, only when browser_mode is false (verified domains only)
+     * Custom user agent, only when browser_mode is false
      * @type {string}
      * @memberof V2CrawlerRequest
      */
     'user_agent'?: string;
     /**
-     * Asset harvesting configuration (verified domains only)
+     * Asset harvesting configuration
      * @type {object}
      * @memberof V2CrawlerRequest
      */
     'assets'?: object;
     /**
-     * Maximum errors before stopping crawl (verified domains only)
+     * Maximum errors before stopping crawl
      * @type {number}
      * @memberof V2CrawlerRequest
      */
