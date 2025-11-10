@@ -26,6 +26,11 @@ Name | Type | Description | Notes
 **waf_config** | [**WafConfig**](WafConfig.md) |  | [optional] [default to undefined]
 **proxy_alert_enabled** | **boolean** | Proxy alert enabled | [optional] [default to undefined]
 **proxy_inline_fn_enabled** | **boolean** | Proxy inline function enabled | [optional] [default to false]
+**application_proxy** | **boolean** | Enable Quant Cloud application proxy mode | [optional] [default to false]
+**application_name** | **string** | Quant Cloud application name (required when application_proxy is true) | [optional] [default to undefined]
+**application_environment** | **string** | Quant Cloud application environment (required when application_proxy is true) | [optional] [default to undefined]
+**application_container** | **string** | Quant Cloud application container (required when application_proxy is true) | [optional] [default to undefined]
+**application_port** | **number** | Quant Cloud application port (required when application_proxy is true) | [optional] [default to undefined]
 **quant_cloud_selection** | [**V2RuleProxyActionQuantCloudSelection**](V2RuleProxyActionQuantCloudSelection.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -55,6 +60,11 @@ const instance: V2RuleProxyAction = {
     waf_config,
     proxy_alert_enabled,
     proxy_inline_fn_enabled,
+    application_proxy,
+    application_name,
+    application_environment,
+    application_container,
+    application_port,
     quant_cloud_selection,
 };
 ```

@@ -7604,6 +7604,36 @@ export interface V2RuleProxyAction {
      */
     'proxy_inline_fn_enabled'?: boolean;
     /**
+     * Enable Quant Cloud application proxy mode
+     * @type {boolean}
+     * @memberof V2RuleProxyAction
+     */
+    'application_proxy'?: boolean;
+    /**
+     * Quant Cloud application name (required when application_proxy is true)
+     * @type {string}
+     * @memberof V2RuleProxyAction
+     */
+    'application_name'?: string;
+    /**
+     * Quant Cloud application environment (required when application_proxy is true)
+     * @type {string}
+     * @memberof V2RuleProxyAction
+     */
+    'application_environment'?: string;
+    /**
+     * Quant Cloud application container (required when application_proxy is true)
+     * @type {string}
+     * @memberof V2RuleProxyAction
+     */
+    'application_container'?: string;
+    /**
+     * Quant Cloud application port (required when application_proxy is true)
+     * @type {number}
+     * @memberof V2RuleProxyAction
+     */
+    'application_port'?: number;
+    /**
      * 
      * @type {V2RuleProxyActionQuantCloudSelection}
      * @memberof V2RuleProxyAction
@@ -7632,7 +7662,7 @@ export interface V2RuleProxyActionNotifyConfig {
     'webhook_url'?: string;
 }
 /**
- * Quant Cloud application proxy selection (only present for Quant Cloud App proxies)
+ * Quant Cloud application proxy selection (populated automatically when application_proxy is enabled)
  * @export
  * @interface V2RuleProxyActionQuantCloudSelection
  */

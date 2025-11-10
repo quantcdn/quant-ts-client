@@ -1,6 +1,6 @@
 # V2RuleProxyActionQuantCloudSelection
 
-Quant Cloud application proxy selection (only present for Quant Cloud App proxies)
+Quant Cloud application proxy selection (populated automatically when application_proxy is enabled)
 
 ## Properties
 
