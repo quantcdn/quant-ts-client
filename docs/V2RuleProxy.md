@@ -23,8 +23,6 @@ Name | Type | Description | Notes
 **country_is** | **Array&lt;string&gt;** | Allowed countries | [optional] [default to undefined]
 **country_is_not** | **Array&lt;string&gt;** | Excluded countries | [optional] [default to undefined]
 **action** | **string** | Rule action | [default to undefined]
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **action_config** | [**V2RuleProxyAction**](V2RuleProxyAction.md) |  | [default to undefined]
 
 ## Example
@@ -51,8 +49,6 @@ const instance: V2RuleProxy = {
     country_is,
     country_is_not,
     action,
-    message,
-    error,
     action_config,
 };
 ```

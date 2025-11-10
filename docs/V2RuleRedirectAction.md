@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **to** | **string** | Redirect destination URL | [default to undefined]
 **status_code** | **string** | HTTP status code for redirect | [optional] [default to '301']
 
@@ -16,8 +14,6 @@ Name | Type | Description | Notes
 import { V2RuleRedirectAction } from '@quantcdn/quant-client';
 
 const instance: V2RuleRedirectAction = {
-    message,
-    error,
     to,
     status_code,
 };

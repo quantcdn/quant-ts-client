@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **fn_uuid** | **string** | Function UUID | [default to undefined]
 
 ## Example
@@ -15,8 +13,6 @@ Name | Type | Description | Notes
 import { V2RuleContentFilterAction } from '@quantcdn/quant-client';
 
 const instance: V2RuleContentFilterAction = {
-    message,
-    error,
     fn_uuid,
 };
 ```

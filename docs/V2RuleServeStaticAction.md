@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **static_file_path** | **string** | Path to the static file to serve | [default to undefined]
 
 ## Example
@@ -15,8 +13,6 @@ Name | Type | Description | Notes
 import { V2RuleServeStaticAction } from '@quantcdn/quant-client';
 
 const instance: V2RuleServeStaticAction = {
-    message,
-    error,
     static_file_path,
 };
 ```

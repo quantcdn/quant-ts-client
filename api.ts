@@ -5905,18 +5905,6 @@ export interface V2RuleAuth {
      */
     'action': string;
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleAuth
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleAuth
-     */
-    'error': boolean;
-    /**
      * 
      * @type {V2RuleAuthAction}
      * @memberof V2RuleAuth
@@ -5929,18 +5917,6 @@ export interface V2RuleAuth {
  * @interface V2RuleAuthAction
  */
 export interface V2RuleAuthAction {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleAuthAction
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleAuthAction
-     */
-    'error': boolean;
     /**
      * Authentication username
      * @type {string}
@@ -6050,18 +6026,6 @@ export interface V2RuleAuthRequest {
      * @memberof V2RuleAuthRequest
      */
     'ip_is_not'?: Array<string>;
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleAuthRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleAuthRequest
-     */
-    'error': boolean;
     /**
      * Authentication username
      * @type {string}
@@ -6190,18 +6154,6 @@ export interface V2RuleBotChallenge {
      */
     'action': string;
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleBotChallenge
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleBotChallenge
-     */
-    'error': boolean;
-    /**
      * 
      * @type {V2RuleBotChallengeAction}
      * @memberof V2RuleBotChallenge
@@ -6214,18 +6166,6 @@ export interface V2RuleBotChallenge {
  * @interface V2RuleBotChallengeAction
  */
 export interface V2RuleBotChallengeAction {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleBotChallengeAction
-     */
-    'error': boolean;
     /**
      * Challenge type (invisible or checkbox)
      * @type {string}
@@ -6341,18 +6281,6 @@ export interface V2RuleBotChallengeRequest {
      * @memberof V2RuleBotChallengeRequest
      */
     'ip_is_not'?: Array<string>;
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleBotChallengeRequest
-     */
-    'error': boolean;
     /**
      * Challenge type (invisible or checkbox)
      * @type {string}
@@ -6487,18 +6415,6 @@ export interface V2RuleContentFilter {
      */
     'action': string;
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleContentFilter
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleContentFilter
-     */
-    'error': boolean;
-    /**
      * 
      * @type {V2RuleContentFilterAction}
      * @memberof V2RuleContentFilter
@@ -6511,18 +6427,6 @@ export interface V2RuleContentFilter {
  * @interface V2RuleContentFilterAction
  */
 export interface V2RuleContentFilterAction {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleContentFilterAction
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleContentFilterAction
-     */
-    'error': boolean;
     /**
      * Function UUID
      * @type {string}
@@ -6748,18 +6652,6 @@ export interface V2RuleCustomResponse {
      */
     'action': string;
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleCustomResponse
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleCustomResponse
-     */
-    'error': boolean;
-    /**
      * 
      * @type {V2RuleCustomResponseAction}
      * @memberof V2RuleCustomResponse
@@ -6772,18 +6664,6 @@ export interface V2RuleCustomResponse {
  * @interface V2RuleCustomResponseAction
  */
 export interface V2RuleCustomResponseAction {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleCustomResponseAction
-     */
-    'error': boolean;
     /**
      * Custom response body content
      * @type {string}
@@ -7033,18 +6913,6 @@ export interface V2RuleFunction {
      */
     'action': string;
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleFunction
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleFunction
-     */
-    'error': boolean;
-    /**
      * 
      * @type {V2RuleFunctionAction}
      * @memberof V2RuleFunction
@@ -7057,18 +6925,6 @@ export interface V2RuleFunction {
  * @interface V2RuleFunctionAction
  */
 export interface V2RuleFunctionAction {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleFunctionAction
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleFunctionAction
-     */
-    'error': boolean;
     /**
      * Function UUID
      * @type {string}
@@ -7172,18 +7028,6 @@ export interface V2RuleFunctionRequest {
      * @memberof V2RuleFunctionRequest
      */
     'ip_is_not'?: Array<string>;
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleFunctionRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleFunctionRequest
-     */
-    'error': boolean;
     /**
      * Function UUID
      * @type {string}
@@ -7306,18 +7150,6 @@ export interface V2RuleHeader {
      */
     'action': string;
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleHeader
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleHeader
-     */
-    'error': boolean;
-    /**
      * 
      * @type {V2RuleHeaderAction}
      * @memberof V2RuleHeader
@@ -7330,18 +7162,6 @@ export interface V2RuleHeader {
  * @interface V2RuleHeaderAction
  */
 export interface V2RuleHeaderAction {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleHeaderAction
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleHeaderAction
-     */
-    'error': boolean;
     /**
      * Headers to set
      * @type {{ [key: string]: string; }}
@@ -7445,18 +7265,6 @@ export interface V2RuleHeaderRequest {
      * @memberof V2RuleHeaderRequest
      */
     'ip_is_not'?: Array<string>;
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleHeaderRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleHeaderRequest
-     */
-    'error': boolean;
     /**
      * Headers to set
      * @type {{ [key: string]: string; }}
@@ -7578,18 +7386,6 @@ export interface V2RuleProxy {
      * @memberof V2RuleProxy
      */
     'action': string;
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleProxy
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleProxy
-     */
-    'error': boolean;
     /**
      * 
      * @type {V2RuleProxyAction}
@@ -8180,18 +7976,6 @@ export interface V2RuleRedirect {
      */
     'action': string;
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleRedirect
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleRedirect
-     */
-    'error': boolean;
-    /**
      * 
      * @type {V2RuleRedirectAction}
      * @memberof V2RuleRedirect
@@ -8204,18 +7988,6 @@ export interface V2RuleRedirect {
  * @interface V2RuleRedirectAction
  */
 export interface V2RuleRedirectAction {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleRedirectAction
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleRedirectAction
-     */
-    'error': boolean;
     /**
      * Redirect destination URL
      * @type {string}
@@ -8550,18 +8322,6 @@ export interface V2RuleServeStatic {
      */
     'action': string;
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleServeStatic
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleServeStatic
-     */
-    'error': boolean;
-    /**
      * 
      * @type {V2RuleServeStaticAction}
      * @memberof V2RuleServeStatic
@@ -8574,18 +8334,6 @@ export interface V2RuleServeStatic {
  * @interface V2RuleServeStaticAction
  */
 export interface V2RuleServeStaticAction {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleServeStaticAction
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleServeStaticAction
-     */
-    'error': boolean;
     /**
      * Path to the static file to serve
      * @type {string}
@@ -8689,18 +8437,6 @@ export interface V2RuleServeStaticRequest {
      * @memberof V2RuleServeStaticRequest
      */
     'ip_is_not'?: Array<string>;
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2RuleServeStaticRequest
-     */
-    'error': boolean;
     /**
      * Path to the static file to serve
      * @type {string}

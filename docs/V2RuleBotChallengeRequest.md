@@ -20,8 +20,6 @@ Name | Type | Description | Notes
 **ip** | **string** | IP filter type (ip_is, ip_is_not, any) | [optional] [default to undefined]
 **ip_is** | **Array&lt;string&gt;** | Allowed IP addresses | [optional] [default to undefined]
 **ip_is_not** | **Array&lt;string&gt;** | Excluded IP addresses | [optional] [default to undefined]
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **robot_challenge_type** | **string** | Challenge type (invisible or checkbox) | [default to undefined]
 **robot_challenge_verification_ttl** | **number** | Verification TTL in seconds | [optional] [default to 10800]
 **robot_challenge_challenge_ttl** | **number** | Challenge TTL in seconds | [optional] [default to 30]
@@ -47,8 +45,6 @@ const instance: V2RuleBotChallengeRequest = {
     ip,
     ip_is,
     ip_is_not,
-    message,
-    error,
     robot_challenge_type,
     robot_challenge_verification_ttl,
     robot_challenge_challenge_ttl,

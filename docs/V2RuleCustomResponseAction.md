@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **custom_response_body** | **string** | Custom response body content | [default to undefined]
 **custom_response_status_code** | **number** | HTTP status code for custom response | [optional] [default to 200]
 
@@ -16,8 +14,6 @@ Name | Type | Description | Notes
 import { V2RuleCustomResponseAction } from '@quantcdn/quant-client';
 
 const instance: V2RuleCustomResponseAction = {
-    message,
-    error,
     custom_response_body,
     custom_response_status_code,
 };

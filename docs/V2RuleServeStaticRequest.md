@@ -20,8 +20,6 @@ Name | Type | Description | Notes
 **ip** | **string** | IP filter type (ip_is, ip_is_not, any) | [optional] [default to undefined]
 **ip_is** | **Array&lt;string&gt;** | Allowed IP addresses | [optional] [default to undefined]
 **ip_is_not** | **Array&lt;string&gt;** | Excluded IP addresses | [optional] [default to undefined]
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **static_file_path** | **string** | Path to the static file to serve | [default to undefined]
 
 ## Example
@@ -45,8 +43,6 @@ const instance: V2RuleServeStaticRequest = {
     ip,
     ip_is,
     ip_is_not,
-    message,
-    error,
     static_file_path,
 };
 ```

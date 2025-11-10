@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **headers** | **{ [key: string]: string; }** | Headers to set | [default to undefined]
 
 ## Example
@@ -15,8 +13,6 @@ Name | Type | Description | Notes
 import { V2RuleHeaderAction } from '@quantcdn/quant-client';
 
 const instance: V2RuleHeaderAction = {
-    message,
-    error,
     headers,
 };
 ```
