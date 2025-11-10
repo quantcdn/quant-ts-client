@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **name** | **string** | Secret store name | [default to undefined]
 
 ## Example
@@ -15,8 +13,6 @@ Name | Type | Description | Notes
 import { V2SecretStoreRequest } from '@quantcdn/quant-client';
 
 const instance: V2SecretStoreRequest = {
-    message,
-    error,
     name,
 };
 ```

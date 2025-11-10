@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **name** | **string** | Organization name | [default to undefined]
 **machine_name** | **string** | Organization machine name | [default to undefined]
 
@@ -16,8 +14,6 @@ Name | Type | Description | Notes
 import { V2OrganizationRequest } from '@quantcdn/quant-client';
 
 const instance: V2OrganizationRequest = {
-    message,
-    error,
     name,
     machine_name,
 };

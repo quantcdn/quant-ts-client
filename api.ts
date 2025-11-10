@@ -5420,18 +5420,6 @@ export interface V2Error {
  */
 export interface V2Organization {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2Organization
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2Organization
-     */
-    'error': boolean;
-    /**
      * Organization name
      * @type {string}
      * @memberof V2Organization
@@ -5480,18 +5468,6 @@ export interface V2Organization {
  * @interface V2OrganizationRequest
  */
 export interface V2OrganizationRequest {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2OrganizationRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2OrganizationRequest
-     */
-    'error': boolean;
     /**
      * Organization name
      * @type {string}
@@ -11657,18 +11633,6 @@ export type V2RuleServeStaticRequestNotifyEnum = typeof V2RuleServeStaticRequest
  */
 export interface V2SecretStore {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2SecretStore
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2SecretStore
-     */
-    'error': boolean;
-    /**
      * Secret store ID
      * @type {string}
      * @memberof V2SecretStore
@@ -11688,18 +11652,6 @@ export interface V2SecretStore {
  */
 export interface V2SecretStoreRequest {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2SecretStoreRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2SecretStoreRequest
-     */
-    'error': boolean;
-    /**
      * Secret store name
      * @type {string}
      * @memberof V2SecretStoreRequest
@@ -11712,18 +11664,6 @@ export interface V2SecretStoreRequest {
  * @interface V2Store
  */
 export interface V2Store {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2Store
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2Store
-     */
-    'error': boolean;
     /**
      * Store ID
      * @type {string}
@@ -11744,18 +11684,6 @@ export interface V2Store {
  */
 export interface V2StoreItem {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2StoreItem
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2StoreItem
-     */
-    'error': boolean;
-    /**
      * Item key
      * @type {string}
      * @memberof V2StoreItem
@@ -11774,18 +11702,6 @@ export interface V2StoreItem {
  * @interface V2StoreItemRequest
  */
 export interface V2StoreItemRequest {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2StoreItemRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2StoreItemRequest
-     */
-    'error': boolean;
     /**
      * Item key
      * @type {string}
@@ -11806,18 +11722,6 @@ export interface V2StoreItemRequest {
  */
 export interface V2StoreItemUpdateRequest {
     /**
-     * Error message
-     * @type {string}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2StoreItemUpdateRequest
-     */
-    'error': boolean;
-    /**
      * Item value (can be JSON string)
      * @type {string}
      * @memberof V2StoreItemUpdateRequest
@@ -11830,18 +11734,6 @@ export interface V2StoreItemUpdateRequest {
  * @interface V2StoreItemsListResponse
  */
 export interface V2StoreItemsListResponse {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2StoreItemsListResponse
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2StoreItemsListResponse
-     */
-    'error': boolean;
     /**
      * List of item keys
      * @type {Array<string>}
@@ -11861,18 +11753,6 @@ export interface V2StoreItemsListResponse {
  * @interface V2StoreRequest
  */
 export interface V2StoreRequest {
-    /**
-     * Error message
-     * @type {string}
-     * @memberof V2StoreRequest
-     */
-    'message': string;
-    /**
-     * Error flag
-     * @type {boolean}
-     * @memberof V2StoreRequest
-     */
-    'error': boolean;
     /**
      * Store name
      * @type {string}

@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **data** | **Array&lt;string&gt;** | List of item keys | [optional] [default to undefined]
 **next_cursor** | **string** | Cursor for next page of results | [optional] [default to undefined]
 
@@ -16,8 +14,6 @@ Name | Type | Description | Notes
 import { V2StoreItemsListResponse } from '@quantcdn/quant-client';
 
 const instance: V2StoreItemsListResponse = {
-    message,
-    error,
     data,
     next_cursor,
 };

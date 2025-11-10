@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Error message | [default to undefined]
-**error** | **boolean** | Error flag | [default to undefined]
 **id** | **string** | Store ID | [default to undefined]
 **name** | **string** | Store name | [default to undefined]
 
@@ -16,8 +14,6 @@ Name | Type | Description | Notes
 import { V2Store } from '@quantcdn/quant-client';
 
 const instance: V2Store = {
-    message,
-    error,
     id,
     name,
 };
