@@ -16,7 +16,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**updateEnvironmentState**](#updateenvironmentstate) | **PUT** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/state | Update the state of an environment|
 
 # **createEnvironment**
-> Environment createEnvironment(createEnvironmentRequest)
+> EnvironmentResponse createEnvironment(createEnvironmentRequest)
 
 
 ### Example
@@ -53,7 +53,7 @@ const { status, data } = await apiInstance.createEnvironment(
 
 ### Return type
 
-**Environment**
+**EnvironmentResponse**
 
 ### Authorization
 
@@ -131,7 +131,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getEnvironment**
-> Environment getEnvironment()
+> EnvironmentResponse getEnvironment()
 
 
 ### Example
@@ -167,7 +167,7 @@ const { status, data } = await apiInstance.getEnvironment(
 
 ### Return type
 
-**Environment**
+**EnvironmentResponse**
 
 ### Authorization
 
@@ -182,7 +182,7 @@ const { status, data } = await apiInstance.getEnvironment(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The environment |  -  |
+|**200** | The environment with runtime details |  -  |
 |**404** | The environment not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

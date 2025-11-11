@@ -1781,6 +1781,31 @@ export interface CreateEnvironmentRequest {
 /**
  * 
  * @export
+ * @interface CreateVolumeRequest
+ */
+export interface CreateVolumeRequest {
+    /**
+     * Volume name
+     * @type {string}
+     * @memberof CreateVolumeRequest
+     */
+    'volumeName': string;
+    /**
+     * Volume description
+     * @type {string}
+     * @memberof CreateVolumeRequest
+     */
+    'description'?: string | null;
+    /**
+     * Root directory path
+     * @type {string}
+     * @memberof CreateVolumeRequest
+     */
+    'rootDirectory'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface Cron
  */
 export interface Cron {
@@ -2051,7 +2076,7 @@ export type EmbeddingsRequestDimensionsEnum = typeof EmbeddingsRequestDimensions
 export type EmbeddingsRequestInput = Array<string> | string;
 
 /**
- * 
+ * Environment creation/update request schema
  * @export
  * @interface Environment
  */
@@ -2062,18 +2087,6 @@ export interface Environment {
      * @memberof Environment
      */
     'envName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Environment
-     */
-    'status'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Environment
-     */
-    'runningCount'?: number;
     /**
      * 
      * @type {number}
@@ -2104,54 +2117,133 @@ export interface Environment {
      * @memberof Environment
      */
     'imageSuffix'?: string;
+}
+/**
+ * Environment response schema with runtime details
+ * @export
+ * @interface EnvironmentResponse
+ */
+export interface EnvironmentResponse {
     /**
-     * 
+     * Environment name
+     * @type {string}
+     * @memberof EnvironmentResponse
+     */
+    'envName': string;
+    /**
+     * Environment status
+     * @type {string}
+     * @memberof EnvironmentResponse
+     */
+    'status'?: string;
+    /**
+     * Number of running tasks
+     * @type {number}
+     * @memberof EnvironmentResponse
+     */
+    'runningCount'?: number;
+    /**
+     * Desired number of tasks
+     * @type {number}
+     * @memberof EnvironmentResponse
+     */
+    'desiredCount'?: number;
+    /**
+     * Minimum capacity for autoscaling
+     * @type {number}
+     * @memberof EnvironmentResponse
+     */
+    'minCapacity'?: number;
+    /**
+     * Maximum capacity for autoscaling
+     * @type {number}
+     * @memberof EnvironmentResponse
+     */
+    'maxCapacity'?: number;
+    /**
+     * Public IP address for SSH access
+     * @type {string}
+     * @memberof EnvironmentResponse
+     */
+    'publicIpAddress'?: string | null;
+    /**
+     * Deployment status
+     * @type {string}
+     * @memberof EnvironmentResponse
+     */
+    'deploymentStatus'?: string;
+    /**
+     * ECS task definition details
      * @type {object}
-     * @memberof Environment
+     * @memberof EnvironmentResponse
      */
     'taskDefinition'?: object;
     /**
-     * 
+     * ECS service details
      * @type {object}
-     * @memberof Environment
+     * @memberof EnvironmentResponse
      */
     'service'?: object;
     /**
-     * 
+     * Load balancer configuration
      * @type {object}
-     * @memberof Environment
+     * @memberof EnvironmentResponse
      */
     'loadBalancer'?: object;
     /**
-     * 
+     * Security group configuration
      * @type {object}
-     * @memberof Environment
+     * @memberof EnvironmentResponse
      */
     'securityGroup'?: object;
     /**
-     * 
+     * Subnet configuration
      * @type {object}
-     * @memberof Environment
+     * @memberof EnvironmentResponse
      */
     'subnet'?: object;
     /**
-     * 
+     * VPC configuration
      * @type {object}
-     * @memberof Environment
+     * @memberof EnvironmentResponse
      */
     'vpc'?: object;
     /**
-     * 
+     * Container configurations
+     * @type {Array<object>}
+     * @memberof EnvironmentResponse
+     */
+    'containers'?: Array<object>;
+    /**
+     * Persistent storage volumes
      * @type {Array<Volume>}
-     * @memberof Environment
+     * @memberof EnvironmentResponse
      */
     'volumes'?: Array<Volume>;
     /**
-     * 
+     * Scheduled cron jobs
      * @type {Array<Cron>}
-     * @memberof Environment
+     * @memberof EnvironmentResponse
      */
     'cron'?: Array<Cron>;
+    /**
+     * ALB routing configuration
+     * @type {object}
+     * @memberof EnvironmentResponse
+     */
+    'albRouting'?: object;
+    /**
+     * Creation timestamp
+     * @type {string}
+     * @memberof EnvironmentResponse
+     */
+    'createdAt'?: string;
+    /**
+     * Last update timestamp
+     * @type {string}
+     * @memberof EnvironmentResponse
+     */
+    'updatedAt'?: string;
 }
 /**
  * 
@@ -14882,7 +14974,7 @@ export const EnvironmentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createEnvironment(organisation: string, application: string, createEnvironmentRequest: CreateEnvironmentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Environment>> {
+        async createEnvironment(organisation: string, application: string, createEnvironmentRequest: CreateEnvironmentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvironmentResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createEnvironment(organisation, application, createEnvironmentRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EnvironmentsApi.createEnvironment']?.[localVarOperationServerIndex]?.url;
@@ -14912,7 +15004,7 @@ export const EnvironmentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getEnvironment(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Environment>> {
+        async getEnvironment(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvironmentResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getEnvironment(organisation, application, environment, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EnvironmentsApi.getEnvironment']?.[localVarOperationServerIndex]?.url;
@@ -15057,7 +15149,7 @@ export const EnvironmentsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createEnvironment(organisation: string, application: string, createEnvironmentRequest: CreateEnvironmentRequest, options?: RawAxiosRequestConfig): AxiosPromise<Environment> {
+        createEnvironment(organisation: string, application: string, createEnvironmentRequest: CreateEnvironmentRequest, options?: RawAxiosRequestConfig): AxiosPromise<EnvironmentResponse> {
             return localVarFp.createEnvironment(organisation, application, createEnvironmentRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -15081,7 +15173,7 @@ export const EnvironmentsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEnvironment(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): AxiosPromise<Environment> {
+        getEnvironment(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): AxiosPromise<EnvironmentResponse> {
             return localVarFp.getEnvironment(organisation, application, environment, options).then((request) => request(axios, basePath));
         },
         /**
@@ -22166,16 +22258,19 @@ export const VolumesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
+         * @param {CreateVolumeRequest} createVolumeRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createVolume: async (organisation: string, application: string, environment: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createVolume: async (organisation: string, application: string, environment: string, createVolumeRequest: CreateVolumeRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organisation' is not null or undefined
             assertParamExists('createVolume', 'organisation', organisation)
             // verify required parameter 'application' is not null or undefined
             assertParamExists('createVolume', 'application', application)
             // verify required parameter 'environment' is not null or undefined
             assertParamExists('createVolume', 'environment', environment)
+            // verify required parameter 'createVolumeRequest' is not null or undefined
+            assertParamExists('createVolume', 'createVolumeRequest', createVolumeRequest)
             const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/volumes`
                 .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
                 .replace(`{${"application"}}`, encodeURIComponent(String(application)))
@@ -22197,9 +22292,12 @@ export const VolumesApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createVolumeRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -22368,11 +22466,12 @@ export const VolumesApiFp = function(configuration?: Configuration) {
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
+         * @param {CreateVolumeRequest} createVolumeRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createVolume(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Volume>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createVolume(organisation, application, environment, options);
+        async createVolume(organisation: string, application: string, environment: string, createVolumeRequest: CreateVolumeRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Volume>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createVolume(organisation, application, environment, createVolumeRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['VolumesApi.createVolume']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -22440,11 +22539,12 @@ export const VolumesApiFactory = function (configuration?: Configuration, basePa
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
+         * @param {CreateVolumeRequest} createVolumeRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createVolume(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): AxiosPromise<Volume> {
-            return localVarFp.createVolume(organisation, application, environment, options).then((request) => request(axios, basePath));
+        createVolume(organisation: string, application: string, environment: string, createVolumeRequest: CreateVolumeRequest, options?: RawAxiosRequestConfig): AxiosPromise<Volume> {
+            return localVarFp.createVolume(organisation, application, environment, createVolumeRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -22500,12 +22600,13 @@ export class VolumesApi extends BaseAPI {
      * @param {string} organisation The organisation ID
      * @param {string} application The application ID
      * @param {string} environment The environment ID
+     * @param {CreateVolumeRequest} createVolumeRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof VolumesApi
      */
-    public createVolume(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig) {
-        return VolumesApiFp(this.configuration).createVolume(organisation, application, environment, options).then((request) => request(this.axios, this.basePath));
+    public createVolume(organisation: string, application: string, environment: string, createVolumeRequest: CreateVolumeRequest, options?: RawAxiosRequestConfig) {
+        return VolumesApiFp(this.configuration).createVolume(organisation, application, environment, createVolumeRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

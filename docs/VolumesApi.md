@@ -10,7 +10,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**listVolumes**](#listvolumes) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/volumes | Get all volumes for an environment|
 
 # **createVolume**
-> Volume createVolume()
+> Volume createVolume(createVolumeRequest)
 
 
 ### Example
@@ -18,7 +18,8 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 ```typescript
 import {
     VolumesApi,
-    Configuration
+    Configuration,
+    CreateVolumeRequest
 } from '@quantcdn/quant-client';
 
 const configuration = new Configuration();
@@ -27,11 +28,13 @@ const apiInstance = new VolumesApi(configuration);
 let organisation: string; //The organisation ID (default to undefined)
 let application: string; //The application ID (default to undefined)
 let environment: string; //The environment ID (default to undefined)
+let createVolumeRequest: CreateVolumeRequest; //
 
 const { status, data } = await apiInstance.createVolume(
     organisation,
     application,
-    environment
+    environment,
+    createVolumeRequest
 );
 ```
 
@@ -39,6 +42,7 @@ const { status, data } = await apiInstance.createVolume(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **createVolumeRequest** | **CreateVolumeRequest**|  | |
 | **organisation** | [**string**] | The organisation ID | defaults to undefined|
 | **application** | [**string**] | The application ID | defaults to undefined|
 | **environment** | [**string**] | The environment ID | defaults to undefined|
@@ -54,7 +58,7 @@ const { status, data } = await apiInstance.createVolume(
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 
