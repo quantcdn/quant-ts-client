@@ -127,7 +127,6 @@ docs/ListToolExecutions200ResponseExecutionsInner.md
 docs/OrganizationsApi.md
 docs/OrganizationsList200ResponseInner.md
 docs/ProjectsApi.md
-docs/ProjectsList200ResponseInner.md
 docs/PurgeApi.md
 docs/PurgeCreateRequest.md
 docs/RulesApi.md
@@ -183,9 +182,13 @@ docs/V1UrlMetaResponse.md
 docs/V1WafLogItem.md
 docs/V1WafLogListResponse.md
 docs/V2Crawler.md
+docs/V2CrawlerAssets.md
+docs/V2CrawlerAssetsNetworkIntercept.md
+docs/V2CrawlerAssetsParser.md
 docs/V2CrawlerRequest.md
 docs/V2CrawlerSchedule.md
 docs/V2CrawlerScheduleRequest.md
+docs/V2CrawlerSitemapInner.md
 docs/V2CustomHeaderRequest.md
 docs/V2Domain.md
 docs/V2DomainRequest.md

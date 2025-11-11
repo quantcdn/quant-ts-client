@@ -45,6 +45,8 @@ Name | Type | Description | Notes
 **application_environment** | **string** | Quant Cloud application environment (required when application_proxy is true) | [optional] [default to undefined]
 **application_container** | **string** | Quant Cloud application container (required when application_proxy is true) | [optional] [default to undefined]
 **application_port** | **number** | Quant Cloud application port (required when application_proxy is true) | [optional] [default to undefined]
+**static_error_page** | **string** | Static error page content (HTML) to serve on origin errors | [optional] [default to undefined]
+**static_error_page_status_codes** | **Array&lt;string&gt;** | Origin status codes that trigger static error page | [optional] [default to undefined]
 
 ## Example
 
@@ -92,6 +94,8 @@ const instance: V2RuleProxyRequest = {
     application_environment,
     application_container,
     application_port,
+    static_error_page,
+    static_error_page_status_codes,
 };
 ```
 

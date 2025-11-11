@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **disable_revisions** | **boolean** | Disable revisions | [optional] [default to undefined]
 **basic_auth_username** | **string** | Basic auth username | [optional] [default to undefined]
 **basic_auth_password** | **string** | Basic auth password | [optional] [default to undefined]
+**basic_auth_preview_only** | **boolean** | Apply basic auth to preview domain only | [optional] [default to false]
 
 ## Example
 
@@ -26,6 +27,7 @@ const instance: V2ProjectRequest = {
     disable_revisions,
     basic_auth_username,
     basic_auth_password,
+    basic_auth_preview_only,
 };
 ```
 

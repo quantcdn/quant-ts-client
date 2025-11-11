@@ -23,10 +23,10 @@ Name | Type | Description | Notes
 **max_hits** | **number** | Maximum total requests, 0 for unlimited (default: 0, non-default requires verification) | [optional] [default to undefined]
 **max_html** | **number** | Maximum HTML pages, 0 for unlimited (default: org limit, non-default requires verification) | [optional] [default to undefined]
 **status_ok** | **Array&lt;number&gt;** | HTTP status codes that will result in content being captured and pushed to Quant | [optional] [default to undefined]
-**sitemap** | **Array&lt;object&gt;** | Sitemap configuration | [optional] [default to undefined]
+**sitemap** | [**Array&lt;V2CrawlerSitemapInner&gt;**](V2CrawlerSitemapInner.md) | Sitemap configuration | [optional] [default to undefined]
 **allowed_domains** | **Array&lt;string&gt;** | Allowed domains for multi-domain crawling, automatically enables merge_domains | [optional] [default to undefined]
 **user_agent** | **string** | Custom user agent, only when browser_mode is false | [optional] [default to undefined]
-**assets** | **object** | Asset harvesting configuration | [optional] [default to undefined]
+**assets** | [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] [default to undefined]
 **max_errors** | **number** | Maximum errors before stopping crawl | [optional] [default to undefined]
 
 ## Example

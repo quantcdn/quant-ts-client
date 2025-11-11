@@ -122,7 +122,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **projectsList**
-> Array<ProjectsList200ResponseInner> projectsList()
+> Array<V2Project> projectsList()
 
 
 ### Example
@@ -152,7 +152,7 @@ const { status, data } = await apiInstance.projectsList(
 
 ### Return type
 
-**Array<ProjectsList200ResponseInner>**
+**Array<V2Project>**
 
 ### Authorization
 

@@ -3442,25 +3442,6 @@ export interface OrganizationsList200ResponseInner {
 /**
  * 
  * @export
- * @interface ProjectsList200ResponseInner
- */
-export interface ProjectsList200ResponseInner {
-    /**
-     * Project name
-     * @type {string}
-     * @memberof ProjectsList200ResponseInner
-     */
-    'name': string;
-    /**
-     * Project machine name
-     * @type {string}
-     * @memberof ProjectsList200ResponseInner
-     */
-    'machine_name': string;
-}
-/**
- * 
- * @export
  * @interface PurgeCreateRequest
  */
 export interface PurgeCreateRequest {
@@ -5227,10 +5208,10 @@ export interface V2Crawler {
     'include'?: Array<string>;
     /**
      * Sitemap configuration
-     * @type {Array<object>}
+     * @type {Array<V2CrawlerSitemapInner>}
      * @memberof V2Crawler
      */
-    'sitemap'?: Array<object>;
+    'sitemap'?: Array<V2CrawlerSitemapInner>;
     /**
      * Allowed domains
      * @type {Array<string>}
@@ -5238,11 +5219,11 @@ export interface V2Crawler {
      */
     'allowed_domains'?: Array<string>;
     /**
-     * Asset harvesting configuration
-     * @type {object}
+     * 
+     * @type {V2CrawlerAssets}
      * @memberof V2Crawler
      */
-    'assets'?: object;
+    'assets'?: V2CrawlerAssets;
     /**
      * Creation timestamp
      * @type {string}
@@ -5261,6 +5242,63 @@ export interface V2Crawler {
      * @memberof V2Crawler
      */
     'deleted_at'?: string;
+}
+/**
+ * Asset harvesting configuration
+ * @export
+ * @interface V2CrawlerAssets
+ */
+export interface V2CrawlerAssets {
+    /**
+     * 
+     * @type {V2CrawlerAssetsNetworkIntercept}
+     * @memberof V2CrawlerAssets
+     */
+    'network_intercept'?: V2CrawlerAssetsNetworkIntercept;
+    /**
+     * 
+     * @type {V2CrawlerAssetsParser}
+     * @memberof V2CrawlerAssets
+     */
+    'parser'?: V2CrawlerAssetsParser;
+}
+/**
+ * Network intercept configuration for asset collection
+ * @export
+ * @interface V2CrawlerAssetsNetworkIntercept
+ */
+export interface V2CrawlerAssetsNetworkIntercept {
+    /**
+     * Enable network intercept
+     * @type {boolean}
+     * @memberof V2CrawlerAssetsNetworkIntercept
+     */
+    'enabled'?: boolean;
+    /**
+     * Request timeout in seconds
+     * @type {number}
+     * @memberof V2CrawlerAssetsNetworkIntercept
+     */
+    'timeout'?: number;
+    /**
+     * Execute JavaScript during asset collection
+     * @type {boolean}
+     * @memberof V2CrawlerAssetsNetworkIntercept
+     */
+    'execute_js'?: boolean;
+}
+/**
+ * Parser configuration for asset extraction
+ * @export
+ * @interface V2CrawlerAssetsParser
+ */
+export interface V2CrawlerAssetsParser {
+    /**
+     * Enable parser
+     * @type {boolean}
+     * @memberof V2CrawlerAssetsParser
+     */
+    'enabled'?: boolean;
 }
 /**
  * 
@@ -5378,10 +5416,10 @@ export interface V2CrawlerRequest {
     'status_ok'?: Array<number>;
     /**
      * Sitemap configuration
-     * @type {Array<object>}
+     * @type {Array<V2CrawlerSitemapInner>}
      * @memberof V2CrawlerRequest
      */
-    'sitemap'?: Array<object>;
+    'sitemap'?: Array<V2CrawlerSitemapInner>;
     /**
      * Allowed domains for multi-domain crawling, automatically enables merge_domains
      * @type {Array<string>}
@@ -5395,11 +5433,11 @@ export interface V2CrawlerRequest {
      */
     'user_agent'?: string;
     /**
-     * Asset harvesting configuration
-     * @type {object}
+     * 
+     * @type {V2CrawlerAssets}
      * @memberof V2CrawlerRequest
      */
-    'assets'?: object;
+    'assets'?: V2CrawlerAssets;
     /**
      * Maximum errors before stopping crawl
      * @type {number}
@@ -5431,6 +5469,12 @@ export interface V2CrawlerSchedule {
      * @memberof V2CrawlerSchedule
      */
     'crawler_config_id': number;
+    /**
+     * Crawler UUID
+     * @type {string}
+     * @memberof V2CrawlerSchedule
+     */
+    'crawler_uuid'?: string;
     /**
      * Project ID
      * @type {number}
@@ -5480,6 +5524,25 @@ export interface V2CrawlerScheduleRequest {
      * @memberof V2CrawlerScheduleRequest
      */
     'schedule_cron_string': string;
+}
+/**
+ * 
+ * @export
+ * @interface V2CrawlerSitemapInner
+ */
+export interface V2CrawlerSitemapInner {
+    /**
+     * Sitemap URL
+     * @type {string}
+     * @memberof V2CrawlerSitemapInner
+     */
+    'url'?: string;
+    /**
+     * Recursively follow sitemap links
+     * @type {boolean}
+     * @memberof V2CrawlerSitemapInner
+     */
+    'recursive'?: boolean;
 }
 /**
  * 
@@ -5626,6 +5689,18 @@ export interface V2OrganizationRequest {
  */
 export interface V2Project {
     /**
+     * Project ID
+     * @type {number}
+     * @memberof V2Project
+     */
+    'id': number;
+    /**
+     * Project UUID
+     * @type {string}
+     * @memberof V2Project
+     */
+    'uuid': string;
+    /**
      * Project name
      * @type {string}
      * @memberof V2Project
@@ -5637,6 +5712,12 @@ export interface V2Project {
      * @memberof V2Project
      */
     'machine_name': string;
+    /**
+     * Write token for API access
+     * @type {string}
+     * @memberof V2Project
+     */
+    'write_token'?: string;
 }
 /**
  * 
@@ -5686,6 +5767,12 @@ export interface V2ProjectRequest {
      * @memberof V2ProjectRequest
      */
     'basic_auth_password'?: string;
+    /**
+     * Apply basic auth to preview domain only
+     * @type {boolean}
+     * @memberof V2ProjectRequest
+     */
+    'basic_auth_preview_only'?: boolean;
 }
 /**
  * 
@@ -7573,6 +7660,18 @@ export interface V2RuleProxyAction {
      * @memberof V2RuleProxyAction
      */
     'quant_cloud_selection'?: V2RuleProxyActionQuantCloudSelection | null;
+    /**
+     * Static error page content (HTML) to serve on origin errors
+     * @type {string}
+     * @memberof V2RuleProxyAction
+     */
+    'static_error_page'?: string | null;
+    /**
+     * Origin status codes that trigger static error page
+     * @type {Array<string>}
+     * @memberof V2RuleProxyAction
+     */
+    'static_error_page_status_codes'?: Array<string>;
 }
 
 export const V2RuleProxyActionNotifyEnum = {
@@ -7872,6 +7971,18 @@ export interface V2RuleProxyRequest {
      * @memberof V2RuleProxyRequest
      */
     'application_port'?: number;
+    /**
+     * Static error page content (HTML) to serve on origin errors
+     * @type {string}
+     * @memberof V2RuleProxyRequest
+     */
+    'static_error_page'?: string | null;
+    /**
+     * Origin status codes that trigger static error page
+     * @type {Array<string>}
+     * @memberof V2RuleProxyRequest
+     */
+    'static_error_page_status_codes'?: Array<string>;
 }
 /**
  * 
@@ -16895,7 +17006,7 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsList(organization: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ProjectsList200ResponseInner>>> {
+        async projectsList(organization: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<V2Project>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectsList(organization, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjectsApi.projectsList']?.[localVarOperationServerIndex]?.url;
@@ -16970,7 +17081,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsList(organization: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ProjectsList200ResponseInner>> {
+        projectsList(organization: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<V2Project>> {
             return localVarFp.projectsList(organization, options).then((request) => request(axios, basePath));
         },
         /**
