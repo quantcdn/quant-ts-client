@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **name** | **string** | Crawler name | [optional] [default to undefined]
 **domain** | **string** | Domain to crawl | [default to undefined]
 **browser_mode** | **boolean** | Enable browser mode | [optional] [default to false]
-**execute_js** | **boolean** | Execute JavaScript during asset collection (only when browser_mode is enabled) | [optional] [default to false]
 **urls** | **Array&lt;string&gt;** | URLs to crawl | [optional] [default to undefined]
 **start_urls** | **Array&lt;string&gt;** | Starting URLs for crawl | [optional] [default to undefined]
 **headers** | **{ [key: string]: string; }** | Custom headers | [optional] [default to undefined]
@@ -38,7 +37,6 @@ const instance: V2CrawlerRequest = {
     name,
     domain,
     browser_mode,
-    execute_js,
     urls,
     start_urls,
     headers,

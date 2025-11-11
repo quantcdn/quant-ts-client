@@ -5123,12 +5123,6 @@ export interface V2Crawler {
      */
     'browser_mode'?: boolean;
     /**
-     * Execute JavaScript during asset collection
-     * @type {boolean}
-     * @memberof V2Crawler
-     */
-    'execute_js'?: boolean;
-    /**
      * Number of concurrent workers
      * @type {number}
      * @memberof V2Crawler
@@ -5324,12 +5318,6 @@ export interface V2CrawlerRequest {
      * @memberof V2CrawlerRequest
      */
     'browser_mode'?: boolean;
-    /**
-     * Execute JavaScript during asset collection (only when browser_mode is enabled)
-     * @type {boolean}
-     * @memberof V2CrawlerRequest
-     */
-    'execute_js'?: boolean;
     /**
      * URLs to crawl
      * @type {Array<string>}

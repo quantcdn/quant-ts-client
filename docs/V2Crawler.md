@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **webhook_auth_header** | **string** | Authorization header for webhook | [optional] [default to undefined]
 **webhook_extra_vars** | **string** | Extra variables for webhook | [optional] [default to undefined]
 **browser_mode** | **boolean** | Browser mode enabled | [optional] [default to undefined]
-**execute_js** | **boolean** | Execute JavaScript during asset collection | [optional] [default to undefined]
 **workers** | **number** | Number of concurrent workers | [optional] [default to undefined]
 **delay** | **number** | Delay between requests in seconds | [optional] [default to undefined]
 **depth** | **number** | Maximum crawl depth | [optional] [default to undefined]
@@ -56,7 +55,6 @@ const instance: V2Crawler = {
     webhook_auth_header,
     webhook_extra_vars,
     browser_mode,
-    execute_js,
     workers,
     delay,
     depth,
