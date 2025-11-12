@@ -69,6 +69,7 @@ docs/CreateCommandRequest.md
 docs/CreateCronJob422Response.md
 docs/CreateCronJobRequest.md
 docs/CreateEnvironmentRequest.md
+docs/CreateEnvironmentRequestEnvironmentInner.md
 docs/CreateVolumeRequest.md
 docs/Cron.md
 docs/CronApi.md

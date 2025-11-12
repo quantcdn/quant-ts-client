@@ -1777,6 +1777,37 @@ export interface CreateEnvironmentRequest {
      * @memberof CreateEnvironmentRequest
      */
     'spotConfiguration'?: SpotConfiguration;
+    /**
+     * Environment variables to inject
+     * @type {Array<CreateEnvironmentRequestEnvironmentInner>}
+     * @memberof CreateEnvironmentRequest
+     */
+    'environment'?: Array<CreateEnvironmentRequestEnvironmentInner>;
+    /**
+     * Whether to merge environment variables with cloned ones (true) or replace them (false). Default: false
+     * @type {boolean}
+     * @memberof CreateEnvironmentRequest
+     */
+    'mergeEnvironment'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface CreateEnvironmentRequestEnvironmentInner
+ */
+export interface CreateEnvironmentRequestEnvironmentInner {
+    /**
+     * Variable name
+     * @type {string}
+     * @memberof CreateEnvironmentRequestEnvironmentInner
+     */
+    'name'?: string;
+    /**
+     * Variable value
+     * @type {string}
+     * @memberof CreateEnvironmentRequestEnvironmentInner
+     */
+    'value'?: string;
 }
 /**
  * 
@@ -3087,7 +3118,7 @@ export interface KVItemsShow200Response {
 }
 /**
  * @type KVItemsShow200ResponseValue
- * Item value (decoded from JSON if applicable)
+ * Item value (decoded from JSON if applicable). Returns \'[ENCRYPTED]\' for secret items.
  * @export
  */
 export type KVItemsShow200ResponseValue = object | string;
@@ -7974,35 +8005,23 @@ export interface V2RuleProxyRequest {
      */
     'failover_mode'?: boolean;
     /**
-     * Failover TTFB threshold
+     * Failover TTFB threshold in milliseconds
      * @type {string}
      * @memberof V2RuleProxyRequest
      */
     'failover_origin_ttfb'?: string;
     /**
-     * Status codes for failover (default: 200,404,301,302,304)
+     * Origin status codes that trigger failover
      * @type {Array<string>}
      * @memberof V2RuleProxyRequest
      */
     'failover_origin_status_codes'?: Array<string>;
     /**
-     * Failover cache lifetime
+     * Failover cache lifetime in seconds
      * @type {string}
      * @memberof V2RuleProxyRequest
      */
     'failover_lifetime'?: string;
-    /**
-     * Failover S3 bucket
-     * @type {string}
-     * @memberof V2RuleProxyRequest
-     */
-    'failover_s3_bucket'?: string;
-    /**
-     * Failover S3 region
-     * @type {string}
-     * @memberof V2RuleProxyRequest
-     */
-    'failover_s3_region'?: string;
     /**
      * Proxy alert enabled
      * @type {boolean}
@@ -8735,6 +8754,12 @@ export interface V2StoreItemRequest {
      * @memberof V2StoreItemRequest
      */
     'value': string;
+    /**
+     * Store as secret with KMS encryption. Secrets cannot be retrieved via GET operations (returns [ENCRYPTED]). Ideal for API keys, passwords, and credentials.
+     * @type {boolean}
+     * @memberof V2StoreItemRequest
+     */
+    'secret'?: boolean;
 }
 /**
  * 
@@ -8748,6 +8773,12 @@ export interface V2StoreItemUpdateRequest {
      * @memberof V2StoreItemUpdateRequest
      */
     'value': string;
+    /**
+     * Store as secret with KMS encryption. Note: Encryption status cannot be changed after initial creation - this value is preserved from the original item.
+     * @type {boolean}
+     * @memberof V2StoreItemUpdateRequest
+     */
+    'secret'?: boolean;
 }
 /**
  * 
@@ -15967,10 +15998,11 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} [cursor] Cursor for pagination
          * @param {number} [limit] Number of items to return
          * @param {string} [search] Search filter for keys
+         * @param {boolean} [includeValues] Include values in the response. Secret values will be redacted as \&#39;[ENCRYPTED]\&#39; for security.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        kVItemsList: async (organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        kVItemsList: async (organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, includeValues?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organization' is not null or undefined
             assertParamExists('kVItemsList', 'organization', organization)
             // verify required parameter 'project' is not null or undefined
@@ -16008,6 +16040,10 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
                 localVarQueryParameter['search'] = search;
             }
 
+            if (includeValues !== undefined) {
+                localVarQueryParameter['include_values'] = includeValues;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -16020,7 +16056,7 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
             };
         },
         /**
-         * 
+         * Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
          * @summary Get an item from a kv store
          * @param {string} organization 
          * @param {string} project 
@@ -16294,17 +16330,18 @@ export const KVApiFp = function(configuration?: Configuration) {
          * @param {string} [cursor] Cursor for pagination
          * @param {number} [limit] Number of items to return
          * @param {string} [search] Search filter for keys
+         * @param {boolean} [includeValues] Include values in the response. Secret values will be redacted as \&#39;[ENCRYPTED]\&#39; for security.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async kVItemsList(organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V2StoreItemsListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.kVItemsList(organization, project, storeId, cursor, limit, search, options);
+        async kVItemsList(organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, includeValues?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V2StoreItemsListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.kVItemsList(organization, project, storeId, cursor, limit, search, includeValues, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['KVApi.kVItemsList']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
          * @summary Get an item from a kv store
          * @param {string} organization 
          * @param {string} project 
@@ -16434,14 +16471,15 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
          * @param {string} [cursor] Cursor for pagination
          * @param {number} [limit] Number of items to return
          * @param {string} [search] Search filter for keys
+         * @param {boolean} [includeValues] Include values in the response. Secret values will be redacted as \&#39;[ENCRYPTED]\&#39; for security.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        kVItemsList(organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, options?: RawAxiosRequestConfig): AxiosPromise<V2StoreItemsListResponse> {
-            return localVarFp.kVItemsList(organization, project, storeId, cursor, limit, search, options).then((request) => request(axios, basePath));
+        kVItemsList(organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, includeValues?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<V2StoreItemsListResponse> {
+            return localVarFp.kVItemsList(organization, project, storeId, cursor, limit, search, includeValues, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
          * @summary Get an item from a kv store
          * @param {string} organization 
          * @param {string} project 
@@ -16567,16 +16605,17 @@ export class KVApi extends BaseAPI {
      * @param {string} [cursor] Cursor for pagination
      * @param {number} [limit] Number of items to return
      * @param {string} [search] Search filter for keys
+     * @param {boolean} [includeValues] Include values in the response. Secret values will be redacted as \&#39;[ENCRYPTED]\&#39; for security.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof KVApi
      */
-    public kVItemsList(organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, options?: RawAxiosRequestConfig) {
-        return KVApiFp(this.configuration).kVItemsList(organization, project, storeId, cursor, limit, search, options).then((request) => request(this.axios, this.basePath));
+    public kVItemsList(organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, includeValues?: boolean, options?: RawAxiosRequestConfig) {
+        return KVApiFp(this.configuration).kVItemsList(organization, project, storeId, cursor, limit, search, includeValues, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
      * @summary Get an item from a kv store
      * @param {string} organization 
      * @param {string} project 

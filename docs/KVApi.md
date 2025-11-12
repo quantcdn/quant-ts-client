@@ -276,6 +276,7 @@ let storeId: string; // (default to undefined)
 let cursor: string; //Cursor for pagination (optional) (default to undefined)
 let limit: number; //Number of items to return (optional) (default to 10)
 let search: string; //Search filter for keys (optional) (default to undefined)
+let includeValues: boolean; //Include values in the response. Secret values will be redacted as \'[ENCRYPTED]\' for security. (optional) (default to false)
 
 const { status, data } = await apiInstance.kVItemsList(
     organization,
@@ -283,7 +284,8 @@ const { status, data } = await apiInstance.kVItemsList(
     storeId,
     cursor,
     limit,
-    search
+    search,
+    includeValues
 );
 ```
 
@@ -297,6 +299,7 @@ const { status, data } = await apiInstance.kVItemsList(
 | **cursor** | [**string**] | Cursor for pagination | (optional) defaults to undefined|
 | **limit** | [**number**] | Number of items to return | (optional) defaults to 10|
 | **search** | [**string**] | Search filter for keys | (optional) defaults to undefined|
+| **includeValues** | [**boolean**] | Include values in the response. Secret values will be redacted as \&#39;[ENCRYPTED]\&#39; for security. | (optional) defaults to false|
 
 
 ### Return type
@@ -325,6 +328,7 @@ const { status, data } = await apiInstance.kVItemsList(
 # **kVItemsShow**
 > KVItemsShow200Response kVItemsShow()
 
+Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
 
 ### Example
 

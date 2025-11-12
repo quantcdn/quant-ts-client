@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **key** | **string** | Item key | [default to undefined]
 **value** | **string** | Item value (can be JSON string) | [default to undefined]
+**secret** | **boolean** | Store as secret with KMS encryption. Secrets cannot be retrieved via GET operations (returns [ENCRYPTED]). Ideal for API keys, passwords, and credentials. | [optional] [default to false]
 
 ## Example
 
@@ -16,6 +17,7 @@ import { V2StoreItemRequest } from '@quantcdn/quant-client';
 const instance: V2StoreItemRequest = {
     key,
     value,
+    secret,
 };
 ```
 

@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **composeDefinition** | [**Compose**](Compose.md) |  | [optional] [default to undefined]
 **imageSuffix** | **string** | Optional image tag suffix for cloning | [optional] [default to undefined]
 **spotConfiguration** | [**SpotConfiguration**](SpotConfiguration.md) |  | [optional] [default to undefined]
+**environment** | [**Array&lt;CreateEnvironmentRequestEnvironmentInner&gt;**](CreateEnvironmentRequestEnvironmentInner.md) | Environment variables to inject | [optional] [default to undefined]
+**mergeEnvironment** | **boolean** | Whether to merge environment variables with cloned ones (true) or replace them (false). Default: false | [optional] [default to undefined]
 
 ## Example
 
@@ -26,6 +28,8 @@ const instance: CreateEnvironmentRequest = {
     composeDefinition,
     imageSuffix,
     spotConfiguration,
+    environment,
+    mergeEnvironment,
 };
 ```
 

@@ -1,6 +1,6 @@
 # KVItemsShow200ResponseValue
 
-Item value (decoded from JSON if applicable)
+Item value (decoded from JSON if applicable). Returns \'[ENCRYPTED]\' for secret items.
 
 ## Properties
 

@@ -32,11 +32,9 @@ Name | Type | Description | Notes
 **proxy_strip_request_headers** | **Array&lt;string&gt;** | Headers to strip from request | [optional] [default to undefined]
 **origin_timeout** | **string** | Origin timeout | [optional] [default to undefined]
 **failover_mode** | **boolean** | Enable failover mode | [optional] [default to false]
-**failover_origin_ttfb** | **string** | Failover TTFB threshold | [optional] [default to '2000']
-**failover_origin_status_codes** | **Array&lt;string&gt;** | Status codes for failover (default: 200,404,301,302,304) | [optional] [default to undefined]
-**failover_lifetime** | **string** | Failover cache lifetime | [optional] [default to '300']
-**failover_s3_bucket** | **string** | Failover S3 bucket | [optional] [default to undefined]
-**failover_s3_region** | **string** | Failover S3 region | [optional] [default to undefined]
+**failover_origin_ttfb** | **string** | Failover TTFB threshold in milliseconds | [optional] [default to '2000']
+**failover_origin_status_codes** | **Array&lt;string&gt;** | Origin status codes that trigger failover | [optional] [default to undefined]
+**failover_lifetime** | **string** | Failover cache lifetime in seconds | [optional] [default to '300']
 **proxy_alert_enabled** | **boolean** | Proxy alert enabled | [optional] [default to false]
 **waf_enabled** | **boolean** | WAF enabled | [optional] [default to false]
 **waf_config** | [**WafConfig**](WafConfig.md) |  | [optional] [default to undefined]
@@ -84,8 +82,6 @@ const instance: V2RuleProxyRequest = {
     failover_origin_ttfb,
     failover_origin_status_codes,
     failover_lifetime,
-    failover_s3_bucket,
-    failover_s3_region,
     proxy_alert_enabled,
     waf_enabled,
     waf_config,
