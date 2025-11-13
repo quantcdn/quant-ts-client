@@ -70,6 +70,7 @@ const { status, data } = await apiInstance.createEnvironment(
 |-------------|-------------|------------------|
 |**201** | The environment created |  -  |
 |**400** | The environment data is invalid |  -  |
+|**403** | Environment limit reached - application has reached the maximum number of allowed environments |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

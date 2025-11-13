@@ -57,9 +57,12 @@ docs/ContainerSecretsInner.md
 docs/ContainersApi.md
 docs/CrawlerSchedulesApi.md
 docs/CrawlersApi.md
+docs/CrawlersRun200Response.md
+docs/CrawlersRunRequest.md
 docs/CreateAISession201Response.md
 docs/CreateAISessionRequest.md
 docs/CreateAISessionRequestInitialMessagesInner.md
+docs/CreateApplication403Response.md
 docs/CreateApplicationRequest.md
 docs/CreateApplicationRequestDatabase.md
 docs/CreateApplicationRequestFilesystem.md
@@ -68,6 +71,7 @@ docs/CreateBackupRequest.md
 docs/CreateCommandRequest.md
 docs/CreateCronJob422Response.md
 docs/CreateCronJobRequest.md
+docs/CreateEnvironment403Response.md
 docs/CreateEnvironmentRequest.md
 docs/CreateEnvironmentRequestEnvironmentInner.md
 docs/CreateVolumeRequest.md

@@ -1415,6 +1415,32 @@ export interface ContainerSecretsInner {
 /**
  * 
  * @export
+ * @interface CrawlersRun200Response
+ */
+export interface CrawlersRun200Response {
+    /**
+     * The crawler run ID
+     * @type {string}
+     * @memberof CrawlersRun200Response
+     */
+    'run_id'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CrawlersRunRequest
+ */
+export interface CrawlersRunRequest {
+    /**
+     * URLs to crawl
+     * @type {Array<string>}
+     * @memberof CrawlersRunRequest
+     */
+    'urls'?: Array<string>;
+}
+/**
+ * 
+ * @export
  * @interface CreateAISession201Response
  */
 export interface CreateAISession201Response {
@@ -1515,6 +1541,25 @@ export const CreateAISessionRequestInitialMessagesInnerRoleEnum = {
 
 export type CreateAISessionRequestInitialMessagesInnerRoleEnum = typeof CreateAISessionRequestInitialMessagesInnerRoleEnum[keyof typeof CreateAISessionRequestInitialMessagesInnerRoleEnum];
 
+/**
+ * 
+ * @export
+ * @interface CreateApplication403Response
+ */
+export interface CreateApplication403Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateApplication403Response
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateApplication403Response
+     */
+    'error'?: string;
+}
 /**
  * 
  * @export
@@ -1728,6 +1773,25 @@ export interface CreateCronJobRequest {
      * @memberof CreateCronJobRequest
      */
     'isEnabled'?: boolean | null;
+}
+/**
+ * 
+ * @export
+ * @interface CreateEnvironment403Response
+ */
+export interface CreateEnvironment403Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateEnvironment403Response
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateEnvironment403Response
+     */
+    'error'?: string;
 }
 /**
  * 
@@ -5358,7 +5422,7 @@ export interface V2Crawler {
      * @type {string}
      * @memberof V2Crawler
      */
-    'deleted_at'?: string;
+    'deleted_at'?: string | null;
 }
 /**
  * Asset harvesting configuration
@@ -12976,6 +13040,58 @@ export const CrawlersApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary Run a crawler
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
+         * @param {string} crawler Crawler identifier
+         * @param {CrawlersRunRequest} crawlersRunRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        crawlersRun: async (organization: string, project: string, crawler: string, crawlersRunRequest: CrawlersRunRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organization' is not null or undefined
+            assertParamExists('crawlersRun', 'organization', organization)
+            // verify required parameter 'project' is not null or undefined
+            assertParamExists('crawlersRun', 'project', project)
+            // verify required parameter 'crawler' is not null or undefined
+            assertParamExists('crawlersRun', 'crawler', crawler)
+            // verify required parameter 'crawlersRunRequest' is not null or undefined
+            assertParamExists('crawlersRun', 'crawlersRunRequest', crawlersRunRequest)
+            const localVarPath = `/api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/run`
+                .replace(`{${"organization"}}`, encodeURIComponent(String(organization)))
+                .replace(`{${"project"}}`, encodeURIComponent(String(project)))
+                .replace(`{${"crawler"}}`, encodeURIComponent(String(crawler)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(crawlersRunRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Update a crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
@@ -13097,6 +13213,22 @@ export const CrawlersApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Run a crawler
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
+         * @param {string} crawler Crawler identifier
+         * @param {CrawlersRunRequest} crawlersRunRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async crawlersRun(organization: string, project: string, crawler: string, crawlersRunRequest: CrawlersRunRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CrawlersRun200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.crawlersRun(organization, project, crawler, crawlersRunRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CrawlersApi.crawlersRun']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Update a crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
@@ -13167,6 +13299,19 @@ export const CrawlersApiFactory = function (configuration?: Configuration, baseP
          */
         crawlersRead(organization: string, project: string, crawler: string, options?: RawAxiosRequestConfig): AxiosPromise<V2Crawler> {
             return localVarFp.crawlersRead(organization, project, crawler, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Run a crawler
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
+         * @param {string} crawler Crawler identifier
+         * @param {CrawlersRunRequest} crawlersRunRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        crawlersRun(organization: string, project: string, crawler: string, crawlersRunRequest: CrawlersRunRequest, options?: RawAxiosRequestConfig): AxiosPromise<CrawlersRun200Response> {
+            return localVarFp.crawlersRun(organization, project, crawler, crawlersRunRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -13244,6 +13389,21 @@ export class CrawlersApi extends BaseAPI {
      */
     public crawlersRead(organization: string, project: string, crawler: string, options?: RawAxiosRequestConfig) {
         return CrawlersApiFp(this.configuration).crawlersRead(organization, project, crawler, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Run a crawler
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
+     * @param {string} crawler Crawler identifier
+     * @param {CrawlersRunRequest} crawlersRunRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CrawlersApi
+     */
+    public crawlersRun(organization: string, project: string, crawler: string, crawlersRunRequest: CrawlersRunRequest, options?: RawAxiosRequestConfig) {
+        return CrawlersApiFp(this.configuration).crawlersRun(organization, project, crawler, crawlersRunRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

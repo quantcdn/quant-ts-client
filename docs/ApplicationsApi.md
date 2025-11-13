@@ -62,6 +62,7 @@ const { status, data } = await apiInstance.createApplication(
 |-------------|-------------|------------------|
 |**201** | The created application |  -  |
 |**400** | The request is invalid |  -  |
+|**403** | Application limit reached - organisation has reached the maximum number of allowed applications |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
