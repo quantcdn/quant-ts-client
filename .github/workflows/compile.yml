@@ -30,7 +30,9 @@ jobs:
           npm run build
 
       - name: Run tests
-        run: npm run test:smoke
+        run: |
+          npm run test:smoke
+          npm run clean
 
       - name: Check if version already published
         id: check
