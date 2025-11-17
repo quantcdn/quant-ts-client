@@ -1,4 +1,4 @@
-# CreateCronJob422Response
+# PatchEnvironmentCompose400Response
 
 
 ## Properties
@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CreateCronJob422Response } from '@quantcdn/quant-client';
+import { PatchEnvironmentCompose400Response } from '@quantcdn/quant-client';
 
-const instance: CreateCronJob422Response = {
+const instance: PatchEnvironmentCompose400Response = {
     message,
     errors,
 };

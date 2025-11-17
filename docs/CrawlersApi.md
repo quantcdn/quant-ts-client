@@ -6,6 +6,8 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |------------- | ------------- | -------------|
 |[**crawlersCreate**](#crawlerscreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/crawlers | Create a new crawler|
 |[**crawlersDelete**](#crawlersdelete) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Delete a crawler|
+|[**crawlersGetRunById**](#crawlersgetrunbyid) | **GET** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/runs/{run_id} | Get a run by ID|
+|[**crawlersGetRuns**](#crawlersgetruns) | **GET** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/runs | Get all runs for a crawler|
 |[**crawlersList**](#crawlerslist) | **GET** /api/v2/organizations/{organization}/projects/{project}/crawlers | List crawlers for the project|
 |[**crawlersRead**](#crawlersread) | **GET** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Get details of a single crawler|
 |[**crawlersRun**](#crawlersrun) | **POST** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/run | Run a crawler|
@@ -125,6 +127,129 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **crawlersGetRunById**
+> V2CrawlerRun crawlersGetRunById()
+
+
+### Example
+
+```typescript
+import {
+    CrawlersApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new CrawlersApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let crawler: string; //Crawler identifier (default to undefined)
+let runId: number; //Run identifier (default to undefined)
+
+const { status, data } = await apiInstance.crawlersGetRunById(
+    organization,
+    project,
+    crawler,
+    runId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **crawler** | [**string**] | Crawler identifier | defaults to undefined|
+| **runId** | [**number**] | Run identifier | defaults to undefined|
+
+
+### Return type
+
+**V2CrawlerRun**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The run |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+|**404** | The resource was not found. |  -  |
+|**500** | An unexpected error occurred. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **crawlersGetRuns**
+> Array<V2CrawlerRun> crawlersGetRuns()
+
+
+### Example
+
+```typescript
+import {
+    CrawlersApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new CrawlersApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let crawler: string; //Crawler identifier (default to undefined)
+
+const { status, data } = await apiInstance.crawlersGetRuns(
+    organization,
+    project,
+    crawler
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **crawler** | [**string**] | Crawler identifier | defaults to undefined|
+
+
+### Return type
+
+**Array<V2CrawlerRun>**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The runs |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+|**404** | The resource was not found. |  -  |
+|**500** | An unexpected error occurred. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

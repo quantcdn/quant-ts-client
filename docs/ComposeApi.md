@@ -5,6 +5,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getEnvironmentCompose**](#getenvironmentcompose) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/compose | Get the compose file for an environment|
+|[**patchEnvironmentCompose**](#patchenvironmentcompose) | **PATCH** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/compose | Partially Update Environment Compose Definition|
 |[**validateCompose**](#validatecompose) | **POST** /api/v3/organizations/{organisation}/compose/validate | Validate a compose file|
 
 # **getEnvironmentCompose**
@@ -61,6 +62,69 @@ const { status, data } = await apiInstance.getEnvironmentCompose(
 |-------------|-------------|------------------|
 |**200** | The compose file |  -  |
 |**404** | The compose file not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **patchEnvironmentCompose**
+> PatchEnvironmentCompose202Response patchEnvironmentCompose(patchEnvironmentComposeRequest)
+
+Partially updates top-level fields of the environment\'s compose definition, such as architecture, task-level CPU/Memory, or min/max scaling capacity. Only fields included in the request body are modified. The \'containers\' array, if provided, REPLACES the existing containers array; if omitted, the existing containers are NOT modified by this PATCH operation. (For modifying individual containers, use PATCH /containers/{containerName}). This triggers a validation, registers a new task definition, and updates the service.
+
+### Example
+
+```typescript
+import {
+    ComposeApi,
+    Configuration,
+    PatchEnvironmentComposeRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new ComposeApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+let application: string; //The application ID (default to undefined)
+let environment: string; //The environment ID (default to undefined)
+let patchEnvironmentComposeRequest: PatchEnvironmentComposeRequest; //Partial compose definition updates. All fields are optional.
+
+const { status, data } = await apiInstance.patchEnvironmentCompose(
+    organisation,
+    application,
+    environment,
+    patchEnvironmentComposeRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **patchEnvironmentComposeRequest** | **PatchEnvironmentComposeRequest**| Partial compose definition updates. All fields are optional. | |
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **application** | [**string**] | The application ID | defaults to undefined|
+| **environment** | [**string**] | The environment ID | defaults to undefined|
+
+
+### Return type
+
+**PatchEnvironmentCompose202Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**202** | Request accepted, compose definition partial update is processing. Returns the full updated compose definition. |  -  |
+|**400** | Invalid compose definition or validation failed. |  -  |
+|**404** | Application or environment not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

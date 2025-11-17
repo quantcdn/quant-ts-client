@@ -3,9 +3,5 @@
   "compilerOptions": {
     "module": "esnext",
     "outDir": "dist/esm"
-  },
-  "exclude": [
-    "dist/**/*",
-    "node_modules/**/*"
-  ]
+  }
 }

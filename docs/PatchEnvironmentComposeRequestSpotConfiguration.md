@@ -1,17 +1,19 @@
-# GetMetricsMetricsParameter
+# PatchEnvironmentComposeRequestSpotConfiguration
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**strategy** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { GetMetricsMetricsParameter } from '@quantcdn/quant-client';
+import { PatchEnvironmentComposeRequestSpotConfiguration } from '@quantcdn/quant-client';
 
-const instance: GetMetricsMetricsParameter = {
+const instance: PatchEnvironmentComposeRequestSpotConfiguration = {
+    strategy,
 };
 ```
 

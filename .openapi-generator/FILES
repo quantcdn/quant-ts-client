@@ -69,7 +69,6 @@ docs/CreateApplicationRequestFilesystem.md
 docs/CreateBackup202Response.md
 docs/CreateBackupRequest.md
 docs/CreateCommandRequest.md
-docs/CreateCronJob422Response.md
 docs/CreateCronJobRequest.md
 docs/CreateEnvironment403Response.md
 docs/CreateEnvironmentRequest.md
@@ -133,6 +132,11 @@ docs/ListToolExecutions200Response.md
 docs/ListToolExecutions200ResponseExecutionsInner.md
 docs/OrganizationsApi.md
 docs/OrganizationsList200ResponseInner.md
+docs/PatchEnvironmentCompose202Response.md
+docs/PatchEnvironmentCompose202ResponseSpotConfiguration.md
+docs/PatchEnvironmentCompose400Response.md
+docs/PatchEnvironmentComposeRequest.md
+docs/PatchEnvironmentComposeRequestSpotConfiguration.md
 docs/ProjectsApi.md
 docs/PurgeApi.md
 docs/PurgeCreateRequest.md
@@ -193,6 +197,7 @@ docs/V2CrawlerAssets.md
 docs/V2CrawlerAssetsNetworkIntercept.md
 docs/V2CrawlerAssetsParser.md
 docs/V2CrawlerRequest.md
+docs/V2CrawlerRun.md
 docs/V2CrawlerSchedule.md
 docs/V2CrawlerScheduleRequest.md
 docs/V2CrawlerSitemapInner.md
@@ -256,6 +261,5 @@ docs/WafConfigHttpbl.md
 docs/WafConfigThresholdsInner.md
 git_push.sh
 index.ts
-package.json
 tsconfig.esm.json
 tsconfig.json
