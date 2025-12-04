@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **maxCapacity** | **number** | Maximum task count for auto-scaling | [optional] [default to 1]
 **database** | [**CreateApplicationRequestDatabase**](CreateApplicationRequestDatabase.md) |  | [optional] [default to undefined]
 **filesystem** | [**CreateApplicationRequestFilesystem**](CreateApplicationRequestFilesystem.md) |  | [optional] [default to undefined]
+**environment** | [**Array&lt;CreateApplicationRequestEnvironmentInner&gt;**](CreateApplicationRequestEnvironmentInner.md) | Optional. Initial environment variables for the production environment. | [optional] [default to undefined]
 
 ## Example
 
@@ -24,6 +25,7 @@ const instance: CreateApplicationRequest = {
     maxCapacity,
     database,
     filesystem,
+    environment,
 };
 ```
 

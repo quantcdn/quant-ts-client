@@ -65,6 +65,7 @@ docs/CreateAISessionRequestInitialMessagesInner.md
 docs/CreateApplication403Response.md
 docs/CreateApplicationRequest.md
 docs/CreateApplicationRequestDatabase.md
+docs/CreateApplicationRequestEnvironmentInner.md
 docs/CreateApplicationRequestFilesystem.md
 docs/CreateBackup202Response.md
 docs/CreateBackupRequest.md
@@ -203,6 +204,8 @@ docs/V2CrawlerScheduleRequest.md
 docs/V2CrawlerSitemapInner.md
 docs/V2CustomHeaderRequest.md
 docs/V2Domain.md
+docs/V2DomainDnsGoLiveRecordsInner.md
+docs/V2DomainDnsValidationRecordsInner.md
 docs/V2DomainRequest.md
 docs/V2Error.md
 docs/V2Organization.md

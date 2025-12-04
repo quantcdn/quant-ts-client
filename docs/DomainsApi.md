@@ -86,7 +86,7 @@ const apiInstance = new DomainsApi(configuration);
 
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
-let domain: string; // (default to undefined)
+let domain: string; //Domain identifier (default to undefined)
 
 const { status, data } = await apiInstance.domainsDelete(
     organization,
@@ -101,7 +101,7 @@ const { status, data } = await apiInstance.domainsDelete(
 |------------- | ------------- | ------------- | -------------|
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
-| **domain** | [**string**] |  | defaults to undefined|
+| **domain** | [**string**] | Domain identifier | defaults to undefined|
 
 
 ### Return type
@@ -199,7 +199,7 @@ const apiInstance = new DomainsApi(configuration);
 
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
-let domain: string; // (default to undefined)
+let domain: string; //Domain identifier (default to undefined)
 
 const { status, data } = await apiInstance.domainsRead(
     organization,
@@ -214,7 +214,7 @@ const { status, data } = await apiInstance.domainsRead(
 |------------- | ------------- | ------------- | -------------|
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
-| **domain** | [**string**] |  | defaults to undefined|
+| **domain** | [**string**] | Domain identifier | defaults to undefined|
 
 
 ### Return type
@@ -292,7 +292,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**202** | The SSL certificate has been renewed. |  -  |
+|**202** | The SSL certificate renewal has been initiated. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
 
