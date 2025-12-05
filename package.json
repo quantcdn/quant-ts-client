@@ -45,6 +45,6 @@
     "nock": "^14.0.10",
     "ts-node": "^10.9.1",
     "@types/mocha": "^10.0.1",
-    "@types/chai": "^4.3.5"
+    "@types/chai": "^5.2.3"
   }
 }
