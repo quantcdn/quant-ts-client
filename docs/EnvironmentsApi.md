@@ -340,7 +340,7 @@ const { status, data } = await apiInstance.getEnvironmentMetrics(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listEnvironments**
-> Array<Environment> listEnvironments()
+> Array<EnvironmentSummary> listEnvironments()
 
 
 ### Example
@@ -373,7 +373,7 @@ const { status, data } = await apiInstance.listEnvironments(
 
 ### Return type
 
-**Array<Environment>**
+**Array<EnvironmentSummary>**
 
 ### Authorization
 
@@ -388,7 +388,7 @@ const { status, data } = await apiInstance.listEnvironments(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The environments |  -  |
+|**200** | List of environments with summary information including deployment status |  -  |
 |**404** | The organisation or application not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

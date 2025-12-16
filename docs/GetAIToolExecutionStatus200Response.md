@@ -1,4 +1,4 @@
-# GetToolExecutionStatus200Response
+# GetAIToolExecutionStatus200Response
 
 
 ## Properties
@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **executionId** | **string** |  | [default to undefined]
 **toolName** | **string** |  | [default to undefined]
-**status** | **string** |  | [default to undefined]
-**result** | [**GetToolExecutionStatus200ResponseResult**](GetToolExecutionStatus200ResponseResult.md) |  | [optional] [default to undefined]
+**status** | **string** | Execution status: pending, running, complete, or failed | [default to undefined]
+**result** | [**GetAIToolExecutionStatus200ResponseResult**](GetAIToolExecutionStatus200ResponseResult.md) |  | [optional] [default to undefined]
 **error** | **string** | Error message (only present when status&#x3D;\&#39;failed\&#39;) | [optional] [default to undefined]
 **createdAt** | **number** | Unix timestamp when execution was created | [default to undefined]
 **startedAt** | **number** | Unix timestamp when execution started (if status &gt;&#x3D; \&#39;running\&#39;) | [optional] [default to undefined]
@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GetToolExecutionStatus200Response } from '@quantcdn/quant-client';
+import { GetAIToolExecutionStatus200Response } from '@quantcdn/quant-client';
 
-const instance: GetToolExecutionStatus200Response = {
+const instance: GetAIToolExecutionStatus200Response = {
     executionId,
     toolName,
     status,

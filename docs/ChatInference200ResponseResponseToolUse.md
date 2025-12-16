@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **name** | **string** |  | [optional] [default to undefined]
 **input** | **object** |  | [optional] [default to undefined]
 **executionId** | **string** | Present for async tools with autoExecute | [optional] [default to undefined]
-**status** | **string** | Present for async tools with autoExecute | [optional] [default to undefined]
+**status** | **string** | Execution status (pending/running/complete/failed) - present for async tools with autoExecute | [optional] [default to undefined]
 **result** | [**ChatInference200ResponseResponseToolUseOneOfResult**](ChatInference200ResponseResponseToolUseOneOfResult.md) |  | [optional] [default to undefined]
 
 ## Example

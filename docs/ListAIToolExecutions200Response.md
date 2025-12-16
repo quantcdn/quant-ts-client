@@ -1,11 +1,11 @@
-# ListToolExecutions200Response
+# ListAIToolExecutions200Response
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**executions** | [**Array&lt;ListToolExecutions200ResponseExecutionsInner&gt;**](ListToolExecutions200ResponseExecutionsInner.md) |  | [default to undefined]
+**executions** | [**Array&lt;ListAIToolExecutions200ResponseExecutionsInner&gt;**](ListAIToolExecutions200ResponseExecutionsInner.md) |  | [default to undefined]
 **count** | **number** | Number of executions returned | [default to undefined]
 **orgId** | **string** | Organization identifier | [default to undefined]
 **status** | **string** | Filter applied (or \&#39;all\&#39;) | [optional] [default to undefined]
@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ListToolExecutions200Response } from '@quantcdn/quant-client';
+import { ListAIToolExecutions200Response } from '@quantcdn/quant-client';
 
-const instance: ListToolExecutions200Response = {
+const instance: ListAIToolExecutions200Response = {
     executions,
     count,
     orgId,

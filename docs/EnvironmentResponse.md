@@ -13,7 +13,9 @@ Name | Type | Description | Notes
 **minCapacity** | **number** | Minimum capacity for autoscaling | [optional] [default to undefined]
 **maxCapacity** | **number** | Maximum capacity for autoscaling | [optional] [default to undefined]
 **publicIpAddress** | **string** | Public IP address for SSH access | [optional] [default to undefined]
-**deploymentStatus** | **string** | Deployment status | [optional] [default to undefined]
+**deploymentStatus** | **string** | Current deployment status. FAILED indicates the most recent deployment did not complete successfully. | [optional] [default to undefined]
+**deploymentFailureType** | **string** | Type of deployment failure when deploymentStatus is FAILED (e.g., \&#39;ECS_DEPLOYMENT_CIRCUIT_BREAKER\&#39;, \&#39;IMAGE_PULL_ERROR\&#39;) | [optional] [default to undefined]
+**deploymentFailureReason** | **string** | Human-readable explanation of why the deployment failed. Contains details such as wrong image architecture, missing image, or container startup errors. | [optional] [default to undefined]
 **taskDefinition** | **object** | ECS task definition details | [optional] [default to undefined]
 **service** | **object** | ECS service details | [optional] [default to undefined]
 **loadBalancer** | **object** | Load balancer configuration | [optional] [default to undefined]
@@ -41,6 +43,8 @@ const instance: EnvironmentResponse = {
     maxCapacity,
     publicIpAddress,
     deploymentStatus,
+    deploymentFailureType,
+    deploymentFailureReason,
     taskDefinition,
     service,
     loadBalancer,

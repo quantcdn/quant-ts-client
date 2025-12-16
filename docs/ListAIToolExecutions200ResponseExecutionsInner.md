@@ -1,4 +1,4 @@
-# ListToolExecutions200ResponseExecutionsInner
+# ListAIToolExecutions200ResponseExecutionsInner
 
 
 ## Properties
@@ -7,16 +7,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **executionId** | **string** |  | [optional] [default to undefined]
 **toolName** | **string** |  | [optional] [default to undefined]
-**status** | **string** |  | [optional] [default to undefined]
+**status** | **string** | Execution status: pending, running, complete, or failed | [optional] [default to undefined]
 **createdAt** | **string** |  | [optional] [default to undefined]
 **completedAt** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { ListToolExecutions200ResponseExecutionsInner } from '@quantcdn/quant-client';
+import { ListAIToolExecutions200ResponseExecutionsInner } from '@quantcdn/quant-client';
 
-const instance: ListToolExecutions200ResponseExecutionsInner = {
+const instance: ListAIToolExecutions200ResponseExecutionsInner = {
     executionId,
     toolName,
     status,

@@ -1,4 +1,4 @@
-# GetToolExecutionStatus404Response
+# GetAIToolExecutionStatus404Response
 
 
 ## Properties
@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GetToolExecutionStatus404Response } from '@quantcdn/quant-client';
+import { GetAIToolExecutionStatus404Response } from '@quantcdn/quant-client';
 
-const instance: GetToolExecutionStatus404Response = {
+const instance: GetAIToolExecutionStatus404Response = {
     error,
     executionId,
 };

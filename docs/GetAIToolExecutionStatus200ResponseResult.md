@@ -1,4 +1,4 @@
-# GetToolExecutionStatus200ResponseResult
+# GetAIToolExecutionStatus200ResponseResult
 
 Tool execution result (only present when status=\'complete\'). Structure varies by tool type.
 
@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GetToolExecutionStatus200ResponseResult } from '@quantcdn/quant-client';
+import { GetAIToolExecutionStatus200ResponseResult } from '@quantcdn/quant-client';
 
-const instance: GetToolExecutionStatus200ResponseResult = {
+const instance: GetAIToolExecutionStatus200ResponseResult = {
     images,
     s3Urls,
 };

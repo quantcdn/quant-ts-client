@@ -416,11 +416,11 @@ export interface ChatInference200ResponseResponseToolUseOneOf {
      */
     'executionId'?: string;
     /**
-     * Present for async tools with autoExecute
+     * Execution status (pending/running/complete/failed) - present for async tools with autoExecute
      * @type {string}
      * @memberof ChatInference200ResponseResponseToolUseOneOf
      */
-    'status'?: ChatInference200ResponseResponseToolUseOneOfStatusEnum;
+    'status'?: string;
     /**
      * 
      * @type {ChatInference200ResponseResponseToolUseOneOfResult}
@@ -428,16 +428,6 @@ export interface ChatInference200ResponseResponseToolUseOneOf {
      */
     'result'?: ChatInference200ResponseResponseToolUseOneOfResult;
 }
-
-export const ChatInference200ResponseResponseToolUseOneOfStatusEnum = {
-    Pending: 'pending',
-    Running: 'running',
-    Complete: 'complete',
-    Failed: 'failed'
-} as const;
-
-export type ChatInference200ResponseResponseToolUseOneOfStatusEnum = typeof ChatInference200ResponseResponseToolUseOneOfStatusEnum[keyof typeof ChatInference200ResponseResponseToolUseOneOfStatusEnum];
-
 /**
  * 
  * @export
@@ -1016,6 +1006,106 @@ export type ChatInferenceStreamRequestMessagesInnerContent = Array<object> | str
 /**
  * 
  * @export
+ * @interface ChatWithAIAgent200Response
+ */
+export interface ChatWithAIAgent200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatWithAIAgent200Response
+     */
+    'sessionId'?: string;
+    /**
+     * 
+     * @type {ChatWithAIAgent200ResponseResponse}
+     * @memberof ChatWithAIAgent200Response
+     */
+    'response'?: ChatWithAIAgent200ResponseResponse;
+}
+/**
+ * 
+ * @export
+ * @interface ChatWithAIAgent200ResponseResponse
+ */
+export interface ChatWithAIAgent200ResponseResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatWithAIAgent200ResponseResponse
+     */
+    'text'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatWithAIAgent200ResponseResponse
+     */
+    'stopReason'?: string;
+    /**
+     * 
+     * @type {ChatWithAIAgent200ResponseResponseUsage}
+     * @memberof ChatWithAIAgent200ResponseResponse
+     */
+    'usage'?: ChatWithAIAgent200ResponseResponseUsage;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof ChatWithAIAgent200ResponseResponse
+     */
+    'toolResults'?: Array<object>;
+}
+/**
+ * 
+ * @export
+ * @interface ChatWithAIAgent200ResponseResponseUsage
+ */
+export interface ChatWithAIAgent200ResponseResponseUsage {
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatWithAIAgent200ResponseResponseUsage
+     */
+    'inputTokens'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatWithAIAgent200ResponseResponseUsage
+     */
+    'outputTokens'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface ChatWithAIAgentRequest
+ */
+export interface ChatWithAIAgentRequest {
+    /**
+     * The user\'s message to the agent
+     * @type {string}
+     * @memberof ChatWithAIAgentRequest
+     */
+    'message': string;
+    /**
+     * Optional session ID to continue a conversation
+     * @type {string}
+     * @memberof ChatWithAIAgentRequest
+     */
+    'sessionId'?: string;
+    /**
+     * Optional user identifier for session isolation
+     * @type {string}
+     * @memberof ChatWithAIAgentRequest
+     */
+    'userId'?: string;
+    /**
+     * Whether to stream the response (SSE)
+     * @type {boolean}
+     * @memberof ChatWithAIAgentRequest
+     */
+    'stream'?: boolean;
+}
+/**
+ * 
+ * @export
  * @interface Command
  */
 export interface Command {
@@ -1441,6 +1531,98 @@ export interface CrawlersRunRequest {
 /**
  * 
  * @export
+ * @interface CreateAIAgent201Response
+ */
+export interface CreateAIAgent201Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateAIAgent201Response
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {object}
+     * @memberof CreateAIAgent201Response
+     */
+    'agent'?: object;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAIAgent201Response
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateAIAgentRequest
+ */
+export interface CreateAIAgentRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAIAgentRequest
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAIAgentRequest
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAIAgentRequest
+     */
+    'group'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAIAgentRequest
+     */
+    'systemPrompt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateAIAgentRequest
+     */
+    'temperature'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAIAgentRequest
+     */
+    'modelId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateAIAgentRequest
+     */
+    'maxTokens'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateAIAgentRequest
+     */
+    'allowedTools'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateAIAgentRequest
+     */
+    'allowedCollections'?: Array<string>;
+    /**
+     * User identifier who created the agent
+     * @type {string}
+     * @memberof CreateAIAgentRequest
+     */
+    'createdBy'?: string;
+}
+/**
+ * 
+ * @export
  * @interface CreateAISession201Response
  */
 export interface CreateAISession201Response {
@@ -1783,6 +1965,74 @@ export interface CreateCronJobRequest {
 /**
  * 
  * @export
+ * @interface CreateCustomTool201Response
+ */
+export interface CreateCustomTool201Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateCustomTool201Response
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {object}
+     * @memberof CreateCustomTool201Response
+     */
+    'tool'?: object;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCustomTool201Response
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateCustomToolRequest
+ */
+export interface CreateCustomToolRequest {
+    /**
+     * Unique tool name (alphanumeric and underscores only)
+     * @type {string}
+     * @memberof CreateCustomToolRequest
+     */
+    'name': string;
+    /**
+     * Human-readable description of what the tool does
+     * @type {string}
+     * @memberof CreateCustomToolRequest
+     */
+    'description': string;
+    /**
+     * HTTPS URL of the edge function
+     * @type {string}
+     * @memberof CreateCustomToolRequest
+     */
+    'edgeFunctionUrl': string;
+    /**
+     * JSON Schema defining the tool\'s input parameters
+     * @type {object}
+     * @memberof CreateCustomToolRequest
+     */
+    'inputSchema': object;
+    /**
+     * Whether this tool runs asynchronously (>5 seconds)
+     * @type {boolean}
+     * @memberof CreateCustomToolRequest
+     */
+    'isAsync'?: boolean;
+    /**
+     * Tool execution timeout
+     * @type {number}
+     * @memberof CreateCustomToolRequest
+     */
+    'timeoutSeconds'?: number;
+}
+/**
+ * 
+ * @export
  * @interface CreateEnvironment403Response
  */
 export interface CreateEnvironment403Response {
@@ -1878,6 +2128,99 @@ export interface CreateEnvironmentRequestEnvironmentInner {
      * @memberof CreateEnvironmentRequestEnvironmentInner
      */
     'value'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateVectorCollection201Response
+ */
+export interface CreateVectorCollection201Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateVectorCollection201Response
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {CreateVectorCollection201ResponseCollection}
+     * @memberof CreateVectorCollection201Response
+     */
+    'collection'?: CreateVectorCollection201ResponseCollection;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVectorCollection201Response
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateVectorCollection201ResponseCollection
+ */
+export interface CreateVectorCollection201ResponseCollection {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVectorCollection201ResponseCollection
+     */
+    'collectionId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVectorCollection201ResponseCollection
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVectorCollection201ResponseCollection
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVectorCollection201ResponseCollection
+     */
+    'embeddingModel'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateVectorCollection201ResponseCollection
+     */
+    'dimensions'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface CreateVectorCollectionRequest
+ */
+export interface CreateVectorCollectionRequest {
+    /**
+     * Collection name (used for reference)
+     * @type {string}
+     * @memberof CreateVectorCollectionRequest
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVectorCollectionRequest
+     */
+    'description'?: string;
+    /**
+     * Embedding model to use (default: amazon.titan-embed-text-v2:0)
+     * @type {string}
+     * @memberof CreateVectorCollectionRequest
+     */
+    'embeddingModel'?: string;
+    /**
+     * Embedding dimensions (default: 1024)
+     * @type {number}
+     * @memberof CreateVectorCollectionRequest
+     */
+    'dimensions'?: number;
 }
 /**
  * 
@@ -2017,6 +2360,25 @@ export type CronRunStatusEnum = typeof CronRunStatusEnum[keyof typeof CronRunSta
 /**
  * 
  * @export
+ * @interface DeleteAIAgent200Response
+ */
+export interface DeleteAIAgent200Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DeleteAIAgent200Response
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeleteAIAgent200Response
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
  * @interface DeleteAISession200Response
  */
 export interface DeleteAISession200Response {
@@ -2045,6 +2407,44 @@ export interface DeleteBackup200Response {
      * @memberof DeleteBackup200Response
      */
     'backupId'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DeleteCustomTool200Response
+ */
+export interface DeleteCustomTool200Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DeleteCustomTool200Response
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeleteCustomTool200Response
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DeleteVectorCollection200Response
+ */
+export interface DeleteVectorCollection200Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DeleteVectorCollection200Response
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeleteVectorCollection200Response
+     */
+    'message'?: string;
 }
 /**
  * 
@@ -2268,11 +2668,23 @@ export interface EnvironmentResponse {
      */
     'publicIpAddress'?: string | null;
     /**
-     * Deployment status
+     * Current deployment status. FAILED indicates the most recent deployment did not complete successfully.
      * @type {string}
      * @memberof EnvironmentResponse
      */
-    'deploymentStatus'?: string;
+    'deploymentStatus'?: EnvironmentResponseDeploymentStatusEnum;
+    /**
+     * Type of deployment failure when deploymentStatus is FAILED (e.g., \'ECS_DEPLOYMENT_CIRCUIT_BREAKER\', \'IMAGE_PULL_ERROR\')
+     * @type {string}
+     * @memberof EnvironmentResponse
+     */
+    'deploymentFailureType'?: string | null;
+    /**
+     * Human-readable explanation of why the deployment failed. Contains details such as wrong image architecture, missing image, or container startup errors.
+     * @type {string}
+     * @memberof EnvironmentResponse
+     */
+    'deploymentFailureReason'?: string | null;
     /**
      * ECS task definition details
      * @type {object}
@@ -2346,36 +2758,362 @@ export interface EnvironmentResponse {
      */
     'updatedAt'?: string;
 }
+
+export const EnvironmentResponseDeploymentStatusEnum = {
+    Completed: 'COMPLETED',
+    InProgress: 'IN_PROGRESS',
+    Failed: 'FAILED'
+} as const;
+
+export type EnvironmentResponseDeploymentStatusEnum = typeof EnvironmentResponseDeploymentStatusEnum[keyof typeof EnvironmentResponseDeploymentStatusEnum];
+
+/**
+ * Environment summary returned in list responses
+ * @export
+ * @interface EnvironmentSummary
+ */
+export interface EnvironmentSummary {
+    /**
+     * Environment name
+     * @type {string}
+     * @memberof EnvironmentSummary
+     */
+    'envName'?: string;
+    /**
+     * Environment status
+     * @type {string}
+     * @memberof EnvironmentSummary
+     */
+    'status'?: string;
+    /**
+     * Current deployment status
+     * @type {string}
+     * @memberof EnvironmentSummary
+     */
+    'deploymentStatus'?: EnvironmentSummaryDeploymentStatusEnum;
+    /**
+     * Number of running tasks
+     * @type {number}
+     * @memberof EnvironmentSummary
+     */
+    'runningCount'?: number;
+    /**
+     * Desired number of tasks
+     * @type {number}
+     * @memberof EnvironmentSummary
+     */
+    'desiredCount'?: number;
+    /**
+     * Minimum capacity for autoscaling
+     * @type {number}
+     * @memberof EnvironmentSummary
+     */
+    'minCapacity'?: number;
+    /**
+     * Maximum capacity for autoscaling
+     * @type {number}
+     * @memberof EnvironmentSummary
+     */
+    'maxCapacity'?: number;
+}
+
+export const EnvironmentSummaryDeploymentStatusEnum = {
+    Completed: 'COMPLETED',
+    InProgress: 'IN_PROGRESS',
+    Failed: 'FAILED'
+} as const;
+
+export type EnvironmentSummaryDeploymentStatusEnum = typeof EnvironmentSummaryDeploymentStatusEnum[keyof typeof EnvironmentSummaryDeploymentStatusEnum];
+
 /**
  * 
  * @export
- * @interface GetAIConfig200Response
+ * @interface ExtendAISession200Response
  */
-export interface GetAIConfig200Response {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof GetAIConfig200Response
-     */
-    'enabled_models'?: Array<string>;
+export interface ExtendAISession200Response {
     /**
      * 
      * @type {string}
-     * @memberof GetAIConfig200Response
+     * @memberof ExtendAISession200Response
      */
-    'default_model'?: string;
+    'sessionId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ExtendAISession200Response
+     */
+    'expiresAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ExtendAISession200Response
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ExtendAISessionRequest
+ */
+export interface ExtendAISessionRequest {
+    /**
+     * Minutes to add to expiration time (default 60, max 1440)
+     * @type {number}
+     * @memberof ExtendAISessionRequest
+     */
+    'additionalMinutes'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface GetAIAgent200Response
+ */
+export interface GetAIAgent200Response {
+    /**
+     * 
+     * @type {GetAIAgent200ResponseAgent}
+     * @memberof GetAIAgent200Response
+     */
+    'agent'?: GetAIAgent200ResponseAgent;
+}
+/**
+ * 
+ * @export
+ * @interface GetAIAgent200ResponseAgent
+ */
+export interface GetAIAgent200ResponseAgent {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'agentId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'group'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'systemPrompt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'modelId'?: string;
     /**
      * 
      * @type {number}
-     * @memberof GetAIConfig200Response
-     */
-    'max_tokens'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof GetAIConfig200Response
+     * @memberof GetAIAgent200ResponseAgent
      */
     'temperature'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'maxTokens'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'allowedTools'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'allowedCollections'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetAIModel200Response
+ */
+export interface GetAIModel200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIModel200Response
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIModel200Response
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIModel200Response
+     */
+    'provider'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIModel200Response
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAIModel200Response
+     */
+    'contextWindow'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAIModel200Response
+     */
+    'maxOutputTokens'?: number;
+    /**
+     * 
+     * @type {GetAIModel200ResponseCapabilities}
+     * @memberof GetAIModel200Response
+     */
+    'capabilities'?: GetAIModel200ResponseCapabilities;
+    /**
+     * 
+     * @type {GetAIModel200ResponsePricing}
+     * @memberof GetAIModel200Response
+     */
+    'pricing'?: GetAIModel200ResponsePricing;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIModel200Response
+     */
+    'releaseDate'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetAIModel200Response
+     */
+    'deprecated'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetAIModel200Response
+     */
+    'available'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface GetAIModel200ResponseCapabilities
+ */
+export interface GetAIModel200ResponseCapabilities {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetAIModel200ResponseCapabilities
+     */
+    'supportsTools'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetAIModel200ResponseCapabilities
+     */
+    'supportsStructuredOutput'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetAIModel200ResponseCapabilities
+     */
+    'supportsMultimodal'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetAIModel200ResponseCapabilities
+     */
+    'supportsVision'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetAIModel200ResponseCapabilities
+     */
+    'supportsStreaming'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface GetAIModel200ResponsePricing
+ */
+export interface GetAIModel200ResponsePricing {
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAIModel200ResponsePricing
+     */
+    'inputPerMToken'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAIModel200ResponsePricing
+     */
+    'outputPerMToken'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIModel200ResponsePricing
+     */
+    'currency'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetAIModel404Response
+ */
+export interface GetAIModel404Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIModel404Response
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIModel404Response
+     */
+    'code'?: string;
 }
 /**
  * 
@@ -2413,6 +3151,105 @@ export interface GetAISession200Response {
      * @memberof GetAISession200Response
      */
     'created_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetAIToolExecutionStatus200Response
+ */
+export interface GetAIToolExecutionStatus200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIToolExecutionStatus200Response
+     */
+    'executionId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIToolExecutionStatus200Response
+     */
+    'toolName': string;
+    /**
+     * Execution status: pending, running, complete, or failed
+     * @type {string}
+     * @memberof GetAIToolExecutionStatus200Response
+     */
+    'status': string;
+    /**
+     * 
+     * @type {GetAIToolExecutionStatus200ResponseResult}
+     * @memberof GetAIToolExecutionStatus200Response
+     */
+    'result'?: GetAIToolExecutionStatus200ResponseResult;
+    /**
+     * Error message (only present when status=\'failed\')
+     * @type {string}
+     * @memberof GetAIToolExecutionStatus200Response
+     */
+    'error'?: string;
+    /**
+     * Unix timestamp when execution was created
+     * @type {number}
+     * @memberof GetAIToolExecutionStatus200Response
+     */
+    'createdAt': number;
+    /**
+     * Unix timestamp when execution started (if status >= \'running\')
+     * @type {number}
+     * @memberof GetAIToolExecutionStatus200Response
+     */
+    'startedAt'?: number;
+    /**
+     * Unix timestamp when execution completed (if status in [\'complete\', \'failed\'])
+     * @type {number}
+     * @memberof GetAIToolExecutionStatus200Response
+     */
+    'completedAt'?: number;
+    /**
+     * Execution duration in seconds (if completed)
+     * @type {number}
+     * @memberof GetAIToolExecutionStatus200Response
+     */
+    'duration'?: number;
+}
+/**
+ * Tool execution result (only present when status=\'complete\'). Structure varies by tool type.
+ * @export
+ * @interface GetAIToolExecutionStatus200ResponseResult
+ */
+export interface GetAIToolExecutionStatus200ResponseResult {
+    /**
+     * For image generation: Array of base64-encoded data URIs for inline display/preview
+     * @type {Array<string>}
+     * @memberof GetAIToolExecutionStatus200ResponseResult
+     */
+    'images'?: Array<string>;
+    /**
+     * For image generation: Array of signed S3 URLs for high-quality downloads (expire after 1 hour)
+     * @type {Array<string>}
+     * @memberof GetAIToolExecutionStatus200ResponseResult
+     */
+    's3Urls'?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface GetAIToolExecutionStatus404Response
+ */
+export interface GetAIToolExecutionStatus404Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIToolExecutionStatus404Response
+     */
+    'error'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAIToolExecutionStatus404Response
+     */
+    'executionId'?: string;
 }
 /**
  * 
@@ -2622,111 +3459,70 @@ export interface GetSshAccessCredentials200ResponseCredentials {
 /**
  * 
  * @export
- * @interface GetToolExecutionStatus200Response
+ * @interface GetVectorCollection200Response
  */
-export interface GetToolExecutionStatus200Response {
+export interface GetVectorCollection200Response {
     /**
      * 
-     * @type {string}
-     * @memberof GetToolExecutionStatus200Response
+     * @type {GetVectorCollection200ResponseCollection}
+     * @memberof GetVectorCollection200Response
      */
-    'executionId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetToolExecutionStatus200Response
-     */
-    'toolName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetToolExecutionStatus200Response
-     */
-    'status': GetToolExecutionStatus200ResponseStatusEnum;
-    /**
-     * 
-     * @type {GetToolExecutionStatus200ResponseResult}
-     * @memberof GetToolExecutionStatus200Response
-     */
-    'result'?: GetToolExecutionStatus200ResponseResult;
-    /**
-     * Error message (only present when status=\'failed\')
-     * @type {string}
-     * @memberof GetToolExecutionStatus200Response
-     */
-    'error'?: string;
-    /**
-     * Unix timestamp when execution was created
-     * @type {number}
-     * @memberof GetToolExecutionStatus200Response
-     */
-    'createdAt': number;
-    /**
-     * Unix timestamp when execution started (if status >= \'running\')
-     * @type {number}
-     * @memberof GetToolExecutionStatus200Response
-     */
-    'startedAt'?: number;
-    /**
-     * Unix timestamp when execution completed (if status in [\'complete\', \'failed\'])
-     * @type {number}
-     * @memberof GetToolExecutionStatus200Response
-     */
-    'completedAt'?: number;
-    /**
-     * Execution duration in seconds (if completed)
-     * @type {number}
-     * @memberof GetToolExecutionStatus200Response
-     */
-    'duration'?: number;
-}
-
-export const GetToolExecutionStatus200ResponseStatusEnum = {
-    Pending: 'pending',
-    Running: 'running',
-    Complete: 'complete',
-    Failed: 'failed'
-} as const;
-
-export type GetToolExecutionStatus200ResponseStatusEnum = typeof GetToolExecutionStatus200ResponseStatusEnum[keyof typeof GetToolExecutionStatus200ResponseStatusEnum];
-
-/**
- * Tool execution result (only present when status=\'complete\'). Structure varies by tool type.
- * @export
- * @interface GetToolExecutionStatus200ResponseResult
- */
-export interface GetToolExecutionStatus200ResponseResult {
-    /**
-     * For image generation: Array of base64-encoded data URIs for inline display/preview
-     * @type {Array<string>}
-     * @memberof GetToolExecutionStatus200ResponseResult
-     */
-    'images'?: Array<string>;
-    /**
-     * For image generation: Array of signed S3 URLs for high-quality downloads (expire after 1 hour)
-     * @type {Array<string>}
-     * @memberof GetToolExecutionStatus200ResponseResult
-     */
-    's3Urls'?: Array<string>;
+    'collection'?: GetVectorCollection200ResponseCollection;
 }
 /**
  * 
  * @export
- * @interface GetToolExecutionStatus404Response
+ * @interface GetVectorCollection200ResponseCollection
  */
-export interface GetToolExecutionStatus404Response {
+export interface GetVectorCollection200ResponseCollection {
     /**
      * 
      * @type {string}
-     * @memberof GetToolExecutionStatus404Response
+     * @memberof GetVectorCollection200ResponseCollection
      */
-    'error'?: string;
+    'collectionId'?: string;
     /**
      * 
      * @type {string}
-     * @memberof GetToolExecutionStatus404Response
+     * @memberof GetVectorCollection200ResponseCollection
      */
-    'executionId'?: string;
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetVectorCollection200ResponseCollection
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetVectorCollection200ResponseCollection
+     */
+    'documentCount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetVectorCollection200ResponseCollection
+     */
+    'embeddingModel'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetVectorCollection200ResponseCollection
+     */
+    'dimensions'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetVectorCollection200ResponseCollection
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetVectorCollection200ResponseCollection
+     */
+    'updatedAt'?: string;
 }
 /**
  * 
@@ -3196,6 +3992,86 @@ export type KVItemsShow200ResponseValue = object | string;
 /**
  * 
  * @export
+ * @interface ListAIAgents200Response
+ */
+export interface ListAIAgents200Response {
+    /**
+     * 
+     * @type {Array<ListAIAgents200ResponseAgentsInner>}
+     * @memberof ListAIAgents200Response
+     */
+    'agents'?: Array<ListAIAgents200ResponseAgentsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface ListAIAgents200ResponseAgentsInner
+ */
+export interface ListAIAgents200ResponseAgentsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'agentId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'group'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'modelId'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'temperature'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'maxTokens'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'allowedTools'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ListAIModels200Response
  */
 export interface ListAIModels200Response {
@@ -3316,6 +4192,74 @@ export interface ListAISessions200ResponseInner {
      * @memberof ListAISessions200ResponseInner
      */
     'updated_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ListAIToolExecutions200Response
+ */
+export interface ListAIToolExecutions200Response {
+    /**
+     * 
+     * @type {Array<ListAIToolExecutions200ResponseExecutionsInner>}
+     * @memberof ListAIToolExecutions200Response
+     */
+    'executions': Array<ListAIToolExecutions200ResponseExecutionsInner>;
+    /**
+     * Number of executions returned
+     * @type {number}
+     * @memberof ListAIToolExecutions200Response
+     */
+    'count': number;
+    /**
+     * Organization identifier
+     * @type {string}
+     * @memberof ListAIToolExecutions200Response
+     */
+    'orgId': string;
+    /**
+     * Filter applied (or \'all\')
+     * @type {string}
+     * @memberof ListAIToolExecutions200Response
+     */
+    'status'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ListAIToolExecutions200ResponseExecutionsInner
+ */
+export interface ListAIToolExecutions200ResponseExecutionsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIToolExecutions200ResponseExecutionsInner
+     */
+    'executionId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIToolExecutions200ResponseExecutionsInner
+     */
+    'toolName'?: string;
+    /**
+     * Execution status: pending, running, complete, or failed
+     * @type {string}
+     * @memberof ListAIToolExecutions200ResponseExecutionsInner
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIToolExecutions200ResponseExecutionsInner
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListAIToolExecutions200ResponseExecutionsInner
+     */
+    'completedAt'?: string;
 }
 /**
  * 
@@ -3538,81 +4482,127 @@ export interface ListBackups422Response {
 /**
  * 
  * @export
- * @interface ListToolExecutions200Response
+ * @interface ListCustomTools200Response
  */
-export interface ListToolExecutions200Response {
+export interface ListCustomTools200Response {
     /**
      * 
-     * @type {Array<ListToolExecutions200ResponseExecutionsInner>}
-     * @memberof ListToolExecutions200Response
+     * @type {Array<ListCustomTools200ResponseToolsInner>}
+     * @memberof ListCustomTools200Response
      */
-    'executions': Array<ListToolExecutions200ResponseExecutionsInner>;
+    'tools'?: Array<ListCustomTools200ResponseToolsInner>;
     /**
-     * Number of executions returned
+     * 
      * @type {number}
-     * @memberof ListToolExecutions200Response
+     * @memberof ListCustomTools200Response
      */
-    'count': number;
-    /**
-     * Organization identifier
-     * @type {string}
-     * @memberof ListToolExecutions200Response
-     */
-    'orgId': string;
-    /**
-     * Filter applied (or \'all\')
-     * @type {string}
-     * @memberof ListToolExecutions200Response
-     */
-    'status'?: string;
+    'count'?: number;
 }
 /**
  * 
  * @export
- * @interface ListToolExecutions200ResponseExecutionsInner
+ * @interface ListCustomTools200ResponseToolsInner
  */
-export interface ListToolExecutions200ResponseExecutionsInner {
+export interface ListCustomTools200ResponseToolsInner {
     /**
      * 
      * @type {string}
-     * @memberof ListToolExecutions200ResponseExecutionsInner
+     * @memberof ListCustomTools200ResponseToolsInner
      */
-    'executionId'?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ListToolExecutions200ResponseExecutionsInner
+     * @memberof ListCustomTools200ResponseToolsInner
      */
-    'toolName'?: string;
+    'description'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ListToolExecutions200ResponseExecutionsInner
+     * @memberof ListCustomTools200ResponseToolsInner
      */
-    'status'?: ListToolExecutions200ResponseExecutionsInnerStatusEnum;
+    'edgeFunctionUrl'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ListCustomTools200ResponseToolsInner
+     */
+    'isAsync'?: boolean;
+    /**
+     * 
+     * @type {object}
+     * @memberof ListCustomTools200ResponseToolsInner
+     */
+    'inputSchema'?: object;
     /**
      * 
      * @type {string}
-     * @memberof ListToolExecutions200ResponseExecutionsInner
+     * @memberof ListCustomTools200ResponseToolsInner
      */
     'createdAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ListVectorCollections200Response
+ */
+export interface ListVectorCollections200Response {
+    /**
+     * 
+     * @type {Array<ListVectorCollections200ResponseCollectionsInner>}
+     * @memberof ListVectorCollections200Response
+     */
+    'collections'?: Array<ListVectorCollections200ResponseCollectionsInner>;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListVectorCollections200Response
+     */
+    'count'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface ListVectorCollections200ResponseCollectionsInner
+ */
+export interface ListVectorCollections200ResponseCollectionsInner {
     /**
      * 
      * @type {string}
-     * @memberof ListToolExecutions200ResponseExecutionsInner
+     * @memberof ListVectorCollections200ResponseCollectionsInner
      */
-    'completedAt'?: string;
+    'collectionId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListVectorCollections200ResponseCollectionsInner
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListVectorCollections200ResponseCollectionsInner
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListVectorCollections200ResponseCollectionsInner
+     */
+    'documentCount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListVectorCollections200ResponseCollectionsInner
+     */
+    'embeddingModel'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListVectorCollections200ResponseCollectionsInner
+     */
+    'createdAt'?: string;
 }
-
-export const ListToolExecutions200ResponseExecutionsInnerStatusEnum = {
-    Pending: 'pending',
-    Running: 'running',
-    Complete: 'complete',
-    Failed: 'failed'
-} as const;
-
-export type ListToolExecutions200ResponseExecutionsInnerStatusEnum = typeof ListToolExecutions200ResponseExecutionsInnerStatusEnum[keyof typeof ListToolExecutions200ResponseExecutionsInnerStatusEnum];
-
 /**
  * 
  * @export
@@ -3849,6 +4839,106 @@ export interface PurgeCreateRequest {
 /**
  * 
  * @export
+ * @interface QueryVectorCollection200Response
+ */
+export interface QueryVectorCollection200Response {
+    /**
+     * 
+     * @type {Array<QueryVectorCollection200ResponseResultsInner>}
+     * @memberof QueryVectorCollection200Response
+     */
+    'results'?: Array<QueryVectorCollection200ResponseResultsInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryVectorCollection200Response
+     */
+    'query'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof QueryVectorCollection200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof QueryVectorCollection200Response
+     */
+    'executionTimeMs'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface QueryVectorCollection200ResponseResultsInner
+ */
+export interface QueryVectorCollection200ResponseResultsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryVectorCollection200ResponseResultsInner
+     */
+    'content'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof QueryVectorCollection200ResponseResultsInner
+     */
+    'score'?: number;
+    /**
+     * 
+     * @type {QueryVectorCollection200ResponseResultsInnerMetadata}
+     * @memberof QueryVectorCollection200ResponseResultsInner
+     */
+    'metadata'?: QueryVectorCollection200ResponseResultsInnerMetadata;
+}
+/**
+ * 
+ * @export
+ * @interface QueryVectorCollection200ResponseResultsInnerMetadata
+ */
+export interface QueryVectorCollection200ResponseResultsInnerMetadata {
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryVectorCollection200ResponseResultsInnerMetadata
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryVectorCollection200ResponseResultsInnerMetadata
+     */
+    'source_url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryVectorCollection200ResponseResultsInnerMetadata
+     */
+    'section'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface QueryVectorCollectionRequest
+ */
+export interface QueryVectorCollectionRequest {
+    /**
+     * Natural language search query
+     * @type {string}
+     * @memberof QueryVectorCollectionRequest
+     */
+    'query': string;
+    /**
+     * Number of results to return
+     * @type {number}
+     * @memberof QueryVectorCollectionRequest
+     */
+    'count'?: number;
+}
+/**
+ * 
+ * @export
  * @interface ScalingPolicy
  */
 export interface ScalingPolicy {
@@ -3974,34 +5064,192 @@ export interface SyncToEnvironmentRequest {
 /**
  * 
  * @export
- * @interface UpdateAIConfigRequest
+ * @interface UpdateAIAgent200Response
  */
-export interface UpdateAIConfigRequest {
+export interface UpdateAIAgent200Response {
     /**
      * 
-     * @type {Array<string>}
-     * @memberof UpdateAIConfigRequest
+     * @type {boolean}
+     * @memberof UpdateAIAgent200Response
      */
-    'enabled_models'?: Array<string>;
+    'success'?: boolean;
+    /**
+     * 
+     * @type {object}
+     * @memberof UpdateAIAgent200Response
+     */
+    'agent'?: object;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAIConfigRequest
+     * @memberof UpdateAIAgent200Response
      */
-    'default_model'?: string;
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateAIAgentRequest
+ */
+export interface UpdateAIAgentRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAIAgentRequest
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAIAgentRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAIAgentRequest
+     */
+    'group'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAIAgentRequest
+     */
+    'systemPrompt'?: string;
     /**
      * 
      * @type {number}
-     * @memberof UpdateAIConfigRequest
-     */
-    'max_tokens'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateAIConfigRequest
+     * @memberof UpdateAIAgentRequest
      */
     'temperature'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAIAgentRequest
+     */
+    'modelId'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateAIAgentRequest
+     */
+    'maxTokens'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateAIAgentRequest
+     */
+    'allowedTools'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateAIAgentRequest
+     */
+    'allowedCollections'?: Array<string>;
 }
+/**
+ * 
+ * @export
+ * @interface UpdateAISession200Response
+ */
+export interface UpdateAISession200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAISession200Response
+     */
+    'sessionId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAISession200Response
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateAISession200Response
+     */
+    'totalMessages'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateAISession200Response
+     */
+    'totalTokens'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAISession200Response
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateAISessionRequest
+ */
+export interface UpdateAISessionRequest {
+    /**
+     * New messages to append to conversation
+     * @type {Array<UpdateAISessionRequestNewMessagesInner>}
+     * @memberof UpdateAISessionRequest
+     */
+    'newMessages'?: Array<UpdateAISessionRequestNewMessagesInner>;
+    /**
+     * Tokens consumed in this turn
+     * @type {number}
+     * @memberof UpdateAISessionRequest
+     */
+    'tokensUsed'?: number;
+    /**
+     * Update session status
+     * @type {string}
+     * @memberof UpdateAISessionRequest
+     */
+    'status'?: UpdateAISessionRequestStatusEnum;
+    /**
+     * Update custom metadata
+     * @type {object}
+     * @memberof UpdateAISessionRequest
+     */
+    'metadata'?: object;
+}
+
+export const UpdateAISessionRequestStatusEnum = {
+    Active: 'active',
+    Completed: 'completed'
+} as const;
+
+export type UpdateAISessionRequestStatusEnum = typeof UpdateAISessionRequestStatusEnum[keyof typeof UpdateAISessionRequestStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateAISessionRequestNewMessagesInner
+ */
+export interface UpdateAISessionRequestNewMessagesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAISessionRequestNewMessagesInner
+     */
+    'role'?: UpdateAISessionRequestNewMessagesInnerRoleEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAISessionRequestNewMessagesInner
+     */
+    'content'?: string;
+}
+
+export const UpdateAISessionRequestNewMessagesInnerRoleEnum = {
+    User: 'user',
+    Assistant: 'assistant'
+} as const;
+
+export type UpdateAISessionRequestNewMessagesInnerRoleEnum = typeof UpdateAISessionRequestNewMessagesInnerRoleEnum[keyof typeof UpdateAISessionRequestNewMessagesInnerRoleEnum];
+
 /**
  * 
  * @export
@@ -4095,6 +5343,100 @@ export interface UpdateEnvironmentVariableRequest {
      * @memberof UpdateEnvironmentVariableRequest
      */
     'value'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UploadVectorDocuments200Response
+ */
+export interface UploadVectorDocuments200Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UploadVectorDocuments200Response
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UploadVectorDocuments200Response
+     */
+    'documentIds'?: Array<string>;
+    /**
+     * 
+     * @type {number}
+     * @memberof UploadVectorDocuments200Response
+     */
+    'chunksCreated'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadVectorDocuments200Response
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UploadVectorDocumentsRequest
+ */
+export interface UploadVectorDocumentsRequest {
+    /**
+     * 
+     * @type {Array<UploadVectorDocumentsRequestDocumentsInner>}
+     * @memberof UploadVectorDocumentsRequest
+     */
+    'documents': Array<UploadVectorDocumentsRequestDocumentsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface UploadVectorDocumentsRequestDocumentsInner
+ */
+export interface UploadVectorDocumentsRequestDocumentsInner {
+    /**
+     * Document text content
+     * @type {string}
+     * @memberof UploadVectorDocumentsRequestDocumentsInner
+     */
+    'content': string;
+    /**
+     * 
+     * @type {UploadVectorDocumentsRequestDocumentsInnerMetadata}
+     * @memberof UploadVectorDocumentsRequestDocumentsInner
+     */
+    'metadata'?: UploadVectorDocumentsRequestDocumentsInnerMetadata;
+}
+/**
+ * 
+ * @export
+ * @interface UploadVectorDocumentsRequestDocumentsInnerMetadata
+ */
+export interface UploadVectorDocumentsRequestDocumentsInnerMetadata {
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadVectorDocumentsRequestDocumentsInnerMetadata
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadVectorDocumentsRequestDocumentsInnerMetadata
+     */
+    'source_url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadVectorDocumentsRequestDocumentsInnerMetadata
+     */
+    'section'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UploadVectorDocumentsRequestDocumentsInnerMetadata
+     */
+    'tags'?: Array<string>;
 }
 /**
  * 
@@ -9577,10 +10919,824 @@ export type WafConfigThresholdsInnerModeEnum = typeof WafConfigThresholdsInnerMo
 
 
 /**
- * AIServicesApi - axios parameter creator
+ * AIAgentsApi - axios parameter creator
  * @export
  */
-export const AIServicesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const AIAgentsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Initiates a chat session with a specific AI agent. The agent\'s configuration (system prompt, temperature, model, allowed tools) is automatically applied.      *      * **Key Features:**      * - **Session Management**: Automatic session creation and state tracking      * - **Multi-turn Conversations**: Full conversation history maintained server-side      * - Agent\'s system prompt is prepended to conversation      * - Only agent\'s allowed tools are available      * - All tools are auto-executed (no client confirmation)      * - Temperature and model from agent config      *      * **Session Support:**      * - Omit `sessionId` to create a new session automatically      * - Include `sessionId` to continue an existing conversation      * - Sessions expire after 60 minutes of inactivity      * - Use `/sessions/{sessionId}` to retrieve full conversation history
+         * @summary Chat with AI Agent
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {ChatWithAIAgentRequest} chatWithAIAgentRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatWithAIAgent: async (organisation: string, agentId: string, chatWithAIAgentRequest: ChatWithAIAgentRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('chatWithAIAgent', 'organisation', organisation)
+            // verify required parameter 'agentId' is not null or undefined
+            assertParamExists('chatWithAIAgent', 'agentId', agentId)
+            // verify required parameter 'chatWithAIAgentRequest' is not null or undefined
+            assertParamExists('chatWithAIAgent', 'chatWithAIAgentRequest', chatWithAIAgentRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/agents/{agentId}/chat`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"agentId"}}`, encodeURIComponent(String(agentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(chatWithAIAgentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Creates a new AI agent with specific configuration, system prompt, and tool permissions.      *      * **Agent Configuration:**      * - **System Prompt**: Instructions that guide the agent\'s behavior      * - **Model**: Which foundation model to use (e.g., \'amazon.nova-pro-v1:0\')      * - **Temperature**: Creativity level (0-1)      * - **Allowed Tools**: Which tools the agent can auto-execute      * - **Allowed Collections**: Vector DB collections for RAG      * - **Group**: Optional categorization (e.g., \'development\', \'compliance\')      *      * **Auto-Execution:**      * All tools are automatically executed when an agent requests them (no client confirmation needed).
+         * @summary Create AI Agent
+         * @param {string} organisation The organisation ID
+         * @param {CreateAIAgentRequest} createAIAgentRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAIAgent: async (organisation: string, createAIAgentRequest: CreateAIAgentRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('createAIAgent', 'organisation', organisation)
+            // verify required parameter 'createAIAgentRequest' is not null or undefined
+            assertParamExists('createAIAgent', 'createAIAgentRequest', createAIAgentRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/agents`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createAIAgentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Permanently deletes an AI agent. This action cannot be undone.
+         * @summary Delete Agent
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAIAgent: async (organisation: string, agentId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('deleteAIAgent', 'organisation', organisation)
+            // verify required parameter 'agentId' is not null or undefined
+            assertParamExists('deleteAIAgent', 'agentId', agentId)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/agents/{agentId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"agentId"}}`, encodeURIComponent(String(agentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieves detailed configuration for a specific AI agent.
+         * @summary Get Agent Details
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIAgent: async (organisation: string, agentId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getAIAgent', 'organisation', organisation)
+            // verify required parameter 'agentId' is not null or undefined
+            assertParamExists('getAIAgent', 'agentId', agentId)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/agents/{agentId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"agentId"}}`, encodeURIComponent(String(agentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists all AI agents for an organization. Agents are pre-configured AI assistants with specific system prompts, model settings, and tool permissions.      *      * **Features:**      * - Filter by group (e.g., \'development\', \'compliance\')      * - Organization-scoped      * - Returns agent configurations without execution history
+         * @summary List AI Agents
+         * @param {string} organisation The organisation ID
+         * @param {string} [group] Optional group filter (e.g., \&#39;development\&#39;, \&#39;compliance\&#39;)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAIAgents: async (organisation: string, group?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listAIAgents', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/agents`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (group !== undefined) {
+                localVarQueryParameter['group'] = group;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Updates an existing AI agent configuration. All fields except agentId, organizationId, createdAt, and createdBy can be updated.
+         * @summary Update Agent
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {UpdateAIAgentRequest} updateAIAgentRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAIAgent: async (organisation: string, agentId: string, updateAIAgentRequest: UpdateAIAgentRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('updateAIAgent', 'organisation', organisation)
+            // verify required parameter 'agentId' is not null or undefined
+            assertParamExists('updateAIAgent', 'agentId', agentId)
+            // verify required parameter 'updateAIAgentRequest' is not null or undefined
+            assertParamExists('updateAIAgent', 'updateAIAgentRequest', updateAIAgentRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/agents/{agentId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"agentId"}}`, encodeURIComponent(String(agentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateAIAgentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AIAgentsApi - functional programming interface
+ * @export
+ */
+export const AIAgentsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AIAgentsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Initiates a chat session with a specific AI agent. The agent\'s configuration (system prompt, temperature, model, allowed tools) is automatically applied.      *      * **Key Features:**      * - **Session Management**: Automatic session creation and state tracking      * - **Multi-turn Conversations**: Full conversation history maintained server-side      * - Agent\'s system prompt is prepended to conversation      * - Only agent\'s allowed tools are available      * - All tools are auto-executed (no client confirmation)      * - Temperature and model from agent config      *      * **Session Support:**      * - Omit `sessionId` to create a new session automatically      * - Include `sessionId` to continue an existing conversation      * - Sessions expire after 60 minutes of inactivity      * - Use `/sessions/{sessionId}` to retrieve full conversation history
+         * @summary Chat with AI Agent
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {ChatWithAIAgentRequest} chatWithAIAgentRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatWithAIAgent(organisation: string, agentId: string, chatWithAIAgentRequest: ChatWithAIAgentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatWithAIAgent200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatWithAIAgent(organisation, agentId, chatWithAIAgentRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIAgentsApi.chatWithAIAgent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Creates a new AI agent with specific configuration, system prompt, and tool permissions.      *      * **Agent Configuration:**      * - **System Prompt**: Instructions that guide the agent\'s behavior      * - **Model**: Which foundation model to use (e.g., \'amazon.nova-pro-v1:0\')      * - **Temperature**: Creativity level (0-1)      * - **Allowed Tools**: Which tools the agent can auto-execute      * - **Allowed Collections**: Vector DB collections for RAG      * - **Group**: Optional categorization (e.g., \'development\', \'compliance\')      *      * **Auto-Execution:**      * All tools are automatically executed when an agent requests them (no client confirmation needed).
+         * @summary Create AI Agent
+         * @param {string} organisation The organisation ID
+         * @param {CreateAIAgentRequest} createAIAgentRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createAIAgent(organisation: string, createAIAgentRequest: CreateAIAgentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateAIAgent201Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAIAgent(organisation, createAIAgentRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIAgentsApi.createAIAgent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Permanently deletes an AI agent. This action cannot be undone.
+         * @summary Delete Agent
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteAIAgent(organisation: string, agentId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteAIAgent200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAIAgent(organisation, agentId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIAgentsApi.deleteAIAgent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieves detailed configuration for a specific AI agent.
+         * @summary Get Agent Details
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAIAgent(organisation: string, agentId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAIAgent200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAIAgent(organisation, agentId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIAgentsApi.getAIAgent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists all AI agents for an organization. Agents are pre-configured AI assistants with specific system prompts, model settings, and tool permissions.      *      * **Features:**      * - Filter by group (e.g., \'development\', \'compliance\')      * - Organization-scoped      * - Returns agent configurations without execution history
+         * @summary List AI Agents
+         * @param {string} organisation The organisation ID
+         * @param {string} [group] Optional group filter (e.g., \&#39;development\&#39;, \&#39;compliance\&#39;)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAIAgents(organisation: string, group?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAIAgents200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAIAgents(organisation, group, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIAgentsApi.listAIAgents']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Updates an existing AI agent configuration. All fields except agentId, organizationId, createdAt, and createdBy can be updated.
+         * @summary Update Agent
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {UpdateAIAgentRequest} updateAIAgentRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateAIAgent(organisation: string, agentId: string, updateAIAgentRequest: UpdateAIAgentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateAIAgent200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAIAgent(organisation, agentId, updateAIAgentRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIAgentsApi.updateAIAgent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AIAgentsApi - factory interface
+ * @export
+ */
+export const AIAgentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AIAgentsApiFp(configuration)
+    return {
+        /**
+         * Initiates a chat session with a specific AI agent. The agent\'s configuration (system prompt, temperature, model, allowed tools) is automatically applied.      *      * **Key Features:**      * - **Session Management**: Automatic session creation and state tracking      * - **Multi-turn Conversations**: Full conversation history maintained server-side      * - Agent\'s system prompt is prepended to conversation      * - Only agent\'s allowed tools are available      * - All tools are auto-executed (no client confirmation)      * - Temperature and model from agent config      *      * **Session Support:**      * - Omit `sessionId` to create a new session automatically      * - Include `sessionId` to continue an existing conversation      * - Sessions expire after 60 minutes of inactivity      * - Use `/sessions/{sessionId}` to retrieve full conversation history
+         * @summary Chat with AI Agent
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {ChatWithAIAgentRequest} chatWithAIAgentRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatWithAIAgent(organisation: string, agentId: string, chatWithAIAgentRequest: ChatWithAIAgentRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChatWithAIAgent200Response> {
+            return localVarFp.chatWithAIAgent(organisation, agentId, chatWithAIAgentRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Creates a new AI agent with specific configuration, system prompt, and tool permissions.      *      * **Agent Configuration:**      * - **System Prompt**: Instructions that guide the agent\'s behavior      * - **Model**: Which foundation model to use (e.g., \'amazon.nova-pro-v1:0\')      * - **Temperature**: Creativity level (0-1)      * - **Allowed Tools**: Which tools the agent can auto-execute      * - **Allowed Collections**: Vector DB collections for RAG      * - **Group**: Optional categorization (e.g., \'development\', \'compliance\')      *      * **Auto-Execution:**      * All tools are automatically executed when an agent requests them (no client confirmation needed).
+         * @summary Create AI Agent
+         * @param {string} organisation The organisation ID
+         * @param {CreateAIAgentRequest} createAIAgentRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAIAgent(organisation: string, createAIAgentRequest: CreateAIAgentRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateAIAgent201Response> {
+            return localVarFp.createAIAgent(organisation, createAIAgentRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Permanently deletes an AI agent. This action cannot be undone.
+         * @summary Delete Agent
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAIAgent(organisation: string, agentId: string, options?: RawAxiosRequestConfig): AxiosPromise<DeleteAIAgent200Response> {
+            return localVarFp.deleteAIAgent(organisation, agentId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieves detailed configuration for a specific AI agent.
+         * @summary Get Agent Details
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIAgent(organisation: string, agentId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAIAgent200Response> {
+            return localVarFp.getAIAgent(organisation, agentId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists all AI agents for an organization. Agents are pre-configured AI assistants with specific system prompts, model settings, and tool permissions.      *      * **Features:**      * - Filter by group (e.g., \'development\', \'compliance\')      * - Organization-scoped      * - Returns agent configurations without execution history
+         * @summary List AI Agents
+         * @param {string} organisation The organisation ID
+         * @param {string} [group] Optional group filter (e.g., \&#39;development\&#39;, \&#39;compliance\&#39;)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAIAgents(organisation: string, group?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListAIAgents200Response> {
+            return localVarFp.listAIAgents(organisation, group, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates an existing AI agent configuration. All fields except agentId, organizationId, createdAt, and createdBy can be updated.
+         * @summary Update Agent
+         * @param {string} organisation The organisation ID
+         * @param {string} agentId The agent ID
+         * @param {UpdateAIAgentRequest} updateAIAgentRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAIAgent(organisation: string, agentId: string, updateAIAgentRequest: UpdateAIAgentRequest, options?: RawAxiosRequestConfig): AxiosPromise<UpdateAIAgent200Response> {
+            return localVarFp.updateAIAgent(organisation, agentId, updateAIAgentRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AIAgentsApi - object-oriented interface
+ * @export
+ * @class AIAgentsApi
+ * @extends {BaseAPI}
+ */
+export class AIAgentsApi extends BaseAPI {
+    /**
+     * Initiates a chat session with a specific AI agent. The agent\'s configuration (system prompt, temperature, model, allowed tools) is automatically applied.      *      * **Key Features:**      * - **Session Management**: Automatic session creation and state tracking      * - **Multi-turn Conversations**: Full conversation history maintained server-side      * - Agent\'s system prompt is prepended to conversation      * - Only agent\'s allowed tools are available      * - All tools are auto-executed (no client confirmation)      * - Temperature and model from agent config      *      * **Session Support:**      * - Omit `sessionId` to create a new session automatically      * - Include `sessionId` to continue an existing conversation      * - Sessions expire after 60 minutes of inactivity      * - Use `/sessions/{sessionId}` to retrieve full conversation history
+     * @summary Chat with AI Agent
+     * @param {string} organisation The organisation ID
+     * @param {string} agentId The agent ID
+     * @param {ChatWithAIAgentRequest} chatWithAIAgentRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIAgentsApi
+     */
+    public chatWithAIAgent(organisation: string, agentId: string, chatWithAIAgentRequest: ChatWithAIAgentRequest, options?: RawAxiosRequestConfig) {
+        return AIAgentsApiFp(this.configuration).chatWithAIAgent(organisation, agentId, chatWithAIAgentRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Creates a new AI agent with specific configuration, system prompt, and tool permissions.      *      * **Agent Configuration:**      * - **System Prompt**: Instructions that guide the agent\'s behavior      * - **Model**: Which foundation model to use (e.g., \'amazon.nova-pro-v1:0\')      * - **Temperature**: Creativity level (0-1)      * - **Allowed Tools**: Which tools the agent can auto-execute      * - **Allowed Collections**: Vector DB collections for RAG      * - **Group**: Optional categorization (e.g., \'development\', \'compliance\')      *      * **Auto-Execution:**      * All tools are automatically executed when an agent requests them (no client confirmation needed).
+     * @summary Create AI Agent
+     * @param {string} organisation The organisation ID
+     * @param {CreateAIAgentRequest} createAIAgentRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIAgentsApi
+     */
+    public createAIAgent(organisation: string, createAIAgentRequest: CreateAIAgentRequest, options?: RawAxiosRequestConfig) {
+        return AIAgentsApiFp(this.configuration).createAIAgent(organisation, createAIAgentRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Permanently deletes an AI agent. This action cannot be undone.
+     * @summary Delete Agent
+     * @param {string} organisation The organisation ID
+     * @param {string} agentId The agent ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIAgentsApi
+     */
+    public deleteAIAgent(organisation: string, agentId: string, options?: RawAxiosRequestConfig) {
+        return AIAgentsApiFp(this.configuration).deleteAIAgent(organisation, agentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieves detailed configuration for a specific AI agent.
+     * @summary Get Agent Details
+     * @param {string} organisation The organisation ID
+     * @param {string} agentId The agent ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIAgentsApi
+     */
+    public getAIAgent(organisation: string, agentId: string, options?: RawAxiosRequestConfig) {
+        return AIAgentsApiFp(this.configuration).getAIAgent(organisation, agentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists all AI agents for an organization. Agents are pre-configured AI assistants with specific system prompts, model settings, and tool permissions.      *      * **Features:**      * - Filter by group (e.g., \'development\', \'compliance\')      * - Organization-scoped      * - Returns agent configurations without execution history
+     * @summary List AI Agents
+     * @param {string} organisation The organisation ID
+     * @param {string} [group] Optional group filter (e.g., \&#39;development\&#39;, \&#39;compliance\&#39;)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIAgentsApi
+     */
+    public listAIAgents(organisation: string, group?: string, options?: RawAxiosRequestConfig) {
+        return AIAgentsApiFp(this.configuration).listAIAgents(organisation, group, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates an existing AI agent configuration. All fields except agentId, organizationId, createdAt, and createdBy can be updated.
+     * @summary Update Agent
+     * @param {string} organisation The organisation ID
+     * @param {string} agentId The agent ID
+     * @param {UpdateAIAgentRequest} updateAIAgentRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIAgentsApi
+     */
+    public updateAIAgent(organisation: string, agentId: string, updateAIAgentRequest: UpdateAIAgentRequest, options?: RawAxiosRequestConfig) {
+        return AIAgentsApiFp(this.configuration).updateAIAgent(organisation, agentId, updateAIAgentRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * AICustomToolsApi - axios parameter creator
+ * @export
+ */
+export const AICustomToolsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Registers a custom edge function as a tool that AI models can invoke. This enables customers to create their own tools backed by edge functions.      *      * **Edge Function Contract:**      * - Edge functions must accept POST requests with JSON payload      * - Expected request format: `{ \'toolName\': \'...\', \'input\': {...}, \'orgId\': \'...\' }`      * - Must return JSON response with either `result` or `error` field      *      * **Async Tools:**      * Set `isAsync: true` for operations >5 seconds. The edge function should return `{ executionId: \'...\' }` and the AI will poll for completion.
+         * @summary Register Custom Edge Function Tool
+         * @param {string} organisation The organisation ID
+         * @param {CreateCustomToolRequest} createCustomToolRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createCustomTool: async (organisation: string, createCustomToolRequest: CreateCustomToolRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('createCustomTool', 'organisation', organisation)
+            // verify required parameter 'createCustomToolRequest' is not null or undefined
+            assertParamExists('createCustomTool', 'createCustomToolRequest', createCustomToolRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/custom-tools`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createCustomToolRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Deletes a custom tool registration. The underlying edge function is not affected.
+         * @summary Delete Custom Tool
+         * @param {string} organisation The organisation ID
+         * @param {string} toolName The tool name to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCustomTool: async (organisation: string, toolName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('deleteCustomTool', 'organisation', organisation)
+            // verify required parameter 'toolName' is not null or undefined
+            assertParamExists('deleteCustomTool', 'toolName', toolName)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/custom-tools/{toolName}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"toolName"}}`, encodeURIComponent(String(toolName)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists all registered custom edge function tools for an organization.
+         * @summary List Custom Tools
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listCustomTools: async (organisation: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listCustomTools', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/custom-tools`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AICustomToolsApi - functional programming interface
+ * @export
+ */
+export const AICustomToolsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AICustomToolsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Registers a custom edge function as a tool that AI models can invoke. This enables customers to create their own tools backed by edge functions.      *      * **Edge Function Contract:**      * - Edge functions must accept POST requests with JSON payload      * - Expected request format: `{ \'toolName\': \'...\', \'input\': {...}, \'orgId\': \'...\' }`      * - Must return JSON response with either `result` or `error` field      *      * **Async Tools:**      * Set `isAsync: true` for operations >5 seconds. The edge function should return `{ executionId: \'...\' }` and the AI will poll for completion.
+         * @summary Register Custom Edge Function Tool
+         * @param {string} organisation The organisation ID
+         * @param {CreateCustomToolRequest} createCustomToolRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createCustomTool(organisation: string, createCustomToolRequest: CreateCustomToolRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCustomTool201Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomTool(organisation, createCustomToolRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AICustomToolsApi.createCustomTool']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Deletes a custom tool registration. The underlying edge function is not affected.
+         * @summary Delete Custom Tool
+         * @param {string} organisation The organisation ID
+         * @param {string} toolName The tool name to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteCustomTool(organisation: string, toolName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteCustomTool200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCustomTool(organisation, toolName, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AICustomToolsApi.deleteCustomTool']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists all registered custom edge function tools for an organization.
+         * @summary List Custom Tools
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listCustomTools(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListCustomTools200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listCustomTools(organisation, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AICustomToolsApi.listCustomTools']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AICustomToolsApi - factory interface
+ * @export
+ */
+export const AICustomToolsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AICustomToolsApiFp(configuration)
+    return {
+        /**
+         * Registers a custom edge function as a tool that AI models can invoke. This enables customers to create their own tools backed by edge functions.      *      * **Edge Function Contract:**      * - Edge functions must accept POST requests with JSON payload      * - Expected request format: `{ \'toolName\': \'...\', \'input\': {...}, \'orgId\': \'...\' }`      * - Must return JSON response with either `result` or `error` field      *      * **Async Tools:**      * Set `isAsync: true` for operations >5 seconds. The edge function should return `{ executionId: \'...\' }` and the AI will poll for completion.
+         * @summary Register Custom Edge Function Tool
+         * @param {string} organisation The organisation ID
+         * @param {CreateCustomToolRequest} createCustomToolRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createCustomTool(organisation: string, createCustomToolRequest: CreateCustomToolRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateCustomTool201Response> {
+            return localVarFp.createCustomTool(organisation, createCustomToolRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Deletes a custom tool registration. The underlying edge function is not affected.
+         * @summary Delete Custom Tool
+         * @param {string} organisation The organisation ID
+         * @param {string} toolName The tool name to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCustomTool(organisation: string, toolName: string, options?: RawAxiosRequestConfig): AxiosPromise<DeleteCustomTool200Response> {
+            return localVarFp.deleteCustomTool(organisation, toolName, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists all registered custom edge function tools for an organization.
+         * @summary List Custom Tools
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listCustomTools(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<ListCustomTools200Response> {
+            return localVarFp.listCustomTools(organisation, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AICustomToolsApi - object-oriented interface
+ * @export
+ * @class AICustomToolsApi
+ * @extends {BaseAPI}
+ */
+export class AICustomToolsApi extends BaseAPI {
+    /**
+     * Registers a custom edge function as a tool that AI models can invoke. This enables customers to create their own tools backed by edge functions.      *      * **Edge Function Contract:**      * - Edge functions must accept POST requests with JSON payload      * - Expected request format: `{ \'toolName\': \'...\', \'input\': {...}, \'orgId\': \'...\' }`      * - Must return JSON response with either `result` or `error` field      *      * **Async Tools:**      * Set `isAsync: true` for operations >5 seconds. The edge function should return `{ executionId: \'...\' }` and the AI will poll for completion.
+     * @summary Register Custom Edge Function Tool
+     * @param {string} organisation The organisation ID
+     * @param {CreateCustomToolRequest} createCustomToolRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AICustomToolsApi
+     */
+    public createCustomTool(organisation: string, createCustomToolRequest: CreateCustomToolRequest, options?: RawAxiosRequestConfig) {
+        return AICustomToolsApiFp(this.configuration).createCustomTool(organisation, createCustomToolRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Deletes a custom tool registration. The underlying edge function is not affected.
+     * @summary Delete Custom Tool
+     * @param {string} organisation The organisation ID
+     * @param {string} toolName The tool name to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AICustomToolsApi
+     */
+    public deleteCustomTool(organisation: string, toolName: string, options?: RawAxiosRequestConfig) {
+        return AICustomToolsApiFp(this.configuration).deleteCustomTool(organisation, toolName, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists all registered custom edge function tools for an organization.
+     * @summary List Custom Tools
+     * @param {string} organisation The organisation ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AICustomToolsApi
+     */
+    public listCustomTools(organisation: string, options?: RawAxiosRequestConfig) {
+        return AICustomToolsApiFp(this.configuration).listCustomTools(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * AIInferenceApi - axios parameter creator
+ * @export
+ */
+export const AIInferenceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
@@ -9671,6 +11827,616 @@ export const AIServicesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Generates vector embeddings for text content using embedding models. Used for semantic search, document similarity, and RAG applications.      *      * **Features:**      * - Single text or batch processing (up to 100 texts)      * - Configurable dimensions (256, 512, 1024, 8192 for Titan v2)      * - Optional normalization to unit length      * - Usage tracking for billing      *      * **Use Cases:**      * - Semantic search across documents      * - Similarity matching for content recommendations      * - RAG (Retrieval-Augmented Generation) pipelines      * - Clustering and classification      *      * **Available Embedding Models:**      * - amazon.titan-embed-text-v2:0 (default, supports 256-8192 dimensions)      * - amazon.titan-embed-text-v1:0 (1536 dimensions fixed)
+         * @summary Generate text embeddings for semantic search and RAG applications
+         * @param {string} organisation The organisation ID
+         * @param {EmbeddingsRequest} embeddingsRequest Embedding request with single or multiple texts
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        embeddings: async (organisation: string, embeddingsRequest: EmbeddingsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('embeddings', 'organisation', organisation)
+            // verify required parameter 'embeddingsRequest' is not null or undefined
+            assertParamExists('embeddings', 'embeddingsRequest', embeddingsRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/embeddings`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(embeddingsRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
+         * @summary Generate images with Amazon Nova Canvas
+         * @param {string} organisation The organisation ID
+         * @param {ImageGenerationRequest} imageGenerationRequest Image generation request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageGeneration: async (organisation: string, imageGenerationRequest: ImageGenerationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('imageGeneration', 'organisation', organisation)
+            // verify required parameter 'imageGenerationRequest' is not null or undefined
+            assertParamExists('imageGeneration', 'imageGenerationRequest', imageGenerationRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/image-generation`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(imageGenerationRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AIInferenceApi - functional programming interface
+ * @export
+ */
+export const AIInferenceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AIInferenceApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
+         * @summary Chat inference via API Gateway (buffered responses) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatInference(organisation: string, chatInferenceRequest: ChatInferenceRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatInference200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatInference(organisation, chatInferenceRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIInferenceApi.chatInference']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
+         * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatInferenceStream(organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatInferenceStream(organisation, chatInferenceStreamRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIInferenceApi.chatInferenceStream']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Generates vector embeddings for text content using embedding models. Used for semantic search, document similarity, and RAG applications.      *      * **Features:**      * - Single text or batch processing (up to 100 texts)      * - Configurable dimensions (256, 512, 1024, 8192 for Titan v2)      * - Optional normalization to unit length      * - Usage tracking for billing      *      * **Use Cases:**      * - Semantic search across documents      * - Similarity matching for content recommendations      * - RAG (Retrieval-Augmented Generation) pipelines      * - Clustering and classification      *      * **Available Embedding Models:**      * - amazon.titan-embed-text-v2:0 (default, supports 256-8192 dimensions)      * - amazon.titan-embed-text-v1:0 (1536 dimensions fixed)
+         * @summary Generate text embeddings for semantic search and RAG applications
+         * @param {string} organisation The organisation ID
+         * @param {EmbeddingsRequest} embeddingsRequest Embedding request with single or multiple texts
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async embeddings(organisation: string, embeddingsRequest: EmbeddingsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Embeddings200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.embeddings(organisation, embeddingsRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIInferenceApi.embeddings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
+         * @summary Generate images with Amazon Nova Canvas
+         * @param {string} organisation The organisation ID
+         * @param {ImageGenerationRequest} imageGenerationRequest Image generation request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageGeneration(organisation: string, imageGenerationRequest: ImageGenerationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageGeneration200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageGeneration(organisation, imageGenerationRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIInferenceApi.imageGeneration']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AIInferenceApi - factory interface
+ * @export
+ */
+export const AIInferenceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AIInferenceApiFp(configuration)
+    return {
+        /**
+         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
+         * @summary Chat inference via API Gateway (buffered responses) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatInference(organisation: string, chatInferenceRequest: ChatInferenceRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChatInference200Response> {
+            return localVarFp.chatInference(organisation, chatInferenceRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
+         * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
+         * @param {string} organisation The organisation ID
+         * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatInferenceStream(organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
+            return localVarFp.chatInferenceStream(organisation, chatInferenceStreamRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Generates vector embeddings for text content using embedding models. Used for semantic search, document similarity, and RAG applications.      *      * **Features:**      * - Single text or batch processing (up to 100 texts)      * - Configurable dimensions (256, 512, 1024, 8192 for Titan v2)      * - Optional normalization to unit length      * - Usage tracking for billing      *      * **Use Cases:**      * - Semantic search across documents      * - Similarity matching for content recommendations      * - RAG (Retrieval-Augmented Generation) pipelines      * - Clustering and classification      *      * **Available Embedding Models:**      * - amazon.titan-embed-text-v2:0 (default, supports 256-8192 dimensions)      * - amazon.titan-embed-text-v1:0 (1536 dimensions fixed)
+         * @summary Generate text embeddings for semantic search and RAG applications
+         * @param {string} organisation The organisation ID
+         * @param {EmbeddingsRequest} embeddingsRequest Embedding request with single or multiple texts
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        embeddings(organisation: string, embeddingsRequest: EmbeddingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Embeddings200Response> {
+            return localVarFp.embeddings(organisation, embeddingsRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
+         * @summary Generate images with Amazon Nova Canvas
+         * @param {string} organisation The organisation ID
+         * @param {ImageGenerationRequest} imageGenerationRequest Image generation request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageGeneration(organisation: string, imageGenerationRequest: ImageGenerationRequest, options?: RawAxiosRequestConfig): AxiosPromise<ImageGeneration200Response> {
+            return localVarFp.imageGeneration(organisation, imageGenerationRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AIInferenceApi - object-oriented interface
+ * @export
+ * @class AIInferenceApi
+ * @extends {BaseAPI}
+ */
+export class AIInferenceApi extends BaseAPI {
+    /**
+     * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
+     * @summary Chat inference via API Gateway (buffered responses) with multimodal support
+     * @param {string} organisation The organisation ID
+     * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIInferenceApi
+     */
+    public chatInference(organisation: string, chatInferenceRequest: ChatInferenceRequest, options?: RawAxiosRequestConfig) {
+        return AIInferenceApiFp(this.configuration).chatInference(organisation, chatInferenceRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
+     * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
+     * @param {string} organisation The organisation ID
+     * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIInferenceApi
+     */
+    public chatInferenceStream(organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options?: RawAxiosRequestConfig) {
+        return AIInferenceApiFp(this.configuration).chatInferenceStream(organisation, chatInferenceStreamRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Generates vector embeddings for text content using embedding models. Used for semantic search, document similarity, and RAG applications.      *      * **Features:**      * - Single text or batch processing (up to 100 texts)      * - Configurable dimensions (256, 512, 1024, 8192 for Titan v2)      * - Optional normalization to unit length      * - Usage tracking for billing      *      * **Use Cases:**      * - Semantic search across documents      * - Similarity matching for content recommendations      * - RAG (Retrieval-Augmented Generation) pipelines      * - Clustering and classification      *      * **Available Embedding Models:**      * - amazon.titan-embed-text-v2:0 (default, supports 256-8192 dimensions)      * - amazon.titan-embed-text-v1:0 (1536 dimensions fixed)
+     * @summary Generate text embeddings for semantic search and RAG applications
+     * @param {string} organisation The organisation ID
+     * @param {EmbeddingsRequest} embeddingsRequest Embedding request with single or multiple texts
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIInferenceApi
+     */
+    public embeddings(organisation: string, embeddingsRequest: EmbeddingsRequest, options?: RawAxiosRequestConfig) {
+        return AIInferenceApiFp(this.configuration).embeddings(organisation, embeddingsRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
+     * @summary Generate images with Amazon Nova Canvas
+     * @param {string} organisation The organisation ID
+     * @param {ImageGenerationRequest} imageGenerationRequest Image generation request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIInferenceApi
+     */
+    public imageGeneration(organisation: string, imageGenerationRequest: ImageGenerationRequest, options?: RawAxiosRequestConfig) {
+        return AIInferenceApiFp(this.configuration).imageGeneration(organisation, imageGenerationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * AIModelsApi - axios parameter creator
+ * @export
+ */
+export const AIModelsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Retrieves detailed information about a specific Bedrock model from the catalog.      *      * **Features:**      * - Complete pricing breakdown (input/output per million tokens)      * - Context window and output token limits      * - Supported features (chat, vision, streaming, embeddings)      * - Model availability and deprecation status      * - Release date for version tracking      *      * **Example Model IDs:**      * - `amazon.nova-lite-v1:0` - Default multimodal model      * - `anthropic.claude-3-5-sonnet-20241022-v2:0` - Latest Claude      * - `amazon.titan-embed-text-v2:0` - Latest embeddings
+         * @summary Get AI Model Details
+         * @param {string} organisation The organisation ID
+         * @param {string} modelId The model identifier (e.g., amazon.nova-lite-v1:0)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIModel: async (organisation: string, modelId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getAIModel', 'organisation', organisation)
+            // verify required parameter 'modelId' is not null or undefined
+            assertParamExists('getAIModel', 'modelId', modelId)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/models/{modelId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"modelId"}}`, encodeURIComponent(String(modelId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List available AI models for an organization
+         * @param {string} organisation The organisation ID
+         * @param {ListAIModelsFeatureEnum} [feature] Filter models by supported feature
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAIModels: async (organisation: string, feature?: ListAIModelsFeatureEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listAIModels', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/models`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (feature !== undefined) {
+                localVarQueryParameter['feature'] = feature;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AIModelsApi - functional programming interface
+ * @export
+ */
+export const AIModelsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AIModelsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Retrieves detailed information about a specific Bedrock model from the catalog.      *      * **Features:**      * - Complete pricing breakdown (input/output per million tokens)      * - Context window and output token limits      * - Supported features (chat, vision, streaming, embeddings)      * - Model availability and deprecation status      * - Release date for version tracking      *      * **Example Model IDs:**      * - `amazon.nova-lite-v1:0` - Default multimodal model      * - `anthropic.claude-3-5-sonnet-20241022-v2:0` - Latest Claude      * - `amazon.titan-embed-text-v2:0` - Latest embeddings
+         * @summary Get AI Model Details
+         * @param {string} organisation The organisation ID
+         * @param {string} modelId The model identifier (e.g., amazon.nova-lite-v1:0)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAIModel(organisation: string, modelId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAIModel200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAIModel(organisation, modelId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIModelsApi.getAIModel']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List available AI models for an organization
+         * @param {string} organisation The organisation ID
+         * @param {ListAIModelsFeatureEnum} [feature] Filter models by supported feature
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAIModels(organisation: string, feature?: ListAIModelsFeatureEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAIModels200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAIModels(organisation, feature, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIModelsApi.listAIModels']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AIModelsApi - factory interface
+ * @export
+ */
+export const AIModelsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AIModelsApiFp(configuration)
+    return {
+        /**
+         * Retrieves detailed information about a specific Bedrock model from the catalog.      *      * **Features:**      * - Complete pricing breakdown (input/output per million tokens)      * - Context window and output token limits      * - Supported features (chat, vision, streaming, embeddings)      * - Model availability and deprecation status      * - Release date for version tracking      *      * **Example Model IDs:**      * - `amazon.nova-lite-v1:0` - Default multimodal model      * - `anthropic.claude-3-5-sonnet-20241022-v2:0` - Latest Claude      * - `amazon.titan-embed-text-v2:0` - Latest embeddings
+         * @summary Get AI Model Details
+         * @param {string} organisation The organisation ID
+         * @param {string} modelId The model identifier (e.g., amazon.nova-lite-v1:0)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIModel(organisation: string, modelId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAIModel200Response> {
+            return localVarFp.getAIModel(organisation, modelId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List available AI models for an organization
+         * @param {string} organisation The organisation ID
+         * @param {ListAIModelsFeatureEnum} [feature] Filter models by supported feature
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAIModels(organisation: string, feature?: ListAIModelsFeatureEnum, options?: RawAxiosRequestConfig): AxiosPromise<ListAIModels200Response> {
+            return localVarFp.listAIModels(organisation, feature, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AIModelsApi - object-oriented interface
+ * @export
+ * @class AIModelsApi
+ * @extends {BaseAPI}
+ */
+export class AIModelsApi extends BaseAPI {
+    /**
+     * Retrieves detailed information about a specific Bedrock model from the catalog.      *      * **Features:**      * - Complete pricing breakdown (input/output per million tokens)      * - Context window and output token limits      * - Supported features (chat, vision, streaming, embeddings)      * - Model availability and deprecation status      * - Release date for version tracking      *      * **Example Model IDs:**      * - `amazon.nova-lite-v1:0` - Default multimodal model      * - `anthropic.claude-3-5-sonnet-20241022-v2:0` - Latest Claude      * - `amazon.titan-embed-text-v2:0` - Latest embeddings
+     * @summary Get AI Model Details
+     * @param {string} organisation The organisation ID
+     * @param {string} modelId The model identifier (e.g., amazon.nova-lite-v1:0)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIModelsApi
+     */
+    public getAIModel(organisation: string, modelId: string, options?: RawAxiosRequestConfig) {
+        return AIModelsApiFp(this.configuration).getAIModel(organisation, modelId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List available AI models for an organization
+     * @param {string} organisation The organisation ID
+     * @param {ListAIModelsFeatureEnum} [feature] Filter models by supported feature
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIModelsApi
+     */
+    public listAIModels(organisation: string, feature?: ListAIModelsFeatureEnum, options?: RawAxiosRequestConfig) {
+        return AIModelsApiFp(this.configuration).listAIModels(organisation, feature, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+/**
+ * @export
+ */
+export const ListAIModelsFeatureEnum = {
+    Chat: 'chat',
+    Embeddings: 'embeddings',
+    Vision: 'vision',
+    Streaming: 'streaming',
+    All: 'all'
+} as const;
+export type ListAIModelsFeatureEnum = typeof ListAIModelsFeatureEnum[keyof typeof ListAIModelsFeatureEnum];
+
+
+/**
+ * AIMonitoringApi - axios parameter creator
+ * @export
+ */
+export const AIMonitoringApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get AI usage statistics
+         * @param {string} organisation The organisation ID
+         * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIUsageStats: async (organisation: string, month?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getAIUsageStats', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/usage`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (month !== undefined) {
+                localVarQueryParameter['month'] = month;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AIMonitoringApi - functional programming interface
+ * @export
+ */
+export const AIMonitoringApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AIMonitoringApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Get AI usage statistics
+         * @param {string} organisation The organisation ID
+         * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAIUsageStats(organisation: string, month?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAIUsageStats200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAIUsageStats(organisation, month, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIMonitoringApi.getAIUsageStats']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AIMonitoringApi - factory interface
+ * @export
+ */
+export const AIMonitoringApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AIMonitoringApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Get AI usage statistics
+         * @param {string} organisation The organisation ID
+         * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIUsageStats(organisation: string, month?: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAIUsageStats200Response> {
+            return localVarFp.getAIUsageStats(organisation, month, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AIMonitoringApi - object-oriented interface
+ * @export
+ * @class AIMonitoringApi
+ * @extends {BaseAPI}
+ */
+export class AIMonitoringApi extends BaseAPI {
+    /**
+     * 
+     * @summary Get AI usage statistics
+     * @param {string} organisation The organisation ID
+     * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIMonitoringApi
+     */
+    public getAIUsageStats(organisation: string, month?: string, options?: RawAxiosRequestConfig) {
+        return AIMonitoringApiFp(this.configuration).getAIUsageStats(organisation, month, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * AISessionsApi - axios parameter creator
+ * @export
+ */
+export const AISessionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
          * Creates an AI session with automatic expiration (60 min default, 24h max). Sessions are isolated by organization. Use userId to identify the user creating the session. Use sessionGroup for logical grouping. Use metadata for additional custom data. Filter sessions by userId or sessionGroup when listing.
          * @summary Create a new chat session with multi-tenant isolation
          * @param {string} organisation The organisation ID
@@ -9757,20 +12523,22 @@ export const AIServicesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Generates vector embeddings for text content using embedding models. Used for semantic search, document similarity, and RAG applications.      *      * **Features:**      * - Single text or batch processing (up to 100 texts)      * - Configurable dimensions (256, 512, 1024, 8192 for Titan v2)      * - Optional normalization to unit length      * - Usage tracking for billing      *      * **Use Cases:**      * - Semantic search across documents      * - Similarity matching for content recommendations      * - RAG (Retrieval-Augmented Generation) pipelines      * - Clustering and classification      *      * **Available Embedding Models:**      * - amazon.titan-embed-text-v2:0 (default, supports 256-8192 dimensions)      * - amazon.titan-embed-text-v1:0 (1536 dimensions fixed)
-         * @summary Generate text embeddings for semantic search and RAG applications
+         * Extends the expiration time of an active session. Useful for keeping long-running conversations alive.
+         * @summary Extend Session Expiration
          * @param {string} organisation The organisation ID
-         * @param {EmbeddingsRequest} embeddingsRequest Embedding request with single or multiple texts
+         * @param {string} sessionId The session ID
+         * @param {ExtendAISessionRequest} [extendAISessionRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        embeddings: async (organisation: string, embeddingsRequest: EmbeddingsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        extendAISession: async (organisation: string, sessionId: string, extendAISessionRequest?: ExtendAISessionRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('embeddings', 'organisation', organisation)
-            // verify required parameter 'embeddingsRequest' is not null or undefined
-            assertParamExists('embeddings', 'embeddingsRequest', embeddingsRequest)
-            const localVarPath = `/api/v3/organizations/{organisation}/ai/embeddings`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            assertParamExists('extendAISession', 'organisation', organisation)
+            // verify required parameter 'sessionId' is not null or undefined
+            assertParamExists('extendAISession', 'sessionId', sessionId)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/sessions/{sessionId}/extend`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9778,7 +12546,7 @@ export const AIServicesApiAxiosParamCreator = function (configuration?: Configur
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -9793,45 +12561,7 @@ export const AIServicesApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(embeddingsRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get AI configuration for an organization
-         * @param {string} organisation The organisation ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAIConfig: async (organisation: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('getAIConfig', 'organisation', organisation)
-            const localVarPath = `/api/v3/organizations/{organisation}/ai/config`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(extendAISessionRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -9868,178 +12598,6 @@ export const AIServicesApiAxiosParamCreator = function (configuration?: Configur
             // authentication BearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get AI usage statistics
-         * @param {string} organisation The organisation ID
-         * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAIUsageStats: async (organisation: string, month?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('getAIUsageStats', 'organisation', organisation)
-            const localVarPath = `/api/v3/organizations/{organisation}/ai/usage`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (month !== undefined) {
-                localVarQueryParameter['month'] = month;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
-         * @summary Get async tool execution status and result
-         * @param {string} organisation The organisation ID
-         * @param {string} executionId Tool execution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getToolExecutionStatus: async (organisation: string, executionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('getToolExecutionStatus', 'organisation', organisation)
-            // verify required parameter 'executionId' is not null or undefined
-            assertParamExists('getToolExecutionStatus', 'executionId', executionId)
-            const localVarPath = `/api/v3/organizations/{organisation}/ai/tools/executions/{executionId}`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
-                .replace(`{${"executionId"}}`, encodeURIComponent(String(executionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
-         * @summary Generate images with Amazon Nova Canvas
-         * @param {string} organisation The organisation ID
-         * @param {ImageGenerationRequest} imageGenerationRequest Image generation request
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        imageGeneration: async (organisation: string, imageGenerationRequest: ImageGenerationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('imageGeneration', 'organisation', organisation)
-            // verify required parameter 'imageGenerationRequest' is not null or undefined
-            assertParamExists('imageGeneration', 'imageGenerationRequest', imageGenerationRequest)
-            const localVarPath = `/api/v3/organizations/{organisation}/ai/image-generation`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(imageGenerationRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List available AI models for an organization
-         * @param {string} organisation The organisation ID
-         * @param {ListAIModelsFeatureEnum} [feature] Filter models by supported feature
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listAIModels: async (organisation: string, feature?: ListAIModelsFeatureEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('listAIModels', 'organisation', organisation)
-            const localVarPath = `/api/v3/organizations/{organisation}/ai/models`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (feature !== undefined) {
-                localVarQueryParameter['feature'] = feature;
-            }
 
 
     
@@ -10102,6 +12660,429 @@ export const AIServicesApiAxiosParamCreator = function (configuration?: Configur
 
             if (model !== undefined) {
                 localVarQueryParameter['model'] = model;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Updates session with new conversation messages and tracks token usage. Appends new messages to conversation history and updates session stats.      *      * **Typical Flow:**      * 1. Get session to retrieve conversation history      * 2. Call AI inference with full message history      * 3. Update session with new user + assistant messages
+         * @summary Update Session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {UpdateAISessionRequest} updateAISessionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAISession: async (organisation: string, sessionId: string, updateAISessionRequest: UpdateAISessionRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('updateAISession', 'organisation', organisation)
+            // verify required parameter 'sessionId' is not null or undefined
+            assertParamExists('updateAISession', 'sessionId', sessionId)
+            // verify required parameter 'updateAISessionRequest' is not null or undefined
+            assertParamExists('updateAISession', 'updateAISessionRequest', updateAISessionRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/sessions/{sessionId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateAISessionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AISessionsApi - functional programming interface
+ * @export
+ */
+export const AISessionsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AISessionsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Creates an AI session with automatic expiration (60 min default, 24h max). Sessions are isolated by organization. Use userId to identify the user creating the session. Use sessionGroup for logical grouping. Use metadata for additional custom data. Filter sessions by userId or sessionGroup when listing.
+         * @summary Create a new chat session with multi-tenant isolation
+         * @param {string} organisation The organisation ID
+         * @param {CreateAISessionRequest} createAISessionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createAISession(organisation: string, createAISessionRequest: CreateAISessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateAISession201Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAISession(organisation, createAISessionRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AISessionsApi.createAISession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete a chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteAISession200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAISession(organisation, sessionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AISessionsApi.deleteAISession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Extends the expiration time of an active session. Useful for keeping long-running conversations alive.
+         * @summary Extend Session Expiration
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {ExtendAISessionRequest} [extendAISessionRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async extendAISession(organisation: string, sessionId: string, extendAISessionRequest?: ExtendAISessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExtendAISession200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.extendAISession(organisation, sessionId, extendAISessionRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AISessionsApi.extendAISession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get a specific chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAISession200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAISession(organisation, sessionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AISessionsApi.getAISession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists active sessions for an organization with flexible filtering options.      *      * **Query Combinations:**      * 1. By Organization (default): Returns all sessions in the organization      * 2. By Organization + Group: `?sessionGroup=drupal-prod` - Sessions in a specific group      * 3. By User: `?userId=user-123` - All sessions for a user      * 4. By User + Group: `?userId=user-123&sessionGroup=drupal-prod` - User\'s sessions in a specific group      *      * **Use Cases:**      * - List user\'s conversations in a specific app/environment      * - Admin view of all sessions in a customer/tenant group      * - User profile showing all AI conversations across apps
+         * @summary List chat sessions with multi-tenant filtering
+         * @param {string} organisation The organisation ID
+         * @param {string} [userId] Filter sessions by user ID
+         * @param {string} [sessionGroup] Filter by session group. Returns only sessions matching the specified group.
+         * @param {number} [limit] Maximum number of sessions to return (default 50, max 100)
+         * @param {number} [offset] Offset for pagination
+         * @param {string} [model] Filter by model ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAISessions(organisation: string, userId?: string, sessionGroup?: string, limit?: number, offset?: number, model?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListAISessions200ResponseInner>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAISessions(organisation, userId, sessionGroup, limit, offset, model, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AISessionsApi.listAISessions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Updates session with new conversation messages and tracks token usage. Appends new messages to conversation history and updates session stats.      *      * **Typical Flow:**      * 1. Get session to retrieve conversation history      * 2. Call AI inference with full message history      * 3. Update session with new user + assistant messages
+         * @summary Update Session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {UpdateAISessionRequest} updateAISessionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateAISession(organisation: string, sessionId: string, updateAISessionRequest: UpdateAISessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateAISession200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAISession(organisation, sessionId, updateAISessionRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AISessionsApi.updateAISession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AISessionsApi - factory interface
+ * @export
+ */
+export const AISessionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AISessionsApiFp(configuration)
+    return {
+        /**
+         * Creates an AI session with automatic expiration (60 min default, 24h max). Sessions are isolated by organization. Use userId to identify the user creating the session. Use sessionGroup for logical grouping. Use metadata for additional custom data. Filter sessions by userId or sessionGroup when listing.
+         * @summary Create a new chat session with multi-tenant isolation
+         * @param {string} organisation The organisation ID
+         * @param {CreateAISessionRequest} createAISessionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAISession(organisation: string, createAISessionRequest: CreateAISessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateAISession201Response> {
+            return localVarFp.createAISession(organisation, createAISessionRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): AxiosPromise<DeleteAISession200Response> {
+            return localVarFp.deleteAISession(organisation, sessionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Extends the expiration time of an active session. Useful for keeping long-running conversations alive.
+         * @summary Extend Session Expiration
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {ExtendAISessionRequest} [extendAISessionRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        extendAISession(organisation: string, sessionId: string, extendAISessionRequest?: ExtendAISessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ExtendAISession200Response> {
+            return localVarFp.extendAISession(organisation, sessionId, extendAISessionRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get a specific chat session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAISession200Response> {
+            return localVarFp.getAISession(organisation, sessionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists active sessions for an organization with flexible filtering options.      *      * **Query Combinations:**      * 1. By Organization (default): Returns all sessions in the organization      * 2. By Organization + Group: `?sessionGroup=drupal-prod` - Sessions in a specific group      * 3. By User: `?userId=user-123` - All sessions for a user      * 4. By User + Group: `?userId=user-123&sessionGroup=drupal-prod` - User\'s sessions in a specific group      *      * **Use Cases:**      * - List user\'s conversations in a specific app/environment      * - Admin view of all sessions in a customer/tenant group      * - User profile showing all AI conversations across apps
+         * @summary List chat sessions with multi-tenant filtering
+         * @param {string} organisation The organisation ID
+         * @param {string} [userId] Filter sessions by user ID
+         * @param {string} [sessionGroup] Filter by session group. Returns only sessions matching the specified group.
+         * @param {number} [limit] Maximum number of sessions to return (default 50, max 100)
+         * @param {number} [offset] Offset for pagination
+         * @param {string} [model] Filter by model ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAISessions(organisation: string, userId?: string, sessionGroup?: string, limit?: number, offset?: number, model?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ListAISessions200ResponseInner>> {
+            return localVarFp.listAISessions(organisation, userId, sessionGroup, limit, offset, model, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates session with new conversation messages and tracks token usage. Appends new messages to conversation history and updates session stats.      *      * **Typical Flow:**      * 1. Get session to retrieve conversation history      * 2. Call AI inference with full message history      * 3. Update session with new user + assistant messages
+         * @summary Update Session
+         * @param {string} organisation The organisation ID
+         * @param {string} sessionId The session ID
+         * @param {UpdateAISessionRequest} updateAISessionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAISession(organisation: string, sessionId: string, updateAISessionRequest: UpdateAISessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<UpdateAISession200Response> {
+            return localVarFp.updateAISession(organisation, sessionId, updateAISessionRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AISessionsApi - object-oriented interface
+ * @export
+ * @class AISessionsApi
+ * @extends {BaseAPI}
+ */
+export class AISessionsApi extends BaseAPI {
+    /**
+     * Creates an AI session with automatic expiration (60 min default, 24h max). Sessions are isolated by organization. Use userId to identify the user creating the session. Use sessionGroup for logical grouping. Use metadata for additional custom data. Filter sessions by userId or sessionGroup when listing.
+     * @summary Create a new chat session with multi-tenant isolation
+     * @param {string} organisation The organisation ID
+     * @param {CreateAISessionRequest} createAISessionRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AISessionsApi
+     */
+    public createAISession(organisation: string, createAISessionRequest: CreateAISessionRequest, options?: RawAxiosRequestConfig) {
+        return AISessionsApiFp(this.configuration).createAISession(organisation, createAISessionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a chat session
+     * @param {string} organisation The organisation ID
+     * @param {string} sessionId The session ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AISessionsApi
+     */
+    public deleteAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig) {
+        return AISessionsApiFp(this.configuration).deleteAISession(organisation, sessionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Extends the expiration time of an active session. Useful for keeping long-running conversations alive.
+     * @summary Extend Session Expiration
+     * @param {string} organisation The organisation ID
+     * @param {string} sessionId The session ID
+     * @param {ExtendAISessionRequest} [extendAISessionRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AISessionsApi
+     */
+    public extendAISession(organisation: string, sessionId: string, extendAISessionRequest?: ExtendAISessionRequest, options?: RawAxiosRequestConfig) {
+        return AISessionsApiFp(this.configuration).extendAISession(organisation, sessionId, extendAISessionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get a specific chat session
+     * @param {string} organisation The organisation ID
+     * @param {string} sessionId The session ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AISessionsApi
+     */
+    public getAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig) {
+        return AISessionsApiFp(this.configuration).getAISession(organisation, sessionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists active sessions for an organization with flexible filtering options.      *      * **Query Combinations:**      * 1. By Organization (default): Returns all sessions in the organization      * 2. By Organization + Group: `?sessionGroup=drupal-prod` - Sessions in a specific group      * 3. By User: `?userId=user-123` - All sessions for a user      * 4. By User + Group: `?userId=user-123&sessionGroup=drupal-prod` - User\'s sessions in a specific group      *      * **Use Cases:**      * - List user\'s conversations in a specific app/environment      * - Admin view of all sessions in a customer/tenant group      * - User profile showing all AI conversations across apps
+     * @summary List chat sessions with multi-tenant filtering
+     * @param {string} organisation The organisation ID
+     * @param {string} [userId] Filter sessions by user ID
+     * @param {string} [sessionGroup] Filter by session group. Returns only sessions matching the specified group.
+     * @param {number} [limit] Maximum number of sessions to return (default 50, max 100)
+     * @param {number} [offset] Offset for pagination
+     * @param {string} [model] Filter by model ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AISessionsApi
+     */
+    public listAISessions(organisation: string, userId?: string, sessionGroup?: string, limit?: number, offset?: number, model?: string, options?: RawAxiosRequestConfig) {
+        return AISessionsApiFp(this.configuration).listAISessions(organisation, userId, sessionGroup, limit, offset, model, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates session with new conversation messages and tracks token usage. Appends new messages to conversation history and updates session stats.      *      * **Typical Flow:**      * 1. Get session to retrieve conversation history      * 2. Call AI inference with full message history      * 3. Update session with new user + assistant messages
+     * @summary Update Session
+     * @param {string} organisation The organisation ID
+     * @param {string} sessionId The session ID
+     * @param {UpdateAISessionRequest} updateAISessionRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AISessionsApi
+     */
+    public updateAISession(organisation: string, sessionId: string, updateAISessionRequest: UpdateAISessionRequest, options?: RawAxiosRequestConfig) {
+        return AISessionsApiFp(this.configuration).updateAISession(organisation, sessionId, updateAISessionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * AIToolsApi - axios parameter creator
+ * @export
+ */
+export const AIToolsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
+         * @summary Get async tool execution status and result
+         * @param {string} organisation The organisation ID
+         * @param {string} executionId Tool execution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAIToolExecutionStatus: async (organisation: string, executionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getAIToolExecutionStatus', 'organisation', organisation)
+            // verify required parameter 'executionId' is not null or undefined
+            assertParamExists('getAIToolExecutionStatus', 'executionId', executionId)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/tools/executions/{executionId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"executionId"}}`, encodeURIComponent(String(executionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
+         * @summary List tool executions for monitoring and debugging
+         * @param {string} organisation The organisation ID
+         * @param {ListAIToolExecutionsStatusEnum} [status] Filter by execution status
+         * @param {number} [limit] Maximum number of executions to return
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAIToolExecutions: async (organisation: string, status?: ListAIToolExecutionsStatusEnum, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listAIToolExecutions', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/tools/executions`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -10191,219 +13172,16 @@ export const AIServicesApiAxiosParamCreator = function (configuration?: Configur
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
-         * @summary List tool executions for monitoring and debugging
-         * @param {string} organisation The organisation ID
-         * @param {ListToolExecutionsStatusEnum} [status] Filter by execution status
-         * @param {number} [limit] Maximum number of executions to return
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listToolExecutions: async (organisation: string, status?: ListToolExecutionsStatusEnum, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('listToolExecutions', 'organisation', organisation)
-            const localVarPath = `/api/v3/organizations/{organisation}/ai/tools/executions`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Update AI configuration for an organization
-         * @param {string} organisation The organisation ID
-         * @param {UpdateAIConfigRequest} updateAIConfigRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateAIConfig: async (organisation: string, updateAIConfigRequest: UpdateAIConfigRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('updateAIConfig', 'organisation', organisation)
-            // verify required parameter 'updateAIConfigRequest' is not null or undefined
-            assertParamExists('updateAIConfig', 'updateAIConfigRequest', updateAIConfigRequest)
-            const localVarPath = `/api/v3/organizations/{organisation}/ai/config`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateAIConfigRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
 /**
- * AIServicesApi - functional programming interface
+ * AIToolsApi - functional programming interface
  * @export
  */
-export const AIServicesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = AIServicesApiAxiosParamCreator(configuration)
+export const AIToolsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AIToolsApiAxiosParamCreator(configuration)
     return {
-        /**
-         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
-         * @summary Chat inference via API Gateway (buffered responses) with multimodal support
-         * @param {string} organisation The organisation ID
-         * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async chatInference(organisation: string, chatInferenceRequest: ChatInferenceRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatInference200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.chatInference(organisation, chatInferenceRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.chatInference']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
-         * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
-         * @param {string} organisation The organisation ID
-         * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async chatInferenceStream(organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.chatInferenceStream(organisation, chatInferenceStreamRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.chatInferenceStream']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Creates an AI session with automatic expiration (60 min default, 24h max). Sessions are isolated by organization. Use userId to identify the user creating the session. Use sessionGroup for logical grouping. Use metadata for additional custom data. Filter sessions by userId or sessionGroup when listing.
-         * @summary Create a new chat session with multi-tenant isolation
-         * @param {string} organisation The organisation ID
-         * @param {CreateAISessionRequest} createAISessionRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createAISession(organisation: string, createAISessionRequest: CreateAISessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateAISession201Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createAISession(organisation, createAISessionRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.createAISession']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Delete a chat session
-         * @param {string} organisation The organisation ID
-         * @param {string} sessionId The session ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteAISession200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAISession(organisation, sessionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.deleteAISession']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Generates vector embeddings for text content using embedding models. Used for semantic search, document similarity, and RAG applications.      *      * **Features:**      * - Single text or batch processing (up to 100 texts)      * - Configurable dimensions (256, 512, 1024, 8192 for Titan v2)      * - Optional normalization to unit length      * - Usage tracking for billing      *      * **Use Cases:**      * - Semantic search across documents      * - Similarity matching for content recommendations      * - RAG (Retrieval-Augmented Generation) pipelines      * - Clustering and classification      *      * **Available Embedding Models:**      * - amazon.titan-embed-text-v2:0 (default, supports 256-8192 dimensions)      * - amazon.titan-embed-text-v1:0 (1536 dimensions fixed)
-         * @summary Generate text embeddings for semantic search and RAG applications
-         * @param {string} organisation The organisation ID
-         * @param {EmbeddingsRequest} embeddingsRequest Embedding request with single or multiple texts
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async embeddings(organisation: string, embeddingsRequest: EmbeddingsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Embeddings200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.embeddings(organisation, embeddingsRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.embeddings']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get AI configuration for an organization
-         * @param {string} organisation The organisation ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAIConfig(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAIConfig200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAIConfig(organisation, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.getAIConfig']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get a specific chat session
-         * @param {string} organisation The organisation ID
-         * @param {string} sessionId The session ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAISession200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAISession(organisation, sessionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.getAISession']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get AI usage statistics
-         * @param {string} organisation The organisation ID
-         * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAIUsageStats(organisation: string, month?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAIUsageStats200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAIUsageStats(organisation, month, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.getAIUsageStats']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
         /**
          * Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
          * @summary Get async tool execution status and result
@@ -10412,56 +13190,25 @@ export const AIServicesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getToolExecutionStatus(organisation: string, executionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetToolExecutionStatus200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getToolExecutionStatus(organisation, executionId, options);
+        async getAIToolExecutionStatus(organisation: string, executionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAIToolExecutionStatus200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAIToolExecutionStatus(organisation, executionId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.getToolExecutionStatus']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIToolsApi.getAIToolExecutionStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
-         * @summary Generate images with Amazon Nova Canvas
+         * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
+         * @summary List tool executions for monitoring and debugging
          * @param {string} organisation The organisation ID
-         * @param {ImageGenerationRequest} imageGenerationRequest Image generation request
+         * @param {ListAIToolExecutionsStatusEnum} [status] Filter by execution status
+         * @param {number} [limit] Maximum number of executions to return
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async imageGeneration(organisation: string, imageGenerationRequest: ImageGenerationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageGeneration200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.imageGeneration(organisation, imageGenerationRequest, options);
+        async listAIToolExecutions(organisation: string, status?: ListAIToolExecutionsStatusEnum, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAIToolExecutions200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAIToolExecutions(organisation, status, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.imageGeneration']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary List available AI models for an organization
-         * @param {string} organisation The organisation ID
-         * @param {ListAIModelsFeatureEnum} [feature] Filter models by supported feature
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listAIModels(organisation: string, feature?: ListAIModelsFeatureEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAIModels200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listAIModels(organisation, feature, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listAIModels']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Lists active sessions for an organization with flexible filtering options.      *      * **Query Combinations:**      * 1. By Organization (default): Returns all sessions in the organization      * 2. By Organization + Group: `?sessionGroup=drupal-prod` - Sessions in a specific group      * 3. By User: `?userId=user-123` - All sessions for a user      * 4. By User + Group: `?userId=user-123&sessionGroup=drupal-prod` - User\'s sessions in a specific group      *      * **Use Cases:**      * - List user\'s conversations in a specific app/environment      * - Admin view of all sessions in a customer/tenant group      * - User profile showing all AI conversations across apps
-         * @summary List chat sessions with multi-tenant filtering
-         * @param {string} organisation The organisation ID
-         * @param {string} [userId] Filter sessions by user ID
-         * @param {string} [sessionGroup] Filter by session group. Returns only sessions matching the specified group.
-         * @param {number} [limit] Maximum number of sessions to return (default 50, max 100)
-         * @param {number} [offset] Offset for pagination
-         * @param {string} [model] Filter by model ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listAISessions(organisation: string, userId?: string, sessionGroup?: string, limit?: number, offset?: number, model?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListAISessions200ResponseInner>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listAISessions(organisation, userId, sessionGroup, limit, offset, model, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listAISessions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIToolsApi.listAIToolExecutions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -10474,7 +13221,7 @@ export const AIServicesApiFp = function(configuration?: Configuration) {
         async listAIToolNames(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAIToolNames200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAIToolNames(organisation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listAIToolNames']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIToolsApi.listAIToolNames']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -10487,135 +13234,19 @@ export const AIServicesApiFp = function(configuration?: Configuration) {
         async listAITools(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAITools200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAITools(organisation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listAITools']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
-         * @summary List tool executions for monitoring and debugging
-         * @param {string} organisation The organisation ID
-         * @param {ListToolExecutionsStatusEnum} [status] Filter by execution status
-         * @param {number} [limit] Maximum number of executions to return
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listToolExecutions(organisation: string, status?: ListToolExecutionsStatusEnum, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListToolExecutions200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listToolExecutions(organisation, status, limit, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.listToolExecutions']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Update AI configuration for an organization
-         * @param {string} organisation The organisation ID
-         * @param {UpdateAIConfigRequest} updateAIConfigRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateAIConfig(organisation: string, updateAIConfigRequest: UpdateAIConfigRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAIConfig(organisation, updateAIConfigRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIServicesApi.updateAIConfig']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIToolsApi.listAITools']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * AIServicesApi - factory interface
+ * AIToolsApi - factory interface
  * @export
  */
-export const AIServicesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = AIServicesApiFp(configuration)
+export const AIToolsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AIToolsApiFp(configuration)
     return {
-        /**
-         * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
-         * @summary Chat inference via API Gateway (buffered responses) with multimodal support
-         * @param {string} organisation The organisation ID
-         * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        chatInference(organisation: string, chatInferenceRequest: ChatInferenceRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChatInference200Response> {
-            return localVarFp.chatInference(organisation, chatInferenceRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
-         * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
-         * @param {string} organisation The organisation ID
-         * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        chatInferenceStream(organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.chatInferenceStream(organisation, chatInferenceStreamRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Creates an AI session with automatic expiration (60 min default, 24h max). Sessions are isolated by organization. Use userId to identify the user creating the session. Use sessionGroup for logical grouping. Use metadata for additional custom data. Filter sessions by userId or sessionGroup when listing.
-         * @summary Create a new chat session with multi-tenant isolation
-         * @param {string} organisation The organisation ID
-         * @param {CreateAISessionRequest} createAISessionRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createAISession(organisation: string, createAISessionRequest: CreateAISessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateAISession201Response> {
-            return localVarFp.createAISession(organisation, createAISessionRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Delete a chat session
-         * @param {string} organisation The organisation ID
-         * @param {string} sessionId The session ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): AxiosPromise<DeleteAISession200Response> {
-            return localVarFp.deleteAISession(organisation, sessionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Generates vector embeddings for text content using embedding models. Used for semantic search, document similarity, and RAG applications.      *      * **Features:**      * - Single text or batch processing (up to 100 texts)      * - Configurable dimensions (256, 512, 1024, 8192 for Titan v2)      * - Optional normalization to unit length      * - Usage tracking for billing      *      * **Use Cases:**      * - Semantic search across documents      * - Similarity matching for content recommendations      * - RAG (Retrieval-Augmented Generation) pipelines      * - Clustering and classification      *      * **Available Embedding Models:**      * - amazon.titan-embed-text-v2:0 (default, supports 256-8192 dimensions)      * - amazon.titan-embed-text-v1:0 (1536 dimensions fixed)
-         * @summary Generate text embeddings for semantic search and RAG applications
-         * @param {string} organisation The organisation ID
-         * @param {EmbeddingsRequest} embeddingsRequest Embedding request with single or multiple texts
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        embeddings(organisation: string, embeddingsRequest: EmbeddingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Embeddings200Response> {
-            return localVarFp.embeddings(organisation, embeddingsRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get AI configuration for an organization
-         * @param {string} organisation The organisation ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAIConfig(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAIConfig200Response> {
-            return localVarFp.getAIConfig(organisation, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get a specific chat session
-         * @param {string} organisation The organisation ID
-         * @param {string} sessionId The session ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAISession200Response> {
-            return localVarFp.getAISession(organisation, sessionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get AI usage statistics
-         * @param {string} organisation The organisation ID
-         * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAIUsageStats(organisation: string, month?: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAIUsageStats200Response> {
-            return localVarFp.getAIUsageStats(organisation, month, options).then((request) => request(axios, basePath));
-        },
         /**
          * Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
          * @summary Get async tool execution status and result
@@ -10624,45 +13255,20 @@ export const AIServicesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getToolExecutionStatus(organisation: string, executionId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetToolExecutionStatus200Response> {
-            return localVarFp.getToolExecutionStatus(organisation, executionId, options).then((request) => request(axios, basePath));
+        getAIToolExecutionStatus(organisation: string, executionId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAIToolExecutionStatus200Response> {
+            return localVarFp.getAIToolExecutionStatus(organisation, executionId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
-         * @summary Generate images with Amazon Nova Canvas
+         * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
+         * @summary List tool executions for monitoring and debugging
          * @param {string} organisation The organisation ID
-         * @param {ImageGenerationRequest} imageGenerationRequest Image generation request
+         * @param {ListAIToolExecutionsStatusEnum} [status] Filter by execution status
+         * @param {number} [limit] Maximum number of executions to return
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        imageGeneration(organisation: string, imageGenerationRequest: ImageGenerationRequest, options?: RawAxiosRequestConfig): AxiosPromise<ImageGeneration200Response> {
-            return localVarFp.imageGeneration(organisation, imageGenerationRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List available AI models for an organization
-         * @param {string} organisation The organisation ID
-         * @param {ListAIModelsFeatureEnum} [feature] Filter models by supported feature
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listAIModels(organisation: string, feature?: ListAIModelsFeatureEnum, options?: RawAxiosRequestConfig): AxiosPromise<ListAIModels200Response> {
-            return localVarFp.listAIModels(organisation, feature, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Lists active sessions for an organization with flexible filtering options.      *      * **Query Combinations:**      * 1. By Organization (default): Returns all sessions in the organization      * 2. By Organization + Group: `?sessionGroup=drupal-prod` - Sessions in a specific group      * 3. By User: `?userId=user-123` - All sessions for a user      * 4. By User + Group: `?userId=user-123&sessionGroup=drupal-prod` - User\'s sessions in a specific group      *      * **Use Cases:**      * - List user\'s conversations in a specific app/environment      * - Admin view of all sessions in a customer/tenant group      * - User profile showing all AI conversations across apps
-         * @summary List chat sessions with multi-tenant filtering
-         * @param {string} organisation The organisation ID
-         * @param {string} [userId] Filter sessions by user ID
-         * @param {string} [sessionGroup] Filter by session group. Returns only sessions matching the specified group.
-         * @param {number} [limit] Maximum number of sessions to return (default 50, max 100)
-         * @param {number} [offset] Offset for pagination
-         * @param {string} [model] Filter by model ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listAISessions(organisation: string, userId?: string, sessionGroup?: string, limit?: number, offset?: number, model?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ListAISessions200ResponseInner>> {
-            return localVarFp.listAISessions(organisation, userId, sessionGroup, limit, offset, model, options).then((request) => request(axios, basePath));
+        listAIToolExecutions(organisation: string, status?: ListAIToolExecutionsStatusEnum, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListAIToolExecutions200Response> {
+            return localVarFp.listAIToolExecutions(organisation, status, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves just the names of available built-in tools. Useful for quick validation or UI dropdown population without the full tool specifications.
@@ -10684,142 +13290,16 @@ export const AIServicesApiFactory = function (configuration?: Configuration, bas
         listAITools(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<ListAITools200Response> {
             return localVarFp.listAITools(organisation, options).then((request) => request(axios, basePath));
         },
-        /**
-         * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
-         * @summary List tool executions for monitoring and debugging
-         * @param {string} organisation The organisation ID
-         * @param {ListToolExecutionsStatusEnum} [status] Filter by execution status
-         * @param {number} [limit] Maximum number of executions to return
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listToolExecutions(organisation: string, status?: ListToolExecutionsStatusEnum, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListToolExecutions200Response> {
-            return localVarFp.listToolExecutions(organisation, status, limit, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Update AI configuration for an organization
-         * @param {string} organisation The organisation ID
-         * @param {UpdateAIConfigRequest} updateAIConfigRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateAIConfig(organisation: string, updateAIConfigRequest: UpdateAIConfigRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.updateAIConfig(organisation, updateAIConfigRequest, options).then((request) => request(axios, basePath));
-        },
     };
 };
 
 /**
- * AIServicesApi - object-oriented interface
+ * AIToolsApi - object-oriented interface
  * @export
- * @class AIServicesApi
+ * @class AIToolsApi
  * @extends {BaseAPI}
  */
-export class AIServicesApi extends BaseAPI {
-    /**
-     * Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
-     * @summary Chat inference via API Gateway (buffered responses) with multimodal support
-     * @param {string} organisation The organisation ID
-     * @param {ChatInferenceRequest} chatInferenceRequest Chat request with optional multimodal content blocks
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public chatInference(organisation: string, chatInferenceRequest: ChatInferenceRequest, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).chatInference(organisation, chatInferenceRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models:**      * - Amazon Nova Lite, Micro, Pro (all support multimodal)      * - Claude models (text only)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
-     * @summary Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
-     * @param {string} organisation The organisation ID
-     * @param {ChatInferenceStreamRequest} chatInferenceStreamRequest Chat request with optional multimodal content blocks
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public chatInferenceStream(organisation: string, chatInferenceStreamRequest: ChatInferenceStreamRequest, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).chatInferenceStream(organisation, chatInferenceStreamRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Creates an AI session with automatic expiration (60 min default, 24h max). Sessions are isolated by organization. Use userId to identify the user creating the session. Use sessionGroup for logical grouping. Use metadata for additional custom data. Filter sessions by userId or sessionGroup when listing.
-     * @summary Create a new chat session with multi-tenant isolation
-     * @param {string} organisation The organisation ID
-     * @param {CreateAISessionRequest} createAISessionRequest 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public createAISession(organisation: string, createAISessionRequest: CreateAISessionRequest, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).createAISession(organisation, createAISessionRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Delete a chat session
-     * @param {string} organisation The organisation ID
-     * @param {string} sessionId The session ID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public deleteAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).deleteAISession(organisation, sessionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Generates vector embeddings for text content using embedding models. Used for semantic search, document similarity, and RAG applications.      *      * **Features:**      * - Single text or batch processing (up to 100 texts)      * - Configurable dimensions (256, 512, 1024, 8192 for Titan v2)      * - Optional normalization to unit length      * - Usage tracking for billing      *      * **Use Cases:**      * - Semantic search across documents      * - Similarity matching for content recommendations      * - RAG (Retrieval-Augmented Generation) pipelines      * - Clustering and classification      *      * **Available Embedding Models:**      * - amazon.titan-embed-text-v2:0 (default, supports 256-8192 dimensions)      * - amazon.titan-embed-text-v1:0 (1536 dimensions fixed)
-     * @summary Generate text embeddings for semantic search and RAG applications
-     * @param {string} organisation The organisation ID
-     * @param {EmbeddingsRequest} embeddingsRequest Embedding request with single or multiple texts
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public embeddings(organisation: string, embeddingsRequest: EmbeddingsRequest, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).embeddings(organisation, embeddingsRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get AI configuration for an organization
-     * @param {string} organisation The organisation ID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public getAIConfig(organisation: string, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).getAIConfig(organisation, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get a specific chat session
-     * @param {string} organisation The organisation ID
-     * @param {string} sessionId The session ID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public getAISession(organisation: string, sessionId: string, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).getAISession(organisation, sessionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get AI usage statistics
-     * @param {string} organisation The organisation ID
-     * @param {string} [month] Month to retrieve statistics for (YYYY-MM format)
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public getAIUsageStats(organisation: string, month?: string, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).getAIUsageStats(organisation, month, options).then((request) => request(this.axios, this.basePath));
-    }
-
+export class AIToolsApi extends BaseAPI {
     /**
      * Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
      * @summary Get async tool execution status and result
@@ -10827,53 +13307,24 @@ export class AIServicesApi extends BaseAPI {
      * @param {string} executionId Tool execution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AIServicesApi
+     * @memberof AIToolsApi
      */
-    public getToolExecutionStatus(organisation: string, executionId: string, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).getToolExecutionStatus(organisation, executionId, options).then((request) => request(this.axios, this.basePath));
+    public getAIToolExecutionStatus(organisation: string, executionId: string, options?: RawAxiosRequestConfig) {
+        return AIToolsApiFp(this.configuration).getAIToolExecutionStatus(organisation, executionId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
-     * @summary Generate images with Amazon Nova Canvas
+     * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
+     * @summary List tool executions for monitoring and debugging
      * @param {string} organisation The organisation ID
-     * @param {ImageGenerationRequest} imageGenerationRequest Image generation request
+     * @param {ListAIToolExecutionsStatusEnum} [status] Filter by execution status
+     * @param {number} [limit] Maximum number of executions to return
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AIServicesApi
+     * @memberof AIToolsApi
      */
-    public imageGeneration(organisation: string, imageGenerationRequest: ImageGenerationRequest, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).imageGeneration(organisation, imageGenerationRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List available AI models for an organization
-     * @param {string} organisation The organisation ID
-     * @param {ListAIModelsFeatureEnum} [feature] Filter models by supported feature
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public listAIModels(organisation: string, feature?: ListAIModelsFeatureEnum, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).listAIModels(organisation, feature, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Lists active sessions for an organization with flexible filtering options.      *      * **Query Combinations:**      * 1. By Organization (default): Returns all sessions in the organization      * 2. By Organization + Group: `?sessionGroup=drupal-prod` - Sessions in a specific group      * 3. By User: `?userId=user-123` - All sessions for a user      * 4. By User + Group: `?userId=user-123&sessionGroup=drupal-prod` - User\'s sessions in a specific group      *      * **Use Cases:**      * - List user\'s conversations in a specific app/environment      * - Admin view of all sessions in a customer/tenant group      * - User profile showing all AI conversations across apps
-     * @summary List chat sessions with multi-tenant filtering
-     * @param {string} organisation The organisation ID
-     * @param {string} [userId] Filter sessions by user ID
-     * @param {string} [sessionGroup] Filter by session group. Returns only sessions matching the specified group.
-     * @param {number} [limit] Maximum number of sessions to return (default 50, max 100)
-     * @param {number} [offset] Offset for pagination
-     * @param {string} [model] Filter by model ID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public listAISessions(organisation: string, userId?: string, sessionGroup?: string, limit?: number, offset?: number, model?: string, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).listAISessions(organisation, userId, sessionGroup, limit, offset, model, options).then((request) => request(this.axios, this.basePath));
+    public listAIToolExecutions(organisation: string, status?: ListAIToolExecutionsStatusEnum, limit?: number, options?: RawAxiosRequestConfig) {
+        return AIToolsApiFp(this.configuration).listAIToolExecutions(organisation, status, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10882,10 +13333,10 @@ export class AIServicesApi extends BaseAPI {
      * @param {string} organisation The organisation ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AIServicesApi
+     * @memberof AIToolsApi
      */
     public listAIToolNames(organisation: string, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).listAIToolNames(organisation, options).then((request) => request(this.axios, this.basePath));
+        return AIToolsApiFp(this.configuration).listAIToolNames(organisation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10894,61 +13345,555 @@ export class AIServicesApi extends BaseAPI {
      * @param {string} organisation The organisation ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AIServicesApi
+     * @memberof AIToolsApi
      */
     public listAITools(organisation: string, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).listAITools(organisation, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Lists recent async tool executions for an organization. Useful for debugging, monitoring, and building admin UIs.      *      * **Query Patterns:**      * - All recent executions: `GET /ai/tools/executions`      * - Filter by status: `GET /ai/tools/executions?status=running`      * - Limit results: `GET /ai/tools/executions?limit=20`      *      * **Results:**      * - Ordered by creation time (newest first)      * - Limited to 50 by default (configurable via `limit` parameter)      * - Only shows executions not yet expired (24h TTL)      *      * **Use Cases:**      * - Monitor all active tool executions      * - Debug failed executions      * - Build admin dashboards      * - Track tool usage patterns      * - Audit async operations
-     * @summary List tool executions for monitoring and debugging
-     * @param {string} organisation The organisation ID
-     * @param {ListToolExecutionsStatusEnum} [status] Filter by execution status
-     * @param {number} [limit] Maximum number of executions to return
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public listToolExecutions(organisation: string, status?: ListToolExecutionsStatusEnum, limit?: number, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).listToolExecutions(organisation, status, limit, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Update AI configuration for an organization
-     * @param {string} organisation The organisation ID
-     * @param {UpdateAIConfigRequest} updateAIConfigRequest 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AIServicesApi
-     */
-    public updateAIConfig(organisation: string, updateAIConfigRequest: UpdateAIConfigRequest, options?: RawAxiosRequestConfig) {
-        return AIServicesApiFp(this.configuration).updateAIConfig(organisation, updateAIConfigRequest, options).then((request) => request(this.axios, this.basePath));
+        return AIToolsApiFp(this.configuration).listAITools(organisation, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
 /**
  * @export
  */
-export const ListAIModelsFeatureEnum = {
-    Chat: 'chat',
-    Embeddings: 'embeddings',
-    Vision: 'vision',
-    Streaming: 'streaming',
-    All: 'all'
-} as const;
-export type ListAIModelsFeatureEnum = typeof ListAIModelsFeatureEnum[keyof typeof ListAIModelsFeatureEnum];
-/**
- * @export
- */
-export const ListToolExecutionsStatusEnum = {
+export const ListAIToolExecutionsStatusEnum = {
     Pending: 'pending',
     Running: 'running',
     Complete: 'complete',
     Failed: 'failed'
 } as const;
-export type ListToolExecutionsStatusEnum = typeof ListToolExecutionsStatusEnum[keyof typeof ListToolExecutionsStatusEnum];
+export type ListAIToolExecutionsStatusEnum = typeof ListAIToolExecutionsStatusEnum[keyof typeof ListAIToolExecutionsStatusEnum];
+
+
+/**
+ * AIVectorDatabaseApi - axios parameter creator
+ * @export
+ */
+export const AIVectorDatabaseApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Creates a new vector database collection (knowledge base category) for semantic search. Collections store documents with embeddings for RAG (Retrieval Augmented Generation).      *      * **Use Cases:**      * - Product documentation (\'docs\')      * - Company policies (\'policies\')      * - Support knowledge base (\'support\')      * - Technical specifications (\'specs\')
+         * @summary Create Vector Database Collection
+         * @param {string} organisation The organisation ID
+         * @param {CreateVectorCollectionRequest} createVectorCollectionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createVectorCollection: async (organisation: string, createVectorCollectionRequest: CreateVectorCollectionRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('createVectorCollection', 'organisation', organisation)
+            // verify required parameter 'createVectorCollectionRequest' is not null or undefined
+            assertParamExists('createVectorCollection', 'createVectorCollectionRequest', createVectorCollectionRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/vector-db/collections`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createVectorCollectionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Deletes a vector database collection and all its documents. This action cannot be undone.
+         * @summary Delete Collection
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteVectorCollection: async (organisation: string, collectionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('deleteVectorCollection', 'organisation', organisation)
+            // verify required parameter 'collectionId' is not null or undefined
+            assertParamExists('deleteVectorCollection', 'collectionId', collectionId)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"collectionId"}}`, encodeURIComponent(String(collectionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get detailed information about a specific vector database collection.
+         * @summary Get Collection Details
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getVectorCollection: async (organisation: string, collectionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getVectorCollection', 'organisation', organisation)
+            // verify required parameter 'collectionId' is not null or undefined
+            assertParamExists('getVectorCollection', 'collectionId', collectionId)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"collectionId"}}`, encodeURIComponent(String(collectionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists all vector database collections (knowledge bases) for an organization.
+         * @summary List Vector Database Collections
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listVectorCollections: async (organisation: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listVectorCollections', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/vector-db/collections`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.      *      * **Use Cases:**      * - Find relevant documentation for user questions      * - Power RAG (Retrieval Augmented Generation) in AI assistants      * - Semantic search across knowledge bases
+         * @summary Semantic Search Query
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {QueryVectorCollectionRequest} queryVectorCollectionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        queryVectorCollection: async (organisation: string, collectionId: string, queryVectorCollectionRequest: QueryVectorCollectionRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('queryVectorCollection', 'organisation', organisation)
+            // verify required parameter 'collectionId' is not null or undefined
+            assertParamExists('queryVectorCollection', 'collectionId', collectionId)
+            // verify required parameter 'queryVectorCollectionRequest' is not null or undefined
+            assertParamExists('queryVectorCollection', 'queryVectorCollectionRequest', queryVectorCollectionRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/query`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"collectionId"}}`, encodeURIComponent(String(collectionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(queryVectorCollectionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Uploads documents to a vector database collection with automatic embedding generation. Documents are chunked (if needed), embedded using the collection\'s embedding model, and stored.      *      * **Supported Content:**      * - Plain text content      * - URLs to fetch content from      * - Markdown documents      *      * **Metadata:**      * Each document can include metadata (title, source_url, section, tags) that is returned with search results.
+         * @summary Upload Documents to Collection
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {UploadVectorDocumentsRequest} uploadVectorDocumentsRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadVectorDocuments: async (organisation: string, collectionId: string, uploadVectorDocumentsRequest: UploadVectorDocumentsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('uploadVectorDocuments', 'organisation', organisation)
+            // verify required parameter 'collectionId' is not null or undefined
+            assertParamExists('uploadVectorDocuments', 'collectionId', collectionId)
+            // verify required parameter 'uploadVectorDocumentsRequest' is not null or undefined
+            assertParamExists('uploadVectorDocuments', 'uploadVectorDocumentsRequest', uploadVectorDocumentsRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"collectionId"}}`, encodeURIComponent(String(collectionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(uploadVectorDocumentsRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AIVectorDatabaseApi - functional programming interface
+ * @export
+ */
+export const AIVectorDatabaseApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AIVectorDatabaseApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Creates a new vector database collection (knowledge base category) for semantic search. Collections store documents with embeddings for RAG (Retrieval Augmented Generation).      *      * **Use Cases:**      * - Product documentation (\'docs\')      * - Company policies (\'policies\')      * - Support knowledge base (\'support\')      * - Technical specifications (\'specs\')
+         * @summary Create Vector Database Collection
+         * @param {string} organisation The organisation ID
+         * @param {CreateVectorCollectionRequest} createVectorCollectionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createVectorCollection(organisation: string, createVectorCollectionRequest: CreateVectorCollectionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateVectorCollection201Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createVectorCollection(organisation, createVectorCollectionRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIVectorDatabaseApi.createVectorCollection']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Deletes a vector database collection and all its documents. This action cannot be undone.
+         * @summary Delete Collection
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteVectorCollection(organisation: string, collectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteVectorCollection200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteVectorCollection(organisation, collectionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIVectorDatabaseApi.deleteVectorCollection']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get detailed information about a specific vector database collection.
+         * @summary Get Collection Details
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getVectorCollection(organisation: string, collectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetVectorCollection200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getVectorCollection(organisation, collectionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIVectorDatabaseApi.getVectorCollection']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists all vector database collections (knowledge bases) for an organization.
+         * @summary List Vector Database Collections
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listVectorCollections(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListVectorCollections200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listVectorCollections(organisation, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIVectorDatabaseApi.listVectorCollections']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.      *      * **Use Cases:**      * - Find relevant documentation for user questions      * - Power RAG (Retrieval Augmented Generation) in AI assistants      * - Semantic search across knowledge bases
+         * @summary Semantic Search Query
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {QueryVectorCollectionRequest} queryVectorCollectionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async queryVectorCollection(organisation: string, collectionId: string, queryVectorCollectionRequest: QueryVectorCollectionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryVectorCollection200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.queryVectorCollection(organisation, collectionId, queryVectorCollectionRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIVectorDatabaseApi.queryVectorCollection']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Uploads documents to a vector database collection with automatic embedding generation. Documents are chunked (if needed), embedded using the collection\'s embedding model, and stored.      *      * **Supported Content:**      * - Plain text content      * - URLs to fetch content from      * - Markdown documents      *      * **Metadata:**      * Each document can include metadata (title, source_url, section, tags) that is returned with search results.
+         * @summary Upload Documents to Collection
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {UploadVectorDocumentsRequest} uploadVectorDocumentsRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadVectorDocuments(organisation: string, collectionId: string, uploadVectorDocumentsRequest: UploadVectorDocumentsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadVectorDocuments200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadVectorDocuments(organisation, collectionId, uploadVectorDocumentsRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIVectorDatabaseApi.uploadVectorDocuments']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AIVectorDatabaseApi - factory interface
+ * @export
+ */
+export const AIVectorDatabaseApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AIVectorDatabaseApiFp(configuration)
+    return {
+        /**
+         * Creates a new vector database collection (knowledge base category) for semantic search. Collections store documents with embeddings for RAG (Retrieval Augmented Generation).      *      * **Use Cases:**      * - Product documentation (\'docs\')      * - Company policies (\'policies\')      * - Support knowledge base (\'support\')      * - Technical specifications (\'specs\')
+         * @summary Create Vector Database Collection
+         * @param {string} organisation The organisation ID
+         * @param {CreateVectorCollectionRequest} createVectorCollectionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createVectorCollection(organisation: string, createVectorCollectionRequest: CreateVectorCollectionRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateVectorCollection201Response> {
+            return localVarFp.createVectorCollection(organisation, createVectorCollectionRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Deletes a vector database collection and all its documents. This action cannot be undone.
+         * @summary Delete Collection
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteVectorCollection(organisation: string, collectionId: string, options?: RawAxiosRequestConfig): AxiosPromise<DeleteVectorCollection200Response> {
+            return localVarFp.deleteVectorCollection(organisation, collectionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get detailed information about a specific vector database collection.
+         * @summary Get Collection Details
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getVectorCollection(organisation: string, collectionId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetVectorCollection200Response> {
+            return localVarFp.getVectorCollection(organisation, collectionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists all vector database collections (knowledge bases) for an organization.
+         * @summary List Vector Database Collections
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listVectorCollections(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<ListVectorCollections200Response> {
+            return localVarFp.listVectorCollections(organisation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.      *      * **Use Cases:**      * - Find relevant documentation for user questions      * - Power RAG (Retrieval Augmented Generation) in AI assistants      * - Semantic search across knowledge bases
+         * @summary Semantic Search Query
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {QueryVectorCollectionRequest} queryVectorCollectionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        queryVectorCollection(organisation: string, collectionId: string, queryVectorCollectionRequest: QueryVectorCollectionRequest, options?: RawAxiosRequestConfig): AxiosPromise<QueryVectorCollection200Response> {
+            return localVarFp.queryVectorCollection(organisation, collectionId, queryVectorCollectionRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Uploads documents to a vector database collection with automatic embedding generation. Documents are chunked (if needed), embedded using the collection\'s embedding model, and stored.      *      * **Supported Content:**      * - Plain text content      * - URLs to fetch content from      * - Markdown documents      *      * **Metadata:**      * Each document can include metadata (title, source_url, section, tags) that is returned with search results.
+         * @summary Upload Documents to Collection
+         * @param {string} organisation The organisation ID
+         * @param {string} collectionId The collection ID
+         * @param {UploadVectorDocumentsRequest} uploadVectorDocumentsRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadVectorDocuments(organisation: string, collectionId: string, uploadVectorDocumentsRequest: UploadVectorDocumentsRequest, options?: RawAxiosRequestConfig): AxiosPromise<UploadVectorDocuments200Response> {
+            return localVarFp.uploadVectorDocuments(organisation, collectionId, uploadVectorDocumentsRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AIVectorDatabaseApi - object-oriented interface
+ * @export
+ * @class AIVectorDatabaseApi
+ * @extends {BaseAPI}
+ */
+export class AIVectorDatabaseApi extends BaseAPI {
+    /**
+     * Creates a new vector database collection (knowledge base category) for semantic search. Collections store documents with embeddings for RAG (Retrieval Augmented Generation).      *      * **Use Cases:**      * - Product documentation (\'docs\')      * - Company policies (\'policies\')      * - Support knowledge base (\'support\')      * - Technical specifications (\'specs\')
+     * @summary Create Vector Database Collection
+     * @param {string} organisation The organisation ID
+     * @param {CreateVectorCollectionRequest} createVectorCollectionRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIVectorDatabaseApi
+     */
+    public createVectorCollection(organisation: string, createVectorCollectionRequest: CreateVectorCollectionRequest, options?: RawAxiosRequestConfig) {
+        return AIVectorDatabaseApiFp(this.configuration).createVectorCollection(organisation, createVectorCollectionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Deletes a vector database collection and all its documents. This action cannot be undone.
+     * @summary Delete Collection
+     * @param {string} organisation The organisation ID
+     * @param {string} collectionId The collection ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIVectorDatabaseApi
+     */
+    public deleteVectorCollection(organisation: string, collectionId: string, options?: RawAxiosRequestConfig) {
+        return AIVectorDatabaseApiFp(this.configuration).deleteVectorCollection(organisation, collectionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get detailed information about a specific vector database collection.
+     * @summary Get Collection Details
+     * @param {string} organisation The organisation ID
+     * @param {string} collectionId The collection ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIVectorDatabaseApi
+     */
+    public getVectorCollection(organisation: string, collectionId: string, options?: RawAxiosRequestConfig) {
+        return AIVectorDatabaseApiFp(this.configuration).getVectorCollection(organisation, collectionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists all vector database collections (knowledge bases) for an organization.
+     * @summary List Vector Database Collections
+     * @param {string} organisation The organisation ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIVectorDatabaseApi
+     */
+    public listVectorCollections(organisation: string, options?: RawAxiosRequestConfig) {
+        return AIVectorDatabaseApiFp(this.configuration).listVectorCollections(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.      *      * **Use Cases:**      * - Find relevant documentation for user questions      * - Power RAG (Retrieval Augmented Generation) in AI assistants      * - Semantic search across knowledge bases
+     * @summary Semantic Search Query
+     * @param {string} organisation The organisation ID
+     * @param {string} collectionId The collection ID
+     * @param {QueryVectorCollectionRequest} queryVectorCollectionRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIVectorDatabaseApi
+     */
+    public queryVectorCollection(organisation: string, collectionId: string, queryVectorCollectionRequest: QueryVectorCollectionRequest, options?: RawAxiosRequestConfig) {
+        return AIVectorDatabaseApiFp(this.configuration).queryVectorCollection(organisation, collectionId, queryVectorCollectionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Uploads documents to a vector database collection with automatic embedding generation. Documents are chunked (if needed), embedded using the collection\'s embedding model, and stored.      *      * **Supported Content:**      * - Plain text content      * - URLs to fetch content from      * - Markdown documents      *      * **Metadata:**      * Each document can include metadata (title, source_url, section, tags) that is returned with search results.
+     * @summary Upload Documents to Collection
+     * @param {string} organisation The organisation ID
+     * @param {string} collectionId The collection ID
+     * @param {UploadVectorDocumentsRequest} uploadVectorDocumentsRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIVectorDatabaseApi
+     */
+    public uploadVectorDocuments(organisation: string, collectionId: string, uploadVectorDocumentsRequest: UploadVectorDocumentsRequest, options?: RawAxiosRequestConfig) {
+        return AIVectorDatabaseApiFp(this.configuration).uploadVectorDocuments(organisation, collectionId, uploadVectorDocumentsRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
 
 
 /**
@@ -15845,7 +18790,7 @@ export const EnvironmentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listEnvironments(organisation: string, application: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Environment>>> {
+        async listEnvironments(organisation: string, application: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvironmentSummary>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listEnvironments(organisation, application, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EnvironmentsApi.listEnvironments']?.[localVarOperationServerIndex]?.url;
@@ -16005,7 +18950,7 @@ export const EnvironmentsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listEnvironments(organisation: string, application: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Environment>> {
+        listEnvironments(organisation: string, application: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<EnvironmentSummary>> {
             return localVarFp.listEnvironments(organisation, application, options).then((request) => request(axios, basePath));
         },
         /**
