@@ -64,6 +64,7 @@ docs/ContainerEnvironmentInner.md
 docs/ContainerHealthCheck.md
 docs/ContainerImageReference.md
 docs/ContainerMountPointsInner.md
+docs/ContainerOriginProtectionConfig.md
 docs/ContainerSecretsInner.md
 docs/ContainersApi.md
 docs/CrawlerSchedulesApi.md

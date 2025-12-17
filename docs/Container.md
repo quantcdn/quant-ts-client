@@ -22,7 +22,8 @@ Name | Type | Description | Notes
 **essential** | **boolean** |  | [optional] [default to true]
 **readonlyRootFilesystem** | **boolean** |  | [optional] [default to false]
 **user** | **string** |  | [optional] [default to undefined]
-**originProtection** | **boolean** | Enable origin protection for all exposed ports on this container | [optional] [default to false]
+**originProtection** | **boolean** | Enable origin protection for all exposed ports on this container. Use originProtectionConfig for advanced options like IP allow lists. | [optional] [default to false]
+**originProtectionConfig** | [**ContainerOriginProtectionConfig**](ContainerOriginProtectionConfig.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -48,6 +49,7 @@ const instance: Container = {
     readonlyRootFilesystem,
     user,
     originProtection,
+    originProtectionConfig,
 };
 ```
 
