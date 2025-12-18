@@ -21,9 +21,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SSHAccessApi(configuration);
 
-let organisation: string; //The organisation machine name (default to undefined)
-let application: string; //The application name (default to undefined)
-let environment: string; //The environment name (default to undefined)
+let organisation: string; //The organisation ID (default to undefined)
+let application: string; //The application ID (default to undefined)
+let environment: string; //The environment ID (default to undefined)
 
 const { status, data } = await apiInstance.getSshAccessCredentials(
     organisation,
@@ -36,9 +36,9 @@ const { status, data } = await apiInstance.getSshAccessCredentials(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organisation** | [**string**] | The organisation machine name | defaults to undefined|
-| **application** | [**string**] | The application name | defaults to undefined|
-| **environment** | [**string**] | The environment name | defaults to undefined|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **application** | [**string**] | The application ID | defaults to undefined|
+| **environment** | [**string**] | The environment ID | defaults to undefined|
 
 
 ### Return type

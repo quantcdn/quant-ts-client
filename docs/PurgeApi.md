@@ -22,8 +22,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PurgeApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let purgeCreateRequest: PurgeCreateRequest; //
 
 const { status, data } = await apiInstance.purgeCreate(
@@ -38,8 +38,8 @@ const { status, data } = await apiInstance.purgeCreate(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **purgeCreateRequest** | **PurgeCreateRequest**|  | |
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 
 
 ### Return type

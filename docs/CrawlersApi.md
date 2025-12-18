@@ -89,7 +89,7 @@ const apiInstance = new CrawlersApi(configuration);
 
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
-let crawler: string; // (default to undefined)
+let crawler: string; //The UUID of the crawler (default to undefined)
 
 const { status, data } = await apiInstance.crawlersDelete(
     organization,
@@ -104,7 +104,7 @@ const { status, data } = await apiInstance.crawlersDelete(
 |------------- | ------------- | ------------- | -------------|
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
-| **crawler** | [**string**] |  | defaults to undefined|
+| **crawler** | [**string**] | The UUID of the crawler | defaults to undefined|
 
 
 ### Return type
@@ -254,7 +254,7 @@ const { status, data } = await apiInstance.crawlersGetRuns(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crawlersList**
-> Array<V2Crawler> crawlersList()
+> crawlersList()
 
 
 ### Example
@@ -287,7 +287,7 @@ const { status, data } = await apiInstance.crawlersList(
 
 ### Return type
 
-**Array<V2Crawler>**
+void (empty response body)
 
 ### Authorization
 
@@ -302,7 +302,6 @@ const { status, data } = await apiInstance.crawlersList(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
 
@@ -325,7 +324,7 @@ const apiInstance = new CrawlersApi(configuration);
 
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
-let crawler: string; // (default to undefined)
+let crawler: string; //The UUID of the crawler (default to undefined)
 
 const { status, data } = await apiInstance.crawlersRead(
     organization,
@@ -340,7 +339,7 @@ const { status, data } = await apiInstance.crawlersRead(
 |------------- | ------------- | ------------- | -------------|
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
-| **crawler** | [**string**] |  | defaults to undefined|
+| **crawler** | [**string**] | The UUID of the crawler | defaults to undefined|
 
 
 ### Return type
@@ -448,7 +447,7 @@ const apiInstance = new CrawlersApi(configuration);
 
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
-let crawler: string; // (default to undefined)
+let crawler: string; //The UUID of the crawler (default to undefined)
 let v2CrawlerRequest: V2CrawlerRequest; //
 
 const { status, data } = await apiInstance.crawlersUpdate(
@@ -466,7 +465,7 @@ const { status, data } = await apiInstance.crawlersUpdate(
 | **v2CrawlerRequest** | **V2CrawlerRequest**|  | |
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
-| **crawler** | [**string**] |  | defaults to undefined|
+| **crawler** | [**string**] | The UUID of the crawler | defaults to undefined|
 
 
 ### Return type

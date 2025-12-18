@@ -16293,7 +16293,7 @@ export const CrawlersApiAxiosParamCreator = function (configuration?: Configurat
          * @summary Delete a crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} crawler 
+         * @param {string} crawler The UUID of the crawler
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -16477,7 +16477,7 @@ export const CrawlersApiAxiosParamCreator = function (configuration?: Configurat
          * @summary Get details of a single crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} crawler 
+         * @param {string} crawler The UUID of the crawler
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -16575,7 +16575,7 @@ export const CrawlersApiAxiosParamCreator = function (configuration?: Configurat
          * @summary Update a crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} crawler 
+         * @param {string} crawler The UUID of the crawler
          * @param {V2CrawlerRequest} v2CrawlerRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -16652,7 +16652,7 @@ export const CrawlersApiFp = function(configuration?: Configuration) {
          * @summary Delete a crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} crawler 
+         * @param {string} crawler The UUID of the crawler
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -16701,7 +16701,7 @@ export const CrawlersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async crawlersList(organization: string, project: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<V2Crawler>>> {
+        async crawlersList(organization: string, project: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.crawlersList(organization, project, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CrawlersApi.crawlersList']?.[localVarOperationServerIndex]?.url;
@@ -16712,7 +16712,7 @@ export const CrawlersApiFp = function(configuration?: Configuration) {
          * @summary Get details of a single crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} crawler 
+         * @param {string} crawler The UUID of the crawler
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -16743,7 +16743,7 @@ export const CrawlersApiFp = function(configuration?: Configuration) {
          * @summary Update a crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} crawler 
+         * @param {string} crawler The UUID of the crawler
          * @param {V2CrawlerRequest} v2CrawlerRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -16781,7 +16781,7 @@ export const CrawlersApiFactory = function (configuration?: Configuration, baseP
          * @summary Delete a crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} crawler 
+         * @param {string} crawler The UUID of the crawler
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -16821,7 +16821,7 @@ export const CrawlersApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        crawlersList(organization: string, project: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<V2Crawler>> {
+        crawlersList(organization: string, project: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.crawlersList(organization, project, options).then((request) => request(axios, basePath));
         },
         /**
@@ -16829,7 +16829,7 @@ export const CrawlersApiFactory = function (configuration?: Configuration, baseP
          * @summary Get details of a single crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} crawler 
+         * @param {string} crawler The UUID of the crawler
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -16854,7 +16854,7 @@ export const CrawlersApiFactory = function (configuration?: Configuration, baseP
          * @summary Update a crawler
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} crawler 
+         * @param {string} crawler The UUID of the crawler
          * @param {V2CrawlerRequest} v2CrawlerRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -16891,7 +16891,7 @@ export class CrawlersApi extends BaseAPI {
      * @summary Delete a crawler
      * @param {string} organization Organization identifier
      * @param {string} project Project identifier
-     * @param {string} crawler 
+     * @param {string} crawler The UUID of the crawler
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CrawlersApi
@@ -16947,7 +16947,7 @@ export class CrawlersApi extends BaseAPI {
      * @summary Get details of a single crawler
      * @param {string} organization Organization identifier
      * @param {string} project Project identifier
-     * @param {string} crawler 
+     * @param {string} crawler The UUID of the crawler
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CrawlersApi
@@ -16976,7 +16976,7 @@ export class CrawlersApi extends BaseAPI {
      * @summary Update a crawler
      * @param {string} organization Organization identifier
      * @param {string} project Project identifier
-     * @param {string} crawler 
+     * @param {string} crawler The UUID of the crawler
      * @param {V2CrawlerRequest} v2CrawlerRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -17756,7 +17756,7 @@ export const DomainsApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Delete a domain
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} domain Domain identifier
+         * @param {string} domain Domain id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -17844,7 +17844,7 @@ export const DomainsApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Get details of a single domain
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} domain Domain identifier
+         * @param {string} domain Domain id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -17890,7 +17890,7 @@ export const DomainsApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Renew the SSL certificate for a domain
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} domain Domain identifier
+         * @param {string} domain Domain id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -17961,7 +17961,7 @@ export const DomainsApiFp = function(configuration?: Configuration) {
          * @summary Delete a domain
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} domain Domain identifier
+         * @param {string} domain Domain id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -17990,7 +17990,7 @@ export const DomainsApiFp = function(configuration?: Configuration) {
          * @summary Get details of a single domain
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} domain Domain identifier
+         * @param {string} domain Domain id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -18005,7 +18005,7 @@ export const DomainsApiFp = function(configuration?: Configuration) {
          * @summary Renew the SSL certificate for a domain
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} domain Domain identifier
+         * @param {string} domain Domain id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -18042,7 +18042,7 @@ export const DomainsApiFactory = function (configuration?: Configuration, basePa
          * @summary Delete a domain
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} domain Domain identifier
+         * @param {string} domain Domain id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -18065,7 +18065,7 @@ export const DomainsApiFactory = function (configuration?: Configuration, basePa
          * @summary Get details of a single domain
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} domain Domain identifier
+         * @param {string} domain Domain id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -18077,7 +18077,7 @@ export const DomainsApiFactory = function (configuration?: Configuration, basePa
          * @summary Renew the SSL certificate for a domain
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
-         * @param {string} domain Domain identifier
+         * @param {string} domain Domain id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -18113,7 +18113,7 @@ export class DomainsApi extends BaseAPI {
      * @summary Delete a domain
      * @param {string} organization Organization identifier
      * @param {string} project Project identifier
-     * @param {string} domain Domain identifier
+     * @param {string} domain Domain id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DomainsApi
@@ -18140,7 +18140,7 @@ export class DomainsApi extends BaseAPI {
      * @summary Get details of a single domain
      * @param {string} organization Organization identifier
      * @param {string} project Project identifier
-     * @param {string} domain Domain identifier
+     * @param {string} domain Domain id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DomainsApi
@@ -18154,7 +18154,7 @@ export class DomainsApi extends BaseAPI {
      * @summary Renew the SSL certificate for a domain
      * @param {string} organization Organization identifier
      * @param {string} project Project identifier
-     * @param {string} domain Domain identifier
+     * @param {string} domain Domain id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DomainsApi
@@ -19224,8 +19224,8 @@ export const HeadersApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Create or update custom headers
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2CustomHeaderRequest} v2CustomHeaderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19272,8 +19272,8 @@ export const HeadersApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Delete custom headers
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2CustomHeaderRequest} v2CustomHeaderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19320,8 +19320,8 @@ export const HeadersApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary List custom headers for a project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -19372,8 +19372,8 @@ export const HeadersApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create or update custom headers
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2CustomHeaderRequest} v2CustomHeaderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19387,8 +19387,8 @@ export const HeadersApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete custom headers
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2CustomHeaderRequest} v2CustomHeaderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19402,8 +19402,8 @@ export const HeadersApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List custom headers for a project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -19426,8 +19426,8 @@ export const HeadersApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Create or update custom headers
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2CustomHeaderRequest} v2CustomHeaderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19438,8 +19438,8 @@ export const HeadersApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Delete custom headers
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2CustomHeaderRequest} v2CustomHeaderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19450,8 +19450,8 @@ export const HeadersApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary List custom headers for a project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -19471,8 +19471,8 @@ export class HeadersApi extends BaseAPI {
     /**
      * 
      * @summary Create or update custom headers
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {V2CustomHeaderRequest} v2CustomHeaderRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -19485,8 +19485,8 @@ export class HeadersApi extends BaseAPI {
     /**
      * 
      * @summary Delete custom headers
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {V2CustomHeaderRequest} v2CustomHeaderRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -19499,8 +19499,8 @@ export class HeadersApi extends BaseAPI {
     /**
      * 
      * @summary List custom headers for a project
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof HeadersApi
@@ -19521,8 +19521,8 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * 
          * @summary Add a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2StoreRequest} v2StoreRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19569,8 +19569,8 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * 
          * @summary Delete a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19615,8 +19615,8 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * 
          * @summary Add an item to a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {V2StoreItemRequest} v2StoreItemRequest 
          * @param {*} [options] Override http request option.
@@ -19667,8 +19667,8 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * 
          * @summary Delete an item from a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} key 
          * @param {*} [options] Override http request option.
@@ -19717,8 +19717,8 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * 
          * @summary List items in a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} [cursor] Cursor for pagination
          * @param {number} [limit] Number of items to return
@@ -19783,8 +19783,8 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
          * @summary Get an item from a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} key 
          * @param {*} [options] Override http request option.
@@ -19833,8 +19833,8 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * 
          * @summary Update an item in a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} key 
          * @param {V2StoreItemUpdateRequest} v2StoreItemUpdateRequest 
@@ -19889,8 +19889,8 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * 
          * @summary List key-value stores
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -19931,8 +19931,8 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * 
          * @summary Get a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19987,8 +19987,8 @@ export const KVApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Add a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2StoreRequest} v2StoreRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20002,8 +20002,8 @@ export const KVApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20017,8 +20017,8 @@ export const KVApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Add an item to a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {V2StoreItemRequest} v2StoreItemRequest 
          * @param {*} [options] Override http request option.
@@ -20033,8 +20033,8 @@ export const KVApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete an item from a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} key 
          * @param {*} [options] Override http request option.
@@ -20049,8 +20049,8 @@ export const KVApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List items in a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} [cursor] Cursor for pagination
          * @param {number} [limit] Number of items to return
@@ -20068,8 +20068,8 @@ export const KVApiFp = function(configuration?: Configuration) {
         /**
          * Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
          * @summary Get an item from a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} key 
          * @param {*} [options] Override http request option.
@@ -20084,8 +20084,8 @@ export const KVApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update an item in a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} key 
          * @param {V2StoreItemUpdateRequest} v2StoreItemUpdateRequest 
@@ -20101,8 +20101,8 @@ export const KVApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List key-value stores
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20115,8 +20115,8 @@ export const KVApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20140,8 +20140,8 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * 
          * @summary Add a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2StoreRequest} v2StoreRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20152,8 +20152,8 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * 
          * @summary Delete a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20164,8 +20164,8 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * 
          * @summary Add an item to a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {V2StoreItemRequest} v2StoreItemRequest 
          * @param {*} [options] Override http request option.
@@ -20177,8 +20177,8 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * 
          * @summary Delete an item from a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} key 
          * @param {*} [options] Override http request option.
@@ -20190,8 +20190,8 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * 
          * @summary List items in a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} [cursor] Cursor for pagination
          * @param {number} [limit] Number of items to return
@@ -20206,8 +20206,8 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
          * @summary Get an item from a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} key 
          * @param {*} [options] Override http request option.
@@ -20219,8 +20219,8 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * 
          * @summary Update an item in a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {string} key 
          * @param {V2StoreItemUpdateRequest} v2StoreItemUpdateRequest 
@@ -20233,8 +20233,8 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * 
          * @summary List key-value stores
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20244,8 +20244,8 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * 
          * @summary Get a kv store
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {string} storeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20266,8 +20266,8 @@ export class KVApi extends BaseAPI {
     /**
      * 
      * @summary Add a kv store
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {V2StoreRequest} v2StoreRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -20280,8 +20280,8 @@ export class KVApi extends BaseAPI {
     /**
      * 
      * @summary Delete a kv store
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {string} storeId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -20294,8 +20294,8 @@ export class KVApi extends BaseAPI {
     /**
      * 
      * @summary Add an item to a kv store
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {string} storeId 
      * @param {V2StoreItemRequest} v2StoreItemRequest 
      * @param {*} [options] Override http request option.
@@ -20309,8 +20309,8 @@ export class KVApi extends BaseAPI {
     /**
      * 
      * @summary Delete an item from a kv store
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {string} storeId 
      * @param {string} key 
      * @param {*} [options] Override http request option.
@@ -20324,8 +20324,8 @@ export class KVApi extends BaseAPI {
     /**
      * 
      * @summary List items in a kv store
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {string} storeId 
      * @param {string} [cursor] Cursor for pagination
      * @param {number} [limit] Number of items to return
@@ -20342,8 +20342,8 @@ export class KVApi extends BaseAPI {
     /**
      * Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
      * @summary Get an item from a kv store
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {string} storeId 
      * @param {string} key 
      * @param {*} [options] Override http request option.
@@ -20357,8 +20357,8 @@ export class KVApi extends BaseAPI {
     /**
      * 
      * @summary Update an item in a kv store
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {string} storeId 
      * @param {string} key 
      * @param {V2StoreItemUpdateRequest} v2StoreItemUpdateRequest 
@@ -20373,8 +20373,8 @@ export class KVApi extends BaseAPI {
     /**
      * 
      * @summary List key-value stores
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof KVApi
@@ -20386,8 +20386,8 @@ export class KVApi extends BaseAPI {
     /**
      * 
      * @summary Get a kv store
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {string} storeId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -20443,7 +20443,7 @@ export const OrganizationsApiAxiosParamCreator = function (configuration?: Confi
         /**
          * 
          * @summary Get details of a single organization
-         * @param {string} organization 
+         * @param {string} organization Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20503,7 +20503,7 @@ export const OrganizationsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get details of a single organization
-         * @param {string} organization 
+         * @param {string} organization Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20535,7 +20535,7 @@ export const OrganizationsApiFactory = function (configuration?: Configuration, 
         /**
          * 
          * @summary Get details of a single organization
-         * @param {string} organization 
+         * @param {string} organization Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20566,7 +20566,7 @@ export class OrganizationsApi extends BaseAPI {
     /**
      * 
      * @summary Get details of a single organization
-     * @param {string} organization 
+     * @param {string} organization Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationsApi
@@ -20587,7 +20587,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create a new project
-         * @param {string} organization 
+         * @param {string} organization Organization identifier
          * @param {V2ProjectRequest} v2ProjectRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20631,8 +20631,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete a project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20673,7 +20673,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Retrieve all projects for an organization
-         * @param {string} organization 
+         * @param {string} organization Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20711,8 +20711,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get details of a single project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {boolean} withToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20760,8 +20760,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update a project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2ProjectRequest} v2ProjectRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20818,7 +20818,7 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a new project
-         * @param {string} organization 
+         * @param {string} organization Organization identifier
          * @param {V2ProjectRequest} v2ProjectRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20832,8 +20832,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20846,7 +20846,7 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Retrieve all projects for an organization
-         * @param {string} organization 
+         * @param {string} organization Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20859,8 +20859,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get details of a single project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {boolean} withToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20874,8 +20874,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2ProjectRequest} v2ProjectRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20899,7 +20899,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create a new project
-         * @param {string} organization 
+         * @param {string} organization Organization identifier
          * @param {V2ProjectRequest} v2ProjectRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20910,8 +20910,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete a project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20921,7 +20921,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Retrieve all projects for an organization
-         * @param {string} organization 
+         * @param {string} organization Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -20931,8 +20931,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get details of a single project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {boolean} withToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20943,8 +20943,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update a project
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {V2ProjectRequest} v2ProjectRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20965,7 +20965,7 @@ export class ProjectsApi extends BaseAPI {
     /**
      * 
      * @summary Create a new project
-     * @param {string} organization 
+     * @param {string} organization Organization identifier
      * @param {V2ProjectRequest} v2ProjectRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -20978,8 +20978,8 @@ export class ProjectsApi extends BaseAPI {
     /**
      * 
      * @summary Delete a project
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectsApi
@@ -20991,7 +20991,7 @@ export class ProjectsApi extends BaseAPI {
     /**
      * 
      * @summary Retrieve all projects for an organization
-     * @param {string} organization 
+     * @param {string} organization Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectsApi
@@ -21003,8 +21003,8 @@ export class ProjectsApi extends BaseAPI {
     /**
      * 
      * @summary Get details of a single project
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {boolean} withToken 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -21017,8 +21017,8 @@ export class ProjectsApi extends BaseAPI {
     /**
      * 
      * @summary Update a project
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {V2ProjectRequest} v2ProjectRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -21040,8 +21040,8 @@ export const PurgeApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @summary Purge cache via URL or cache keys
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {PurgeCreateRequest} purgeCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -21098,8 +21098,8 @@ export const PurgeApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Purge cache via URL or cache keys
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {PurgeCreateRequest} purgeCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -21123,8 +21123,8 @@ export const PurgeApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @summary Purge cache via URL or cache keys
-         * @param {string} organization 
-         * @param {string} project 
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
          * @param {PurgeCreateRequest} purgeCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -21145,8 +21145,8 @@ export class PurgeApi extends BaseAPI {
     /**
      * 
      * @summary Purge cache via URL or cache keys
-     * @param {string} organization 
-     * @param {string} project 
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
      * @param {PurgeCreateRequest} purgeCreateRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -25158,9 +25158,9 @@ export const SSHAccessApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Get SSH access credentials for an environment
-         * @param {string} organisation The organisation machine name
-         * @param {string} application The application name
-         * @param {string} environment The environment name
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The environment ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -25214,9 +25214,9 @@ export const SSHAccessApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get SSH access credentials for an environment
-         * @param {string} organisation The organisation machine name
-         * @param {string} application The application name
-         * @param {string} environment The environment name
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The environment ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -25239,9 +25239,9 @@ export const SSHAccessApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Get SSH access credentials for an environment
-         * @param {string} organisation The organisation machine name
-         * @param {string} application The application name
-         * @param {string} environment The environment name
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The environment ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -25261,9 +25261,9 @@ export class SSHAccessApi extends BaseAPI {
     /**
      * 
      * @summary Get SSH access credentials for an environment
-     * @param {string} organisation The organisation machine name
-     * @param {string} application The application name
-     * @param {string} environment The environment name
+     * @param {string} organisation The organisation ID
+     * @param {string} application The application ID
+     * @param {string} environment The environment ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SSHAccessApi
