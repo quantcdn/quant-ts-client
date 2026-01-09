@@ -26,7 +26,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new ProjectsApi(configuration);
 
-let organization: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
 let v2ProjectRequest: V2ProjectRequest; //
 
 const { status, data } = await apiInstance.projectsCreate(
@@ -40,7 +40,7 @@ const { status, data } = await apiInstance.projectsCreate(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **v2ProjectRequest** | **V2ProjectRequest**|  | |
-| **organization** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
 
 
 ### Return type
@@ -81,8 +81,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new ProjectsApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 
 const { status, data } = await apiInstance.projectsDelete(
     organization,
@@ -94,8 +94,8 @@ const { status, data } = await apiInstance.projectsDelete(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 
 
 ### Return type
@@ -136,7 +136,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new ProjectsApi(configuration);
 
-let organization: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
 
 const { status, data } = await apiInstance.projectsList(
     organization
@@ -147,7 +147,7 @@ const { status, data } = await apiInstance.projectsList(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
 
 
 ### Return type
@@ -188,8 +188,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new ProjectsApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let withToken: boolean; // (default to false)
 
 const { status, data } = await apiInstance.projectsRead(
@@ -203,8 +203,8 @@ const { status, data } = await apiInstance.projectsRead(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 | **withToken** | [**boolean**] |  | defaults to false|
 
 
@@ -247,8 +247,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new ProjectsApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let v2ProjectRequest: V2ProjectRequest; //
 
 const { status, data } = await apiInstance.projectsUpdate(
@@ -263,8 +263,8 @@ const { status, data } = await apiInstance.projectsUpdate(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **v2ProjectRequest** | **V2ProjectRequest**|  | |
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 
 
 ### Return type
