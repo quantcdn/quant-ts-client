@@ -41,8 +41,6 @@ jobs:
       - name: Publish to npm
         if: steps.check.outputs.exists == 'false'
         run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ""
 
       - name: Create GitHub Release
         if: steps.check.outputs.exists == 'false'
