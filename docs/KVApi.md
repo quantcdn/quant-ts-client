@@ -30,8 +30,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new KVApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let v2StoreRequest: V2StoreRequest; //
 
 const { status, data } = await apiInstance.kVCreate(
@@ -46,8 +46,8 @@ const { status, data } = await apiInstance.kVCreate(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **v2StoreRequest** | **V2StoreRequest**|  | |
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 
 
 ### Return type
@@ -88,8 +88,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new KVApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let storeId: string; // (default to undefined)
 
 const { status, data } = await apiInstance.kVDelete(
@@ -103,8 +103,8 @@ const { status, data } = await apiInstance.kVDelete(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 | **storeId** | [**string**] |  | defaults to undefined|
 
 
@@ -147,8 +147,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new KVApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let storeId: string; // (default to undefined)
 let v2StoreItemRequest: V2StoreItemRequest; //
 
@@ -165,8 +165,8 @@ const { status, data } = await apiInstance.kVItemsCreate(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **v2StoreItemRequest** | **V2StoreItemRequest**|  | |
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 | **storeId** | [**string**] |  | defaults to undefined|
 
 
@@ -209,8 +209,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new KVApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let storeId: string; // (default to undefined)
 let key: string; // (default to undefined)
 
@@ -226,8 +226,8 @@ const { status, data } = await apiInstance.kVItemsDelete(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 | **storeId** | [**string**] |  | defaults to undefined|
 | **key** | [**string**] |  | defaults to undefined|
 
@@ -270,8 +270,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new KVApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let storeId: string; // (default to undefined)
 let cursor: string; //Cursor for pagination (optional) (default to undefined)
 let limit: number; //Number of items to return (optional) (default to 10)
@@ -293,8 +293,8 @@ const { status, data } = await apiInstance.kVItemsList(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 | **storeId** | [**string**] |  | defaults to undefined|
 | **cursor** | [**string**] | Cursor for pagination | (optional) defaults to undefined|
 | **limit** | [**number**] | Number of items to return | (optional) defaults to 10|
@@ -341,8 +341,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new KVApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let storeId: string; // (default to undefined)
 let key: string; // (default to undefined)
 
@@ -358,8 +358,8 @@ const { status, data } = await apiInstance.kVItemsShow(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 | **storeId** | [**string**] |  | defaults to undefined|
 | **key** | [**string**] |  | defaults to undefined|
 
@@ -403,8 +403,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new KVApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let storeId: string; // (default to undefined)
 let key: string; // (default to undefined)
 let v2StoreItemUpdateRequest: V2StoreItemUpdateRequest; //
@@ -423,8 +423,8 @@ const { status, data } = await apiInstance.kVItemsUpdate(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **v2StoreItemUpdateRequest** | **V2StoreItemUpdateRequest**|  | |
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 | **storeId** | [**string**] |  | defaults to undefined|
 | **key** | [**string**] |  | defaults to undefined|
 
@@ -468,8 +468,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new KVApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 
 const { status, data } = await apiInstance.kVList(
     organization,
@@ -481,8 +481,8 @@ const { status, data } = await apiInstance.kVList(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 
 
 ### Return type
@@ -523,8 +523,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new KVApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let storeId: string; // (default to undefined)
 
 const { status, data } = await apiInstance.kVShow(
@@ -538,8 +538,8 @@ const { status, data } = await apiInstance.kVShow(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 | **storeId** | [**string**] |  | defaults to undefined|
 
 

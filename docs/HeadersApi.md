@@ -24,8 +24,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new HeadersApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let v2CustomHeaderRequest: V2CustomHeaderRequest; //
 
 const { status, data } = await apiInstance.headersCreate(
@@ -40,8 +40,8 @@ const { status, data } = await apiInstance.headersCreate(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **v2CustomHeaderRequest** | **V2CustomHeaderRequest**|  | |
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 
 
 ### Return type
@@ -83,8 +83,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new HeadersApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 let v2CustomHeaderRequest: V2CustomHeaderRequest; //
 
 const { status, data } = await apiInstance.headersDelete(
@@ -99,8 +99,8 @@ const { status, data } = await apiInstance.headersDelete(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **v2CustomHeaderRequest** | **V2CustomHeaderRequest**|  | |
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 
 
 ### Return type
@@ -141,8 +141,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new HeadersApi(configuration);
 
-let organization: string; // (default to undefined)
-let project: string; // (default to undefined)
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
 
 const { status, data } = await apiInstance.headersList(
     organization,
@@ -154,8 +154,8 @@ const { status, data } = await apiInstance.headersList(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | [**string**] |  | defaults to undefined|
-| **project** | [**string**] |  | defaults to undefined|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
 
 
 ### Return type

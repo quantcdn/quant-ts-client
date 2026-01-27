@@ -86,7 +86,7 @@ const apiInstance = new DomainsApi(configuration);
 
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
-let domain: string; //Domain identifier (default to undefined)
+let domain: string; //Domain id (default to undefined)
 
 const { status, data } = await apiInstance.domainsDelete(
     organization,
@@ -101,7 +101,7 @@ const { status, data } = await apiInstance.domainsDelete(
 |------------- | ------------- | ------------- | -------------|
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
-| **domain** | [**string**] | Domain identifier | defaults to undefined|
+| **domain** | [**string**] | Domain id | defaults to undefined|
 
 
 ### Return type
@@ -199,7 +199,7 @@ const apiInstance = new DomainsApi(configuration);
 
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
-let domain: string; //Domain identifier (default to undefined)
+let domain: string; //Domain id (default to undefined)
 
 const { status, data } = await apiInstance.domainsRead(
     organization,
@@ -214,7 +214,7 @@ const { status, data } = await apiInstance.domainsRead(
 |------------- | ------------- | ------------- | -------------|
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
-| **domain** | [**string**] | Domain identifier | defaults to undefined|
+| **domain** | [**string**] | Domain id | defaults to undefined|
 
 
 ### Return type
@@ -257,7 +257,7 @@ const apiInstance = new DomainsApi(configuration);
 
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
-let domain: string; //Domain identifier (default to undefined)
+let domain: string; //Domain id (default to undefined)
 
 const { status, data } = await apiInstance.domainsRenew(
     organization,
@@ -272,7 +272,7 @@ const { status, data } = await apiInstance.domainsRenew(
 |------------- | ------------- | ------------- | -------------|
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
-| **domain** | [**string**] | Domain identifier | defaults to undefined|
+| **domain** | [**string**] | Domain id | defaults to undefined|
 
 
 ### Return type

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**urls** | **Array&lt;string&gt;** | URLs to crawl | [optional] [default to undefined]
+**urls** | **Array&lt;string&gt;** | Optional URLs to crawl (overrides crawler\&#39;s default URL configuration). If not provided, the crawler will use its configured URLs or perform a full crawl. | [optional] [default to undefined]
 
 ## Example
 
