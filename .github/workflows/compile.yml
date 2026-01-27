@@ -5,6 +5,7 @@ on:
 permissions:
   contents: write  # Required for creating releases and tags
   id-token: write  # Required for requesting the JWT
+  packages: write
 
 jobs:
   publish:
