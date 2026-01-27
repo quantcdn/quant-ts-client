@@ -4,6 +4,7 @@ on:
 
 permissions:
   contents: write  # Required for creating releases and tags
+  id-token: write  # Required for requesting the JWT
 
 jobs:
   publish:
@@ -39,9 +40,7 @@ jobs:
 
       - name: Publish to npm
         if: steps.check.outputs.exists == 'false'
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
 
       - name: Create GitHub Release
         if: steps.check.outputs.exists == 'false'
