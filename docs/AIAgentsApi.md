@@ -14,7 +14,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 # **chatWithAIAgent**
 > ChatWithAIAgent200Response chatWithAIAgent(chatWithAIAgentRequest)
 
-Initiates a chat session with a specific AI agent. The agent\'s configuration (system prompt, temperature, model, allowed tools) is automatically applied.      *      * **Key Features:**      * - **Session Management**: Automatic session creation and state tracking      * - **Multi-turn Conversations**: Full conversation history maintained server-side      * - Agent\'s system prompt is prepended to conversation      * - Only agent\'s allowed tools are available      * - All tools are auto-executed (no client confirmation)      * - Temperature and model from agent config      *      * **Session Support:**      * - Omit `sessionId` to create a new session automatically      * - Include `sessionId` to continue an existing conversation      * - Sessions expire after 60 minutes of inactivity      * - Use `/sessions/{sessionId}` to retrieve full conversation history
+Initiates a chat session with a specific AI agent. The agent\'s configuration (system prompt, temperature, model, allowed tools) is automatically applied.      *      * **Key Features:**      * - **Session Management**: Automatic session creation and state tracking      * - **Multi-turn Conversations**: Full conversation history maintained server-side      * - Agent\'s system prompt is prepended to conversation      * - Only agent\'s allowed tools are available      * - All tools are auto-executed on cloud (no client confirmation needed)      * - Temperature and model from agent config      * - Supports sync, streaming, and async modes      *      * **Execution Modes:**      * - **Sync Mode** (default): Standard JSON response, waits for completion      * - **Streaming Mode**: Set `stream: true` for SSE token-by-token responses      * - **Async Mode**: Set `async: true` for long-running tasks with polling      *      * **Async/Durable Mode (`async: true`):**      * - Returns immediately with `requestId` and `pollUrl` (HTTP 202)      * - Uses AWS Lambda Durable Functions for long-running agent tasks      * - All tools are auto-executed on cloud (no `waiting_callback` state)      * - Poll `/ai/chat/executions/{requestId}` for status      * - Ideal for agents with slow tools (image generation, web search, etc.)      *      * **Session Support:**      * - Omit `sessionId` to create a new session automatically      * - Include `sessionId` to continue an existing conversation      * - Sessions expire after 60 minutes of inactivity      * - Sessions work in all modes (sync, streaming, async)      * - Use `/sessions/{sessionId}` to retrieve full conversation history
 
 ### Example
 
@@ -65,7 +65,8 @@ const { status, data } = await apiInstance.chatWithAIAgent(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Agent response generated successfully |  -  |
+|**200** | Agent response generated successfully (sync mode) |  -  |
+|**202** | Async execution started (when &#x60;async: true&#x60; in request) |  -  |
 |**400** | Invalid request parameters |  -  |
 |**403** | Access denied |  -  |
 |**404** | Agent not found |  -  |

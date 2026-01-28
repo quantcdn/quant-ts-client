@@ -5,9 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**content** | **string** |  | [optional] [default to undefined]
-**score** | **number** |  | [optional] [default to undefined]
-**metadata** | [**QueryVectorCollection200ResponseResultsInnerMetadata**](QueryVectorCollection200ResponseResultsInnerMetadata.md) |  | [optional] [default to undefined]
+**documentId** | **string** |  | [optional] [default to undefined]
+**content** | **string** | Document text content | [optional] [default to undefined]
+**similarity** | **number** | Cosine similarity score (1.0 for metadata-only queries) | [optional] [default to undefined]
+**metadata** | **{ [key: string]: any; }** |  | [optional] [default to undefined]
+**embedding** | **Array&lt;number&gt;** | Vector embedding (only if includeEmbeddings&#x3D;true) | [optional] [default to undefined]
 
 ## Example
 
@@ -15,9 +17,11 @@ Name | Type | Description | Notes
 import { QueryVectorCollection200ResponseResultsInner } from '@quantcdn/quant-client';
 
 const instance: QueryVectorCollection200ResponseResultsInner = {
+    documentId,
     content,
-    score,
+    similarity,
     metadata,
+    embedding,
 };
 ```
 
