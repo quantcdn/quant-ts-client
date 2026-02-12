@@ -9,6 +9,7 @@ docs/AIFileStorageApi.md
 docs/AIInferenceApi.md
 docs/AIModelsApi.md
 docs/AIMonitoringApi.md
+docs/AIOrchestrationsApi.md
 docs/AISessionsApi.md
 docs/AITaskManagementApi.md
 docs/AIToolsApi.md
@@ -23,6 +24,7 @@ docs/ApplicationsApi.md
 docs/BackupManagementApi.md
 docs/BulkSetEnvironmentVariablesRequest.md
 docs/BulkSetEnvironmentVariablesRequestEnvironmentInner.md
+docs/CDNMetricsApi.md
 docs/ChatInference200Response.md
 docs/ChatInference200ResponseResponse.md
 docs/ChatInference200ResponseResponseToolUse.md
@@ -32,6 +34,7 @@ docs/ChatInference200ResponseResponseToolUseOneOfResult.md
 docs/ChatInference200ResponseUsage.md
 docs/ChatInference202Response.md
 docs/ChatInferenceRequest.md
+docs/ChatInferenceRequestGuardrails.md
 docs/ChatInferenceRequestMessagesInner.md
 docs/ChatInferenceRequestMessagesInnerContent.md
 docs/ChatInferenceRequestMessagesInnerContentOneOfInner.md
@@ -94,6 +97,9 @@ docs/CreateCustomToolRequest.md
 docs/CreateEnvironment403Response.md
 docs/CreateEnvironmentRequest.md
 docs/CreateEnvironmentRequestEnvironmentInner.md
+docs/CreateOrchestrationRequest.md
+docs/CreateOrchestrationRequestInputSource.md
+docs/CreateOrchestrationRequestStopCondition.md
 docs/CreateTask201Response.md
 docs/CreateTaskRequest.md
 docs/CreateVectorCollection201Response.md
@@ -111,6 +117,9 @@ docs/DeleteFile200Response.md
 docs/DeleteTask200Response.md
 docs/DeleteTask409Response.md
 docs/DeleteVectorCollection200Response.md
+docs/DeleteVectorDocuments200Response.md
+docs/DeleteVectorDocumentsRequest.md
+docs/DeleteVectorDocumentsRequestMetadata.md
 docs/DomainsApi.md
 docs/DownloadBackup200Response.md
 docs/Embeddings200Response.md
@@ -170,6 +179,8 @@ docs/KVItemsCreate200Response.md
 docs/KVItemsDelete200Response.md
 docs/KVItemsShow200Response.md
 docs/KVItemsShow200ResponseValue.md
+docs/KVLinkToProject200Response.md
+docs/KVLinkToProjectRequest.md
 docs/ListAIAgents200Response.md
 docs/ListAIAgents200ResponseAgentsInner.md
 docs/ListAIModels200Response.md
@@ -190,6 +201,9 @@ docs/ListCustomTools200Response.md
 docs/ListCustomTools200ResponseToolsInner.md
 docs/ListFiles200Response.md
 docs/ListFiles200ResponseFilesInner.md
+docs/ListOrchestrationBatches200Response.md
+docs/ListOrchestrationBatches200ResponseBatchesInner.md
+docs/ListOrchestrations200Response.md
 docs/ListTasks200Response.md
 docs/ListTasks200ResponseTasksInner.md
 docs/ListVectorCollections200Response.md
@@ -292,6 +306,11 @@ docs/V2DomainDnsGoLiveRecordsInner.md
 docs/V2DomainDnsValidationRecordsInner.md
 docs/V2DomainRequest.md
 docs/V2Error.md
+docs/V2MetricData.md
+docs/V2MetricDataPoint.md
+docs/V2MetricDataPointTimestamp.md
+docs/V2MetricsMeta.md
+docs/V2MetricsResponse.md
 docs/V2Organization.md
 docs/V2OrganizationRequest.md
 docs/V2Project.md

@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **toolConfig** | [**ChatInferenceRequestToolConfig**](ChatInferenceRequestToolConfig.md) |  | [optional] [default to undefined]
 **sessionId** | **string** | Optional session ID for conversation continuity. Omit to use stateless mode, include to continue an existing session. | [optional] [default to undefined]
 **async** | **boolean** | Enable async/durable execution mode. When true, returns 202 with pollUrl instead of streaming. Use for long-running inference, client-executed tools, or operations &gt;30 seconds. | [optional] [default to false]
+**allowedTools** | **Array&lt;string&gt;** | Top-level convenience alias for toolConfig.allowedTools. Whitelists which tools can be auto-executed. | [optional] [default to undefined]
+**guardrails** | [**ChatInferenceRequestGuardrails**](ChatInferenceRequestGuardrails.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -34,6 +36,8 @@ const instance: ChatInferenceStreamRequest = {
     toolConfig,
     sessionId,
     async,
+    allowedTools,
+    guardrails,
 };
 ```
 

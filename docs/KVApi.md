@@ -11,8 +11,10 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**kVItemsList**](#kvitemslist) | **GET** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | List items in a kv store|
 |[**kVItemsShow**](#kvitemsshow) | **GET** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Get an item from a kv store|
 |[**kVItemsUpdate**](#kvitemsupdate) | **PUT** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Update an item in a kv store|
+|[**kVLinkToProject**](#kvlinktoproject) | **POST** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/link | Link a KV store to another project|
 |[**kVList**](#kvlist) | **GET** /api/v2/organizations/{organization}/projects/{project}/kv | List key-value stores|
 |[**kVShow**](#kvshow) | **GET** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id} | Get a kv store|
+|[**kVUnlinkFromProject**](#kvunlinkfromproject) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/link | Unlink a KV store from this project|
 
 # **kVCreate**
 > V2Store kVCreate(v2StoreRequest)
@@ -453,6 +455,70 @@ const { status, data } = await apiInstance.kVItemsUpdate(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **kVLinkToProject**
+> KVLinkToProject200Response kVLinkToProject(kVLinkToProjectRequest)
+
+Share a KV store from the source project with a target project. The store will be accessible in the target project.
+
+### Example
+
+```typescript
+import {
+    KVApi,
+    Configuration,
+    KVLinkToProjectRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new KVApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Source project identifier (default to undefined)
+let storeId: string; //KV store identifier (default to undefined)
+let kVLinkToProjectRequest: KVLinkToProjectRequest; //
+
+const { status, data } = await apiInstance.kVLinkToProject(
+    organization,
+    project,
+    storeId,
+    kVLinkToProjectRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **kVLinkToProjectRequest** | **KVLinkToProjectRequest**|  | |
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Source project identifier | defaults to undefined|
+| **storeId** | [**string**] | KV store identifier | defaults to undefined|
+
+
+### Return type
+
+**KVLinkToProject200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Store linked successfully |  -  |
+|**400** | Store already linked or invalid request |  -  |
+|**404** | Store or target project not found |  -  |
+|**403** | Access forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **kVList**
 > Array<V2Store> kVList()
 
@@ -563,6 +629,65 @@ const { status, data } = await apiInstance.kVShow(
 |**200** | The request has succeeded. |  -  |
 |**404** | KV store not found. |  -  |
 |**403** | Access is forbidden. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **kVUnlinkFromProject**
+> KVLinkToProject200Response kVUnlinkFromProject()
+
+Remove access to a linked KV store from this project. The store must be linked (not owned by this project).
+
+### Example
+
+```typescript
+import {
+    KVApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new KVApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let storeId: string; //KV store identifier (default to undefined)
+
+const { status, data } = await apiInstance.kVUnlinkFromProject(
+    organization,
+    project,
+    storeId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **storeId** | [**string**] | KV store identifier | defaults to undefined|
+
+
+### Return type
+
+**KVLinkToProject200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Store unlinked successfully |  -  |
+|**400** | Store not linked or invalid request |  -  |
+|**403** | Cannot unlink store owned by this project |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
