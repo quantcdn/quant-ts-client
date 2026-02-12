@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **crawler_uuid** | **string** | Crawler UUID | [optional] [default to undefined]
 **project_id** | **number** | Project ID | [default to undefined]
 **crawler_last_run_id** | **number** | Last run ID | [default to undefined]
-**schedule_cron_string** | **string** | Cron schedule string | [default to undefined]
+**schedule_cron_string** | **string** | Standard Unix cron expression with 5 space-separated fields: minute, hour, day-of-month, month, day-of-week. Example: 0 2 * * * runs daily at 2 AM. | [default to undefined]
 **created_at** | **string** | Creation timestamp | [optional] [default to undefined]
 **updated_at** | **string** | Last update timestamp | [optional] [default to undefined]
 

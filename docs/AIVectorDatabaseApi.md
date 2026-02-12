@@ -6,6 +6,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |------------- | ------------- | -------------|
 |[**createVectorCollection**](#createvectorcollection) | **POST** /api/v3/organizations/{organisation}/ai/vector-db/collections | Create Vector Database Collection|
 |[**deleteVectorCollection**](#deletevectorcollection) | **DELETE** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId} | Delete Collection|
+|[**deleteVectorDocuments**](#deletevectordocuments) | **DELETE** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents | Delete Documents from Collection|
 |[**getVectorCollection**](#getvectorcollection) | **GET** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId} | Get Collection Details|
 |[**listVectorCollections**](#listvectorcollections) | **GET** /api/v3/organizations/{organisation}/ai/vector-db/collections | List Vector Database Collections|
 |[**queryVectorCollection**](#queryvectorcollection) | **POST** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/query | Semantic Search Query|
@@ -124,6 +125,68 @@ const { status, data } = await apiInstance.deleteVectorCollection(
 |**403** | Access denied |  -  |
 |**404** | Collection not found |  -  |
 |**500** | Failed to delete collection |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteVectorDocuments**
+> DeleteVectorDocuments200Response deleteVectorDocuments(deleteVectorDocumentsRequest)
+
+Delete documents from a collection. Supports three deletion modes:      *      * 1. **Purge All** - Set `purgeAll: true` to delete ALL documents in the collection      *      * 2. **By Document IDs** - Provide `documentIds` array with specific document UUIDs      *      * 3. **By Metadata** - Provide `metadata` object with `field` and `values` to delete documents where the metadata field matches any of the values      *      * **Drupal Integration:**      * When using with Drupal AI Search, use metadata deletion with:      * - `field: \'drupal_entity_id\'` to delete all chunks for specific entities      * - `field: \'drupal_long_id\'` to delete specific chunks
+
+### Example
+
+```typescript
+import {
+    AIVectorDatabaseApi,
+    Configuration,
+    DeleteVectorDocumentsRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIVectorDatabaseApi(configuration);
+
+let organisation: string; //Organisation machine name (default to undefined)
+let collectionId: string; //Collection UUID (default to undefined)
+let deleteVectorDocumentsRequest: DeleteVectorDocumentsRequest; //
+
+const { status, data } = await apiInstance.deleteVectorDocuments(
+    organisation,
+    collectionId,
+    deleteVectorDocumentsRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **deleteVectorDocumentsRequest** | **DeleteVectorDocumentsRequest**|  | |
+| **organisation** | [**string**] | Organisation machine name | defaults to undefined|
+| **collectionId** | [**string**] | Collection UUID | defaults to undefined|
+
+
+### Return type
+
+**DeleteVectorDocuments200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Documents deleted successfully |  -  |
+|**400** | Invalid request - must specify purgeAll, documentIds, or metadata |  -  |
+|**403** | Access denied |  -  |
+|**404** | Collection not found |  -  |
+|**500** | Failed to delete documents |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
