@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **concurrency** | **number** | Concurrent items within a batch | [optional] [default to 1]
 **stopCondition** | [**CreateOrchestrationRequestStopCondition**](CreateOrchestrationRequestStopCondition.md) |  | [optional] [default to undefined]
 **assignedSkills** | **Array&lt;string&gt;** | Skill IDs to assign | [optional] [default to undefined]
+**context** | **object** | Optional context merged into each item before processing (e.g. shared credentials or endpoints) | [optional] [default to undefined]
 **autoStart** | **boolean** | Whether to start immediately | [optional] [default to true]
 
 ## Example
@@ -33,6 +34,7 @@ const instance: CreateOrchestrationRequest = {
     concurrency,
     stopCondition,
     assignedSkills,
+    context,
     autoStart,
 };
 ```
