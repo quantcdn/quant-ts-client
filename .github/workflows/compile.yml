@@ -1,10 +1,20 @@
 name: Publish to npm
+
 on:
+  push:
+    branches: [v4]
+    paths-ignore:
+      - '.github/**'
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.gitignore'
+      - '.npmignore'
   workflow_dispatch:
 
 permissions:
-  contents: write  # Required for creating releases and tags
-  id-token: write  # Required for requesting the JWT
+  contents: write  # Required for creating releases, tags, and pushing version bumps
+  id-token: write  # Required for OIDC npm provenance
   packages: write
 
 jobs:
@@ -13,6 +23,32 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Detect dependabot merge
+        id: dependabot
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%s)
+          if echo "$COMMIT_MSG" | grep -q 'dependabot/'; then
+            echo "is_dependabot=true" >> $GITHUB_OUTPUT
+            echo "Dependabot merge detected"
+          else
+            echo "is_dependabot=false" >> $GITHUB_OUTPUT
+            echo "Not a dependabot merge"
+          fi
+
+      - name: Bump patch version for dependabot
+        if: steps.dependabot.outputs.is_dependabot == 'true'
+        run: npm version patch --no-git-tag-version
+
+      - name: Commit and push dependabot version bump
+        if: steps.dependabot.outputs.is_dependabot == 'true'
+        run: |
+          NEW_VERSION=$(jq -r '.version' package.json)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "chore: bump version to v${NEW_VERSION} [dependabot]"
+          git push
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -30,13 +66,13 @@ jobs:
           VERSION=$(jq -r '.version' package.json)
           echo "package=$PACKAGE_NAME" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          
+
           if npm view $PACKAGE_NAME@$VERSION > /dev/null 2>&1; then
             echo "exists=true" >> $GITHUB_OUTPUT
-            echo "⚠️  Version $VERSION already exists on npm"
+            echo "Version $VERSION already exists on npm"
           else
             echo "exists=false" >> $GITHUB_OUTPUT
-            echo "✓ Version $VERSION is new, will publish"
+            echo "Version $VERSION is new, will publish"
           fi
 
       - name: Publish to npm
@@ -51,14 +87,14 @@ jobs:
           name: Release v${{ steps.check.outputs.version }}
           body: |
             ## Quant TypeScript SDK v${{ steps.check.outputs.version }}
-            
+
             Auto-generated from unified API specification.
-            
+
             **Install:**
             ```bash
             npm install ${{ steps.check.outputs.package }}@${{ steps.check.outputs.version }}
             ```
-            
+
             **Changes:** See commit history
           draft: false
           prerelease: false
@@ -67,13 +103,16 @@ jobs:
 
       - name: Summary
         run: |
-          echo "## 📦 Publish Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## Publish Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Package:** ${{ steps.check.outputs.package }}" >> $GITHUB_STEP_SUMMARY
           echo "**Version:** ${{ steps.check.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           if [ "${{ steps.check.outputs.exists }}" == "true" ]; then
-            echo "**Status:** ⚠️  Already published (skipped)" >> $GITHUB_STEP_SUMMARY
+            echo "**Status:** Already published (skipped)" >> $GITHUB_STEP_SUMMARY
           else
-            echo "**Status:** ✅ Published successfully" >> $GITHUB_STEP_SUMMARY
+            echo "**Status:** Published successfully" >> $GITHUB_STEP_SUMMARY
             echo "**npm:** https://www.npmjs.com/package/${{ steps.check.outputs.package }}/v/${{ steps.check.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ "${{ steps.dependabot.outputs.is_dependabot }}" == "true" ]; then
+            echo "**Dependabot:** Patch version was auto-bumped" >> $GITHUB_STEP_SUMMARY
           fi
