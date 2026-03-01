@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **async** | **boolean** | Enable async/durable execution mode. When true, returns 202 with pollUrl instead of streaming. Use for long-running inference, client-executed tools, or operations &gt;30 seconds. | [optional] [default to false]
 **allowedTools** | **Array&lt;string&gt;** | Top-level convenience alias for toolConfig.allowedTools. Whitelists which tools can be auto-executed. | [optional] [default to undefined]
 **guardrails** | [**ChatInferenceRequestGuardrails**](ChatInferenceRequestGuardrails.md) |  | [optional] [default to undefined]
+**longContext** | **boolean** | Enable 1M context window support regardless of token estimation. Use when sending large payloads (&gt;200K tokens). | [optional] [default to false]
 
 ## Example
 
@@ -38,6 +39,7 @@ const instance: ChatInferenceStreamRequest = {
     async,
     allowedTools,
     guardrails,
+    longContext,
 };
 ```
 
