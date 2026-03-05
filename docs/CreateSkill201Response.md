@@ -1,4 +1,4 @@
-# DeleteVectorCollection200Response
+# CreateSkill201Response
 
 
 ## Properties
@@ -6,15 +6,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** |  | [optional] [default to undefined]
+**skill** | **object** |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { DeleteVectorCollection200Response } from '@quantcdn/quant-client';
+import { CreateSkill201Response } from '@quantcdn/quant-client';
 
-const instance: DeleteVectorCollection200Response = {
+const instance: CreateSkill201Response = {
     success,
+    skill,
     message,
 };
 ```

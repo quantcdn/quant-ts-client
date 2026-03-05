@@ -11,6 +11,7 @@ docs/AIModelsApi.md
 docs/AIMonitoringApi.md
 docs/AIOrchestrationsApi.md
 docs/AISessionsApi.md
+docs/AISkillsApi.md
 docs/AITaskManagementApi.md
 docs/AIToolsApi.md
 docs/AIVectorDatabaseApi.md
@@ -100,6 +101,8 @@ docs/CreateEnvironmentRequestEnvironmentInner.md
 docs/CreateOrchestrationRequest.md
 docs/CreateOrchestrationRequestInputSource.md
 docs/CreateOrchestrationRequestStopCondition.md
+docs/CreateSkill201Response.md
+docs/CreateSkillRequest.md
 docs/CreateTask201Response.md
 docs/CreateTaskRequest.md
 docs/CreateVectorCollection201Response.md
@@ -114,9 +117,10 @@ docs/DeleteAISession200Response.md
 docs/DeleteBackup200Response.md
 docs/DeleteCustomTool200Response.md
 docs/DeleteFile200Response.md
+docs/DeleteSkill200Response.md
+docs/DeleteSkillCollection200Response.md
 docs/DeleteTask200Response.md
 docs/DeleteTask409Response.md
-docs/DeleteVectorCollection200Response.md
 docs/DeleteVectorDocuments200Response.md
 docs/DeleteVectorDocumentsRequest.md
 docs/DeleteVectorDocumentsRequestMetadata.md
@@ -159,6 +163,8 @@ docs/GetEcrLoginCredentials200Response.md
 docs/GetEnvironmentLogs200Response.md
 docs/GetEnvironmentLogs200ResponseLogEventsInner.md
 docs/GetFile200Response.md
+docs/GetSkill200Response.md
+docs/GetSkill200ResponseSkill.md
 docs/GetSshAccessCredentials200Response.md
 docs/GetSshAccessCredentials200ResponseCredentials.md
 docs/GetTask200Response.md
@@ -174,6 +180,12 @@ docs/ImageGenerationRequestImageVariationParams.md
 docs/ImageGenerationRequestInPaintingParams.md
 docs/ImageGenerationRequestOutPaintingParams.md
 docs/ImageGenerationRequestTextToImageParams.md
+docs/ImportSkill201Response.md
+docs/ImportSkillCollection201Response.md
+docs/ImportSkillCollectionRequest.md
+docs/ImportSkillCollectionRequestSource.md
+docs/ImportSkillRequest.md
+docs/ImportSkillRequestSource.md
 docs/KVApi.md
 docs/KVItemsCreate200Response.md
 docs/KVItemsDelete200Response.md
@@ -204,11 +216,14 @@ docs/ListFiles200ResponseFilesInner.md
 docs/ListOrchestrationBatches200Response.md
 docs/ListOrchestrationBatches200ResponseBatchesInner.md
 docs/ListOrchestrations200Response.md
+docs/ListSkillCollections200Response.md
+docs/ListSkillCollections200ResponseCollectionsInner.md
+docs/ListSkills200Response.md
+docs/ListSkills200ResponseSkillsInner.md
 docs/ListTasks200Response.md
 docs/ListTasks200ResponseTasksInner.md
 docs/ListVectorCollections200Response.md
 docs/ListVectorCollections200ResponseCollectionsInner.md
-docs/OrchestrationApi.md
 docs/OrganizationsApi.md
 docs/OrganizationsList200ResponseInner.md
 docs/PatchEnvironmentCompose202Response.md
@@ -233,6 +248,7 @@ docs/SubmitToolCallback200Response.md
 docs/SubmitToolCallbackRequest.md
 docs/SubmitToolCallbackRequestToolResultsInner.md
 docs/SyncOperation.md
+docs/SyncSkillCollection200Response.md
 docs/SyncToEnvironmentRequest.md
 docs/TokensApi.md
 docs/TokensCreate201Response.md
@@ -248,6 +264,8 @@ docs/UpdateCronJobRequest.md
 docs/UpdateEnvironmentRequest.md
 docs/UpdateEnvironmentStateRequest.md
 docs/UpdateEnvironmentVariableRequest.md
+docs/UpdateSkill200Response.md
+docs/UpdateSkillRequest.md
 docs/UpdateTask200Response.md
 docs/UpdateTaskRequest.md
 docs/UploadFile201Response.md
