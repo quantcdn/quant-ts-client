@@ -27,7 +27,7 @@ const apiInstance = new CDNMetricsApi(configuration);
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
 let domain: string; //Filter by domain ID or domain name (optional) (default to undefined)
-let metrics: Array<string>; //Metrics to return (default: hits, bytes) (optional) (default to undefined)
+let metrics: Array<'hits' | 'bytes' | 'edge_resp_header_bytes' | 'bereq_body_bytes' | 'bereq_header_bytes' | 'bandwidth' | 'edge_hit_ratio' | 'edge_hit_requests' | 'edge_miss_requests' | 'origin_fetches' | 'origin_fetch_resp_body_bytes' | 'origin_fetch_resp_header_bytes' | 'origin_offload' | 'status_1xx' | 'status_2xx' | 'status_3xx' | 'status_4xx' | 'status_5xx' | 'origin_status_1xx' | 'origin_status_2xx' | 'origin_status_3xx' | 'origin_status_4xx' | 'origin_status_5xx'>; //Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. (optional) (default to undefined)
 let timestampFormat: 'iso8601' | 'unix'; //Timestamp format in response (optional) (default to 'iso8601')
 
 const { status, data } = await apiInstance.getDailyMetrics(
@@ -46,7 +46,7 @@ const { status, data } = await apiInstance.getDailyMetrics(
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
 | **domain** | [**string**] | Filter by domain ID or domain name | (optional) defaults to undefined|
-| **metrics** | **Array&lt;string&gt;** | Metrics to return (default: hits, bytes) | (optional) defaults to undefined|
+| **metrics** | **Array<&#39;hits&#39; &#124; &#39;bytes&#39; &#124; &#39;edge_resp_header_bytes&#39; &#124; &#39;bereq_body_bytes&#39; &#124; &#39;bereq_header_bytes&#39; &#124; &#39;bandwidth&#39; &#124; &#39;edge_hit_ratio&#39; &#124; &#39;edge_hit_requests&#39; &#124; &#39;edge_miss_requests&#39; &#124; &#39;origin_fetches&#39; &#124; &#39;origin_fetch_resp_body_bytes&#39; &#124; &#39;origin_fetch_resp_header_bytes&#39; &#124; &#39;origin_offload&#39; &#124; &#39;status_1xx&#39; &#124; &#39;status_2xx&#39; &#124; &#39;status_3xx&#39; &#124; &#39;status_4xx&#39; &#124; &#39;status_5xx&#39; &#124; &#39;origin_status_1xx&#39; &#124; &#39;origin_status_2xx&#39; &#124; &#39;origin_status_3xx&#39; &#124; &#39;origin_status_4xx&#39; &#124; &#39;origin_status_5xx&#39;>** | Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. | (optional) defaults to undefined|
 | **timestampFormat** | [**&#39;iso8601&#39; | &#39;unix&#39;**]**Array<&#39;iso8601&#39; &#124; &#39;unix&#39;>** | Timestamp format in response | (optional) defaults to 'iso8601'|
 
 
@@ -92,7 +92,7 @@ const apiInstance = new CDNMetricsApi(configuration);
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
 let domain: string; //Filter by domain ID or domain name (optional) (default to undefined)
-let metrics: Array<string>; //Metrics to return (default: hits, bytes) (optional) (default to undefined)
+let metrics: Array<'hits' | 'bytes' | 'edge_resp_header_bytes' | 'bereq_body_bytes' | 'bereq_header_bytes' | 'bandwidth' | 'edge_hit_ratio' | 'edge_hit_requests' | 'edge_miss_requests' | 'origin_fetches' | 'origin_fetch_resp_body_bytes' | 'origin_fetch_resp_header_bytes' | 'origin_offload' | 'status_1xx' | 'status_2xx' | 'status_3xx' | 'status_4xx' | 'status_5xx' | 'origin_status_1xx' | 'origin_status_2xx' | 'origin_status_3xx' | 'origin_status_4xx' | 'origin_status_5xx'>; //Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. (optional) (default to undefined)
 let timestampFormat: 'iso8601' | 'unix'; //Timestamp format in response (optional) (default to 'iso8601')
 
 const { status, data } = await apiInstance.getHourlyMetrics(
@@ -111,7 +111,7 @@ const { status, data } = await apiInstance.getHourlyMetrics(
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
 | **domain** | [**string**] | Filter by domain ID or domain name | (optional) defaults to undefined|
-| **metrics** | **Array&lt;string&gt;** | Metrics to return (default: hits, bytes) | (optional) defaults to undefined|
+| **metrics** | **Array<&#39;hits&#39; &#124; &#39;bytes&#39; &#124; &#39;edge_resp_header_bytes&#39; &#124; &#39;bereq_body_bytes&#39; &#124; &#39;bereq_header_bytes&#39; &#124; &#39;bandwidth&#39; &#124; &#39;edge_hit_ratio&#39; &#124; &#39;edge_hit_requests&#39; &#124; &#39;edge_miss_requests&#39; &#124; &#39;origin_fetches&#39; &#124; &#39;origin_fetch_resp_body_bytes&#39; &#124; &#39;origin_fetch_resp_header_bytes&#39; &#124; &#39;origin_offload&#39; &#124; &#39;status_1xx&#39; &#124; &#39;status_2xx&#39; &#124; &#39;status_3xx&#39; &#124; &#39;status_4xx&#39; &#124; &#39;status_5xx&#39; &#124; &#39;origin_status_1xx&#39; &#124; &#39;origin_status_2xx&#39; &#124; &#39;origin_status_3xx&#39; &#124; &#39;origin_status_4xx&#39; &#124; &#39;origin_status_5xx&#39;>** | Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. | (optional) defaults to undefined|
 | **timestampFormat** | [**&#39;iso8601&#39; | &#39;unix&#39;**]**Array<&#39;iso8601&#39; &#124; &#39;unix&#39;>** | Timestamp format in response | (optional) defaults to 'iso8601'|
 
 
@@ -157,7 +157,7 @@ const apiInstance = new CDNMetricsApi(configuration);
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
 let domain: string; //Filter by domain ID or domain name (optional) (default to undefined)
-let metrics: Array<string>; //Metrics to return (default: hits, bytes) (optional) (default to undefined)
+let metrics: Array<'hits' | 'bytes' | 'edge_resp_header_bytes' | 'bereq_body_bytes' | 'bereq_header_bytes' | 'bandwidth' | 'edge_hit_ratio' | 'edge_hit_requests' | 'edge_miss_requests' | 'origin_fetches' | 'origin_fetch_resp_body_bytes' | 'origin_fetch_resp_header_bytes' | 'origin_offload' | 'status_1xx' | 'status_2xx' | 'status_3xx' | 'status_4xx' | 'status_5xx' | 'origin_status_1xx' | 'origin_status_2xx' | 'origin_status_3xx' | 'origin_status_4xx' | 'origin_status_5xx'>; //Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. (optional) (default to undefined)
 let timestampFormat: 'iso8601' | 'unix'; //Timestamp format in response (optional) (default to 'iso8601')
 
 const { status, data } = await apiInstance.getMonthlyMetrics(
@@ -176,7 +176,7 @@ const { status, data } = await apiInstance.getMonthlyMetrics(
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
 | **domain** | [**string**] | Filter by domain ID or domain name | (optional) defaults to undefined|
-| **metrics** | **Array&lt;string&gt;** | Metrics to return (default: hits, bytes) | (optional) defaults to undefined|
+| **metrics** | **Array<&#39;hits&#39; &#124; &#39;bytes&#39; &#124; &#39;edge_resp_header_bytes&#39; &#124; &#39;bereq_body_bytes&#39; &#124; &#39;bereq_header_bytes&#39; &#124; &#39;bandwidth&#39; &#124; &#39;edge_hit_ratio&#39; &#124; &#39;edge_hit_requests&#39; &#124; &#39;edge_miss_requests&#39; &#124; &#39;origin_fetches&#39; &#124; &#39;origin_fetch_resp_body_bytes&#39; &#124; &#39;origin_fetch_resp_header_bytes&#39; &#124; &#39;origin_offload&#39; &#124; &#39;status_1xx&#39; &#124; &#39;status_2xx&#39; &#124; &#39;status_3xx&#39; &#124; &#39;status_4xx&#39; &#124; &#39;status_5xx&#39; &#124; &#39;origin_status_1xx&#39; &#124; &#39;origin_status_2xx&#39; &#124; &#39;origin_status_3xx&#39; &#124; &#39;origin_status_4xx&#39; &#124; &#39;origin_status_5xx&#39;>** | Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. | (optional) defaults to undefined|
 | **timestampFormat** | [**&#39;iso8601&#39; | &#39;unix&#39;**]**Array<&#39;iso8601&#39; &#124; &#39;unix&#39;>** | Timestamp format in response | (optional) defaults to 'iso8601'|
 
 

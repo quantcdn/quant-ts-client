@@ -72,7 +72,7 @@ const { status, data } = await apiInstance.createVectorCollection(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteVectorCollection**
-> DeleteVectorCollection200Response deleteVectorCollection()
+> DeleteSkillCollection200Response deleteVectorCollection()
 
 Deletes a vector database collection and all its documents. This action cannot be undone.
 
@@ -106,7 +106,7 @@ const { status, data } = await apiInstance.deleteVectorCollection(
 
 ### Return type
 
-**DeleteVectorCollection200Response**
+**DeleteSkillCollection200Response**
 
 ### Authorization
 
