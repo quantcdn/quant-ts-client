@@ -20,7 +20,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.2",
     "@types/node": "^25.0.2",
     "@types/request": "^2.48.13"
   },
