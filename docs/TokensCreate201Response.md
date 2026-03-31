@@ -6,7 +6,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **token** | **string** | The plain text token (shown once) | [optional] [default to undefined]
+**id** | **number** | Token ID | [optional] [default to undefined]
 **name** | **string** |  | [optional] [default to undefined]
+**scopes** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**projects** | **Array&lt;number&gt;** |  | [optional] [default to undefined]
+**preset** | **string** |  | [optional] [default to undefined]
+**expires_at** | **string** |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -16,7 +21,12 @@ import { TokensCreate201Response } from '@quantcdn/quant-client';
 
 const instance: TokensCreate201Response = {
     token,
+    id,
     name,
+    scopes,
+    projects,
+    preset,
+    expires_at,
     created_at,
 };
 ```

@@ -61,6 +61,7 @@ const { status, data } = await apiInstance.tokensCreate(
 |**201** | Token created. The plain token is returned once and cannot be retrieved again. |  -  |
 |**400** | Bad request. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | Validation error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

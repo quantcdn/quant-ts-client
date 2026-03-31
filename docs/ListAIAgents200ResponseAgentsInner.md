@@ -13,6 +13,11 @@ Name | Type | Description | Notes
 **temperature** | **number** |  | [optional] [default to undefined]
 **maxTokens** | **number** |  | [optional] [default to undefined]
 **allowedTools** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**assignedSkills** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**longContext** | **boolean** |  | [optional] [default to undefined]
+**guardrailPreset** | **string** |  | [optional] [default to undefined]
+**isGlobal** | **boolean** |  | [optional] [default to undefined]
+**hasOverlay** | **boolean** |  | [optional] [default to undefined]
 **createdAt** | **string** |  | [optional] [default to undefined]
 **updatedAt** | **string** |  | [optional] [default to undefined]
 
@@ -30,6 +35,11 @@ const instance: ListAIAgents200ResponseAgentsInner = {
     temperature,
     maxTokens,
     allowedTools,
+    assignedSkills,
+    longContext,
+    guardrailPreset,
+    isGlobal,
+    hasOverlay,
     createdAt,
     updatedAt,
 };

@@ -7,9 +7,12 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**chatWithAIAgent**](#chatwithaiagent) | **POST** /api/v3/organizations/{organisation}/ai/agents/{agentId}/chat | Chat with AI Agent|
 |[**createAIAgent**](#createaiagent) | **POST** /api/v3/organizations/{organisation}/ai/agents | Create AI Agent|
 |[**deleteAIAgent**](#deleteaiagent) | **DELETE** /api/v3/organizations/{organisation}/ai/agents/{agentId} | Delete Agent|
+|[**deleteAgentOverlay**](#deleteagentoverlay) | **DELETE** /api/v3/organizations/{organisation}/ai/agents/{agentId}/overlay | Delete Agent Overlay|
 |[**getAIAgent**](#getaiagent) | **GET** /api/v3/organizations/{organisation}/ai/agents/{agentId} | Get Agent Details|
+|[**getAgentOverlay**](#getagentoverlay) | **GET** /api/v3/organizations/{organisation}/ai/agents/{agentId}/overlay | Get Agent Overlay|
 |[**listAIAgents**](#listaiagents) | **GET** /api/v3/organizations/{organisation}/ai/agents | List AI Agents|
 |[**updateAIAgent**](#updateaiagent) | **PUT** /api/v3/organizations/{organisation}/ai/agents/{agentId} | Update Agent|
+|[**upsertAgentOverlay**](#upsertagentoverlay) | **PUT** /api/v3/organizations/{organisation}/ai/agents/{agentId}/overlay | Upsert Agent Overlay|
 
 # **chatWithAIAgent**
 > ChatWithAIAgent200Response chatWithAIAgent(chatWithAIAgentRequest)
@@ -189,6 +192,63 @@ const { status, data } = await apiInstance.deleteAIAgent(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **deleteAgentOverlay**
+> DeleteAgentOverlay200Response deleteAgentOverlay()
+
+Removes the per-organisation overlay for a global agent, reverting it to platform defaults.
+
+### Example
+
+```typescript
+import {
+    AIAgentsApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIAgentsApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+let agentId: string; //Global agent identifier (default to undefined)
+
+const { status, data } = await apiInstance.deleteAgentOverlay(
+    organisation,
+    agentId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **agentId** | [**string**] | Global agent identifier | defaults to undefined|
+
+
+### Return type
+
+**DeleteAgentOverlay200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Overlay deleted — agent reverted to defaults |  -  |
+|**403** | Access denied |  -  |
+|**404** | Not a global agent |  -  |
+|**500** | Failed to reset overlay |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getAIAgent**
 > GetAIAgent200Response getAIAgent()
 
@@ -243,6 +303,63 @@ const { status, data } = await apiInstance.getAIAgent(
 |**403** | Access denied |  -  |
 |**404** | Agent not found |  -  |
 |**500** | Failed to retrieve agent |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAgentOverlay**
+> GetAgentOverlay200Response getAgentOverlay()
+
+Returns the per-organisation overlay for a global agent, plus base agent metadata for UI context. If no overlay exists the response contains `overlay: null`. Overlays can only be created for global agents.
+
+### Example
+
+```typescript
+import {
+    AIAgentsApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIAgentsApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+let agentId: string; //Global agent identifier (e.g., \'quantgov-code\') (default to undefined)
+
+const { status, data } = await apiInstance.getAgentOverlay(
+    organisation,
+    agentId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **agentId** | [**string**] | Global agent identifier (e.g., \&#39;quantgov-code\&#39;) | defaults to undefined|
+
+
+### Return type
+
+**GetAgentOverlay200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Overlay retrieved (may be null if none set) |  -  |
+|**403** | Access denied |  -  |
+|**404** | Not a global agent |  -  |
+|**500** | Failed to retrieve overlay |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -361,6 +478,69 @@ const { status, data } = await apiInstance.updateAIAgent(
 |**403** | Access denied |  -  |
 |**404** | Agent not found |  -  |
 |**500** | Failed to update agent |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upsertAgentOverlay**
+> UpsertAgentOverlay200Response upsertAgentOverlay(upsertAgentOverlayRequest)
+
+Creates or replaces the per-organisation overlay for a global agent. PUT is full replacement — omitted optional fields are removed. Include `version` from a prior GET to enable compare-and-swap (409 on conflict). Omit for last-writer-wins.
+
+### Example
+
+```typescript
+import {
+    AIAgentsApi,
+    Configuration,
+    UpsertAgentOverlayRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIAgentsApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+let agentId: string; //Global agent identifier (default to undefined)
+let upsertAgentOverlayRequest: UpsertAgentOverlayRequest; //
+
+const { status, data } = await apiInstance.upsertAgentOverlay(
+    organisation,
+    agentId,
+    upsertAgentOverlayRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **upsertAgentOverlayRequest** | **UpsertAgentOverlayRequest**|  | |
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **agentId** | [**string**] | Global agent identifier | defaults to undefined|
+
+
+### Return type
+
+**UpsertAgentOverlay200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Overlay created or updated |  -  |
+|**400** | Invalid request parameters |  -  |
+|**403** | Access denied |  -  |
+|**404** | Not a global agent |  -  |
+|**409** | Version conflict — overlay was modified concurrently |  -  |
+|**500** | Failed to save overlay |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
