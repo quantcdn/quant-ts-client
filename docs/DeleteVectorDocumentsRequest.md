@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **purgeAll** | **boolean** | Delete ALL documents in collection | [optional] [default to undefined]
 **documentIds** | **Array&lt;string&gt;** | Delete specific documents by UUID | [optional] [default to undefined]
+**keys** | **Array&lt;string&gt;** | Delete documents by key | [optional] [default to undefined]
 **metadata** | [**DeleteVectorDocumentsRequestMetadata**](DeleteVectorDocumentsRequestMetadata.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -17,6 +18,7 @@ import { DeleteVectorDocumentsRequest } from '@quantcdn/quant-client';
 const instance: DeleteVectorDocumentsRequest = {
     purgeAll,
     documentIds,
+    keys,
     metadata,
 };
 ```
