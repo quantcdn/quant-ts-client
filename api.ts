@@ -22882,6 +22882,63 @@ export const AIVectorDatabaseApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
+         * Lists documents in a collection with pagination. Supports filtering by document key.
+         * @summary List Documents in Collection
+         * @param {string} organisation 
+         * @param {string} collectionId 
+         * @param {string} [key] Filter by document key
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listVectorDocuments: async (organisation: string, collectionId: string, key?: string, limit?: number, offset?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listVectorDocuments', 'organisation', organisation)
+            // verify required parameter 'collectionId' is not null or undefined
+            assertParamExists('listVectorDocuments', 'collectionId', collectionId)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"collectionId"}}`, encodeURIComponent(String(collectionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (key !== undefined) {
+                localVarQueryParameter['key'] = key;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.      *      * **Three Search Modes:**      *      * 1. **Text Query** - Provide `query` string, server generates embedding      *    - Query text is embedded using the collection\'s embedding model      *    - Embeddings are cached for repeated queries      *      * 2. **Vector Query** - Provide pre-computed `vector` array      *    - Skip embedding generation (faster)      *    - Useful when you\'ve already embedded the query elsewhere      *    - Vector dimension must match collection (e.g., 1024 for Titan v2)      *      * 3. **Metadata List** - Set `listByMetadata: true` with `filter`      *    - Skip semantic search entirely      *    - Return all documents matching the filter      *    - Supports cursor-based pagination for large datasets      *    - Results ordered by sortBy/sortOrder (default: created_at DESC)      *      * **Filtering:**      * - `filter.exact`: Exact match on metadata fields (AND logic)      * - `filter.contains`: Array contains filter for tags (ANY match)      * - Filters can be combined with semantic search or used alone with listByMetadata      *      * **Pagination (listByMetadata mode only):**      * - Use `cursor` from previous response\'s `nextCursor` to get next page      * - Uses keyset pagination for efficient traversal of large datasets      * - Control sort with `sortBy` and `sortOrder`      *      * **Use Cases:**      * - Find relevant documentation for user questions      * - Power RAG (Retrieval Augmented Generation) in AI assistants      * - Semantic search across knowledge bases      * - List all artifacts by building/worker/tag
          * @summary Semantic Search Query
          * @param {string} organisation The organisation ID
@@ -23010,6 +23067,23 @@ export const AIVectorDatabaseApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Lists documents in a collection with pagination. Supports filtering by document key.
+         * @summary List Documents in Collection
+         * @param {string} organisation 
+         * @param {string} collectionId 
+         * @param {string} [key] Filter by document key
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listVectorDocuments(organisation: string, collectionId: string, key?: string, limit?: number, offset?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listVectorDocuments(organisation, collectionId, key, limit, offset, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIVectorDatabaseApi.listVectorDocuments']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.      *      * **Three Search Modes:**      *      * 1. **Text Query** - Provide `query` string, server generates embedding      *    - Query text is embedded using the collection\'s embedding model      *    - Embeddings are cached for repeated queries      *      * 2. **Vector Query** - Provide pre-computed `vector` array      *    - Skip embedding generation (faster)      *    - Useful when you\'ve already embedded the query elsewhere      *    - Vector dimension must match collection (e.g., 1024 for Titan v2)      *      * 3. **Metadata List** - Set `listByMetadata: true` with `filter`      *    - Skip semantic search entirely      *    - Return all documents matching the filter      *    - Supports cursor-based pagination for large datasets      *    - Results ordered by sortBy/sortOrder (default: created_at DESC)      *      * **Filtering:**      * - `filter.exact`: Exact match on metadata fields (AND logic)      * - `filter.contains`: Array contains filter for tags (ANY match)      * - Filters can be combined with semantic search or used alone with listByMetadata      *      * **Pagination (listByMetadata mode only):**      * - Use `cursor` from previous response\'s `nextCursor` to get next page      * - Uses keyset pagination for efficient traversal of large datasets      * - Control sort with `sortBy` and `sortOrder`      *      * **Use Cases:**      * - Find relevant documentation for user questions      * - Power RAG (Retrieval Augmented Generation) in AI assistants      * - Semantic search across knowledge bases      * - List all artifacts by building/worker/tag
          * @summary Semantic Search Query
          * @param {string} organisation The organisation ID
@@ -23088,6 +23162,20 @@ export const AIVectorDatabaseApiFactory = function (configuration?: Configuratio
          */
         listVectorCollections(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<ListVectorCollections200Response> {
             return localVarFp.listVectorCollections(organisation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists documents in a collection with pagination. Supports filtering by document key.
+         * @summary List Documents in Collection
+         * @param {string} organisation 
+         * @param {string} collectionId 
+         * @param {string} [key] Filter by document key
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listVectorDocuments(organisation: string, collectionId: string, key?: string, limit?: number, offset?: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.listVectorDocuments(organisation, collectionId, key, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.      *      * **Three Search Modes:**      *      * 1. **Text Query** - Provide `query` string, server generates embedding      *    - Query text is embedded using the collection\'s embedding model      *    - Embeddings are cached for repeated queries      *      * 2. **Vector Query** - Provide pre-computed `vector` array      *    - Skip embedding generation (faster)      *    - Useful when you\'ve already embedded the query elsewhere      *    - Vector dimension must match collection (e.g., 1024 for Titan v2)      *      * 3. **Metadata List** - Set `listByMetadata: true` with `filter`      *    - Skip semantic search entirely      *    - Return all documents matching the filter      *    - Supports cursor-based pagination for large datasets      *    - Results ordered by sortBy/sortOrder (default: created_at DESC)      *      * **Filtering:**      * - `filter.exact`: Exact match on metadata fields (AND logic)      * - `filter.contains`: Array contains filter for tags (ANY match)      * - Filters can be combined with semantic search or used alone with listByMetadata      *      * **Pagination (listByMetadata mode only):**      * - Use `cursor` from previous response\'s `nextCursor` to get next page      * - Uses keyset pagination for efficient traversal of large datasets      * - Control sort with `sortBy` and `sortOrder`      *      * **Use Cases:**      * - Find relevant documentation for user questions      * - Power RAG (Retrieval Augmented Generation) in AI assistants      * - Semantic search across knowledge bases      * - List all artifacts by building/worker/tag
@@ -23174,6 +23262,22 @@ export class AIVectorDatabaseApi extends BaseAPI {
      */
     public listVectorCollections(organisation: string, options?: RawAxiosRequestConfig) {
         return AIVectorDatabaseApiFp(this.configuration).listVectorCollections(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists documents in a collection with pagination. Supports filtering by document key.
+     * @summary List Documents in Collection
+     * @param {string} organisation 
+     * @param {string} collectionId 
+     * @param {string} [key] Filter by document key
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIVectorDatabaseApi
+     */
+    public listVectorDocuments(organisation: string, collectionId: string, key?: string, limit?: number, offset?: number, options?: RawAxiosRequestConfig) {
+        return AIVectorDatabaseApiFp(this.configuration).listVectorDocuments(organisation, collectionId, key, limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -36194,149 +36298,6 @@ export class VariablesApi extends BaseAPI {
      */
     public updateEnvironmentVariable(apiOrganisation: string, apiApplication: string, apiEnvironment: string, apiVariable: string, updateEnvironmentVariableRequest: UpdateEnvironmentVariableRequest, options?: RawAxiosRequestConfig) {
         return VariablesApiFp(this.configuration).updateEnvironmentVariable(apiOrganisation, apiApplication, apiEnvironment, apiVariable, updateEnvironmentVariableRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * VectorDatabaseApi - axios parameter creator
- * @export
- */
-export const VectorDatabaseApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Lists documents in a collection with pagination. Supports filtering by document key.
-         * @summary List Documents in Collection
-         * @param {string} organisation 
-         * @param {string} collectionId 
-         * @param {string} [key] Filter by document key
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listVectorDocuments: async (organisation: string, collectionId: string, key?: string, limit?: number, offset?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('listVectorDocuments', 'organisation', organisation)
-            // verify required parameter 'collectionId' is not null or undefined
-            assertParamExists('listVectorDocuments', 'collectionId', collectionId)
-            const localVarPath = `/api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
-                .replace(`{${"collectionId"}}`, encodeURIComponent(String(collectionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (key !== undefined) {
-                localVarQueryParameter['key'] = key;
-            }
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (offset !== undefined) {
-                localVarQueryParameter['offset'] = offset;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * VectorDatabaseApi - functional programming interface
- * @export
- */
-export const VectorDatabaseApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = VectorDatabaseApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Lists documents in a collection with pagination. Supports filtering by document key.
-         * @summary List Documents in Collection
-         * @param {string} organisation 
-         * @param {string} collectionId 
-         * @param {string} [key] Filter by document key
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listVectorDocuments(organisation: string, collectionId: string, key?: string, limit?: number, offset?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listVectorDocuments(organisation, collectionId, key, limit, offset, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['VectorDatabaseApi.listVectorDocuments']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * VectorDatabaseApi - factory interface
- * @export
- */
-export const VectorDatabaseApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = VectorDatabaseApiFp(configuration)
-    return {
-        /**
-         * Lists documents in a collection with pagination. Supports filtering by document key.
-         * @summary List Documents in Collection
-         * @param {string} organisation 
-         * @param {string} collectionId 
-         * @param {string} [key] Filter by document key
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listVectorDocuments(organisation: string, collectionId: string, key?: string, limit?: number, offset?: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.listVectorDocuments(organisation, collectionId, key, limit, offset, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * VectorDatabaseApi - object-oriented interface
- * @export
- * @class VectorDatabaseApi
- * @extends {BaseAPI}
- */
-export class VectorDatabaseApi extends BaseAPI {
-    /**
-     * Lists documents in a collection with pagination. Supports filtering by document key.
-     * @summary List Documents in Collection
-     * @param {string} organisation 
-     * @param {string} collectionId 
-     * @param {string} [key] Filter by document key
-     * @param {number} [limit] 
-     * @param {number} [offset] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof VectorDatabaseApi
-     */
-    public listVectorDocuments(organisation: string, collectionId: string, key?: string, limit?: number, offset?: number, options?: RawAxiosRequestConfig) {
-        return VectorDatabaseApiFp(this.configuration).listVectorDocuments(organisation, collectionId, key, limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
