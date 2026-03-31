@@ -20,6 +20,9 @@ Name | Type | Description | Notes
 **ip** | **string** | IP filter type (ip_is, ip_is_not, any) | [optional] [default to undefined]
 **ip_is** | **Array&lt;string&gt;** | Allowed IP addresses | [optional] [default to undefined]
 **ip_is_not** | **Array&lt;string&gt;** | Excluded IP addresses | [optional] [default to undefined]
+**asn** | **string** | ASN filter type (asn_is, asn_is_not, any) | [optional] [default to undefined]
+**asn_is** | **Array&lt;string&gt;** | Allowed AS numbers | [optional] [default to undefined]
+**asn_is_not** | **Array&lt;string&gt;** | Excluded AS numbers | [optional] [default to undefined]
 **fn_uuid** | **string** | Function UUID | [default to undefined]
 
 ## Example
@@ -43,6 +46,9 @@ const instance: V2RuleContentFilterRequest = {
     ip,
     ip_is,
     ip_is_not,
+    asn,
+    asn_is,
+    asn_is_not,
     fn_uuid,
 };
 ```

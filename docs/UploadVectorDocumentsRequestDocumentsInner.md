@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **content** | **string** | Document text content | [default to undefined]
+**key** | **string** | Stable document key for upsert | [optional] [default to undefined]
 **metadata** | [**UploadVectorDocumentsRequestDocumentsInnerMetadata**](UploadVectorDocumentsRequestDocumentsInnerMetadata.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -15,6 +16,7 @@ import { UploadVectorDocumentsRequestDocumentsInner } from '@quantcdn/quant-clie
 
 const instance: UploadVectorDocumentsRequestDocumentsInner = {
     content,
+    key,
     metadata,
 };
 ```
