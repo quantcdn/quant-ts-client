@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **stream** | **boolean** | Whether to stream the response (SSE) | [optional] [default to false]
 **async** | **boolean** | Enable async/durable execution mode. When true, returns 202 with pollUrl. Use for long-running agent tasks. | [optional] [default to false]
 **system** | **string** | Optional additional system prompt (appended to agent\&#39;s configured prompt) | [optional] [default to undefined]
+**longContext** | **boolean** | Per-request override to force 1M context window routing | [optional] [default to false]
+**maxToolIterations** | **number** | Maximum tool auto-execution iterations for this request | [optional] [default to undefined]
+**allowedCollections** | **Array&lt;string&gt;** | Per-request override for vector DB collections the agent can query | [optional] [default to undefined]
 
 ## Example
 
@@ -24,6 +27,9 @@ const instance: ChatWithAIAgentRequest = {
     stream,
     async,
     system,
+    longContext,
+    maxToolIterations,
+    allowedCollections,
 };
 ```
 

@@ -9,8 +9,8 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**deleteVectorDocuments**](#deletevectordocuments) | **DELETE** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents | Delete Documents from Collection|
 |[**getVectorCollection**](#getvectorcollection) | **GET** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId} | Get Collection Details|
 |[**listVectorCollections**](#listvectorcollections) | **GET** /api/v3/organizations/{organisation}/ai/vector-db/collections | List Vector Database Collections|
+|[**listVectorDocuments**](#listvectordocuments) | **GET** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents | List Documents in Collection|
 |[**queryVectorCollection**](#queryvectorcollection) | **POST** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/query | Semantic Search Query|
-|[**uploadVectorDocuments**](#uploadvectordocuments) | **POST** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents | Upload Documents to Collection|
 
 # **createVectorCollection**
 > CreateVectorCollection201Response createVectorCollection(createVectorCollectionRequest)
@@ -300,6 +300,72 @@ const { status, data } = await apiInstance.listVectorCollections(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **listVectorDocuments**
+> listVectorDocuments()
+
+Lists documents in a collection with pagination. Supports filtering by document key.
+
+### Example
+
+```typescript
+import {
+    AIVectorDatabaseApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIVectorDatabaseApi(configuration);
+
+let organisation: string; // (default to undefined)
+let collectionId: string; // (default to undefined)
+let key: string; //Filter by document key (optional) (default to undefined)
+let limit: number; // (optional) (default to 50)
+let offset: number; // (optional) (default to 0)
+
+const { status, data } = await apiInstance.listVectorDocuments(
+    organisation,
+    collectionId,
+    key,
+    limit,
+    offset
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] |  | defaults to undefined|
+| **collectionId** | [**string**] |  | defaults to undefined|
+| **key** | [**string**] | Filter by document key | (optional) defaults to undefined|
+| **limit** | [**number**] |  | (optional) defaults to 50|
+| **offset** | [**number**] |  | (optional) defaults to 0|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Documents retrieved successfully |  -  |
+|**403** | Access denied |  -  |
+|**404** | Collection not found |  -  |
+|**500** | Failed to list documents |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **queryVectorCollection**
 > QueryVectorCollection200Response queryVectorCollection(queryVectorCollectionRequest)
 
@@ -359,68 +425,6 @@ const { status, data } = await apiInstance.queryVectorCollection(
 |**403** | Access denied |  -  |
 |**404** | Collection not found |  -  |
 |**500** | Failed to perform search |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **uploadVectorDocuments**
-> UploadVectorDocuments200Response uploadVectorDocuments(uploadVectorDocumentsRequest)
-
-Uploads documents to a vector database collection with automatic embedding generation. Documents are chunked (if needed), embedded using the collection\'s embedding model, and stored.      *      * **Supported Content:**      * - Plain text content      * - URLs to fetch content from      * - Markdown documents      *      * **Metadata:**      * Each document can include metadata (title, source_url, section, tags) that is returned with search results.
-
-### Example
-
-```typescript
-import {
-    AIVectorDatabaseApi,
-    Configuration,
-    UploadVectorDocumentsRequest
-} from '@quantcdn/quant-client';
-
-const configuration = new Configuration();
-const apiInstance = new AIVectorDatabaseApi(configuration);
-
-let organisation: string; //The organisation ID (default to undefined)
-let collectionId: string; //The collection ID (default to undefined)
-let uploadVectorDocumentsRequest: UploadVectorDocumentsRequest; //
-
-const { status, data } = await apiInstance.uploadVectorDocuments(
-    organisation,
-    collectionId,
-    uploadVectorDocumentsRequest
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **uploadVectorDocumentsRequest** | **UploadVectorDocumentsRequest**|  | |
-| **organisation** | [**string**] | The organisation ID | defaults to undefined|
-| **collectionId** | [**string**] | The collection ID | defaults to undefined|
-
-
-### Return type
-
-**UploadVectorDocuments200Response**
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Documents uploaded successfully |  -  |
-|**400** | Invalid request parameters |  -  |
-|**403** | Access denied |  -  |
-|**404** | Collection not found |  -  |
-|**500** | Failed to upload documents |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

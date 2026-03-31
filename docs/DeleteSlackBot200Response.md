@@ -1,4 +1,4 @@
-# UploadVectorDocuments200Response
+# DeleteSlackBot200Response
 
 
 ## Properties
@@ -6,19 +6,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** |  | [optional] [default to undefined]
-**documentIds** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
-**chunksCreated** | **number** |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { UploadVectorDocuments200Response } from '@quantcdn/quant-client';
+import { DeleteSlackBot200Response } from '@quantcdn/quant-client';
 
-const instance: UploadVectorDocuments200Response = {
+const instance: DeleteSlackBot200Response = {
     success,
-    documentIds,
-    chunksCreated,
     message,
 };
 ```
