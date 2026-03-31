@@ -20,6 +20,9 @@ Name | Type | Description | Notes
 **ip** | **string** | IP filter type (ip_is, ip_is_not, any) | [optional] [default to undefined]
 **ip_is** | **Array&lt;string&gt;** | Allowed IP addresses | [optional] [default to undefined]
 **ip_is_not** | **Array&lt;string&gt;** | Excluded IP addresses | [optional] [default to undefined]
+**asn** | **string** | ASN filter type (asn_is, asn_is_not, any) | [optional] [default to undefined]
+**asn_is** | **Array&lt;string&gt;** | Allowed AS numbers | [optional] [default to undefined]
+**asn_is_not** | **Array&lt;string&gt;** | Excluded AS numbers | [optional] [default to undefined]
 **custom_response_body** | **string** | Custom response body content | [default to undefined]
 **custom_response_status_code** | **number** | HTTP status code for custom response | [optional] [default to 200]
 **status_code** | **number** | Legacy field for status code (deprecated) | [optional] [default to undefined]
@@ -46,6 +49,9 @@ const instance: V2RuleCustomResponseRequest = {
     ip,
     ip_is,
     ip_is_not,
+    asn,
+    asn_is,
+    asn_is_not,
     custom_response_body,
     custom_response_status_code,
     status_code,
