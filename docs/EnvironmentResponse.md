@@ -7,27 +7,27 @@ Environment response schema with runtime details
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **envName** | **string** | Environment name | [default to undefined]
-**status** | **string** | Environment status | [optional] [default to undefined]
-**runningCount** | **number** | Number of running tasks | [optional] [default to undefined]
-**desiredCount** | **number** | Desired number of tasks | [optional] [default to undefined]
+**status** | **string** | Environment status | [optional] [readonly] [default to undefined]
+**runningCount** | **number** | Number of running tasks | [optional] [readonly] [default to undefined]
+**desiredCount** | **number** | Desired number of tasks | [optional] [readonly] [default to undefined]
 **minCapacity** | **number** | Minimum capacity for autoscaling | [optional] [default to undefined]
 **maxCapacity** | **number** | Maximum capacity for autoscaling | [optional] [default to undefined]
-**publicIpAddress** | **string** | Public IP address for SSH access | [optional] [default to undefined]
-**deploymentStatus** | **string** | Current deployment status. FAILED indicates the most recent deployment did not complete successfully. | [optional] [default to undefined]
-**deploymentFailureType** | **string** | Type of deployment failure when deploymentStatus is FAILED (e.g., \&#39;ECS_DEPLOYMENT_CIRCUIT_BREAKER\&#39;, \&#39;IMAGE_PULL_ERROR\&#39;) | [optional] [default to undefined]
-**deploymentFailureReason** | **string** | Human-readable explanation of why the deployment failed. Contains details such as wrong image architecture, missing image, or container startup errors. | [optional] [default to undefined]
-**taskDefinition** | **object** | ECS task definition details | [optional] [default to undefined]
-**service** | **object** | ECS service details | [optional] [default to undefined]
-**loadBalancer** | **object** | Load balancer configuration | [optional] [default to undefined]
-**securityGroup** | **object** | Security group configuration | [optional] [default to undefined]
-**subnet** | **object** | Subnet configuration | [optional] [default to undefined]
-**vpc** | **object** | VPC configuration | [optional] [default to undefined]
-**containers** | **Array&lt;object&gt;** | Container configurations | [optional] [default to undefined]
-**volumes** | [**Array&lt;Volume&gt;**](Volume.md) | Persistent storage volumes | [optional] [default to undefined]
-**cron** | [**Array&lt;Cron&gt;**](Cron.md) | Scheduled cron jobs | [optional] [default to undefined]
-**albRouting** | **object** | ALB routing configuration | [optional] [default to undefined]
-**createdAt** | **string** | Creation timestamp | [optional] [default to undefined]
-**updatedAt** | **string** | Last update timestamp | [optional] [default to undefined]
+**publicIpAddress** | **string** | Public IP address for SSH access | [optional] [readonly] [default to undefined]
+**deploymentStatus** | **string** | Current deployment status | [optional] [readonly] [default to undefined]
+**deploymentFailureType** | **string** | Type of deployment failure | [optional] [readonly] [default to undefined]
+**deploymentFailureReason** | **string** | Reason for deployment failure | [optional] [readonly] [default to undefined]
+**taskDefinition** | **object** | ECS task definition details | [optional] [readonly] [default to undefined]
+**service** | **object** | ECS service details | [optional] [readonly] [default to undefined]
+**loadBalancer** | **object** | Load balancer configuration | [optional] [readonly] [default to undefined]
+**securityGroup** | **object** | Security group configuration | [optional] [readonly] [default to undefined]
+**subnet** | **object** | Subnet configuration | [optional] [readonly] [default to undefined]
+**vpc** | **object** | VPC configuration | [optional] [readonly] [default to undefined]
+**containerNames** | **Array&lt;string&gt;** | Container name list | [optional] [readonly] [default to undefined]
+**volumes** | [**Array&lt;Volume&gt;**](Volume.md) | Persistent storage volumes | [optional] [readonly] [default to undefined]
+**cron** | [**Array&lt;Cron&gt;**](Cron.md) | Scheduled cron jobs | [optional] [readonly] [default to undefined]
+**albRouting** | **object** | ALB routing configuration | [optional] [readonly] [default to undefined]
+**createdAt** | **string** | Creation timestamp | [optional] [readonly] [default to undefined]
+**updatedAt** | **string** | Last update timestamp | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -51,7 +51,7 @@ const instance: EnvironmentResponse = {
     securityGroup,
     subnet,
     vpc,
-    containers,
+    containerNames,
     volumes,
     cron,
     albRouting,

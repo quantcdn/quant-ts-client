@@ -6,8 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** |  | [optional] [default to undefined]
-**schedule** | **string** |  | [optional] [default to undefined]
-**command** | **string** |  | [optional] [default to undefined]
+**description** | **string** |  | [optional] [default to undefined]
+**scheduleExpression** | **string** |  | [optional] [default to undefined]
+**command** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**targetContainerName** | **string** |  | [optional] [default to undefined]
+**isEnabled** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -16,8 +19,11 @@ import { Cron } from '@quantcdn/quant-client';
 
 const instance: Cron = {
     name,
-    schedule,
+    description,
+    scheduleExpression,
     command,
+    targetContainerName,
+    isEnabled,
 };
 ```
 

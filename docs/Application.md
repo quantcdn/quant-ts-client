@@ -10,15 +10,15 @@ Name | Type | Description | Notes
 **database** | [**ApplicationDatabase**](ApplicationDatabase.md) |  | [optional] [default to undefined]
 **filesystem** | [**ApplicationFilesystem**](ApplicationFilesystem.md) |  | [optional] [default to undefined]
 **composeDefinition** | [**Compose**](Compose.md) |  | [optional] [default to undefined]
-**status** | **string** | Application status | [optional] [default to undefined]
-**deploymentInformation** | [**Array&lt;ApplicationDeploymentInformationInner&gt;**](ApplicationDeploymentInformationInner.md) | Deployment history | [optional] [default to undefined]
+**status** | **string** | Application status | [optional] [readonly] [default to undefined]
+**deploymentInformation** | [**Array&lt;ApplicationDeploymentInformationInner&gt;**](ApplicationDeploymentInformationInner.md) | Deployment history | [optional] [readonly] [default to undefined]
 **imageReference** | [**ApplicationImageReference**](ApplicationImageReference.md) |  | [optional] [default to undefined]
-**containerNames** | **Array&lt;string&gt;** | List of container names | [optional] [default to undefined]
+**containerNames** | **Array&lt;string&gt;** | List of container names | [optional] [readonly] [default to undefined]
 **minCapacity** | **number** | Minimum task count for auto-scaling | [optional] [default to undefined]
 **maxCapacity** | **number** | Maximum task count for auto-scaling | [optional] [default to undefined]
 **desiredCount** | **number** | Desired task count | [optional] [default to undefined]
 **runningCount** | **number** | Currently running task count | [optional] [default to undefined]
-**environments** | [**Array&lt;ApplicationEnvironmentsInner&gt;**](ApplicationEnvironmentsInner.md) | List of environments | [optional] [default to undefined]
+**environmentNames** | **Array&lt;string&gt;** | List of environment names (read-only) | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -39,7 +39,7 @@ const instance: Application = {
     maxCapacity,
     desiredCount,
     runningCount,
-    environments,
+    environmentNames,
 };
 ```
 
