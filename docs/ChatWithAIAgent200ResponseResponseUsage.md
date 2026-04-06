@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **inputTokens** | **number** |  | [optional] [default to undefined]
 **outputTokens** | **number** |  | [optional] [default to undefined]
+**totalTokens** | **number** |  | [optional] [default to undefined]
+**costCents** | **number** | Cost of this inference call in US cents | [optional] [default to undefined]
 
 ## Example
 
@@ -16,6 +18,8 @@ import { ChatWithAIAgent200ResponseResponseUsage } from '@quantcdn/quant-client'
 const instance: ChatWithAIAgent200ResponseResponseUsage = {
     inputTokens,
     outputTokens,
+    totalTokens,
+    costCents,
 };
 ```
 

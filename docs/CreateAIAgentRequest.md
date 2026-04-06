@@ -14,7 +14,11 @@ Name | Type | Description | Notes
 **maxTokens** | **number** |  | [optional] [default to undefined]
 **allowedTools** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **allowedCollections** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**assignedSkills** | **Array&lt;string&gt;** | Skill IDs to assign to this agent | [optional] [default to undefined]
 **createdBy** | **string** | User identifier who created the agent | [optional] [default to undefined]
+**longContext** | **boolean** | Enable 1M context window support | [optional] [default to undefined]
+**guardrailPreset** | **string** | Guardrail preset name | [optional] [default to undefined]
+**filterPolicies** | **Array&lt;string&gt;** | Filter policy IDs to apply to this agent\&#39;s inference requests | [optional] [default to undefined]
 
 ## Example
 
@@ -31,7 +35,11 @@ const instance: CreateAIAgentRequest = {
     maxTokens,
     allowedTools,
     allowedCollections,
+    assignedSkills,
     createdBy,
+    longContext,
+    guardrailPreset,
+    filterPolicies,
 };
 ```
 
