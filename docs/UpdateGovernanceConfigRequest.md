@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **modelList** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **mandatoryGuardrailPreset** | **string** |  | [optional] [default to undefined]
 **mandatoryFilterPolicies** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
-**spendLimits** | **object** |  | [optional] [default to undefined]
+**spendLimits** | [**GetGovernanceConfig200ResponseSpendLimits**](GetGovernanceConfig200ResponseSpendLimits.md) |  | [optional] [default to undefined]
 **version** | **number** |  | [optional] [default to undefined]
 
 ## Example

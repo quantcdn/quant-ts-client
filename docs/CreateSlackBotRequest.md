@@ -5,13 +5,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**agentId** | **string** | The AI agent that powers this bot | [default to undefined]
+**name** | **string** | Display name for the bot | [default to undefined]
 **setupType** | **string** | Whether to use Quant-managed or customer-provided Slack app | [default to undefined]
+**systemPrompt** | **string** | System prompt for the backing AI agent | [default to undefined]
+**modelId** | **string** | AI model identifier | [default to undefined]
+**temperature** | **number** | Sampling temperature | [optional] [default to undefined]
+**maxTokens** | **number** | Maximum response tokens | [optional] [default to undefined]
+**allowedTools** | **Array&lt;string&gt;** | Tools the agent may use | [optional] [default to undefined]
+**assignedSkills** | **Array&lt;string&gt;** | Skills assigned to the agent | [optional] [default to undefined]
+**allowedCollections** | **Array&lt;string&gt;** | Vector DB collections the agent may query | [optional] [default to undefined]
+**allowedSubAgents** | **Array&lt;string&gt;** | Sub-agents the agent may call | [optional] [default to undefined]
+**guardrailPreset** | **string** | Guardrail preset name | [optional] [default to undefined]
+**filterPolicies** | **Array&lt;string&gt;** | Content filter policies | [optional] [default to undefined]
+**longContext** | **boolean** | Enable long context mode | [optional] [default to undefined]
 **sessionTtlDays** | **number** | Session TTL in days | [optional] [default to undefined]
 **allowedChannels** | **Array&lt;string&gt;** | Slack channel IDs the bot may respond in | [optional] [default to undefined]
+**allowedUsers** | **Array&lt;string&gt;** | Slack user IDs allowed to interact with the bot | [optional] [default to undefined]
+**deniedUsers** | **Array&lt;string&gt;** | Slack user IDs denied from interacting with the bot | [optional] [default to undefined]
+**allowGuests** | **boolean** | Whether guest users may interact with the bot | [optional] [default to undefined]
+**homeTabContent** | **string** | Content shown on the bot\&#39;s Home tab in Slack | [optional] [default to undefined]
+**agentAccessControl** | **object** | Agent-level access control settings | [optional] [default to undefined]
 **keywordsEnabled** | **boolean** | Whether keyword triggers are enabled | [optional] [default to undefined]
 **keywords** | **Array&lt;string&gt;** | Keywords that trigger the bot | [optional] [default to undefined]
-**slashCommands** | **Array&lt;string&gt;** | Slash commands the bot responds to | [optional] [default to undefined]
 
 ## Example
 
@@ -19,13 +34,28 @@ Name | Type | Description | Notes
 import { CreateSlackBotRequest } from '@quantcdn/quant-client';
 
 const instance: CreateSlackBotRequest = {
-    agentId,
+    name,
     setupType,
+    systemPrompt,
+    modelId,
+    temperature,
+    maxTokens,
+    allowedTools,
+    assignedSkills,
+    allowedCollections,
+    allowedSubAgents,
+    guardrailPreset,
+    filterPolicies,
+    longContext,
     sessionTtlDays,
     allowedChannels,
+    allowedUsers,
+    deniedUsers,
+    allowGuests,
+    homeTabContent,
+    agentAccessControl,
     keywordsEnabled,
     keywords,
-    slashCommands,
 };
 ```
 
