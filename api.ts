@@ -2779,17 +2779,83 @@ export interface CreateSlackBot201Response {
  */
 export interface CreateSlackBotRequest {
     /**
-     * The AI agent that powers this bot
+     * Display name for the bot
      * @type {string}
      * @memberof CreateSlackBotRequest
      */
-    'agentId': string;
+    'name': string;
     /**
      * Whether to use Quant-managed or customer-provided Slack app
      * @type {string}
      * @memberof CreateSlackBotRequest
      */
     'setupType': CreateSlackBotRequestSetupTypeEnum;
+    /**
+     * System prompt for the backing AI agent
+     * @type {string}
+     * @memberof CreateSlackBotRequest
+     */
+    'systemPrompt': string;
+    /**
+     * AI model identifier
+     * @type {string}
+     * @memberof CreateSlackBotRequest
+     */
+    'modelId': string;
+    /**
+     * Sampling temperature
+     * @type {number}
+     * @memberof CreateSlackBotRequest
+     */
+    'temperature'?: number;
+    /**
+     * Maximum response tokens
+     * @type {number}
+     * @memberof CreateSlackBotRequest
+     */
+    'maxTokens'?: number;
+    /**
+     * Tools the agent may use
+     * @type {Array<string>}
+     * @memberof CreateSlackBotRequest
+     */
+    'allowedTools'?: Array<string>;
+    /**
+     * Skills assigned to the agent
+     * @type {Array<string>}
+     * @memberof CreateSlackBotRequest
+     */
+    'assignedSkills'?: Array<string>;
+    /**
+     * Vector DB collections the agent may query
+     * @type {Array<string>}
+     * @memberof CreateSlackBotRequest
+     */
+    'allowedCollections'?: Array<string>;
+    /**
+     * Sub-agents the agent may call
+     * @type {Array<string>}
+     * @memberof CreateSlackBotRequest
+     */
+    'allowedSubAgents'?: Array<string>;
+    /**
+     * Guardrail preset name
+     * @type {string}
+     * @memberof CreateSlackBotRequest
+     */
+    'guardrailPreset'?: string;
+    /**
+     * Content filter policies
+     * @type {Array<string>}
+     * @memberof CreateSlackBotRequest
+     */
+    'filterPolicies'?: Array<string>;
+    /**
+     * Enable long context mode
+     * @type {boolean}
+     * @memberof CreateSlackBotRequest
+     */
+    'longContext'?: boolean;
     /**
      * Session TTL in days
      * @type {number}
@@ -2803,6 +2869,36 @@ export interface CreateSlackBotRequest {
      */
     'allowedChannels'?: Array<string>;
     /**
+     * Slack user IDs allowed to interact with the bot
+     * @type {Array<string>}
+     * @memberof CreateSlackBotRequest
+     */
+    'allowedUsers'?: Array<string>;
+    /**
+     * Slack user IDs denied from interacting with the bot
+     * @type {Array<string>}
+     * @memberof CreateSlackBotRequest
+     */
+    'deniedUsers'?: Array<string>;
+    /**
+     * Whether guest users may interact with the bot
+     * @type {boolean}
+     * @memberof CreateSlackBotRequest
+     */
+    'allowGuests'?: boolean;
+    /**
+     * Content shown on the bot\'s Home tab in Slack
+     * @type {string}
+     * @memberof CreateSlackBotRequest
+     */
+    'homeTabContent'?: string;
+    /**
+     * Agent-level access control settings
+     * @type {object}
+     * @memberof CreateSlackBotRequest
+     */
+    'agentAccessControl'?: object;
+    /**
      * Whether keyword triggers are enabled
      * @type {boolean}
      * @memberof CreateSlackBotRequest
@@ -2814,12 +2910,6 @@ export interface CreateSlackBotRequest {
      * @memberof CreateSlackBotRequest
      */
     'keywords'?: Array<string>;
-    /**
-     * Slash commands the bot responds to
-     * @type {Array<string>}
-     * @memberof CreateSlackBotRequest
-     */
-    'slashCommands'?: Array<string>;
 }
 
 export const CreateSlackBotRequestSetupTypeEnum = {
@@ -5446,7 +5536,7 @@ export interface GetSlackBot200ResponseBot {
      * @type {string}
      * @memberof GetSlackBot200ResponseBot
      */
-    'agentId'?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
@@ -5467,6 +5557,72 @@ export interface GetSlackBot200ResponseBot {
     'connected'?: boolean;
     /**
      * 
+     * @type {string}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'systemPrompt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'modelId'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'temperature'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'maxTokens'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'allowedTools'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'assignedSkills'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'allowedCollections'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'allowedSubAgents'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'guardrailPreset'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'filterPolicies'?: Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'longContext'?: boolean;
+    /**
+     * 
      * @type {number}
      * @memberof GetSlackBot200ResponseBot
      */
@@ -5479,6 +5635,36 @@ export interface GetSlackBot200ResponseBot {
     'allowedChannels'?: Array<string>;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'allowedUsers'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'deniedUsers'?: Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'allowGuests'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'homeTabContent'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'agentAccessControl'?: object;
+    /**
+     * 
      * @type {boolean}
      * @memberof GetSlackBot200ResponseBot
      */
@@ -5489,12 +5675,6 @@ export interface GetSlackBot200ResponseBot {
      * @memberof GetSlackBot200ResponseBot
      */
     'keywords'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof GetSlackBot200ResponseBot
-     */
-    'slashCommands'?: Array<string>;
     /**
      * 
      * @type {string}
@@ -7486,7 +7666,7 @@ export interface ListSlackBots200ResponseBotsInner {
      * @type {string}
      * @memberof ListSlackBots200ResponseBotsInner
      */
-    'agentId'?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
@@ -7505,6 +7685,72 @@ export interface ListSlackBots200ResponseBotsInner {
      * @memberof ListSlackBots200ResponseBotsInner
      */
     'connected'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'systemPrompt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'modelId'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'temperature'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'maxTokens'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'allowedTools'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'assignedSkills'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'allowedCollections'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'allowedSubAgents'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'guardrailPreset'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'filterPolicies'?: Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'longContext'?: boolean;
     /**
      * 
      * @type {number}
@@ -9058,10 +9304,10 @@ export interface UpdateGovernanceConfigRequest {
     'mandatoryFilterPolicies'?: Array<string>;
     /**
      * 
-     * @type {object}
+     * @type {GetGovernanceConfig200ResponseSpendLimits}
      * @memberof UpdateGovernanceConfigRequest
      */
-    'spendLimits'?: object;
+    'spendLimits'?: GetGovernanceConfig200ResponseSpendLimits;
     /**
      * 
      * @type {number}
@@ -9190,17 +9436,83 @@ export interface UpdateSkillRequest {
  */
 export interface UpdateSlackBotRequest {
     /**
-     * Change the backing AI agent
+     * Display name for the bot
      * @type {string}
      * @memberof UpdateSlackBotRequest
      */
-    'agentId'?: string;
+    'name'?: string;
     /**
      * Enable or disable the bot
      * @type {string}
      * @memberof UpdateSlackBotRequest
      */
     'status'?: UpdateSlackBotRequestStatusEnum;
+    /**
+     * System prompt for the backing AI agent
+     * @type {string}
+     * @memberof UpdateSlackBotRequest
+     */
+    'systemPrompt'?: string;
+    /**
+     * AI model identifier
+     * @type {string}
+     * @memberof UpdateSlackBotRequest
+     */
+    'modelId'?: string;
+    /**
+     * Sampling temperature
+     * @type {number}
+     * @memberof UpdateSlackBotRequest
+     */
+    'temperature'?: number;
+    /**
+     * Maximum response tokens
+     * @type {number}
+     * @memberof UpdateSlackBotRequest
+     */
+    'maxTokens'?: number;
+    /**
+     * Tools the agent may use
+     * @type {Array<string>}
+     * @memberof UpdateSlackBotRequest
+     */
+    'allowedTools'?: Array<string>;
+    /**
+     * Skills assigned to the agent
+     * @type {Array<string>}
+     * @memberof UpdateSlackBotRequest
+     */
+    'assignedSkills'?: Array<string>;
+    /**
+     * Vector DB collections the agent may query
+     * @type {Array<string>}
+     * @memberof UpdateSlackBotRequest
+     */
+    'allowedCollections'?: Array<string>;
+    /**
+     * Sub-agents the agent may call
+     * @type {Array<string>}
+     * @memberof UpdateSlackBotRequest
+     */
+    'allowedSubAgents'?: Array<string>;
+    /**
+     * Guardrail preset name
+     * @type {string}
+     * @memberof UpdateSlackBotRequest
+     */
+    'guardrailPreset'?: string;
+    /**
+     * Content filter policies
+     * @type {Array<string>}
+     * @memberof UpdateSlackBotRequest
+     */
+    'filterPolicies'?: Array<string>;
+    /**
+     * Enable long context mode
+     * @type {boolean}
+     * @memberof UpdateSlackBotRequest
+     */
+    'longContext'?: boolean;
     /**
      * Session TTL in days
      * @type {number}
@@ -9214,6 +9526,36 @@ export interface UpdateSlackBotRequest {
      */
     'allowedChannels'?: Array<string>;
     /**
+     * Slack user IDs allowed to interact with the bot
+     * @type {Array<string>}
+     * @memberof UpdateSlackBotRequest
+     */
+    'allowedUsers'?: Array<string>;
+    /**
+     * Slack user IDs denied from interacting with the bot
+     * @type {Array<string>}
+     * @memberof UpdateSlackBotRequest
+     */
+    'deniedUsers'?: Array<string>;
+    /**
+     * Whether guest users may interact with the bot
+     * @type {boolean}
+     * @memberof UpdateSlackBotRequest
+     */
+    'allowGuests'?: boolean;
+    /**
+     * Content shown on the bot\'s Home tab in Slack
+     * @type {string}
+     * @memberof UpdateSlackBotRequest
+     */
+    'homeTabContent'?: string;
+    /**
+     * Agent-level access control settings
+     * @type {object}
+     * @memberof UpdateSlackBotRequest
+     */
+    'agentAccessControl'?: object;
+    /**
      * Whether keyword triggers are enabled
      * @type {boolean}
      * @memberof UpdateSlackBotRequest
@@ -9225,12 +9567,6 @@ export interface UpdateSlackBotRequest {
      * @memberof UpdateSlackBotRequest
      */
     'keywords'?: Array<string>;
-    /**
-     * Slash commands the bot responds to
-     * @type {Array<string>}
-     * @memberof UpdateSlackBotRequest
-     */
-    'slashCommands'?: Array<string>;
 }
 
 export const UpdateSlackBotRequestStatusEnum = {
@@ -21158,7 +21494,7 @@ export class AISkillsApi extends BaseAPI {
 export const AISlackBotsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Creates a new Slack bot backed by an AI agent. The bot must be connected to a Slack workspace via OAuth before it can receive events.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
+         * Creates a new Slack bot with inline AI agent configuration. A backing agent is created automatically — callers do not need to manage agents separately.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
          * @summary Create Slack Bot
          * @param {string} organisation The organisation ID
          * @param {CreateSlackBotRequest} createSlackBotRequest 
@@ -21202,7 +21538,7 @@ export const AISlackBotsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Permanently deletes a Slack bot and disconnects it from the workspace.
+         * Permanently deletes a Slack bot, disconnects it from the workspace, and deletes its backing AI agent.
          * @summary Delete Slack Bot
          * @param {string} organisation The organisation ID
          * @param {string} botId The Slack bot ID
@@ -21244,7 +21580,7 @@ export const AISlackBotsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Retrieves details for a specific Slack bot including its configuration and connection status.
+         * Retrieves details for a specific Slack bot including its configuration, connection status, and flattened agent configuration.
          * @summary Get Slack Bot
          * @param {string} organisation The organisation ID
          * @param {string} botId The Slack bot ID
@@ -21286,7 +21622,7 @@ export const AISlackBotsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace.
+         * Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace. Agent configuration fields are flattened onto each bot object.
          * @summary List Slack Bots
          * @param {string} organisation The organisation ID
          * @param {*} [options] Override http request option.
@@ -21418,7 +21754,7 @@ export const AISlackBotsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Updates a Slack bot\'s configuration. Only provided fields are updated.
+         * Updates a Slack bot\'s configuration and/or its backing agent. Only provided fields are updated.
          * @summary Update Slack Bot
          * @param {string} organisation The organisation ID
          * @param {string} botId The Slack bot ID
@@ -21476,7 +21812,7 @@ export const AISlackBotsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AISlackBotsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Creates a new Slack bot backed by an AI agent. The bot must be connected to a Slack workspace via OAuth before it can receive events.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
+         * Creates a new Slack bot with inline AI agent configuration. A backing agent is created automatically — callers do not need to manage agents separately.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
          * @summary Create Slack Bot
          * @param {string} organisation The organisation ID
          * @param {CreateSlackBotRequest} createSlackBotRequest 
@@ -21490,7 +21826,7 @@ export const AISlackBotsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Permanently deletes a Slack bot and disconnects it from the workspace.
+         * Permanently deletes a Slack bot, disconnects it from the workspace, and deletes its backing AI agent.
          * @summary Delete Slack Bot
          * @param {string} organisation The organisation ID
          * @param {string} botId The Slack bot ID
@@ -21504,7 +21840,7 @@ export const AISlackBotsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieves details for a specific Slack bot including its configuration and connection status.
+         * Retrieves details for a specific Slack bot including its configuration, connection status, and flattened agent configuration.
          * @summary Get Slack Bot
          * @param {string} organisation The organisation ID
          * @param {string} botId The Slack bot ID
@@ -21518,7 +21854,7 @@ export const AISlackBotsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace.
+         * Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace. Agent configuration fields are flattened onto each bot object.
          * @summary List Slack Bots
          * @param {string} organisation The organisation ID
          * @param {*} [options] Override http request option.
@@ -21561,7 +21897,7 @@ export const AISlackBotsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates a Slack bot\'s configuration. Only provided fields are updated.
+         * Updates a Slack bot\'s configuration and/or its backing agent. Only provided fields are updated.
          * @summary Update Slack Bot
          * @param {string} organisation The organisation ID
          * @param {string} botId The Slack bot ID
@@ -21586,7 +21922,7 @@ export const AISlackBotsApiFactory = function (configuration?: Configuration, ba
     const localVarFp = AISlackBotsApiFp(configuration)
     return {
         /**
-         * Creates a new Slack bot backed by an AI agent. The bot must be connected to a Slack workspace via OAuth before it can receive events.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
+         * Creates a new Slack bot with inline AI agent configuration. A backing agent is created automatically — callers do not need to manage agents separately.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
          * @summary Create Slack Bot
          * @param {string} organisation The organisation ID
          * @param {CreateSlackBotRequest} createSlackBotRequest 
@@ -21597,7 +21933,7 @@ export const AISlackBotsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.createSlackBot(organisation, createSlackBotRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Permanently deletes a Slack bot and disconnects it from the workspace.
+         * Permanently deletes a Slack bot, disconnects it from the workspace, and deletes its backing AI agent.
          * @summary Delete Slack Bot
          * @param {string} organisation The organisation ID
          * @param {string} botId The Slack bot ID
@@ -21608,7 +21944,7 @@ export const AISlackBotsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.deleteSlackBot(organisation, botId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves details for a specific Slack bot including its configuration and connection status.
+         * Retrieves details for a specific Slack bot including its configuration, connection status, and flattened agent configuration.
          * @summary Get Slack Bot
          * @param {string} organisation The organisation ID
          * @param {string} botId The Slack bot ID
@@ -21619,7 +21955,7 @@ export const AISlackBotsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.getSlackBot(organisation, botId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace.
+         * Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace. Agent configuration fields are flattened onto each bot object.
          * @summary List Slack Bots
          * @param {string} organisation The organisation ID
          * @param {*} [options] Override http request option.
@@ -21653,7 +21989,7 @@ export const AISlackBotsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.searchSlackWorkspaceUsers(organisation, botId, q, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates a Slack bot\'s configuration. Only provided fields are updated.
+         * Updates a Slack bot\'s configuration and/or its backing agent. Only provided fields are updated.
          * @summary Update Slack Bot
          * @param {string} organisation The organisation ID
          * @param {string} botId The Slack bot ID
@@ -21675,7 +22011,7 @@ export const AISlackBotsApiFactory = function (configuration?: Configuration, ba
  */
 export class AISlackBotsApi extends BaseAPI {
     /**
-     * Creates a new Slack bot backed by an AI agent. The bot must be connected to a Slack workspace via OAuth before it can receive events.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
+     * Creates a new Slack bot with inline AI agent configuration. A backing agent is created automatically — callers do not need to manage agents separately.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
      * @summary Create Slack Bot
      * @param {string} organisation The organisation ID
      * @param {CreateSlackBotRequest} createSlackBotRequest 
@@ -21688,7 +22024,7 @@ export class AISlackBotsApi extends BaseAPI {
     }
 
     /**
-     * Permanently deletes a Slack bot and disconnects it from the workspace.
+     * Permanently deletes a Slack bot, disconnects it from the workspace, and deletes its backing AI agent.
      * @summary Delete Slack Bot
      * @param {string} organisation The organisation ID
      * @param {string} botId The Slack bot ID
@@ -21701,7 +22037,7 @@ export class AISlackBotsApi extends BaseAPI {
     }
 
     /**
-     * Retrieves details for a specific Slack bot including its configuration and connection status.
+     * Retrieves details for a specific Slack bot including its configuration, connection status, and flattened agent configuration.
      * @summary Get Slack Bot
      * @param {string} organisation The organisation ID
      * @param {string} botId The Slack bot ID
@@ -21714,7 +22050,7 @@ export class AISlackBotsApi extends BaseAPI {
     }
 
     /**
-     * Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace.
+     * Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace. Agent configuration fields are flattened onto each bot object.
      * @summary List Slack Bots
      * @param {string} organisation The organisation ID
      * @param {*} [options] Override http request option.
@@ -21754,7 +22090,7 @@ export class AISlackBotsApi extends BaseAPI {
     }
 
     /**
-     * Updates a Slack bot\'s configuration. Only provided fields are updated.
+     * Updates a Slack bot\'s configuration and/or its backing agent. Only provided fields are updated.
      * @summary Update Slack Bot
      * @param {string} organisation The organisation ID
      * @param {string} botId The Slack bot ID
