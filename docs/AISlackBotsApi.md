@@ -15,7 +15,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 # **createSlackBot**
 > CreateSlackBot201Response createSlackBot(createSlackBotRequest)
 
-Creates a new Slack bot backed by an AI agent. The bot must be connected to a Slack workspace via OAuth before it can receive events.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
+Creates a new Slack bot with inline AI agent configuration. A backing agent is created automatically — callers do not need to manage agents separately.      *      * **Setup Types:**      * - `quant`: Quant-managed Slack app — uses shared OAuth credentials      * - `byo`: Bring Your Own — customer provides their own Slack app credentials
 
 ### Example
 
@@ -73,7 +73,7 @@ const { status, data } = await apiInstance.createSlackBot(
 # **deleteSlackBot**
 > DeleteSlackBot200Response deleteSlackBot()
 
-Permanently deletes a Slack bot and disconnects it from the workspace.
+Permanently deletes a Slack bot, disconnects it from the workspace, and deletes its backing AI agent.
 
 ### Example
 
@@ -130,7 +130,7 @@ const { status, data } = await apiInstance.deleteSlackBot(
 # **getSlackBot**
 > GetSlackBot200Response getSlackBot()
 
-Retrieves details for a specific Slack bot including its configuration and connection status.
+Retrieves details for a specific Slack bot including its configuration, connection status, and flattened agent configuration.
 
 ### Example
 
@@ -187,7 +187,7 @@ const { status, data } = await apiInstance.getSlackBot(
 # **listSlackBots**
 > ListSlackBots200Response listSlackBots()
 
-Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace.
+Lists all Slack bots configured for the organization. Each bot is backed by an AI agent and can be connected to a Slack workspace. Agent configuration fields are flattened onto each bot object.
 
 ### Example
 
@@ -360,7 +360,7 @@ const { status, data } = await apiInstance.searchSlackWorkspaceUsers(
 # **updateSlackBot**
 > CreateSlackBot201Response updateSlackBot(updateSlackBotRequest)
 
-Updates a Slack bot\'s configuration. Only provided fields are updated.
+Updates a Slack bot\'s configuration and/or its backing agent. Only provided fields are updated.
 
 ### Example
 
