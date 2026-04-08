@@ -165,6 +165,8 @@ docs/GetAIUsageStats200ResponseByModelValue.md
 docs/GetAgentOverlay200Response.md
 docs/GetAgentOverlay200ResponseBase.md
 docs/GetAgentOverlay200ResponseOverlay.md
+docs/GetCustomTool200Response.md
+docs/GetCustomTool200ResponseTool.md
 docs/GetDependencyGraph200Response.md
 docs/GetDurableExecutionStatus200Response.md
 docs/GetDurableExecutionStatus200ResponseError.md
