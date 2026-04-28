@@ -199,6 +199,8 @@ docs/GetMyUsage200Response.md
 docs/GetMyUsage200ResponseDaily.md
 docs/GetMyUsage200ResponseMonthly.md
 docs/GetMyUsage200ResponseQuota.md
+docs/GetMyUsage200ResponseQuotaDailyLimit.md
+docs/GetMyUsage200ResponseQuotaMonthlyLimit.md
 docs/GetSkill200Response.md
 docs/GetSkill200ResponseSkill.md
 docs/GetSlackBot200Response.md

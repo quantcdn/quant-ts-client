@@ -5740,17 +5740,73 @@ export interface GetMyUsage200ResponseMonthly {
  */
 export interface GetMyUsage200ResponseQuota {
     /**
-     * Per-user monthly budget in US cents
-     * @type {number}
+     * 
+     * @type {GetMyUsage200ResponseQuotaMonthlyLimit}
      * @memberof GetMyUsage200ResponseQuota
      */
-    'monthlyLimit'?: number | null;
+    'monthlyLimit'?: GetMyUsage200ResponseQuotaMonthlyLimit | null;
     /**
-     * Per-user daily budget in US cents
-     * @type {number}
+     * 
+     * @type {GetMyUsage200ResponseQuotaDailyLimit}
      * @memberof GetMyUsage200ResponseQuota
      */
-    'dailyLimit'?: number | null;
+    'dailyLimit'?: GetMyUsage200ResponseQuotaDailyLimit | null;
+}
+/**
+ * Per-user daily spend cap (object form, present when an org-level perUserDailyBudget is configured)
+ * @export
+ * @interface GetMyUsage200ResponseQuotaDailyLimit
+ */
+export interface GetMyUsage200ResponseQuotaDailyLimit {
+    /**
+     * The configured daily cap in US cents
+     * @type {number}
+     * @memberof GetMyUsage200ResponseQuotaDailyLimit
+     */
+    'limitCents'?: number;
+    /**
+     * Percentage of the cap consumed today (0–100+)
+     * @type {number}
+     * @memberof GetMyUsage200ResponseQuotaDailyLimit
+     */
+    'usedPercent'?: number;
+    /**
+     * Cents remaining before the cap is hit; can be negative if overspent
+     * @type {number}
+     * @memberof GetMyUsage200ResponseQuotaDailyLimit
+     */
+    'remainingCents'?: number;
+    /**
+     * UTC timestamp when the daily counter resets (always next UTC midnight)
+     * @type {string}
+     * @memberof GetMyUsage200ResponseQuotaDailyLimit
+     */
+    'resetsAt'?: string;
+}
+/**
+ * Per-user monthly spend cap (object form, present when an org-level perUserMonthlyBudget is configured)
+ * @export
+ * @interface GetMyUsage200ResponseQuotaMonthlyLimit
+ */
+export interface GetMyUsage200ResponseQuotaMonthlyLimit {
+    /**
+     * The configured monthly cap in US cents
+     * @type {number}
+     * @memberof GetMyUsage200ResponseQuotaMonthlyLimit
+     */
+    'limitCents'?: number;
+    /**
+     * Percentage of the cap consumed this month (0–100+)
+     * @type {number}
+     * @memberof GetMyUsage200ResponseQuotaMonthlyLimit
+     */
+    'usedPercent'?: number;
+    /**
+     * Cents remaining before the cap is hit; can be negative if overspent
+     * @type {number}
+     * @memberof GetMyUsage200ResponseQuotaMonthlyLimit
+     */
+    'remainingCents'?: number;
 }
 /**
  * 
