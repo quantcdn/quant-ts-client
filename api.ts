@@ -2077,7 +2077,7 @@ export interface CreateAIAgentRequest {
      * @type {string}
      * @memberof CreateAIAgentRequest
      */
-    'guardrailPreset'?: CreateAIAgentRequestGuardrailPresetEnum;
+    'guardrailPreset'?: CreateAIAgentRequestGuardrailPresetEnum | null;
     /**
      * Filter policy IDs to apply to this agent\'s inference requests
      * @type {Array<string>}
@@ -5811,6 +5811,141 @@ export interface GetMyUsage200ResponseQuotaMonthlyLimit {
 /**
  * 
  * @export
+ * @interface GetRestoreStatus200Response
+ */
+export interface GetRestoreStatus200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'restoreId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'orgName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'appName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'envName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'backupId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'status'?: GetRestoreStatus200ResponseStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'startedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'completedAt'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'errorMessage'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRestoreStatus200Response
+     */
+    'taskArn'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetRestoreStatus200Response
+     */
+    'ttl'?: number | null;
+}
+
+export const GetRestoreStatus200ResponseStatusEnum = {
+    Pending: 'pending',
+    InProgress: 'in_progress',
+    Completed: 'completed',
+    Failed: 'failed'
+} as const;
+
+export type GetRestoreStatus200ResponseStatusEnum = typeof GetRestoreStatus200ResponseStatusEnum[keyof typeof GetRestoreStatus200ResponseStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface GetScalingPolicyResponse
+ */
+export interface GetScalingPolicyResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetScalingPolicyResponse
+     */
+    'metric'?: GetScalingPolicyResponseMetricEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetScalingPolicyResponse
+     */
+    'targetValue'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetScalingPolicyResponse
+     */
+    'scaleInCooldownSeconds'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetScalingPolicyResponse
+     */
+    'scaleOutCooldownSeconds'?: number;
+    /**
+     * Name of the underlying Application Auto Scaling policy.
+     * @type {string}
+     * @memberof GetScalingPolicyResponse
+     */
+    'policyName'?: string;
+    /**
+     * ALB ResourceLabel for RPS policies (target group identifier).
+     * @type {string}
+     * @memberof GetScalingPolicyResponse
+     */
+    'resourceLabel'?: string | null;
+}
+
+export const GetScalingPolicyResponseMetricEnum = {
+    CpuUtilization: 'CPUUtilization',
+    MemoryUtilization: 'MemoryUtilization',
+    Rps: 'RPS'
+} as const;
+
+export type GetScalingPolicyResponseMetricEnum = typeof GetScalingPolicyResponseMetricEnum[keyof typeof GetScalingPolicyResponseMetricEnum];
+
+/**
+ * 
+ * @export
  * @interface GetSkill200Response
  */
 export interface GetSkill200Response {
@@ -8862,43 +8997,104 @@ export interface QueryVectorCollectionRequestFilter {
 /**
  * 
  * @export
- * @interface ScalingPolicy
+ * @interface RestoreDatabase202Response
  */
-export interface ScalingPolicy {
+export interface RestoreDatabase202Response {
     /**
      * 
      * @type {string}
-     * @memberof ScalingPolicy
+     * @memberof RestoreDatabase202Response
      */
-    'metric'?: ScalingPolicyMetricEnum;
+    'restoreId'?: string;
     /**
      * 
-     * @type {number}
-     * @memberof ScalingPolicy
+     * @type {string}
+     * @memberof RestoreDatabase202Response
      */
-    'targetValue'?: number;
+    'status'?: string;
     /**
      * 
-     * @type {number}
-     * @memberof ScalingPolicy
+     * @type {string}
+     * @memberof RestoreDatabase202Response
      */
-    'scaleInCooldownSeconds'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ScalingPolicy
-     */
-    'scaleOutCooldownSeconds'?: number;
+    'message'?: string;
 }
-
-export const ScalingPolicyMetricEnum = {
-    CpuUtilization: 'CPUUtilization',
-    MemoryUtilization: 'MemoryUtilization',
-    Rps: 'RPS'
-} as const;
-
-export type ScalingPolicyMetricEnum = typeof ScalingPolicyMetricEnum[keyof typeof ScalingPolicyMetricEnum];
-
+/**
+ * 
+ * @export
+ * @interface RestoreDatabaseRequest
+ */
+export interface RestoreDatabaseRequest {
+    /**
+     * The backup ID to restore (must match path param)
+     * @type {string}
+     * @memberof RestoreDatabaseRequest
+     */
+    'backupId': string;
+    /**
+     * Must be true to confirm existing data will be overwritten
+     * @type {boolean}
+     * @memberof RestoreDatabaseRequest
+     */
+    'acknowledgeDataloss': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface RestoreFilesystem202Response
+ */
+export interface RestoreFilesystem202Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof RestoreFilesystem202Response
+     */
+    'restoreId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RestoreFilesystem202Response
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RestoreFilesystem202Response
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RestoreFilesystemRequest
+ */
+export interface RestoreFilesystemRequest {
+    /**
+     * The backup ID to restore (must match path param)
+     * @type {string}
+     * @memberof RestoreFilesystemRequest
+     */
+    'backupId': string;
+    /**
+     * Must be true. tar extraction overwrites same-named files in the target EFS in place; pre-existing files not in the archive are preserved.
+     * @type {boolean}
+     * @memberof RestoreFilesystemRequest
+     */
+    'acknowledgeDataloss': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface ScalingPolicyListResponse
+ */
+export interface ScalingPolicyListResponse {
+    /**
+     * 
+     * @type {Array<GetScalingPolicyResponse>}
+     * @memberof ScalingPolicyListResponse
+     */
+    'policies'?: Array<GetScalingPolicyResponse>;
+}
 /**
  * 
  * @export
@@ -8969,6 +9165,46 @@ export interface SearchSlackWorkspaceUsers200ResponseResultsInner {
      */
     'real_name'?: string;
 }
+/**
+ * 
+ * @export
+ * @interface SetScalingPolicyRequest
+ */
+export interface SetScalingPolicyRequest {
+    /**
+     * Metric to track for scaling.
+     * @type {string}
+     * @memberof SetScalingPolicyRequest
+     */
+    'metric': SetScalingPolicyRequestMetricEnum;
+    /**
+     * Target value. Percentage for CPU/Memory; req/sec per task for RPS.
+     * @type {number}
+     * @memberof SetScalingPolicyRequest
+     */
+    'targetValue': number;
+    /**
+     * Cooldown (seconds) before another scale-in can start.
+     * @type {number}
+     * @memberof SetScalingPolicyRequest
+     */
+    'scaleInCooldownSeconds'?: number;
+    /**
+     * Cooldown (seconds) before another scale-out can start.
+     * @type {number}
+     * @memberof SetScalingPolicyRequest
+     */
+    'scaleOutCooldownSeconds'?: number;
+}
+
+export const SetScalingPolicyRequestMetricEnum = {
+    CpuUtilization: 'CPUUtilization',
+    MemoryUtilization: 'MemoryUtilization',
+    Rps: 'RPS'
+} as const;
+
+export type SetScalingPolicyRequestMetricEnum = typeof SetScalingPolicyRequestMetricEnum[keyof typeof SetScalingPolicyRequestMetricEnum];
+
 /**
  * Spot instance strategy configuration for controlling cost vs reliability. Spot instances provide significant cost savings (~70%) but may be interrupted by AWS. Available for non-production environments.
  * @export
@@ -9408,7 +9644,7 @@ export interface UpdateAIAgentRequest {
      * @type {string}
      * @memberof UpdateAIAgentRequest
      */
-    'guardrailPreset'?: UpdateAIAgentRequestGuardrailPresetEnum;
+    'guardrailPreset'?: UpdateAIAgentRequestGuardrailPresetEnum | null;
     /**
      * Filter policy IDs to apply to this agent\'s inference requests
      * @type {Array<string>}
@@ -10410,7 +10646,7 @@ export interface UpsertAgentOverlayRequest {
      * @type {string}
      * @memberof UpsertAgentOverlayRequest
      */
-    'guardrailPreset'?: UpsertAgentOverlayRequestGuardrailPresetEnum;
+    'guardrailPreset'?: UpsertAgentOverlayRequestGuardrailPresetEnum | null;
     /**
      * Current version for optimistic concurrency
      * @type {number}
@@ -33900,6 +34136,345 @@ export class PurgeApi extends BaseAPI {
 
 
 /**
+ * RestoreManagementApi - axios parameter creator
+ * @export
+ */
+export const RestoreManagementApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Returns the current status and metadata for a restore operation. Poll this endpoint to track progress.
+         * @summary Get the status of a restore operation
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The environment ID
+         * @param {string} restoreId The restore operation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRestoreStatus: async (organisation: string, application: string, environment: string, restoreId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getRestoreStatus', 'organisation', organisation)
+            // verify required parameter 'application' is not null or undefined
+            assertParamExists('getRestoreStatus', 'application', application)
+            // verify required parameter 'environment' is not null or undefined
+            assertParamExists('getRestoreStatus', 'environment', environment)
+            // verify required parameter 'restoreId' is not null or undefined
+            assertParamExists('getRestoreStatus', 'restoreId', restoreId)
+            const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/restores/{restoreId}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"application"}}`, encodeURIComponent(String(application)))
+                .replace(`{${"environment"}}`, encodeURIComponent(String(environment)))
+                .replace(`{${"restoreId"}}`, encodeURIComponent(String(restoreId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Initiates an async restore of a database backup into the specified target environment. The backup may originate from a different environment of the same application (cross-env restore). Returns 202 with a restoreId for status polling.
+         * @summary Restore a database backup to a target environment
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The TARGET environment ID to restore INTO
+         * @param {string} backupId The backup ID to restore from
+         * @param {RestoreDatabaseRequest} restoreDatabaseRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        restoreDatabase: async (organisation: string, application: string, environment: string, backupId: string, restoreDatabaseRequest: RestoreDatabaseRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('restoreDatabase', 'organisation', organisation)
+            // verify required parameter 'application' is not null or undefined
+            assertParamExists('restoreDatabase', 'application', application)
+            // verify required parameter 'environment' is not null or undefined
+            assertParamExists('restoreDatabase', 'environment', environment)
+            // verify required parameter 'backupId' is not null or undefined
+            assertParamExists('restoreDatabase', 'backupId', backupId)
+            // verify required parameter 'restoreDatabaseRequest' is not null or undefined
+            assertParamExists('restoreDatabase', 'restoreDatabaseRequest', restoreDatabaseRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{backupId}/restore-database`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"application"}}`, encodeURIComponent(String(application)))
+                .replace(`{${"environment"}}`, encodeURIComponent(String(environment)))
+                .replace(`{${"backupId"}}`, encodeURIComponent(String(backupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(restoreDatabaseRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Initiates an async restore of a filesystem backup into the specified target environment. The backup may originate from a different environment of the same application (cross-env restore). Returns 202 with a restoreId for status polling.
+         * @summary Restore a filesystem backup to a target environment
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The TARGET environment ID to restore INTO
+         * @param {string} backupId The backup ID to restore from
+         * @param {RestoreFilesystemRequest} restoreFilesystemRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        restoreFilesystem: async (organisation: string, application: string, environment: string, backupId: string, restoreFilesystemRequest: RestoreFilesystemRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('restoreFilesystem', 'organisation', organisation)
+            // verify required parameter 'application' is not null or undefined
+            assertParamExists('restoreFilesystem', 'application', application)
+            // verify required parameter 'environment' is not null or undefined
+            assertParamExists('restoreFilesystem', 'environment', environment)
+            // verify required parameter 'backupId' is not null or undefined
+            assertParamExists('restoreFilesystem', 'backupId', backupId)
+            // verify required parameter 'restoreFilesystemRequest' is not null or undefined
+            assertParamExists('restoreFilesystem', 'restoreFilesystemRequest', restoreFilesystemRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{backupId}/restore-filesystem`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"application"}}`, encodeURIComponent(String(application)))
+                .replace(`{${"environment"}}`, encodeURIComponent(String(environment)))
+                .replace(`{${"backupId"}}`, encodeURIComponent(String(backupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(restoreFilesystemRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RestoreManagementApi - functional programming interface
+ * @export
+ */
+export const RestoreManagementApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RestoreManagementApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Returns the current status and metadata for a restore operation. Poll this endpoint to track progress.
+         * @summary Get the status of a restore operation
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The environment ID
+         * @param {string} restoreId The restore operation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRestoreStatus(organisation: string, application: string, environment: string, restoreId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetRestoreStatus200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRestoreStatus(organisation, application, environment, restoreId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RestoreManagementApi.getRestoreStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Initiates an async restore of a database backup into the specified target environment. The backup may originate from a different environment of the same application (cross-env restore). Returns 202 with a restoreId for status polling.
+         * @summary Restore a database backup to a target environment
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The TARGET environment ID to restore INTO
+         * @param {string} backupId The backup ID to restore from
+         * @param {RestoreDatabaseRequest} restoreDatabaseRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async restoreDatabase(organisation: string, application: string, environment: string, backupId: string, restoreDatabaseRequest: RestoreDatabaseRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RestoreDatabase202Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.restoreDatabase(organisation, application, environment, backupId, restoreDatabaseRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RestoreManagementApi.restoreDatabase']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Initiates an async restore of a filesystem backup into the specified target environment. The backup may originate from a different environment of the same application (cross-env restore). Returns 202 with a restoreId for status polling.
+         * @summary Restore a filesystem backup to a target environment
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The TARGET environment ID to restore INTO
+         * @param {string} backupId The backup ID to restore from
+         * @param {RestoreFilesystemRequest} restoreFilesystemRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async restoreFilesystem(organisation: string, application: string, environment: string, backupId: string, restoreFilesystemRequest: RestoreFilesystemRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RestoreFilesystem202Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.restoreFilesystem(organisation, application, environment, backupId, restoreFilesystemRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RestoreManagementApi.restoreFilesystem']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * RestoreManagementApi - factory interface
+ * @export
+ */
+export const RestoreManagementApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RestoreManagementApiFp(configuration)
+    return {
+        /**
+         * Returns the current status and metadata for a restore operation. Poll this endpoint to track progress.
+         * @summary Get the status of a restore operation
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The environment ID
+         * @param {string} restoreId The restore operation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRestoreStatus(organisation: string, application: string, environment: string, restoreId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetRestoreStatus200Response> {
+            return localVarFp.getRestoreStatus(organisation, application, environment, restoreId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Initiates an async restore of a database backup into the specified target environment. The backup may originate from a different environment of the same application (cross-env restore). Returns 202 with a restoreId for status polling.
+         * @summary Restore a database backup to a target environment
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The TARGET environment ID to restore INTO
+         * @param {string} backupId The backup ID to restore from
+         * @param {RestoreDatabaseRequest} restoreDatabaseRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        restoreDatabase(organisation: string, application: string, environment: string, backupId: string, restoreDatabaseRequest: RestoreDatabaseRequest, options?: RawAxiosRequestConfig): AxiosPromise<RestoreDatabase202Response> {
+            return localVarFp.restoreDatabase(organisation, application, environment, backupId, restoreDatabaseRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Initiates an async restore of a filesystem backup into the specified target environment. The backup may originate from a different environment of the same application (cross-env restore). Returns 202 with a restoreId for status polling.
+         * @summary Restore a filesystem backup to a target environment
+         * @param {string} organisation The organisation ID
+         * @param {string} application The application ID
+         * @param {string} environment The TARGET environment ID to restore INTO
+         * @param {string} backupId The backup ID to restore from
+         * @param {RestoreFilesystemRequest} restoreFilesystemRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        restoreFilesystem(organisation: string, application: string, environment: string, backupId: string, restoreFilesystemRequest: RestoreFilesystemRequest, options?: RawAxiosRequestConfig): AxiosPromise<RestoreFilesystem202Response> {
+            return localVarFp.restoreFilesystem(organisation, application, environment, backupId, restoreFilesystemRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RestoreManagementApi - object-oriented interface
+ * @export
+ * @class RestoreManagementApi
+ * @extends {BaseAPI}
+ */
+export class RestoreManagementApi extends BaseAPI {
+    /**
+     * Returns the current status and metadata for a restore operation. Poll this endpoint to track progress.
+     * @summary Get the status of a restore operation
+     * @param {string} organisation The organisation ID
+     * @param {string} application The application ID
+     * @param {string} environment The environment ID
+     * @param {string} restoreId The restore operation ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestoreManagementApi
+     */
+    public getRestoreStatus(organisation: string, application: string, environment: string, restoreId: string, options?: RawAxiosRequestConfig) {
+        return RestoreManagementApiFp(this.configuration).getRestoreStatus(organisation, application, environment, restoreId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Initiates an async restore of a database backup into the specified target environment. The backup may originate from a different environment of the same application (cross-env restore). Returns 202 with a restoreId for status polling.
+     * @summary Restore a database backup to a target environment
+     * @param {string} organisation The organisation ID
+     * @param {string} application The application ID
+     * @param {string} environment The TARGET environment ID to restore INTO
+     * @param {string} backupId The backup ID to restore from
+     * @param {RestoreDatabaseRequest} restoreDatabaseRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestoreManagementApi
+     */
+    public restoreDatabase(organisation: string, application: string, environment: string, backupId: string, restoreDatabaseRequest: RestoreDatabaseRequest, options?: RawAxiosRequestConfig) {
+        return RestoreManagementApiFp(this.configuration).restoreDatabase(organisation, application, environment, backupId, restoreDatabaseRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Initiates an async restore of a filesystem backup into the specified target environment. The backup may originate from a different environment of the same application (cross-env restore). Returns 202 with a restoreId for status polling.
+     * @summary Restore a filesystem backup to a target environment
+     * @param {string} organisation The organisation ID
+     * @param {string} application The application ID
+     * @param {string} environment The TARGET environment ID to restore INTO
+     * @param {string} backupId The backup ID to restore from
+     * @param {RestoreFilesystemRequest} restoreFilesystemRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestoreManagementApi
+     */
+    public restoreFilesystem(organisation: string, application: string, environment: string, backupId: string, restoreFilesystemRequest: RestoreFilesystemRequest, options?: RawAxiosRequestConfig) {
+        return RestoreManagementApiFp(this.configuration).restoreFilesystem(organisation, application, environment, backupId, restoreFilesystemRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * RulesApi - axios parameter creator
  * @export
  */
@@ -38022,29 +38597,27 @@ export class SSHAccessApi extends BaseAPI {
 export const ScalingPolicyApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
-         * @summary Delete the scaling policy for an environment
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
-         * @param {string} policyName The policy name
+         * Deletes a specific scaling policy for the environment. Specify the metric type or policy name to delete a single policy. If neither is provided, all policies will be deleted.
+         * @summary Delete Scaling Policy
+         * @param {string} organisation 
+         * @param {string} application 
+         * @param {string} environment 
+         * @param {DeleteScalingPolicyMetricEnum} [metric] Optional. Delete by metric type.
+         * @param {string} [policyName] Optional. Delete by exact policy name.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteScalingPolicy: async (organisation: string, application: string, environment: string, policyName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteScalingPolicy: async (organisation: string, application: string, environment: string, metric?: DeleteScalingPolicyMetricEnum, policyName?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organisation' is not null or undefined
             assertParamExists('deleteScalingPolicy', 'organisation', organisation)
             // verify required parameter 'application' is not null or undefined
             assertParamExists('deleteScalingPolicy', 'application', application)
             // verify required parameter 'environment' is not null or undefined
             assertParamExists('deleteScalingPolicy', 'environment', environment)
-            // verify required parameter 'policyName' is not null or undefined
-            assertParamExists('deleteScalingPolicy', 'policyName', policyName)
-            const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies/{policyName}`
+            const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies`
                 .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
                 .replace(`{${"application"}}`, encodeURIComponent(String(application)))
-                .replace(`{${"environment"}}`, encodeURIComponent(String(environment)))
-                .replace(`{${"policyName"}}`, encodeURIComponent(String(policyName)));
+                .replace(`{${"environment"}}`, encodeURIComponent(String(environment)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -38060,6 +38633,14 @@ export const ScalingPolicyApiAxiosParamCreator = function (configuration?: Confi
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            if (metric !== undefined) {
+                localVarQueryParameter['metric'] = metric;
+            }
+
+            if (policyName !== undefined) {
+                localVarQueryParameter['policyName'] = policyName;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -38072,21 +38653,23 @@ export const ScalingPolicyApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
-         * @summary Get the scaling policies for an environment
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
+         * Retrieves all active target tracking scaling policies for the environment. Returns an array of policies, each with its metric, target value, cooldowns, and resource label (if applicable).
+         * @summary List Scaling Policies
+         * @param {string} organisation 
+         * @param {string} application 
+         * @param {string} environment 
+         * @param {ListScalingPoliciesMetricEnum} [metric] Optional. Filter policies by metric type.
+         * @param {string} [policyName] Optional. Filter policies by exact policy name.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getScalingPolicies: async (organisation: string, application: string, environment: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listScalingPolicies: async (organisation: string, application: string, environment: string, metric?: ListScalingPoliciesMetricEnum, policyName?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('getScalingPolicies', 'organisation', organisation)
+            assertParamExists('listScalingPolicies', 'organisation', organisation)
             // verify required parameter 'application' is not null or undefined
-            assertParamExists('getScalingPolicies', 'application', application)
+            assertParamExists('listScalingPolicies', 'application', application)
             // verify required parameter 'environment' is not null or undefined
-            assertParamExists('getScalingPolicies', 'environment', environment)
+            assertParamExists('listScalingPolicies', 'environment', environment)
             const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies`
                 .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
                 .replace(`{${"application"}}`, encodeURIComponent(String(application)))
@@ -38106,6 +38689,14 @@ export const ScalingPolicyApiAxiosParamCreator = function (configuration?: Confi
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            if (metric !== undefined) {
+                localVarQueryParameter['metric'] = metric;
+            }
+
+            if (policyName !== undefined) {
+                localVarQueryParameter['policyName'] = policyName;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -38118,24 +38709,25 @@ export const ScalingPolicyApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
-         * @summary Update the scaling policy for an environment
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
-         * @param {ScalingPolicy} scalingPolicy 
+         * Creates or updates a target tracking scaling policy for the environment. Specify the metric type and target value. If a policy with the same metric or name exists, it will be updated. Optionally, provide a custom policy name via query.
+         * @summary Upsert Scaling Policy
+         * @param {string} organisation 
+         * @param {string} application 
+         * @param {string} environment 
+         * @param {SetScalingPolicyRequest} setScalingPolicyRequest 
+         * @param {string} [policyName] Optional. Specify a custom policy name to upsert.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateScalingPolicy: async (organisation: string, application: string, environment: string, scalingPolicy: ScalingPolicy, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        upsertScalingPolicy: async (organisation: string, application: string, environment: string, setScalingPolicyRequest: SetScalingPolicyRequest, policyName?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('updateScalingPolicy', 'organisation', organisation)
+            assertParamExists('upsertScalingPolicy', 'organisation', organisation)
             // verify required parameter 'application' is not null or undefined
-            assertParamExists('updateScalingPolicy', 'application', application)
+            assertParamExists('upsertScalingPolicy', 'application', application)
             // verify required parameter 'environment' is not null or undefined
-            assertParamExists('updateScalingPolicy', 'environment', environment)
-            // verify required parameter 'scalingPolicy' is not null or undefined
-            assertParamExists('updateScalingPolicy', 'scalingPolicy', scalingPolicy)
+            assertParamExists('upsertScalingPolicy', 'environment', environment)
+            // verify required parameter 'setScalingPolicyRequest' is not null or undefined
+            assertParamExists('upsertScalingPolicy', 'setScalingPolicyRequest', setScalingPolicyRequest)
             const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies`
                 .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
                 .replace(`{${"application"}}`, encodeURIComponent(String(application)))
@@ -38155,6 +38747,10 @@ export const ScalingPolicyApiAxiosParamCreator = function (configuration?: Confi
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            if (policyName !== undefined) {
+                localVarQueryParameter['policyName'] = policyName;
+            }
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -38162,7 +38758,7 @@ export const ScalingPolicyApiAxiosParamCreator = function (configuration?: Confi
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(scalingPolicy, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(setScalingPolicyRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -38180,50 +38776,54 @@ export const ScalingPolicyApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ScalingPolicyApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
-         * @summary Delete the scaling policy for an environment
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
-         * @param {string} policyName The policy name
+         * Deletes a specific scaling policy for the environment. Specify the metric type or policy name to delete a single policy. If neither is provided, all policies will be deleted.
+         * @summary Delete Scaling Policy
+         * @param {string} organisation 
+         * @param {string} application 
+         * @param {string} environment 
+         * @param {DeleteScalingPolicyMetricEnum} [metric] Optional. Delete by metric type.
+         * @param {string} [policyName] Optional. Delete by exact policy name.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteScalingPolicy(organisation: string, application: string, environment: string, policyName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteScalingPolicy(organisation, application, environment, policyName, options);
+        async deleteScalingPolicy(organisation: string, application: string, environment: string, metric?: DeleteScalingPolicyMetricEnum, policyName?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteScalingPolicy(organisation, application, environment, metric, policyName, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ScalingPolicyApi.deleteScalingPolicy']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Get the scaling policies for an environment
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
+         * Retrieves all active target tracking scaling policies for the environment. Returns an array of policies, each with its metric, target value, cooldowns, and resource label (if applicable).
+         * @summary List Scaling Policies
+         * @param {string} organisation 
+         * @param {string} application 
+         * @param {string} environment 
+         * @param {ListScalingPoliciesMetricEnum} [metric] Optional. Filter policies by metric type.
+         * @param {string} [policyName] Optional. Filter policies by exact policy name.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getScalingPolicies(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getScalingPolicies(organisation, application, environment, options);
+        async listScalingPolicies(organisation: string, application: string, environment: string, metric?: ListScalingPoliciesMetricEnum, policyName?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScalingPolicyListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listScalingPolicies(organisation, application, environment, metric, policyName, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ScalingPolicyApi.getScalingPolicies']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ScalingPolicyApi.listScalingPolicies']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Update the scaling policy for an environment
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
-         * @param {ScalingPolicy} scalingPolicy 
+         * Creates or updates a target tracking scaling policy for the environment. Specify the metric type and target value. If a policy with the same metric or name exists, it will be updated. Optionally, provide a custom policy name via query.
+         * @summary Upsert Scaling Policy
+         * @param {string} organisation 
+         * @param {string} application 
+         * @param {string} environment 
+         * @param {SetScalingPolicyRequest} setScalingPolicyRequest 
+         * @param {string} [policyName] Optional. Specify a custom policy name to upsert.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateScalingPolicy(organisation: string, application: string, environment: string, scalingPolicy: ScalingPolicy, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateScalingPolicy(organisation, application, environment, scalingPolicy, options);
+        async upsertScalingPolicy(organisation: string, application: string, environment: string, setScalingPolicyRequest: SetScalingPolicyRequest, policyName?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetScalingPolicyResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.upsertScalingPolicy(organisation, application, environment, setScalingPolicyRequest, policyName, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ScalingPolicyApi.updateScalingPolicy']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ScalingPolicyApi.upsertScalingPolicy']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -38237,42 +38837,46 @@ export const ScalingPolicyApiFactory = function (configuration?: Configuration, 
     const localVarFp = ScalingPolicyApiFp(configuration)
     return {
         /**
-         * 
-         * @summary Delete the scaling policy for an environment
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
-         * @param {string} policyName The policy name
+         * Deletes a specific scaling policy for the environment. Specify the metric type or policy name to delete a single policy. If neither is provided, all policies will be deleted.
+         * @summary Delete Scaling Policy
+         * @param {string} organisation 
+         * @param {string} application 
+         * @param {string} environment 
+         * @param {DeleteScalingPolicyMetricEnum} [metric] Optional. Delete by metric type.
+         * @param {string} [policyName] Optional. Delete by exact policy name.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteScalingPolicy(organisation: string, application: string, environment: string, policyName: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteScalingPolicy(organisation, application, environment, policyName, options).then((request) => request(axios, basePath));
+        deleteScalingPolicy(organisation: string, application: string, environment: string, metric?: DeleteScalingPolicyMetricEnum, policyName?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteScalingPolicy(organisation, application, environment, metric, policyName, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Get the scaling policies for an environment
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
+         * Retrieves all active target tracking scaling policies for the environment. Returns an array of policies, each with its metric, target value, cooldowns, and resource label (if applicable).
+         * @summary List Scaling Policies
+         * @param {string} organisation 
+         * @param {string} application 
+         * @param {string} environment 
+         * @param {ListScalingPoliciesMetricEnum} [metric] Optional. Filter policies by metric type.
+         * @param {string} [policyName] Optional. Filter policies by exact policy name.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getScalingPolicies(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.getScalingPolicies(organisation, application, environment, options).then((request) => request(axios, basePath));
+        listScalingPolicies(organisation: string, application: string, environment: string, metric?: ListScalingPoliciesMetricEnum, policyName?: string, options?: RawAxiosRequestConfig): AxiosPromise<ScalingPolicyListResponse> {
+            return localVarFp.listScalingPolicies(organisation, application, environment, metric, policyName, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Update the scaling policy for an environment
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
-         * @param {ScalingPolicy} scalingPolicy 
+         * Creates or updates a target tracking scaling policy for the environment. Specify the metric type and target value. If a policy with the same metric or name exists, it will be updated. Optionally, provide a custom policy name via query.
+         * @summary Upsert Scaling Policy
+         * @param {string} organisation 
+         * @param {string} application 
+         * @param {string} environment 
+         * @param {SetScalingPolicyRequest} setScalingPolicyRequest 
+         * @param {string} [policyName] Optional. Specify a custom policy name to upsert.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateScalingPolicy(organisation: string, application: string, environment: string, scalingPolicy: ScalingPolicy, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.updateScalingPolicy(organisation, application, environment, scalingPolicy, options).then((request) => request(axios, basePath));
+        upsertScalingPolicy(organisation: string, application: string, environment: string, setScalingPolicyRequest: SetScalingPolicyRequest, policyName?: string, options?: RawAxiosRequestConfig): AxiosPromise<GetScalingPolicyResponse> {
+            return localVarFp.upsertScalingPolicy(organisation, application, environment, setScalingPolicyRequest, policyName, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -38285,50 +38889,72 @@ export const ScalingPolicyApiFactory = function (configuration?: Configuration, 
  */
 export class ScalingPolicyApi extends BaseAPI {
     /**
-     * 
-     * @summary Delete the scaling policy for an environment
-     * @param {string} organisation The organisation ID
-     * @param {string} application The application ID
-     * @param {string} environment The environment ID
-     * @param {string} policyName The policy name
+     * Deletes a specific scaling policy for the environment. Specify the metric type or policy name to delete a single policy. If neither is provided, all policies will be deleted.
+     * @summary Delete Scaling Policy
+     * @param {string} organisation 
+     * @param {string} application 
+     * @param {string} environment 
+     * @param {DeleteScalingPolicyMetricEnum} [metric] Optional. Delete by metric type.
+     * @param {string} [policyName] Optional. Delete by exact policy name.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScalingPolicyApi
      */
-    public deleteScalingPolicy(organisation: string, application: string, environment: string, policyName: string, options?: RawAxiosRequestConfig) {
-        return ScalingPolicyApiFp(this.configuration).deleteScalingPolicy(organisation, application, environment, policyName, options).then((request) => request(this.axios, this.basePath));
+    public deleteScalingPolicy(organisation: string, application: string, environment: string, metric?: DeleteScalingPolicyMetricEnum, policyName?: string, options?: RawAxiosRequestConfig) {
+        return ScalingPolicyApiFp(this.configuration).deleteScalingPolicy(organisation, application, environment, metric, policyName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @summary Get the scaling policies for an environment
-     * @param {string} organisation The organisation ID
-     * @param {string} application The application ID
-     * @param {string} environment The environment ID
+     * Retrieves all active target tracking scaling policies for the environment. Returns an array of policies, each with its metric, target value, cooldowns, and resource label (if applicable).
+     * @summary List Scaling Policies
+     * @param {string} organisation 
+     * @param {string} application 
+     * @param {string} environment 
+     * @param {ListScalingPoliciesMetricEnum} [metric] Optional. Filter policies by metric type.
+     * @param {string} [policyName] Optional. Filter policies by exact policy name.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScalingPolicyApi
      */
-    public getScalingPolicies(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig) {
-        return ScalingPolicyApiFp(this.configuration).getScalingPolicies(organisation, application, environment, options).then((request) => request(this.axios, this.basePath));
+    public listScalingPolicies(organisation: string, application: string, environment: string, metric?: ListScalingPoliciesMetricEnum, policyName?: string, options?: RawAxiosRequestConfig) {
+        return ScalingPolicyApiFp(this.configuration).listScalingPolicies(organisation, application, environment, metric, policyName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @summary Update the scaling policy for an environment
-     * @param {string} organisation The organisation ID
-     * @param {string} application The application ID
-     * @param {string} environment The environment ID
-     * @param {ScalingPolicy} scalingPolicy 
+     * Creates or updates a target tracking scaling policy for the environment. Specify the metric type and target value. If a policy with the same metric or name exists, it will be updated. Optionally, provide a custom policy name via query.
+     * @summary Upsert Scaling Policy
+     * @param {string} organisation 
+     * @param {string} application 
+     * @param {string} environment 
+     * @param {SetScalingPolicyRequest} setScalingPolicyRequest 
+     * @param {string} [policyName] Optional. Specify a custom policy name to upsert.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScalingPolicyApi
      */
-    public updateScalingPolicy(organisation: string, application: string, environment: string, scalingPolicy: ScalingPolicy, options?: RawAxiosRequestConfig) {
-        return ScalingPolicyApiFp(this.configuration).updateScalingPolicy(organisation, application, environment, scalingPolicy, options).then((request) => request(this.axios, this.basePath));
+    public upsertScalingPolicy(organisation: string, application: string, environment: string, setScalingPolicyRequest: SetScalingPolicyRequest, policyName?: string, options?: RawAxiosRequestConfig) {
+        return ScalingPolicyApiFp(this.configuration).upsertScalingPolicy(organisation, application, environment, setScalingPolicyRequest, policyName, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
+/**
+ * @export
+ */
+export const DeleteScalingPolicyMetricEnum = {
+    CpuUtilization: 'CPUUtilization',
+    MemoryUtilization: 'MemoryUtilization',
+    Rps: 'RPS'
+} as const;
+export type DeleteScalingPolicyMetricEnum = typeof DeleteScalingPolicyMetricEnum[keyof typeof DeleteScalingPolicyMetricEnum];
+/**
+ * @export
+ */
+export const ListScalingPoliciesMetricEnum = {
+    CpuUtilization: 'CPUUtilization',
+    MemoryUtilization: 'MemoryUtilization',
+    Rps: 'RPS'
+} as const;
+export type ListScalingPoliciesMetricEnum = typeof ListScalingPoliciesMetricEnum[keyof typeof ListScalingPoliciesMetricEnum];
 
 
 /**

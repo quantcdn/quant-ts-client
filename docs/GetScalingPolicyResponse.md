@@ -1,4 +1,4 @@
-# ScalingPolicy
+# GetScalingPolicyResponse
 
 
 ## Properties
@@ -9,17 +9,21 @@ Name | Type | Description | Notes
 **targetValue** | **number** |  | [optional] [default to undefined]
 **scaleInCooldownSeconds** | **number** |  | [optional] [default to undefined]
 **scaleOutCooldownSeconds** | **number** |  | [optional] [default to undefined]
+**policyName** | **string** | Name of the underlying Application Auto Scaling policy. | [optional] [default to undefined]
+**resourceLabel** | **string** | ALB ResourceLabel for RPS policies (target group identifier). | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { ScalingPolicy } from '@quantcdn/quant-client';
+import { GetScalingPolicyResponse } from '@quantcdn/quant-client';
 
-const instance: ScalingPolicy = {
+const instance: GetScalingPolicyResponse = {
     metric,
     targetValue,
     scaleInCooldownSeconds,
     scaleOutCooldownSeconds,
+    policyName,
+    resourceLabel,
 };
 ```
 
