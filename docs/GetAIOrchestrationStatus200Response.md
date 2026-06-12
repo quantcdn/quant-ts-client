@@ -9,11 +9,12 @@ Name | Type | Description | Notes
 **status** | **string** | Current orchestration status | [default to undefined]
 **toolCount** | **number** | Total number of async tools in this orchestration | [default to undefined]
 **completedTools** | **number** | Number of tools that have completed | [optional] [default to undefined]
-**synthesizedResponse** | **string** | AI-synthesized response combining all tool results (only present when status&#x3D;complete) | [optional] [default to undefined]
+**result** | **string** | AI-synthesized response combining all tool results (only present when status&#x3D;complete) | [optional] [default to undefined]
 **tools** | [**Array&lt;GetAIOrchestrationStatus200ResponseToolsInner&gt;**](GetAIOrchestrationStatus200ResponseToolsInner.md) | Status of individual tool executions | [optional] [default to undefined]
 **error** | **string** | Error message (only present when status&#x3D;failed) | [optional] [default to undefined]
 **createdAt** | **string** | When orchestration was created | [default to undefined]
 **completedAt** | **string** | When orchestration completed (if status in complete or failed) | [optional] [default to undefined]
+**duration** | **number** | Seconds from creation to completion (present only once completed) | [optional] [default to undefined]
 
 ## Example
 
@@ -25,11 +26,12 @@ const instance: GetAIOrchestrationStatus200Response = {
     status,
     toolCount,
     completedTools,
-    synthesizedResponse,
+    result,
     tools,
     error,
     createdAt,
     completedAt,
+    duration,
 };
 ```
 
