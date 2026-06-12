@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**monthlyLimit** | **number** | Per-user monthly budget in US cents | [optional] [default to undefined]
-**dailyLimit** | **number** | Per-user daily budget in US cents | [optional] [default to undefined]
+**monthlyLimit** | [**GetMyUsage200ResponseQuotaMonthlyLimit**](GetMyUsage200ResponseQuotaMonthlyLimit.md) |  | [optional] [default to undefined]
+**dailyLimit** | [**GetMyUsage200ResponseQuotaDailyLimit**](GetMyUsage200ResponseQuotaDailyLimit.md) |  | [optional] [default to undefined]
 
 ## Example
 
