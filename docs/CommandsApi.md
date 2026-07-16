@@ -4,9 +4,9 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createCommand**](#createcommand) | **POST** /api/v3/organizations/{organisation}/environments/{environment}/commands | Create a command for an environment|
-|[**getCommand**](#getcommand) | **GET** /api/v3/organizations/{organisation}/environments/{environment}/commands/{command} | Get a command|
-|[**listCommands**](#listcommands) | **GET** /api/v3/organizations/{organisation}/environments/{environment}/commands | Get all commands for an environment|
+|[**createCommand**](#createcommand) | **POST** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands | Create a command for an environment|
+|[**getCommand**](#getcommand) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands/{command} | Get a command|
+|[**listCommands**](#listcommands) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands | Get all commands for an environment|
 
 # **createCommand**
 > Command createCommand(createCommandRequest)
@@ -25,11 +25,13 @@ const configuration = new Configuration();
 const apiInstance = new CommandsApi(configuration);
 
 let organisation: string; //The organisation ID (default to undefined)
+let application: string; //The application ID (default to undefined)
 let environment: string; //The environment ID (default to undefined)
 let createCommandRequest: CreateCommandRequest; //
 
 const { status, data } = await apiInstance.createCommand(
     organisation,
+    application,
     environment,
     createCommandRequest
 );
@@ -41,6 +43,7 @@ const { status, data } = await apiInstance.createCommand(
 |------------- | ------------- | ------------- | -------------|
 | **createCommandRequest** | **CreateCommandRequest**|  | |
 | **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **application** | [**string**] | The application ID | defaults to undefined|
 | **environment** | [**string**] | The environment ID | defaults to undefined|
 
 
@@ -62,6 +65,7 @@ const { status, data } = await apiInstance.createCommand(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The command |  -  |
+|**404** | The environment not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -81,11 +85,13 @@ const configuration = new Configuration();
 const apiInstance = new CommandsApi(configuration);
 
 let organisation: string; //The organisation ID (default to undefined)
+let application: string; //The application ID (default to undefined)
 let environment: string; //The environment ID (default to undefined)
-let command: string; //The command ID (default to undefined)
+let command: string; //The command run ID (default to undefined)
 
 const { status, data } = await apiInstance.getCommand(
     organisation,
+    application,
     environment,
     command
 );
@@ -96,8 +102,9 @@ const { status, data } = await apiInstance.getCommand(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **application** | [**string**] | The application ID | defaults to undefined|
 | **environment** | [**string**] | The environment ID | defaults to undefined|
-| **command** | [**string**] | The command ID | defaults to undefined|
+| **command** | [**string**] | The command run ID | defaults to undefined|
 
 
 ### Return type
@@ -118,11 +125,12 @@ const { status, data } = await apiInstance.getCommand(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The command |  -  |
+|**404** | The command run not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listCommands**
-> Command listCommands()
+> listCommands()
 
 
 ### Example
@@ -137,10 +145,12 @@ const configuration = new Configuration();
 const apiInstance = new CommandsApi(configuration);
 
 let organisation: string; //The organisation ID (default to undefined)
+let application: string; //The application ID (default to undefined)
 let environment: string; //The environment ID (default to undefined)
 
 const { status, data } = await apiInstance.listCommands(
     organisation,
+    application,
     environment
 );
 ```
@@ -150,12 +160,13 @@ const { status, data } = await apiInstance.listCommands(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **application** | [**string**] | The application ID | defaults to undefined|
 | **environment** | [**string**] | The environment ID | defaults to undefined|
 
 
 ### Return type
 
-**Command**
+void (empty response body)
 
 ### Authorization
 
@@ -164,13 +175,13 @@ const { status, data } = await apiInstance.listCommands(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: Not defined
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The commands |  -  |
+|**501** | Command history listing is not yet supported |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
