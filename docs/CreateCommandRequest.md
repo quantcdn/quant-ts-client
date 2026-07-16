@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**command** | **string** |  | [optional] [default to undefined]
+**command** | **string** |  | [default to undefined]
+**containerName** | **string** | Target container (defaults to the first container in the task definition) | [optional] [default to undefined]
 
 ## Example
 
@@ -14,6 +15,7 @@ import { CreateCommandRequest } from '@quantcdn/quant-client';
 
 const instance: CreateCommandRequest = {
     command,
+    containerName,
 };
 ```
 

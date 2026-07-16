@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **organisation** | **string** | Organisation machine name | [default to undefined]
 **database** | [**ApplicationDatabase**](ApplicationDatabase.md) |  | [optional] [default to undefined]
 **filesystem** | [**ApplicationFilesystem**](ApplicationFilesystem.md) |  | [optional] [default to undefined]
+**cache** | [**ApplicationCache**](ApplicationCache.md) |  | [optional] [default to undefined]
 **composeDefinition** | [**Compose**](Compose.md) |  | [optional] [default to undefined]
 **status** | **string** | Application status | [optional] [readonly] [default to undefined]
 **deploymentInformation** | [**Array&lt;ApplicationDeploymentInformationInner&gt;**](ApplicationDeploymentInformationInner.md) | Deployment history | [optional] [readonly] [default to undefined]
@@ -30,6 +31,7 @@ const instance: Application = {
     organisation,
     database,
     filesystem,
+    cache,
     composeDefinition,
     status,
     deploymentInformation,
