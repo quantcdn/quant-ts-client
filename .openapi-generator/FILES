@@ -35,6 +35,7 @@ docs/ApplicationDeploymentInformationInner.md
 docs/ApplicationFilesystem.md
 docs/ApplicationImageReference.md
 docs/ApplicationsApi.md
+docs/AttachOrgResourceRequest.md
 docs/BackupManagementApi.md
 docs/BulkSetEnvironmentVariablesRequest.md
 docs/BulkSetEnvironmentVariablesRequestEnvironmentInner.md
@@ -117,6 +118,8 @@ docs/CreateFilterPolicyRequestRulesInnerMatch.md
 docs/CreateOrchestrationRequest.md
 docs/CreateOrchestrationRequestInputSource.md
 docs/CreateOrchestrationRequestStopCondition.md
+docs/CreateOrgResourceRequest.md
+docs/CreateOrgResourceRequestConfig.md
 docs/CreateSkill201Response.md
 docs/CreateSkillRequest.md
 docs/CreateSlackBot201Response.md
@@ -214,6 +217,8 @@ docs/GetTask200Response.md
 docs/GetVectorCollection200Response.md
 docs/GetVectorCollection200ResponseCollection.md
 docs/HeadersApi.md
+docs/IdleSleepApi.md
+docs/IdleSleepResponse.md
 docs/ImageGeneration200Response.md
 docs/ImageGenerationRequest.md
 docs/ImageGenerationRequestBackgroundRemovalParams.md
@@ -256,6 +261,8 @@ docs/ListCustomTools200Response.md
 docs/ListCustomTools200ResponseToolsInner.md
 docs/ListFiles200Response.md
 docs/ListFiles200ResponseFilesInner.md
+docs/ListMcpServers200Response.md
+docs/ListMcpServers200ResponseServersInner.md
 docs/ListOrchestrationBatches200Response.md
 docs/ListOrchestrationBatches200ResponseBatchesInner.md
 docs/ListOrchestrations200Response.md
@@ -283,6 +290,7 @@ docs/OaiGetModel200Response.md
 docs/OaiListModels200Response.md
 docs/OaiListModels200ResponseDataInner.md
 docs/OpenAICompatibilityApi.md
+docs/OrgResource.md
 docs/OrganizationsApi.md
 docs/OrganizationsList200ResponseInner.md
 docs/PatchEnvironmentCompose202Response.md
@@ -298,6 +306,8 @@ docs/QueryVectorCollection200ResponsePagination.md
 docs/QueryVectorCollection200ResponseResultsInner.md
 docs/QueryVectorCollectionRequest.md
 docs/QueryVectorCollectionRequestFilter.md
+docs/ResourceAttachment.md
+docs/ResourcesApi.md
 docs/RestoreDatabase202Response.md
 docs/RestoreDatabaseRequest.md
 docs/RestoreFilesystem202Response.md
@@ -311,6 +321,7 @@ docs/SearchSlackWorkspaceChannels200Response.md
 docs/SearchSlackWorkspaceChannels200ResponseResultsInner.md
 docs/SearchSlackWorkspaceUsers200Response.md
 docs/SearchSlackWorkspaceUsers200ResponseResultsInner.md
+docs/SetIdleSleepRequest.md
 docs/SetScalingPolicyRequest.md
 docs/SpotConfiguration.md
 docs/SubmitToolCallback200Response.md

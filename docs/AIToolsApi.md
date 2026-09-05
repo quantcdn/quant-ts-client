@@ -9,6 +9,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**listAIToolExecutions**](#listaitoolexecutions) | **GET** /api/v3/organizations/{organisation}/ai/tools/executions | List tool executions for monitoring and debugging|
 |[**listAIToolNames**](#listaitoolnames) | **GET** /api/v3/organizations/{organisation}/ai/tools/names | List tool names only (lightweight response)|
 |[**listAITools**](#listaitools) | **GET** /api/v3/organizations/{organisation}/ai/tools | List available built-in tools for function calling|
+|[**listMcpServers**](#listmcpservers) | **GET** /api/v3/organizations/{organisation}/ai/mcp-servers | List MCP servers with gateway URLs|
 
 # **getAIOrchestrationStatus**
 > GetAIOrchestrationStatus200Response getAIOrchestrationStatus()
@@ -287,6 +288,59 @@ const { status, data } = await apiInstance.listAITools(
 |**200** | Available tools retrieved successfully |  -  |
 |**403** | Access denied |  -  |
 |**500** | Failed to fetch tools |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listMcpServers**
+> ListMcpServers200Response listMcpServers()
+
+Lists the organization\'s registered MCP servers for CLI sync (QuantCode). Each server\'s `url` is the FULL MCP gateway URL on the AI API host — clients connect there, never to the origin server. Credentials are never exposed.
+
+### Example
+
+```typescript
+import {
+    AIToolsApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIToolsApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+
+const { status, data } = await apiInstance.listMcpServers(
+    organisation
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+
+
+### Return type
+
+**ListMcpServers200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of MCP servers retrieved successfully |  -  |
+|**403** | Access denied |  -  |
+|**500** | Failed to fetch MCP servers |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
