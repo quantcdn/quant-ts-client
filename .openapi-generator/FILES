@@ -188,6 +188,7 @@ docs/GetDurableExecutionStatus200ResponseResultUsage.md
 docs/GetEcrLoginCredentials200Response.md
 docs/GetEnvironmentLogs200Response.md
 docs/GetEnvironmentLogs200ResponseLogEventsInner.md
+docs/GetEnvironmentLogs200ResponsePagination.md
 docs/GetFile200Response.md
 docs/GetGovernanceConfig200Response.md
 docs/GetGovernanceConfig200ResponseSpendLimits.md
@@ -205,6 +206,10 @@ docs/GetMyUsage200ResponseMonthly.md
 docs/GetMyUsage200ResponseQuota.md
 docs/GetMyUsage200ResponseQuotaDailyLimit.md
 docs/GetMyUsage200ResponseQuotaMonthlyLimit.md
+docs/GetOrgResourceCredentials200Response.md
+docs/GetProjectLogs200Response.md
+docs/GetProjectLogs200ResponseLogsInner.md
+docs/GetProjectLogs400Response.md
 docs/GetRestoreStatus200Response.md
 docs/GetScalingPolicyResponse.md
 docs/GetSkill200Response.md
@@ -235,8 +240,11 @@ docs/ImportSkillCollectionRequestSource.md
 docs/ImportSkillRequest.md
 docs/ImportSkillRequestSource.md
 docs/KVApi.md
+docs/KVDelete409Response.md
 docs/KVItemsCreate200Response.md
 docs/KVItemsDelete200Response.md
+docs/KVItemsPurge200Response.md
+docs/KVItemsPurge202Response.md
 docs/KVItemsShow200Response.md
 docs/KVItemsShow200ResponseValue.md
 docs/KVLinkToProject200Response.md
@@ -301,6 +309,8 @@ docs/PatchEnvironmentComposeRequestSpotConfiguration.md
 docs/ProjectsApi.md
 docs/PurgeApi.md
 docs/PurgeCreateRequest.md
+docs/PurgeOrgResource200Response.md
+docs/PurgeOrgResourceRequest.md
 docs/QueryVectorCollection200Response.md
 docs/QueryVectorCollection200ResponsePagination.md
 docs/QueryVectorCollection200ResponseResultsInner.md

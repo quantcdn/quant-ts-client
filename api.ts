@@ -497,7 +497,21 @@ export interface AttachOrgResourceRequest {
      * @memberof AttachOrgResourceRequest
      */
     'envVarPrefix'?: string;
+    /**
+     * Cache only. scoped injects an RBAC user limited to this environment\'s CACHE_PREFIX (plain and {hash-tag} forms) with FLUSHALL and FLUSHDB denied. admin injects the cache-wide credential for integrations that require FLUSHDB, such as Laravel Cache::flush() or the WordPress object cache without selective flush; it can read, write and flush every attached environment\'s keys.
+     * @type {string}
+     * @memberof AttachOrgResourceRequest
+     */
+    'accessLevel'?: AttachOrgResourceRequestAccessLevelEnum;
 }
+
+export const AttachOrgResourceRequestAccessLevelEnum = {
+    Scoped: 'scoped',
+    Admin: 'admin'
+} as const;
+
+export type AttachOrgResourceRequestAccessLevelEnum = typeof AttachOrgResourceRequestAccessLevelEnum[keyof typeof AttachOrgResourceRequestAccessLevelEnum];
+
 /**
  * 
  * @export
@@ -5439,7 +5453,19 @@ export interface GetEnvironmentLogs200Response {
      */
     'logEvents'?: Array<GetEnvironmentLogs200ResponseLogEventsInner>;
     /**
-     * Token for fetching next page of results (null if no more pages)
+     * CloudWatch log group the events were read from
+     * @type {string}
+     * @memberof GetEnvironmentLogs200Response
+     */
+    'logGroupName'?: string | null;
+    /**
+     * 
+     * @type {GetEnvironmentLogs200ResponsePagination}
+     * @memberof GetEnvironmentLogs200Response
+     */
+    'pagination'?: GetEnvironmentLogs200ResponsePagination;
+    /**
+     * Same as pagination.nextToken; kept for backward compatibility
      * @type {string}
      * @memberof GetEnvironmentLogs200Response
      */
@@ -5463,6 +5489,55 @@ export interface GetEnvironmentLogs200ResponseLogEventsInner {
      * @memberof GetEnvironmentLogs200ResponseLogEventsInner
      */
     'message'?: string;
+    /**
+     * Unix timestamp in milliseconds when CloudWatch ingested the event
+     * @type {number}
+     * @memberof GetEnvironmentLogs200ResponseLogEventsInner
+     */
+    'ingestionTime'?: number | null;
+    /**
+     * CloudWatch log stream, named container/container/taskId
+     * @type {string}
+     * @memberof GetEnvironmentLogs200ResponseLogEventsInner
+     */
+    'logStreamName'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface GetEnvironmentLogs200ResponsePagination
+ */
+export interface GetEnvironmentLogs200ResponsePagination {
+    /**
+     * Page size that was applied
+     * @type {number}
+     * @memberof GetEnvironmentLogs200ResponsePagination
+     */
+    'limit'?: number;
+    /**
+     * True when another page is available
+     * @type {boolean}
+     * @memberof GetEnvironmentLogs200ResponsePagination
+     */
+    'hasMore'?: boolean;
+    /**
+     * Token for the next page. Present only when hasMore is true.
+     * @type {string}
+     * @memberof GetEnvironmentLogs200ResponsePagination
+     */
+    'nextToken'?: string | null;
+    /**
+     * Total events in the time range. Present only when includeTotal=true.
+     * @type {number}
+     * @memberof GetEnvironmentLogs200ResponsePagination
+     */
+    'total'?: number | null;
+    /**
+     * ceil(total / limit). Present only when includeTotal=true.
+     * @type {number}
+     * @memberof GetEnvironmentLogs200ResponsePagination
+     */
+    'totalPages'?: number | null;
 }
 /**
  * 
@@ -5981,6 +6056,166 @@ export interface GetMyUsage200ResponseQuotaMonthlyLimit {
      * @memberof GetMyUsage200ResponseQuotaMonthlyLimit
      */
     'remainingCents'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface GetOrgResourceCredentials200Response
+ */
+export interface GetOrgResourceCredentials200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetOrgResourceCredentials200Response
+     */
+    'host'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetOrgResourceCredentials200Response
+     */
+    'port'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetOrgResourceCredentials200Response
+     */
+    'tls'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetOrgResourceCredentials200Response
+     */
+    'username'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetOrgResourceCredentials200Response
+     */
+    'password'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetOrgResourceCredentials200Response
+     */
+    'note'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetProjectLogs200Response
+ */
+export interface GetProjectLogs200Response {
+    /**
+     * Structured CloudFront access log entries. Each entry carries request, response, timing and cache fields as emitted by the edge.
+     * @type {Array<GetProjectLogs200ResponseLogsInner>}
+     * @memberof GetProjectLogs200Response
+     */
+    'logs'?: Array<GetProjectLogs200ResponseLogsInner>;
+    /**
+     * Number of entries in this response
+     * @type {number}
+     * @memberof GetProjectLogs200Response
+     */
+    'count'?: number;
+    /**
+     * Token for the next page, or null when there are no more entries
+     * @type {string}
+     * @memberof GetProjectLogs200Response
+     */
+    'nextToken'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface GetProjectLogs200ResponseLogsInner
+ */
+export interface GetProjectLogs200ResponseLogsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'timestamp'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'project'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'domain'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'method'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'uri'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'status_code'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'cache_status'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'client_ip'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'user_agent'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'bytes'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetProjectLogs200ResponseLogsInner
+     */
+    'time_taken'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface GetProjectLogs400Response
+ */
+export interface GetProjectLogs400Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetProjectLogs400Response
+     */
+    'error'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectLogs400Response
+     */
+    'message'?: string;
 }
 /**
  * 
@@ -7409,6 +7644,31 @@ export type ImportSkillRequestSourceTypeEnum = typeof ImportSkillRequestSourceTy
 /**
  * 
  * @export
+ * @interface KVDelete409Response
+ */
+export interface KVDelete409Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof KVDelete409Response
+     */
+    'error'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof KVDelete409Response
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof KVDelete409Response
+     */
+    'hint'?: string;
+}
+/**
+ * 
+ * @export
  * @interface KVItemsCreate200Response
  */
 export interface KVItemsCreate200Response {
@@ -7449,6 +7709,56 @@ export interface KVItemsDelete200Response {
      * @memberof KVItemsDelete200Response
      */
     'key'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface KVItemsPurge200Response
+ */
+export interface KVItemsPurge200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof KVItemsPurge200Response
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof KVItemsPurge200Response
+     */
+    'deleted'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof KVItemsPurge200Response
+     */
+    'scanned'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface KVItemsPurge202Response
+ */
+export interface KVItemsPurge202Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof KVItemsPurge202Response
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof KVItemsPurge202Response
+     */
+    'deleted'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof KVItemsPurge202Response
+     */
+    'scanned'?: number;
 }
 /**
  * 
@@ -9502,6 +9812,94 @@ export interface PurgeCreateRequest {
 /**
  * 
  * @export
+ * @interface PurgeOrgResource200Response
+ */
+export interface PurgeOrgResource200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof PurgeOrgResource200Response
+     */
+    'scope'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurgeOrgResource200Response
+     */
+    'prefix'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PurgeOrgResource200Response
+     */
+    'deletedKeys'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PurgeOrgResource200Response
+     */
+    'complete'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurgeOrgResource200Response
+     */
+    'cursor'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PurgeOrgResource200Response
+     */
+    'flushed'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface PurgeOrgResourceRequest
+ */
+export interface PurgeOrgResourceRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof PurgeOrgResourceRequest
+     */
+    'scope': PurgeOrgResourceRequestScopeEnum;
+    /**
+     * scope environment only
+     * @type {string}
+     * @memberof PurgeOrgResourceRequest
+     */
+    'application'?: string;
+    /**
+     * scope environment only
+     * @type {string}
+     * @memberof PurgeOrgResourceRequest
+     */
+    'environment'?: string;
+    /**
+     * scope all only; must be true
+     * @type {boolean}
+     * @memberof PurgeOrgResourceRequest
+     */
+    'confirm'?: boolean;
+    /**
+     * scope environment only; resume a partial purge
+     * @type {string}
+     * @memberof PurgeOrgResourceRequest
+     */
+    'cursor'?: string;
+}
+
+export const PurgeOrgResourceRequestScopeEnum = {
+    Environment: 'environment',
+    All: 'all'
+} as const;
+
+export type PurgeOrgResourceRequestScopeEnum = typeof PurgeOrgResourceRequestScopeEnum[keyof typeof PurgeOrgResourceRequestScopeEnum];
+
+/**
+ * 
+ * @export
  * @interface QueryVectorCollection200Response
  */
 export interface QueryVectorCollection200Response {
@@ -9782,6 +10180,18 @@ export interface ResourceAttachment {
      */
     'accessKeyId'?: string;
     /**
+     * Cache only. This environment\'s own RBAC user, limited to its CACHE_PREFIX with FLUSHALL and FLUSHDB denied, so it cannot touch another environment\'s keys.
+     * @type {string}
+     * @memberof ResourceAttachment
+     */
+    'cacheUserId'?: string;
+    /**
+     * Cache only. scoped: the environment holds its own RBAC user. admin: it holds the cache-wide credential and can read, write and flush every attached environment\'s keys. Absent on attachments made before access levels existed (treated as scoped).
+     * @type {string}
+     * @memberof ResourceAttachment
+     */
+    'accessLevel'?: ResourceAttachmentAccessLevelEnum;
+    /**
      * The exact variable names this attachment wrote, removed precisely on detach
      * @type {Array<string>}
      * @memberof ResourceAttachment
@@ -9800,6 +10210,14 @@ export interface ResourceAttachment {
      */
     'note'?: string;
 }
+
+export const ResourceAttachmentAccessLevelEnum = {
+    Scoped: 'scoped',
+    Admin: 'admin'
+} as const;
+
+export type ResourceAttachmentAccessLevelEnum = typeof ResourceAttachmentAccessLevelEnum[keyof typeof ResourceAttachmentAccessLevelEnum];
+
 /**
  * 
  * @export
@@ -32073,7 +32491,7 @@ export const EnvironmentsApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and pattern matching. Supports pagination via nextToken.
+         * Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and literal text. Newest-first by default; pass the nextToken from the previous response to fetch the next page.
          * @summary Get the logs for an environment
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
@@ -32081,13 +32499,15 @@ export const EnvironmentsApiAxiosParamCreator = function (configuration?: Config
          * @param {string} [startTime] Start time for log retrieval (ISO 8601 format or Unix timestamp)
          * @param {string} [endTime] End time for log retrieval (ISO 8601 format or Unix timestamp)
          * @param {string} [containerName] Filter logs by specific container name
-         * @param {string} [filterPattern] CloudWatch Logs filter pattern for searching log content
-         * @param {number} [limit] Maximum number of log entries to return per page
-         * @param {string} [nextToken] Pagination token from previous response for retrieving next page of results
+         * @param {string} [filterPattern] Literal, case-sensitive text to match anywhere in the log message
+         * @param {number} [limit] Maximum number of log entries to return per page (default 50)
+         * @param {string} [nextToken] Opaque pagination token from the previous response. Pass back unchanged to fetch the next page.
+         * @param {GetEnvironmentLogsOrderEnum} [order] Sort order. desc returns newest first, asc returns oldest first.
+         * @param {boolean} [includeTotal] When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEnvironmentLogs: async (organisation: string, application: string, environment: string, startTime?: string, endTime?: string, containerName?: string, filterPattern?: string, limit?: number, nextToken?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getEnvironmentLogs: async (organisation: string, application: string, environment: string, startTime?: string, endTime?: string, containerName?: string, filterPattern?: string, limit?: number, nextToken?: string, order?: GetEnvironmentLogsOrderEnum, includeTotal?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organisation' is not null or undefined
             assertParamExists('getEnvironmentLogs', 'organisation', organisation)
             // verify required parameter 'application' is not null or undefined
@@ -32135,6 +32555,14 @@ export const EnvironmentsApiAxiosParamCreator = function (configuration?: Config
 
             if (nextToken !== undefined) {
                 localVarQueryParameter['nextToken'] = nextToken;
+            }
+
+            if (order !== undefined) {
+                localVarQueryParameter['order'] = order;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['includeTotal'] = includeTotal;
             }
 
 
@@ -32527,7 +32955,7 @@ export const EnvironmentsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and pattern matching. Supports pagination via nextToken.
+         * Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and literal text. Newest-first by default; pass the nextToken from the previous response to fetch the next page.
          * @summary Get the logs for an environment
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
@@ -32535,14 +32963,16 @@ export const EnvironmentsApiFp = function(configuration?: Configuration) {
          * @param {string} [startTime] Start time for log retrieval (ISO 8601 format or Unix timestamp)
          * @param {string} [endTime] End time for log retrieval (ISO 8601 format or Unix timestamp)
          * @param {string} [containerName] Filter logs by specific container name
-         * @param {string} [filterPattern] CloudWatch Logs filter pattern for searching log content
-         * @param {number} [limit] Maximum number of log entries to return per page
-         * @param {string} [nextToken] Pagination token from previous response for retrieving next page of results
+         * @param {string} [filterPattern] Literal, case-sensitive text to match anywhere in the log message
+         * @param {number} [limit] Maximum number of log entries to return per page (default 50)
+         * @param {string} [nextToken] Opaque pagination token from the previous response. Pass back unchanged to fetch the next page.
+         * @param {GetEnvironmentLogsOrderEnum} [order] Sort order. desc returns newest first, asc returns oldest first.
+         * @param {boolean} [includeTotal] When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getEnvironmentLogs(organisation: string, application: string, environment: string, startTime?: string, endTime?: string, containerName?: string, filterPattern?: string, limit?: number, nextToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetEnvironmentLogs200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getEnvironmentLogs(organisation, application, environment, startTime, endTime, containerName, filterPattern, limit, nextToken, options);
+        async getEnvironmentLogs(organisation: string, application: string, environment: string, startTime?: string, endTime?: string, containerName?: string, filterPattern?: string, limit?: number, nextToken?: string, order?: GetEnvironmentLogsOrderEnum, includeTotal?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetEnvironmentLogs200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEnvironmentLogs(organisation, application, environment, startTime, endTime, containerName, filterPattern, limit, nextToken, order, includeTotal, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EnvironmentsApi.getEnvironmentLogs']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -32693,7 +33123,7 @@ export const EnvironmentsApiFactory = function (configuration?: Configuration, b
             return localVarFp.getEnvironment(organisation, application, environment, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and pattern matching. Supports pagination via nextToken.
+         * Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and literal text. Newest-first by default; pass the nextToken from the previous response to fetch the next page.
          * @summary Get the logs for an environment
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
@@ -32701,14 +33131,16 @@ export const EnvironmentsApiFactory = function (configuration?: Configuration, b
          * @param {string} [startTime] Start time for log retrieval (ISO 8601 format or Unix timestamp)
          * @param {string} [endTime] End time for log retrieval (ISO 8601 format or Unix timestamp)
          * @param {string} [containerName] Filter logs by specific container name
-         * @param {string} [filterPattern] CloudWatch Logs filter pattern for searching log content
-         * @param {number} [limit] Maximum number of log entries to return per page
-         * @param {string} [nextToken] Pagination token from previous response for retrieving next page of results
+         * @param {string} [filterPattern] Literal, case-sensitive text to match anywhere in the log message
+         * @param {number} [limit] Maximum number of log entries to return per page (default 50)
+         * @param {string} [nextToken] Opaque pagination token from the previous response. Pass back unchanged to fetch the next page.
+         * @param {GetEnvironmentLogsOrderEnum} [order] Sort order. desc returns newest first, asc returns oldest first.
+         * @param {boolean} [includeTotal] When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEnvironmentLogs(organisation: string, application: string, environment: string, startTime?: string, endTime?: string, containerName?: string, filterPattern?: string, limit?: number, nextToken?: string, options?: RawAxiosRequestConfig): AxiosPromise<GetEnvironmentLogs200Response> {
-            return localVarFp.getEnvironmentLogs(organisation, application, environment, startTime, endTime, containerName, filterPattern, limit, nextToken, options).then((request) => request(axios, basePath));
+        getEnvironmentLogs(organisation: string, application: string, environment: string, startTime?: string, endTime?: string, containerName?: string, filterPattern?: string, limit?: number, nextToken?: string, order?: GetEnvironmentLogsOrderEnum, includeTotal?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<GetEnvironmentLogs200Response> {
+            return localVarFp.getEnvironmentLogs(organisation, application, environment, startTime, endTime, containerName, filterPattern, limit, nextToken, order, includeTotal, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves CloudWatch metrics for the specified environment with optional filtering by time range, container, and metric configuration.
@@ -32844,7 +33276,7 @@ export class EnvironmentsApi extends BaseAPI {
     }
 
     /**
-     * Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and pattern matching. Supports pagination via nextToken.
+     * Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and literal text. Newest-first by default; pass the nextToken from the previous response to fetch the next page.
      * @summary Get the logs for an environment
      * @param {string} organisation The organisation ID
      * @param {string} application The application ID
@@ -32852,15 +33284,17 @@ export class EnvironmentsApi extends BaseAPI {
      * @param {string} [startTime] Start time for log retrieval (ISO 8601 format or Unix timestamp)
      * @param {string} [endTime] End time for log retrieval (ISO 8601 format or Unix timestamp)
      * @param {string} [containerName] Filter logs by specific container name
-     * @param {string} [filterPattern] CloudWatch Logs filter pattern for searching log content
-     * @param {number} [limit] Maximum number of log entries to return per page
-     * @param {string} [nextToken] Pagination token from previous response for retrieving next page of results
+     * @param {string} [filterPattern] Literal, case-sensitive text to match anywhere in the log message
+     * @param {number} [limit] Maximum number of log entries to return per page (default 50)
+     * @param {string} [nextToken] Opaque pagination token from the previous response. Pass back unchanged to fetch the next page.
+     * @param {GetEnvironmentLogsOrderEnum} [order] Sort order. desc returns newest first, asc returns oldest first.
+     * @param {boolean} [includeTotal] When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EnvironmentsApi
      */
-    public getEnvironmentLogs(organisation: string, application: string, environment: string, startTime?: string, endTime?: string, containerName?: string, filterPattern?: string, limit?: number, nextToken?: string, options?: RawAxiosRequestConfig) {
-        return EnvironmentsApiFp(this.configuration).getEnvironmentLogs(organisation, application, environment, startTime, endTime, containerName, filterPattern, limit, nextToken, options).then((request) => request(this.axios, this.basePath));
+    public getEnvironmentLogs(organisation: string, application: string, environment: string, startTime?: string, endTime?: string, containerName?: string, filterPattern?: string, limit?: number, nextToken?: string, order?: GetEnvironmentLogsOrderEnum, includeTotal?: boolean, options?: RawAxiosRequestConfig) {
+        return EnvironmentsApiFp(this.configuration).getEnvironmentLogs(organisation, application, environment, startTime, endTime, containerName, filterPattern, limit, nextToken, order, includeTotal, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -32957,6 +33391,14 @@ export class EnvironmentsApi extends BaseAPI {
     }
 }
 
+/**
+ * @export
+ */
+export const GetEnvironmentLogsOrderEnum = {
+    Asc: 'asc',
+    Desc: 'desc'
+} as const;
+export type GetEnvironmentLogsOrderEnum = typeof GetEnvironmentLogsOrderEnum[keyof typeof GetEnvironmentLogsOrderEnum];
 /**
  * @export
  */
@@ -33554,10 +33996,11 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
          * @param {string} storeId 
+         * @param {boolean} [force] Delete the store even if it still holds keys. Without it a non-empty store returns 409.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        kVDelete: async (organization: string, project: string, storeId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        kVDelete: async (organization: string, project: string, storeId: string, force?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organization' is not null or undefined
             assertParamExists('kVDelete', 'organization', organization)
             // verify required parameter 'project' is not null or undefined
@@ -33582,6 +34025,10 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
             // authentication BearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (force !== undefined) {
+                localVarQueryParameter['force'] = force;
+            }
 
 
     
@@ -33749,6 +34196,62 @@ export const KVApiAxiosParamCreator = function (configuration?: Configuration) {
 
             if (includeValues !== undefined) {
                 localVarQueryParameter['include_values'] = includeValues;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Deletes every item matching the filters. With no filters the whole store is cleared. A small purge finishes in the request and returns 200; a large one returns 202 with the counts so far and continues in the background. Idempotent.
+         * @summary Delete items in bulk by prefix and/or age
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
+         * @param {string} storeId 
+         * @param {string} [prefix] Only delete keys that start with this string.
+         * @param {string} [olderThan] Only delete keys last updated before this instant. ISO 8601, or a duration with unit s, m, h or d.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        kVItemsPurge: async (organization: string, project: string, storeId: string, prefix?: string, olderThan?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organization' is not null or undefined
+            assertParamExists('kVItemsPurge', 'organization', organization)
+            // verify required parameter 'project' is not null or undefined
+            assertParamExists('kVItemsPurge', 'project', project)
+            // verify required parameter 'storeId' is not null or undefined
+            assertParamExists('kVItemsPurge', 'storeId', storeId)
+            const localVarPath = `/api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items`
+                .replace(`{${"organization"}}`, encodeURIComponent(String(organization)))
+                .replace(`{${"project"}}`, encodeURIComponent(String(project)))
+                .replace(`{${"store_id"}}`, encodeURIComponent(String(storeId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (prefix !== undefined) {
+                localVarQueryParameter['prefix'] = prefix;
+            }
+
+            if (olderThan !== undefined) {
+                localVarQueryParameter['older_than'] = olderThan;
             }
 
 
@@ -34085,11 +34588,12 @@ export const KVApiFp = function(configuration?: Configuration) {
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
          * @param {string} storeId 
+         * @param {boolean} [force] Delete the store even if it still holds keys. Without it a non-empty store returns 409.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async kVDelete(organization: string, project: string, storeId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.kVDelete(organization, project, storeId, options);
+        async kVDelete(organization: string, project: string, storeId: string, force?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.kVDelete(organization, project, storeId, force, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['KVApi.kVDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -34143,6 +34647,23 @@ export const KVApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.kVItemsList(organization, project, storeId, cursor, limit, search, includeValues, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['KVApi.kVItemsList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Deletes every item matching the filters. With no filters the whole store is cleared. A small purge finishes in the request and returns 200; a large one returns 202 with the counts so far and continues in the background. Idempotent.
+         * @summary Delete items in bulk by prefix and/or age
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
+         * @param {string} storeId 
+         * @param {string} [prefix] Only delete keys that start with this string.
+         * @param {string} [olderThan] Only delete keys last updated before this instant. ISO 8601, or a duration with unit s, m, h or d.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async kVItemsPurge(organization: string, project: string, storeId: string, prefix?: string, olderThan?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<KVItemsPurge200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.kVItemsPurge(organization, project, storeId, prefix, olderThan, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['KVApi.kVItemsPurge']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -34266,11 +34787,12 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
          * @param {string} organization Organization identifier
          * @param {string} project Project identifier
          * @param {string} storeId 
+         * @param {boolean} [force] Delete the store even if it still holds keys. Without it a non-empty store returns 409.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        kVDelete(organization: string, project: string, storeId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.kVDelete(organization, project, storeId, options).then((request) => request(axios, basePath));
+        kVDelete(organization: string, project: string, storeId: string, force?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.kVDelete(organization, project, storeId, force, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -34313,6 +34835,20 @@ export const KVApiFactory = function (configuration?: Configuration, basePath?: 
          */
         kVItemsList(organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, includeValues?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<V2StoreItemsListResponse> {
             return localVarFp.kVItemsList(organization, project, storeId, cursor, limit, search, includeValues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Deletes every item matching the filters. With no filters the whole store is cleared. A small purge finishes in the request and returns 200; a large one returns 202 with the counts so far and continues in the background. Idempotent.
+         * @summary Delete items in bulk by prefix and/or age
+         * @param {string} organization Organization identifier
+         * @param {string} project Project identifier
+         * @param {string} storeId 
+         * @param {string} [prefix] Only delete keys that start with this string.
+         * @param {string} [olderThan] Only delete keys last updated before this instant. ISO 8601, or a duration with unit s, m, h or d.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        kVItemsPurge(organization: string, project: string, storeId: string, prefix?: string, olderThan?: string, options?: RawAxiosRequestConfig): AxiosPromise<KVItemsPurge200Response> {
+            return localVarFp.kVItemsPurge(organization, project, storeId, prefix, olderThan, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as \'[ENCRYPTED]\' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
@@ -34419,12 +34955,13 @@ export class KVApi extends BaseAPI {
      * @param {string} organization Organization identifier
      * @param {string} project Project identifier
      * @param {string} storeId 
+     * @param {boolean} [force] Delete the store even if it still holds keys. Without it a non-empty store returns 409.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof KVApi
      */
-    public kVDelete(organization: string, project: string, storeId: string, options?: RawAxiosRequestConfig) {
-        return KVApiFp(this.configuration).kVDelete(organization, project, storeId, options).then((request) => request(this.axios, this.basePath));
+    public kVDelete(organization: string, project: string, storeId: string, force?: boolean, options?: RawAxiosRequestConfig) {
+        return KVApiFp(this.configuration).kVDelete(organization, project, storeId, force, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -34473,6 +35010,22 @@ export class KVApi extends BaseAPI {
      */
     public kVItemsList(organization: string, project: string, storeId: string, cursor?: string, limit?: number, search?: string, includeValues?: boolean, options?: RawAxiosRequestConfig) {
         return KVApiFp(this.configuration).kVItemsList(organization, project, storeId, cursor, limit, search, includeValues, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Deletes every item matching the filters. With no filters the whole store is cleared. A small purge finishes in the request and returns 200; a large one returns 202 with the counts so far and continues in the background. Idempotent.
+     * @summary Delete items in bulk by prefix and/or age
+     * @param {string} organization Organization identifier
+     * @param {string} project Project identifier
+     * @param {string} storeId 
+     * @param {string} [prefix] Only delete keys that start with this string.
+     * @param {string} [olderThan] Only delete keys last updated before this instant. ISO 8601, or a duration with unit s, m, h or d.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof KVApi
+     */
+    public kVItemsPurge(organization: string, project: string, storeId: string, prefix?: string, olderThan?: string, options?: RawAxiosRequestConfig) {
+        return KVApiFp(this.configuration).kVItemsPurge(organization, project, storeId, prefix, olderThan, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -35078,6 +35631,78 @@ export class OrganizationsApi extends BaseAPI {
 export const ProjectsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Retrieves CloudFront access log entries for an AWS-platform project. Results are always scoped to the project; the optional filter can only narrow them. Entries are returned oldest first; pass nextToken from the previous response to fetch the next page. Logs are retained for 30 days.
+         * @summary Get CDN access logs for a project
+         * @param {string} organization The organization machine name
+         * @param {string} project The project machine name
+         * @param {number} [limit] Maximum number of log entries to return per page (default 100)
+         * @param {string} [startTime] Start of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [endTime] End of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [filter] CloudWatch JSON filter expression AND-ed with the project constraint, e.g. $.status_code &#x3D; 404. Outer braces are optional; nested braces are rejected.
+         * @param {string} [domain] Only return entries for this domain
+         * @param {string} [nextToken] Opaque pagination token from the previous response. Pass back unchanged to fetch the next page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjectLogs: async (organization: string, project: string, limit?: number, startTime?: string, endTime?: string, filter?: string, domain?: string, nextToken?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organization' is not null or undefined
+            assertParamExists('getProjectLogs', 'organization', organization)
+            // verify required parameter 'project' is not null or undefined
+            assertParamExists('getProjectLogs', 'project', project)
+            const localVarPath = `/api/v2/organizations/{organization}/projects/{project}/logs`
+                .replace(`{${"organization"}}`, encodeURIComponent(String(organization)))
+                .replace(`{${"project"}}`, encodeURIComponent(String(project)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (startTime !== undefined) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+
+            if (endTime !== undefined) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (domain !== undefined) {
+                localVarQueryParameter['domain'] = domain;
+            }
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Create a new project
          * @param {string} organization Organization identifier
@@ -35309,6 +35934,26 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProjectsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Retrieves CloudFront access log entries for an AWS-platform project. Results are always scoped to the project; the optional filter can only narrow them. Entries are returned oldest first; pass nextToken from the previous response to fetch the next page. Logs are retained for 30 days.
+         * @summary Get CDN access logs for a project
+         * @param {string} organization The organization machine name
+         * @param {string} project The project machine name
+         * @param {number} [limit] Maximum number of log entries to return per page (default 100)
+         * @param {string} [startTime] Start of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [endTime] End of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [filter] CloudWatch JSON filter expression AND-ed with the project constraint, e.g. $.status_code &#x3D; 404. Outer braces are optional; nested braces are rejected.
+         * @param {string} [domain] Only return entries for this domain
+         * @param {string} [nextToken] Opaque pagination token from the previous response. Pass back unchanged to fetch the next page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getProjectLogs(organization: string, project: string, limit?: number, startTime?: string, endTime?: string, filter?: string, domain?: string, nextToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetProjectLogs200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProjectLogs(organization, project, limit, startTime, endTime, filter, domain, nextToken, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProjectsApi.getProjectLogs']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Create a new project
          * @param {string} organization Organization identifier
@@ -35390,6 +36035,23 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = ProjectsApiFp(configuration)
     return {
         /**
+         * Retrieves CloudFront access log entries for an AWS-platform project. Results are always scoped to the project; the optional filter can only narrow them. Entries are returned oldest first; pass nextToken from the previous response to fetch the next page. Logs are retained for 30 days.
+         * @summary Get CDN access logs for a project
+         * @param {string} organization The organization machine name
+         * @param {string} project The project machine name
+         * @param {number} [limit] Maximum number of log entries to return per page (default 100)
+         * @param {string} [startTime] Start of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [endTime] End of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [filter] CloudWatch JSON filter expression AND-ed with the project constraint, e.g. $.status_code &#x3D; 404. Outer braces are optional; nested braces are rejected.
+         * @param {string} [domain] Only return entries for this domain
+         * @param {string} [nextToken] Opaque pagination token from the previous response. Pass back unchanged to fetch the next page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjectLogs(organization: string, project: string, limit?: number, startTime?: string, endTime?: string, filter?: string, domain?: string, nextToken?: string, options?: RawAxiosRequestConfig): AxiosPromise<GetProjectLogs200Response> {
+            return localVarFp.getProjectLogs(organization, project, limit, startTime, endTime, filter, domain, nextToken, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Create a new project
          * @param {string} organization Organization identifier
@@ -35455,6 +36117,25 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
  * @extends {BaseAPI}
  */
 export class ProjectsApi extends BaseAPI {
+    /**
+     * Retrieves CloudFront access log entries for an AWS-platform project. Results are always scoped to the project; the optional filter can only narrow them. Entries are returned oldest first; pass nextToken from the previous response to fetch the next page. Logs are retained for 30 days.
+     * @summary Get CDN access logs for a project
+     * @param {string} organization The organization machine name
+     * @param {string} project The project machine name
+     * @param {number} [limit] Maximum number of log entries to return per page (default 100)
+     * @param {string} [startTime] Start of the time range. ISO 8601 or Unix epoch milliseconds.
+     * @param {string} [endTime] End of the time range. ISO 8601 or Unix epoch milliseconds.
+     * @param {string} [filter] CloudWatch JSON filter expression AND-ed with the project constraint, e.g. $.status_code &#x3D; 404. Outer braces are optional; nested braces are rejected.
+     * @param {string} [domain] Only return entries for this domain
+     * @param {string} [nextToken] Opaque pagination token from the previous response. Pass back unchanged to fetch the next page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectsApi
+     */
+    public getProjectLogs(organization: string, project: string, limit?: number, startTime?: string, endTime?: string, filter?: string, domain?: string, nextToken?: string, options?: RawAxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).getProjectLogs(organization, project, limit, startTime, endTime, filter, domain, nextToken, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary Create a new project
@@ -35890,6 +36571,48 @@ export const ResourcesApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
+         * Cache resources only. Returns the cache-wide user (every key, every command, including FLUSHDB) with host and port. Environments attached to the cache use their own scoped users; this credential is for operators who genuinely need unrestricted access. Every read is audit-logged against the requesting user.
+         * @summary Get a cache\'s administrative credential
+         * @param {string} organisation The organisation ID
+         * @param {string} resource The resource ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrgResourceCredentials: async (organisation: string, resource: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getOrgResourceCredentials', 'organisation', organisation)
+            // verify required parameter 'resource' is not null or undefined
+            assertParamExists('getOrgResourceCredentials', 'resource', resource)
+            const localVarPath = `/api/v3/organizations/{organisation}/resources/{resource}/credentials`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary List an organisation\'s shared resources
          * @param {string} organisation The organisation ID
@@ -35921,6 +36644,54 @@ export const ResourcesApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Cache resources only. scope environment deletes that environment\'s keys, using the CACHE_PREFIX recorded on its attachment rather than anything in the request. scope all flushes every key for every attached environment and requires confirm=true. A large environment purge may return complete=false with a cursor to resume.
+         * @summary Purge keys from a cache
+         * @param {string} organisation The organisation ID
+         * @param {string} resource The resource ID
+         * @param {PurgeOrgResourceRequest} purgeOrgResourceRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purgeOrgResource: async (organisation: string, resource: string, purgeOrgResourceRequest: PurgeOrgResourceRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('purgeOrgResource', 'organisation', organisation)
+            // verify required parameter 'resource' is not null or undefined
+            assertParamExists('purgeOrgResource', 'resource', resource)
+            // verify required parameter 'purgeOrgResourceRequest' is not null or undefined
+            assertParamExists('purgeOrgResource', 'purgeOrgResourceRequest', purgeOrgResourceRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/resources/{resource}/purge`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(purgeOrgResourceRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -36012,6 +36783,20 @@ export const ResourcesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Cache resources only. Returns the cache-wide user (every key, every command, including FLUSHDB) with host and port. Environments attached to the cache use their own scoped users; this credential is for operators who genuinely need unrestricted access. Every read is audit-logged against the requesting user.
+         * @summary Get a cache\'s administrative credential
+         * @param {string} organisation The organisation ID
+         * @param {string} resource The resource ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOrgResourceCredentials(organisation: string, resource: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetOrgResourceCredentials200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrgResourceCredentials(organisation, resource, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ResourcesApi.getOrgResourceCredentials']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary List an organisation\'s shared resources
          * @param {string} organisation The organisation ID
@@ -36022,6 +36807,21 @@ export const ResourcesApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listOrgResources(organisation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ResourcesApi.listOrgResources']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Cache resources only. scope environment deletes that environment\'s keys, using the CACHE_PREFIX recorded on its attachment rather than anything in the request. scope all flushes every key for every attached environment and requires confirm=true. A large environment purge may return complete=false with a cursor to resume.
+         * @summary Purge keys from a cache
+         * @param {string} organisation The organisation ID
+         * @param {string} resource The resource ID
+         * @param {PurgeOrgResourceRequest} purgeOrgResourceRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async purgeOrgResource(organisation: string, resource: string, purgeOrgResourceRequest: PurgeOrgResourceRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PurgeOrgResource200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.purgeOrgResource(organisation, resource, purgeOrgResourceRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ResourcesApi.purgeOrgResource']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -36094,6 +36894,17 @@ export const ResourcesApiFactory = function (configuration?: Configuration, base
             return localVarFp.getOrgResource(organisation, resource, options).then((request) => request(axios, basePath));
         },
         /**
+         * Cache resources only. Returns the cache-wide user (every key, every command, including FLUSHDB) with host and port. Environments attached to the cache use their own scoped users; this credential is for operators who genuinely need unrestricted access. Every read is audit-logged against the requesting user.
+         * @summary Get a cache\'s administrative credential
+         * @param {string} organisation The organisation ID
+         * @param {string} resource The resource ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrgResourceCredentials(organisation: string, resource: string, options?: RawAxiosRequestConfig): AxiosPromise<GetOrgResourceCredentials200Response> {
+            return localVarFp.getOrgResourceCredentials(organisation, resource, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary List an organisation\'s shared resources
          * @param {string} organisation The organisation ID
@@ -36102,6 +36913,18 @@ export const ResourcesApiFactory = function (configuration?: Configuration, base
          */
         listOrgResources(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<OrgResource>> {
             return localVarFp.listOrgResources(organisation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Cache resources only. scope environment deletes that environment\'s keys, using the CACHE_PREFIX recorded on its attachment rather than anything in the request. scope all flushes every key for every attached environment and requires confirm=true. A large environment purge may return complete=false with a cursor to resume.
+         * @summary Purge keys from a cache
+         * @param {string} organisation The organisation ID
+         * @param {string} resource The resource ID
+         * @param {PurgeOrgResourceRequest} purgeOrgResourceRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purgeOrgResource(organisation: string, resource: string, purgeOrgResourceRequest: PurgeOrgResourceRequest, options?: RawAxiosRequestConfig): AxiosPromise<PurgeOrgResource200Response> {
+            return localVarFp.purgeOrgResource(organisation, resource, purgeOrgResourceRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -36183,6 +37006,19 @@ export class ResourcesApi extends BaseAPI {
     }
 
     /**
+     * Cache resources only. Returns the cache-wide user (every key, every command, including FLUSHDB) with host and port. Environments attached to the cache use their own scoped users; this credential is for operators who genuinely need unrestricted access. Every read is audit-logged against the requesting user.
+     * @summary Get a cache\'s administrative credential
+     * @param {string} organisation The organisation ID
+     * @param {string} resource The resource ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ResourcesApi
+     */
+    public getOrgResourceCredentials(organisation: string, resource: string, options?: RawAxiosRequestConfig) {
+        return ResourcesApiFp(this.configuration).getOrgResourceCredentials(organisation, resource, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * 
      * @summary List an organisation\'s shared resources
      * @param {string} organisation The organisation ID
@@ -36192,6 +37028,20 @@ export class ResourcesApi extends BaseAPI {
      */
     public listOrgResources(organisation: string, options?: RawAxiosRequestConfig) {
         return ResourcesApiFp(this.configuration).listOrgResources(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Cache resources only. scope environment deletes that environment\'s keys, using the CACHE_PREFIX recorded on its attachment rather than anything in the request. scope all flushes every key for every attached environment and requires confirm=true. A large environment purge may return complete=false with a cursor to resume.
+     * @summary Purge keys from a cache
+     * @param {string} organisation The organisation ID
+     * @param {string} resource The resource ID
+     * @param {PurgeOrgResourceRequest} purgeOrgResourceRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ResourcesApi
+     */
+    public purgeOrgResource(organisation: string, resource: string, purgeOrgResourceRequest: PurgeOrgResourceRequest, options?: RawAxiosRequestConfig) {
+        return ResourcesApiFp(this.configuration).purgeOrgResource(organisation, resource, purgeOrgResourceRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

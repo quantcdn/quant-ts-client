@@ -9,7 +9,9 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**deleteOrgResource**](#deleteorgresource) | **DELETE** /api/v3/organizations/{organisation}/resources/{resource} | Delete a shared resource|
 |[**detachOrgResource**](#detachorgresource) | **DELETE** /api/v3/organizations/{organisation}/resources/{resource}/attachments/{application}/{environment} | Detach a resource from an application environment|
 |[**getOrgResource**](#getorgresource) | **GET** /api/v3/organizations/{organisation}/resources/{resource} | Get a shared resource and its attachments|
+|[**getOrgResourceCredentials**](#getorgresourcecredentials) | **GET** /api/v3/organizations/{organisation}/resources/{resource}/credentials | Get a cache\&#39;s administrative credential|
 |[**listOrgResources**](#listorgresources) | **GET** /api/v3/organizations/{organisation}/resources | List an organisation\&#39;s shared resources|
+|[**purgeOrgResource**](#purgeorgresource) | **POST** /api/v3/organizations/{organisation}/resources/{resource}/purge | Purge keys from a cache|
 
 # **attachOrgResource**
 > ResourceAttachment attachOrgResource(attachOrgResourceRequest)
@@ -300,6 +302,61 @@ const { status, data } = await apiInstance.getOrgResource(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getOrgResourceCredentials**
+> GetOrgResourceCredentials200Response getOrgResourceCredentials()
+
+Cache resources only. Returns the cache-wide user (every key, every command, including FLUSHDB) with host and port. Environments attached to the cache use their own scoped users; this credential is for operators who genuinely need unrestricted access. Every read is audit-logged against the requesting user.
+
+### Example
+
+```typescript
+import {
+    ResourcesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new ResourcesApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+let resource: string; //The resource ID (default to undefined)
+
+const { status, data } = await apiInstance.getOrgResourceCredentials(
+    organisation,
+    resource
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **resource** | [**string**] | The resource ID | defaults to undefined|
+
+
+### Return type
+
+**GetOrgResourceCredentials200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The admin credential |  -  |
+|**409** | Not a cache resource, or not yet available |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **listOrgResources**
 > Array<OrgResource> listOrgResources()
 
@@ -348,6 +405,66 @@ const { status, data } = await apiInstance.listOrgResources(
 |-------------|-------------|------------------|
 |**200** | The organisation\&#39;s resources |  -  |
 |**403** | Cloud access required |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **purgeOrgResource**
+> PurgeOrgResource200Response purgeOrgResource(purgeOrgResourceRequest)
+
+Cache resources only. scope environment deletes that environment\'s keys, using the CACHE_PREFIX recorded on its attachment rather than anything in the request. scope all flushes every key for every attached environment and requires confirm=true. A large environment purge may return complete=false with a cursor to resume.
+
+### Example
+
+```typescript
+import {
+    ResourcesApi,
+    Configuration,
+    PurgeOrgResourceRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new ResourcesApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+let resource: string; //The resource ID (default to undefined)
+let purgeOrgResourceRequest: PurgeOrgResourceRequest; //
+
+const { status, data } = await apiInstance.purgeOrgResource(
+    organisation,
+    resource,
+    purgeOrgResourceRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **purgeOrgResourceRequest** | **PurgeOrgResourceRequest**|  | |
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **resource** | [**string**] | The resource ID | defaults to undefined|
+
+
+### Return type
+
+**PurgeOrgResource200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Purge result |  -  |
+|**422** | Invalid scope, missing application/environment, or scope all without confirm |  -  |
+|**404** | No such attachment |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
