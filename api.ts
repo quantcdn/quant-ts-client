@@ -13601,7 +13601,7 @@ export interface V2CrawlerRequest {
      */
     'allowed_domains'?: Array<string>;
     /**
-     * Custom user agent, only when browser_mode is false
+     * Custom user agent. Valid with or without browser_mode.
      * @type {string}
      * @memberof V2CrawlerRequest
      */
