@@ -4213,11 +4213,11 @@ export interface EnvironmentResponse {
      */
     'deploymentStatus'?: EnvironmentResponseDeploymentStatusEnum;
     /**
-     * Type of deployment failure
+     * Why the most recent task stopped. SPOT_INTERRUPTION is informational: AWS reclaimed the task and ECS replaces it.
      * @type {string}
      * @memberof EnvironmentResponse
      */
-    'deploymentFailureType'?: string | null;
+    'deploymentFailureType'?: EnvironmentResponseDeploymentFailureTypeEnum | null;
     /**
      * Reason for deployment failure
      * @type {string}
@@ -4305,6 +4305,16 @@ export const EnvironmentResponseDeploymentStatusEnum = {
 } as const;
 
 export type EnvironmentResponseDeploymentStatusEnum = typeof EnvironmentResponseDeploymentStatusEnum[keyof typeof EnvironmentResponseDeploymentStatusEnum];
+export const EnvironmentResponseDeploymentFailureTypeEnum = {
+    ImageNotFound: 'IMAGE_NOT_FOUND',
+    AccessDenied: 'ACCESS_DENIED',
+    ArchitectureMismatch: 'ARCHITECTURE_MISMATCH',
+    ResourceLimit: 'RESOURCE_LIMIT',
+    SpotInterruption: 'SPOT_INTERRUPTION',
+    Other: 'OTHER'
+} as const;
+
+export type EnvironmentResponseDeploymentFailureTypeEnum = typeof EnvironmentResponseDeploymentFailureTypeEnum[keyof typeof EnvironmentResponseDeploymentFailureTypeEnum];
 
 /**
  * Environment summary returned in list responses
@@ -13309,6 +13319,12 @@ export interface V2Crawler {
      */
     'browser_mode'?: boolean;
     /**
+     * Content tracking enabled: the crawl reports progress and page status to the project tracking site
+     * @type {boolean}
+     * @memberof V2Crawler
+     */
+    'tracking'?: boolean;
+    /**
      * Number of concurrent workers
      * @type {number}
      * @memberof V2Crawler
@@ -13504,6 +13520,12 @@ export interface V2CrawlerRequest {
      * @memberof V2CrawlerRequest
      */
     'browser_mode'?: boolean;
+    /**
+     * Enable content tracking. Records crawl progress and per-page status against the project tracking site. Needs no domain verification.
+     * @type {boolean}
+     * @memberof V2CrawlerRequest
+     */
+    'tracking'?: boolean;
     /**
      * URLs to crawl
      * @type {Array<string>}

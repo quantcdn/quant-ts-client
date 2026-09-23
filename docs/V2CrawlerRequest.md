@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **string** | Crawler name | [optional] [default to undefined]
 **domain** | **string** | Domain to crawl | [default to undefined]
 **browser_mode** | **boolean** | Enable browser mode | [optional] [default to false]
+**tracking** | **boolean** | Enable content tracking. Records crawl progress and per-page status against the project tracking site. Needs no domain verification. | [optional] [default to false]
 **urls** | **Array&lt;string&gt;** | URLs to crawl | [optional] [default to undefined]
 **start_urls** | **Array&lt;string&gt;** | Starting URLs for crawl | [optional] [default to undefined]
 **headers** | **{ [key: string]: string; }** | Custom headers | [optional] [default to undefined]
@@ -37,6 +38,7 @@ const instance: V2CrawlerRequest = {
     name,
     domain,
     browser_mode,
+    tracking,
     urls,
     start_urls,
     headers,
