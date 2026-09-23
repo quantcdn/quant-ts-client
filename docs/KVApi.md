@@ -9,6 +9,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**kVItemsCreate**](#kvitemscreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | Add an item to a kv store|
 |[**kVItemsDelete**](#kvitemsdelete) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Delete an item from a kv store|
 |[**kVItemsList**](#kvitemslist) | **GET** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | List items in a kv store|
+|[**kVItemsPurge**](#kvitemspurge) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | Delete items in bulk by prefix and/or age|
 |[**kVItemsShow**](#kvitemsshow) | **GET** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Get an item from a kv store|
 |[**kVItemsUpdate**](#kvitemsupdate) | **PUT** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Update an item in a kv store|
 |[**kVLinkToProject**](#kvlinktoproject) | **POST** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/link | Link a KV store to another project|
@@ -93,11 +94,13 @@ const apiInstance = new KVApi(configuration);
 let organization: string; //Organization identifier (default to undefined)
 let project: string; //Project identifier (default to undefined)
 let storeId: string; // (default to undefined)
+let force: boolean; //Delete the store even if it still holds keys. Without it a non-empty store returns 409. (optional) (default to false)
 
 const { status, data } = await apiInstance.kVDelete(
     organization,
     project,
-    storeId
+    storeId,
+    force
 );
 ```
 
@@ -108,6 +111,7 @@ const { status, data } = await apiInstance.kVDelete(
 | **organization** | [**string**] | Organization identifier | defaults to undefined|
 | **project** | [**string**] | Project identifier | defaults to undefined|
 | **storeId** | [**string**] |  | defaults to undefined|
+| **force** | [**boolean**] | Delete the store even if it still holds keys. Without it a non-empty store returns 409. | (optional) defaults to false|
 
 
 ### Return type
@@ -129,6 +133,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**409** | The store is not empty. Clear its keys in the dashboard or pass force&#x3D;true. |  -  |
 |**403** | Access is forbidden. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -324,6 +329,72 @@ const { status, data } = await apiInstance.kVItemsList(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **kVItemsPurge**
+> KVItemsPurge200Response kVItemsPurge()
+
+Deletes every item matching the filters. With no filters the whole store is cleared. A small purge finishes in the request and returns 200; a large one returns 202 with the counts so far and continues in the background. Idempotent.
+
+### Example
+
+```typescript
+import {
+    KVApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new KVApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let storeId: string; // (default to undefined)
+let prefix: string; //Only delete keys that start with this string. (optional) (default to undefined)
+let olderThan: string; //Only delete keys last updated before this instant. ISO 8601, or a duration with unit s, m, h or d. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.kVItemsPurge(
+    organization,
+    project,
+    storeId,
+    prefix,
+    olderThan
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **storeId** | [**string**] |  | defaults to undefined|
+| **prefix** | [**string**] | Only delete keys that start with this string. | (optional) defaults to undefined|
+| **olderThan** | [**string**] | Only delete keys last updated before this instant. ISO 8601, or a duration with unit s, m, h or d. | (optional) defaults to undefined|
+
+
+### Return type
+
+**KVItemsPurge200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The purge finished. |  -  |
+|**202** | The purge continues in the background. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Insufficient permissions. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
