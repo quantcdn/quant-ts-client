@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **string** | Crawler name | [optional] [default to undefined]
 **domain** | **string** | Domain to crawl | [default to undefined]
 **browser_mode** | **boolean** | Enable browser mode | [optional] [default to false]
+**tracking** | **boolean** | Enable content tracking. Records crawl progress and per-page status against the project tracking site. Needs no domain verification. | [optional] [default to false]
 **urls** | **Array&lt;string&gt;** | URLs to crawl | [optional] [default to undefined]
 **start_urls** | **Array&lt;string&gt;** | Starting URLs for crawl | [optional] [default to undefined]
 **headers** | **{ [key: string]: string; }** | Custom headers | [optional] [default to undefined]
@@ -24,7 +25,7 @@ Name | Type | Description | Notes
 **status_ok** | **Array&lt;number&gt;** | HTTP status codes that will result in content being captured and pushed to Quant | [optional] [default to undefined]
 **sitemap** | [**Array&lt;V2CrawlerSitemapInner&gt;**](V2CrawlerSitemapInner.md) | Sitemap configuration | [optional] [default to undefined]
 **allowed_domains** | **Array&lt;string&gt;** | Allowed domains for multi-domain crawling, automatically enables merge_domains | [optional] [default to undefined]
-**user_agent** | **string** | Custom user agent, only when browser_mode is false | [optional] [default to undefined]
+**user_agent** | **string** | Custom user agent. Valid with or without browser_mode. | [optional] [default to undefined]
 **assets** | [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] [default to undefined]
 **max_errors** | **number** | Maximum errors before stopping crawl | [optional] [default to undefined]
 
@@ -37,6 +38,7 @@ const instance: V2CrawlerRequest = {
     name,
     domain,
     browser_mode,
+    tracking,
     urls,
     start_urls,
     headers,

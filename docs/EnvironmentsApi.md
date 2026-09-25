@@ -191,7 +191,7 @@ const { status, data } = await apiInstance.getEnvironment(
 # **getEnvironmentLogs**
 > GetEnvironmentLogs200Response getEnvironmentLogs()
 
-Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and pattern matching. Supports pagination via nextToken.
+Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and literal text. Newest-first by default; pass the nextToken from the previous response to fetch the next page.
 
 ### Example
 
@@ -210,9 +210,11 @@ let environment: string; //The environment ID (default to undefined)
 let startTime: string; //Start time for log retrieval (ISO 8601 format or Unix timestamp) (optional) (default to undefined)
 let endTime: string; //End time for log retrieval (ISO 8601 format or Unix timestamp) (optional) (default to undefined)
 let containerName: string; //Filter logs by specific container name (optional) (default to undefined)
-let filterPattern: string; //CloudWatch Logs filter pattern for searching log content (optional) (default to undefined)
-let limit: number; //Maximum number of log entries to return per page (optional) (default to undefined)
-let nextToken: string; //Pagination token from previous response for retrieving next page of results (optional) (default to undefined)
+let filterPattern: string; //Literal, case-sensitive text to match anywhere in the log message (optional) (default to undefined)
+let limit: number; //Maximum number of log entries to return per page (default 50) (optional) (default to 50)
+let nextToken: string; //Opaque pagination token from the previous response. Pass back unchanged to fetch the next page. (optional) (default to undefined)
+let order: 'asc' | 'desc'; //Sort order. desc returns newest first, asc returns oldest first. (optional) (default to 'desc')
+let includeTotal: boolean; //When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency. (optional) (default to false)
 
 const { status, data } = await apiInstance.getEnvironmentLogs(
     organisation,
@@ -223,7 +225,9 @@ const { status, data } = await apiInstance.getEnvironmentLogs(
     containerName,
     filterPattern,
     limit,
-    nextToken
+    nextToken,
+    order,
+    includeTotal
 );
 ```
 
@@ -237,9 +241,11 @@ const { status, data } = await apiInstance.getEnvironmentLogs(
 | **startTime** | [**string**] | Start time for log retrieval (ISO 8601 format or Unix timestamp) | (optional) defaults to undefined|
 | **endTime** | [**string**] | End time for log retrieval (ISO 8601 format or Unix timestamp) | (optional) defaults to undefined|
 | **containerName** | [**string**] | Filter logs by specific container name | (optional) defaults to undefined|
-| **filterPattern** | [**string**] | CloudWatch Logs filter pattern for searching log content | (optional) defaults to undefined|
-| **limit** | [**number**] | Maximum number of log entries to return per page | (optional) defaults to undefined|
-| **nextToken** | [**string**] | Pagination token from previous response for retrieving next page of results | (optional) defaults to undefined|
+| **filterPattern** | [**string**] | Literal, case-sensitive text to match anywhere in the log message | (optional) defaults to undefined|
+| **limit** | [**number**] | Maximum number of log entries to return per page (default 50) | (optional) defaults to 50|
+| **nextToken** | [**string**] | Opaque pagination token from the previous response. Pass back unchanged to fetch the next page. | (optional) defaults to undefined|
+| **order** | [**&#39;asc&#39; | &#39;desc&#39;**]**Array<&#39;asc&#39; &#124; &#39;desc&#39;>** | Sort order. desc returns newest first, asc returns oldest first. | (optional) defaults to 'desc'|
+| **includeTotal** | [**boolean**] | When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency. | (optional) defaults to false|
 
 
 ### Return type
@@ -260,6 +266,7 @@ const { status, data } = await apiInstance.getEnvironmentLogs(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The logs |  -  |
+|**400** | Invalid startTime or endTime |  -  |
 |**404** | The environment not found |  -  |
 |**422** | Validation error |  -  |
 
