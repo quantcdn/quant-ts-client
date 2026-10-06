@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **allowed_domains** | **Array&lt;string&gt;** | Allowed domains for multi-domain crawling, automatically enables merge_domains | [optional] [default to undefined]
 **user_agent** | **string** | Custom user agent. Valid with or without browser_mode. | [optional] [default to undefined]
 **assets** | [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] [default to undefined]
+**browser_config** | [**V2CrawlerBrowserConfig**](V2CrawlerBrowserConfig.md) |  | [optional] [default to undefined]
 **max_errors** | **number** | Maximum errors before stopping crawl | [optional] [default to undefined]
 
 ## Example
@@ -57,6 +58,7 @@ const instance: V2CrawlerRequest = {
     allowed_domains,
     user_agent,
     assets,
+    browser_config,
     max_errors,
 };
 ```

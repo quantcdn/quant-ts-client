@@ -3698,6 +3698,44 @@ export type CronRunStatusEnum = typeof CronRunStatusEnum[keyof typeof CronRunSta
 /**
  * 
  * @export
+ * @interface DNSCreateRecordRequest
+ */
+export interface DNSCreateRecordRequest {
+    /**
+     * Name relative to the zone; @ denotes the apex
+     * @type {string}
+     * @memberof DNSCreateRecordRequest
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DNSCreateRecordRequest
+     */
+    'type': DNSCreateRecordRequestTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof DNSCreateRecordRequest
+     */
+    'value': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof DNSCreateRecordRequest
+     */
+    'ttl'?: number;
+}
+
+export const DNSCreateRecordRequestTypeEnum = {
+    A: 'A'
+} as const;
+
+export type DNSCreateRecordRequestTypeEnum = typeof DNSCreateRecordRequestTypeEnum[keyof typeof DNSCreateRecordRequestTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface DeleteAIAgent200Response
  */
 export interface DeleteAIAgent200Response {
@@ -5873,7 +5911,7 @@ export interface GetGovernanceSpend200ResponseDailyBudget {
  */
 export interface GetGovernanceSpend200ResponseOrgTotal {
     /**
-     * Total org spend in US cents
+     * Total org spend in US cents, exact to 6 decimal places
      * @type {number}
      * @memberof GetGovernanceSpend200ResponseOrgTotal
      */
@@ -5892,7 +5930,7 @@ export interface GetGovernanceSpend200ResponseOrgTotal {
  */
 export interface GetGovernanceSpend200ResponseTodayTotal {
     /**
-     * Org spend today in US cents
+     * Org spend today in US cents, exact to 6 decimal places
      * @type {number}
      * @memberof GetGovernanceSpend200ResponseTodayTotal
      */
@@ -13421,6 +13459,12 @@ export interface V2Crawler {
      */
     'assets'?: V2CrawlerAssets;
     /**
+     * 
+     * @type {V2CrawlerBrowserConfig}
+     * @memberof V2Crawler
+     */
+    'browser_config'?: V2CrawlerBrowserConfig;
+    /**
      * Creation timestamp
      * @type {string}
      * @memberof V2Crawler
@@ -13495,6 +13539,31 @@ export interface V2CrawlerAssetsParser {
      * @memberof V2CrawlerAssetsParser
      */
     'enabled'?: boolean;
+}
+/**
+ * Browser-mode behaviour. Only applies when browser_mode is true.
+ * @export
+ * @interface V2CrawlerBrowserConfig
+ */
+export interface V2CrawlerBrowserConfig {
+    /**
+     * Store XHR/fetch responses as files, so a static copy can serve a site whose navigation or content is rendered client-side from a JSON endpoint
+     * @type {boolean}
+     * @memberof V2CrawlerBrowserConfig
+     */
+    'capture_api_responses'?: boolean;
+    /**
+     * Wait for the network to settle before capture, in milliseconds. Useful for API-driven sites
+     * @type {number}
+     * @memberof V2CrawlerBrowserConfig
+     */
+    'wait_for_network_idle'?: number;
+    /**
+     * Store the JavaScript-modified DOM instead of the original HTML response
+     * @type {boolean}
+     * @memberof V2CrawlerBrowserConfig
+     */
+    'use_rendered_html'?: boolean;
 }
 /**
  * 
@@ -13634,6 +13703,12 @@ export interface V2CrawlerRequest {
      * @memberof V2CrawlerRequest
      */
     'assets'?: V2CrawlerAssets;
+    /**
+     * 
+     * @type {V2CrawlerBrowserConfig}
+     * @memberof V2CrawlerRequest
+     */
+    'browser_config'?: V2CrawlerBrowserConfig;
     /**
      * Maximum errors before stopping crawl
      * @type {number}
@@ -32189,6 +32264,201 @@ export class CronApi extends BaseAPI {
 export const DomainsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * dns:write and add_domains are required. Existing names are rejected; this endpoint does not update records. Only organization-wide tokens are accepted.
+         * @summary Create an A record
+         * @param {string} organization 
+         * @param {string} zoneId 
+         * @param {DNSCreateRecordRequest} dNSCreateRecordRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dNSCreateRecord: async (organization: string, zoneId: string, dNSCreateRecordRequest: DNSCreateRecordRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organization' is not null or undefined
+            assertParamExists('dNSCreateRecord', 'organization', organization)
+            // verify required parameter 'zoneId' is not null or undefined
+            assertParamExists('dNSCreateRecord', 'zoneId', zoneId)
+            // verify required parameter 'dNSCreateRecordRequest' is not null or undefined
+            assertParamExists('dNSCreateRecord', 'dNSCreateRecordRequest', dNSCreateRecordRequest)
+            const localVarPath = `/api/v2/organizations/{organization}/dns/zones/{zoneId}/records`
+                .replace(`{${"organization"}}`, encodeURIComponent(String(organization)))
+                .replace(`{${"zoneId"}}`, encodeURIComponent(String(zoneId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(dNSCreateRecordRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * dns:read and browse_domains are required. Filters: type, name, limit (1–1000), offset, sync (true/false).
+         * @summary List DNS records
+         * @param {string} organization 
+         * @param {string} zoneId 
+         * @param {DNSListRecordsTypeEnum} [type] 
+         * @param {string} [name] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {boolean} [sync] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dNSListRecords: async (organization: string, zoneId: string, type?: DNSListRecordsTypeEnum, name?: string, limit?: number, offset?: number, sync?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organization' is not null or undefined
+            assertParamExists('dNSListRecords', 'organization', organization)
+            // verify required parameter 'zoneId' is not null or undefined
+            assertParamExists('dNSListRecords', 'zoneId', zoneId)
+            const localVarPath = `/api/v2/organizations/{organization}/dns/zones/{zoneId}/records`
+                .replace(`{${"organization"}}`, encodeURIComponent(String(organization)))
+                .replace(`{${"zoneId"}}`, encodeURIComponent(String(zoneId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (sync !== undefined) {
+                localVarQueryParameter['sync'] = sync;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * dns:read and browse_domains are required.
+         * @summary List organization DNS zones
+         * @param {string} organization 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dNSListZones: async (organization: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organization' is not null or undefined
+            assertParamExists('dNSListZones', 'organization', organization)
+            const localVarPath = `/api/v2/organizations/{organization}/dns/zones`
+                .replace(`{${"organization"}}`, encodeURIComponent(String(organization)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * dns:read and browse_domains are required. The zone must belong to the organization.
+         * @summary Get a DNS zone
+         * @param {string} organization 
+         * @param {string} zoneId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dNSShowZone: async (organization: string, zoneId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organization' is not null or undefined
+            assertParamExists('dNSShowZone', 'organization', organization)
+            // verify required parameter 'zoneId' is not null or undefined
+            assertParamExists('dNSShowZone', 'zoneId', zoneId)
+            const localVarPath = `/api/v2/organizations/{organization}/dns/zones/{zoneId}`
+                .replace(`{${"organization"}}`, encodeURIComponent(String(organization)))
+                .replace(`{${"zoneId"}}`, encodeURIComponent(String(zoneId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Add a new domain
          * @param {string} organization Organization identifier
@@ -32427,6 +32697,67 @@ export const DomainsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DomainsApiAxiosParamCreator(configuration)
     return {
         /**
+         * dns:write and add_domains are required. Existing names are rejected; this endpoint does not update records. Only organization-wide tokens are accepted.
+         * @summary Create an A record
+         * @param {string} organization 
+         * @param {string} zoneId 
+         * @param {DNSCreateRecordRequest} dNSCreateRecordRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dNSCreateRecord(organization: string, zoneId: string, dNSCreateRecordRequest: DNSCreateRecordRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dNSCreateRecord(organization, zoneId, dNSCreateRecordRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DomainsApi.dNSCreateRecord']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * dns:read and browse_domains are required. Filters: type, name, limit (1–1000), offset, sync (true/false).
+         * @summary List DNS records
+         * @param {string} organization 
+         * @param {string} zoneId 
+         * @param {DNSListRecordsTypeEnum} [type] 
+         * @param {string} [name] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {boolean} [sync] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dNSListRecords(organization: string, zoneId: string, type?: DNSListRecordsTypeEnum, name?: string, limit?: number, offset?: number, sync?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dNSListRecords(organization, zoneId, type, name, limit, offset, sync, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DomainsApi.dNSListRecords']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * dns:read and browse_domains are required.
+         * @summary List organization DNS zones
+         * @param {string} organization 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dNSListZones(organization: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dNSListZones(organization, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DomainsApi.dNSListZones']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * dns:read and browse_domains are required. The zone must belong to the organization.
+         * @summary Get a DNS zone
+         * @param {string} organization 
+         * @param {string} zoneId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dNSShowZone(organization: string, zoneId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dNSShowZone(organization, zoneId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DomainsApi.dNSShowZone']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Add a new domain
          * @param {string} organization Organization identifier
@@ -32511,6 +32842,55 @@ export const DomainsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = DomainsApiFp(configuration)
     return {
         /**
+         * dns:write and add_domains are required. Existing names are rejected; this endpoint does not update records. Only organization-wide tokens are accepted.
+         * @summary Create an A record
+         * @param {string} organization 
+         * @param {string} zoneId 
+         * @param {DNSCreateRecordRequest} dNSCreateRecordRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dNSCreateRecord(organization: string, zoneId: string, dNSCreateRecordRequest: DNSCreateRecordRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.dNSCreateRecord(organization, zoneId, dNSCreateRecordRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * dns:read and browse_domains are required. Filters: type, name, limit (1–1000), offset, sync (true/false).
+         * @summary List DNS records
+         * @param {string} organization 
+         * @param {string} zoneId 
+         * @param {DNSListRecordsTypeEnum} [type] 
+         * @param {string} [name] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {boolean} [sync] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dNSListRecords(organization: string, zoneId: string, type?: DNSListRecordsTypeEnum, name?: string, limit?: number, offset?: number, sync?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.dNSListRecords(organization, zoneId, type, name, limit, offset, sync, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * dns:read and browse_domains are required.
+         * @summary List organization DNS zones
+         * @param {string} organization 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dNSListZones(organization: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.dNSListZones(organization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * dns:read and browse_domains are required. The zone must belong to the organization.
+         * @summary Get a DNS zone
+         * @param {string} organization 
+         * @param {string} zoneId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dNSShowZone(organization: string, zoneId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.dNSShowZone(organization, zoneId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Add a new domain
          * @param {string} organization Organization identifier
@@ -32579,6 +32959,63 @@ export const DomainsApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class DomainsApi extends BaseAPI {
+    /**
+     * dns:write and add_domains are required. Existing names are rejected; this endpoint does not update records. Only organization-wide tokens are accepted.
+     * @summary Create an A record
+     * @param {string} organization 
+     * @param {string} zoneId 
+     * @param {DNSCreateRecordRequest} dNSCreateRecordRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DomainsApi
+     */
+    public dNSCreateRecord(organization: string, zoneId: string, dNSCreateRecordRequest: DNSCreateRecordRequest, options?: RawAxiosRequestConfig) {
+        return DomainsApiFp(this.configuration).dNSCreateRecord(organization, zoneId, dNSCreateRecordRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * dns:read and browse_domains are required. Filters: type, name, limit (1–1000), offset, sync (true/false).
+     * @summary List DNS records
+     * @param {string} organization 
+     * @param {string} zoneId 
+     * @param {DNSListRecordsTypeEnum} [type] 
+     * @param {string} [name] 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {boolean} [sync] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DomainsApi
+     */
+    public dNSListRecords(organization: string, zoneId: string, type?: DNSListRecordsTypeEnum, name?: string, limit?: number, offset?: number, sync?: boolean, options?: RawAxiosRequestConfig) {
+        return DomainsApiFp(this.configuration).dNSListRecords(organization, zoneId, type, name, limit, offset, sync, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * dns:read and browse_domains are required.
+     * @summary List organization DNS zones
+     * @param {string} organization 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DomainsApi
+     */
+    public dNSListZones(organization: string, options?: RawAxiosRequestConfig) {
+        return DomainsApiFp(this.configuration).dNSListZones(organization, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * dns:read and browse_domains are required. The zone must belong to the organization.
+     * @summary Get a DNS zone
+     * @param {string} organization 
+     * @param {string} zoneId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DomainsApi
+     */
+    public dNSShowZone(organization: string, zoneId: string, options?: RawAxiosRequestConfig) {
+        return DomainsApiFp(this.configuration).dNSShowZone(organization, zoneId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary Add a new domain
@@ -32649,6 +33086,22 @@ export class DomainsApi extends BaseAPI {
     }
 }
 
+/**
+ * @export
+ */
+export const DNSListRecordsTypeEnum = {
+    A: 'A',
+    Aaaa: 'AAAA',
+    Cname: 'CNAME',
+    Mx: 'MX',
+    Txt: 'TXT',
+    Ns: 'NS',
+    Srv: 'SRV',
+    Caa: 'CAA',
+    Ptr: 'PTR',
+    Alias: 'ALIAS'
+} as const;
+export type DNSListRecordsTypeEnum = typeof DNSListRecordsTypeEnum[keyof typeof DNSListRecordsTypeEnum];
 
 
 /**

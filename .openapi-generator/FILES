@@ -133,6 +133,7 @@ docs/CreateVolumeRequest.md
 docs/Cron.md
 docs/CronApi.md
 docs/CronRun.md
+docs/DNSCreateRecordRequest.md
 docs/DeleteAIAgent200Response.md
 docs/DeleteAISession200Response.md
 docs/DeleteAgentOverlay200Response.md
@@ -415,6 +416,7 @@ docs/V2Crawler.md
 docs/V2CrawlerAssets.md
 docs/V2CrawlerAssetsNetworkIntercept.md
 docs/V2CrawlerAssetsParser.md
+docs/V2CrawlerBrowserConfig.md
 docs/V2CrawlerRequest.md
 docs/V2CrawlerRun.md
 docs/V2CrawlerSchedule.md

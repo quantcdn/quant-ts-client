@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **sitemap** | [**Array&lt;V2CrawlerSitemapInner&gt;**](V2CrawlerSitemapInner.md) | Sitemap configuration | [optional] [default to undefined]
 **allowed_domains** | **Array&lt;string&gt;** | Allowed domains | [optional] [default to undefined]
 **assets** | [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] [default to undefined]
+**browser_config** | [**V2CrawlerBrowserConfig**](V2CrawlerBrowserConfig.md) |  | [optional] [default to undefined]
 **created_at** | **string** | Creation timestamp | [optional] [default to undefined]
 **updated_at** | **string** | Last update timestamp | [optional] [default to undefined]
 **deleted_at** | **string** | Deletion timestamp | [optional] [default to undefined]
@@ -73,6 +74,7 @@ const instance: V2Crawler = {
     sitemap,
     allowed_domains,
     assets,
+    browser_config,
     created_at,
     updated_at,
     deleted_at,
