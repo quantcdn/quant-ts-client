@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**spendCents** | **number** | Org spend today in US cents | [optional] [default to undefined]
+**spendCents** | **number** | Org spend today in US cents, exact to 6 decimal places | [optional] [default to undefined]
 **requestCount** | **number** |  | [optional] [default to undefined]
 
 ## Example
