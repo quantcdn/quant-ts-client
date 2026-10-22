@@ -5,13 +5,13 @@ A comprehensive TypeScript client for the Quant API, providing access to all Qua
 ## Installation
 
 ```bash
-npm install quant-ts-client
+npm install @quantcdn/quant-client
 ```
 
 ## Usage
 
 ```typescript
-import { EnvironmentsApi, Configuration } from 'quant-ts-client';
+import { EnvironmentsApi, Configuration } from '@quantcdn/quant-client';
 
 // Create a configuration with your API key
 const config = new Configuration({
@@ -83,7 +83,7 @@ The client provides access to the following API endpoints:
 ### Working with Applications
 
 ```typescript
-import { ApplicationsApi } from 'quant-ts-client';
+import { ApplicationsApi } from '@quantcdn/quant-client';
 
 const appsApi = new ApplicationsApi(config.basePath);
 appsApi.setDefaultAuthentication(auth);
@@ -101,7 +101,7 @@ const newApp = await appsApi.createApplication('your-org-id', {
 ### Managing Environments
 
 ```typescript
-import { EnvironmentsApi } from 'quant-ts-client';
+import { EnvironmentsApi } from '@quantcdn/quant-client';
 
 const envsApi = new EnvironmentsApi(config.basePath);
 envsApi.setDefaultAuthentication(auth);
@@ -118,7 +118,7 @@ const logs = await envsApi.getEnvironmentLogs('org-id', 'app-id', 'env-id');
 ### Working with Cron Jobs
 
 ```typescript
-import { CronApi } from 'quant-ts-client';
+import { CronApi } from '@quantcdn/quant-client';
 
 const cronApi = new CronApi(config.basePath);
 cronApi.setDefaultAuthentication(auth);
@@ -155,7 +155,7 @@ npm run build
 npm link
 
 # In your project directory
-npm link quant-ts-client
+npm link @quantcdn/quant-client
 ```
 
 ### Publishing the package
