@@ -143,8 +143,10 @@ export const toPathString = function (url: URL) {
  * @export
  */
 export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration) {
-    return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+    return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH): Promise<R> => {
         const axiosRequestArgs = {...axiosArgs.options, url: (axios.defaults.baseURL ? '' : configuration?.basePath ?? basePath) + axiosArgs.url};
-        return axios.request<T, R>(axiosRequestArgs);
+        // axios >=1.20 widens request()'s return type (AxiosResponseResult); the
+        // SDK contract is still Promise<R>, so bridge the typing here. Runtime is unchanged.
+        return axios.request<T, R>(axiosRequestArgs) as unknown as Promise<R>;
     };
 }
