@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **string** | Specifies whether the image is internal (ECR) or external (e.g., Docker Hub) | [default to undefined]
+**type** | **string** | Specifies whether the image is internal (Quant container registry) or external (e.g., Docker Hub) | [default to undefined]
 **identifier** | **string** | The image identifier. For \&#39;internal\&#39; type, this is the image tag. For \&#39;external\&#39; type, this is the full image name. | [default to undefined]
 
 ## Example

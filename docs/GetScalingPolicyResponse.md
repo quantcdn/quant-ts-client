@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **scaleInCooldownSeconds** | **number** |  | [optional] [default to undefined]
 **scaleOutCooldownSeconds** | **number** |  | [optional] [default to undefined]
 **policyName** | **string** | Name of the underlying Application Auto Scaling policy. | [optional] [default to undefined]
-**resourceLabel** | **string** | ALB ResourceLabel for RPS policies (target group identifier). | [optional] [default to undefined]
+**resourceLabel** | **string** | Load balancer resource label for RPS policies (target group identifier). | [optional] [default to undefined]
 
 ## Example
 

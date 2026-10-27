@@ -7,7 +7,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**purgeCreate**](#purgecreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/purge | Purge cache via URL or cache keys|
 
 # **purgeCreate**
-> string purgeCreate(purgeCreateRequest)
+> PurgeCreate200Response purgeCreate(purgeCreateRequest)
 
 
 ### Example
@@ -44,7 +44,7 @@ const { status, data } = await apiInstance.purgeCreate(
 
 ### Return type
 
-**string**
+**PurgeCreate200Response**
 
 ### Authorization
 
@@ -59,9 +59,10 @@ const { status, data } = await apiInstance.purgeCreate(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The request has succeeded. |  -  |
-|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**200** | The purge was accepted. |  -  |
+|**400** | Invalid request: no urls or cache_keys, an invalid scope, more than 100 URLs, or a URL that is not a string path starting with a slash. Nothing is purged. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**502** | The content API did not accept the purge for one or more URLs. The message names those paths; the other URLs were purged. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

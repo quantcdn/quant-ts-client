@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **name** | **string** | Project name | [default to undefined]
 **machine_name** | **string** | Project machine name | [default to undefined]
 **write_token** | **string** | Write token for API access | [optional] [default to undefined]
+**search_enabled** | **boolean** | Whether the project\&#39;s search index is enabled. Requires an organisation search subscription. | [optional] [default to undefined]
+**search_config** | [**V2SearchConfig**](V2SearchConfig.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -22,6 +24,8 @@ const instance: V2Project = {
     name,
     machine_name,
     write_token,
+    search_enabled,
+    search_config,
 };
 ```
 

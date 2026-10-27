@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**domain** | **Array&lt;string&gt;** | Domain patterns (default: any) | [default to undefined]
+**domain** | **Array&lt;string&gt;** | Exact hostnames the rule matches, or \&#39;any\&#39; (the default). Wildcards such as *.example.com are not supported. | [default to undefined]
 **name** | **string** | Rule name | [optional] [default to undefined]
 **uuid** | **string** | Rule UUID | [optional] [default to undefined]
-**weight** | **number** | Rule weight | [optional] [default to 0]
+**weight** | **number** | Rule order. Must be 0 or greater; lower weights are processed first. If omitted on create, the rule is placed last. | [optional] [default to undefined]
 **disabled** | **boolean** | Whether rule is disabled | [optional] [default to false]
 **url** | **Array&lt;string&gt;** | URL patterns | [default to undefined]
 **country** | **string** | Country filter type (country_is, country_is_not, any) | [optional] [default to undefined]
@@ -20,9 +20,16 @@ Name | Type | Description | Notes
 **ip** | **string** | IP filter type (ip_is, ip_is_not, any) | [optional] [default to undefined]
 **ip_is** | **Array&lt;string&gt;** | Allowed IP addresses | [optional] [default to undefined]
 **ip_is_not** | **Array&lt;string&gt;** | Excluded IP addresses | [optional] [default to undefined]
-**asn** | **string** | ASN filter type (asn_is, asn_is_not, any) | [optional] [default to undefined]
-**asn_is** | **Array&lt;string&gt;** | Allowed AS numbers | [optional] [default to undefined]
-**asn_is_not** | **Array&lt;string&gt;** | Excluded AS numbers | [optional] [default to undefined]
+**asn** | **string** | ASN filter type (asn_is, asn_is_not, any). A PATCH that omits it keeps the current value. Invalid values return 422. | [optional] [default to undefined]
+**asn_is** | **Array&lt;string&gt;** | Allowed AS numbers. Positive integers up to 4294967295, stored as strings. A PATCH replaces the list. | [optional] [default to undefined]
+**asn_is_not** | **Array&lt;string&gt;** | Excluded AS numbers. Positive integers up to 4294967295, stored as strings. A PATCH replaces the list. | [optional] [default to undefined]
+**ua** | **string** | User agent filter type (ua_is, ua_is_not, any). Invalid values return 422. | [optional] [default to undefined]
+**ua_is** | **Array&lt;string&gt;** | User agent strings to match. Each item has at most 255 characters. A PATCH replaces the list. | [optional] [default to undefined]
+**ua_is_not** | **Array&lt;string&gt;** | User agent strings to exclude. Each item has at most 255 characters. A PATCH replaces the list. | [optional] [default to undefined]
+**traffic_source** | **string** | Traffic source filter type (traffic_source_is, traffic_source_is_not, any). Invalid values return 422. | [optional] [default to undefined]
+**traffic_source_is** | **Array&lt;string&gt;** | Traffic sources to match. A PATCH replaces the list. | [optional] [default to undefined]
+**traffic_source_is_not** | **Array&lt;string&gt;** | Traffic sources to exclude. A PATCH replaces the list. | [optional] [default to undefined]
+**cookie_name** | **string** | Write name of only_with_cookie: the rule applies only when this cookie is present. Empty string clears it. | [optional] [default to undefined]
 **custom_response_body** | **string** | Custom response body content | [default to undefined]
 **custom_response_status_code** | **number** | HTTP status code for custom response | [optional] [default to 200]
 **status_code** | **number** | Legacy field for status code (deprecated) | [optional] [default to undefined]
@@ -52,6 +59,13 @@ const instance: V2RuleCustomResponseRequest = {
     asn,
     asn_is,
     asn_is_not,
+    ua,
+    ua_is,
+    ua_is_not,
+    traffic_source,
+    traffic_source_is,
+    traffic_source_is_not,
+    cookie_name,
     custom_response_body,
     custom_response_status_code,
     status_code,

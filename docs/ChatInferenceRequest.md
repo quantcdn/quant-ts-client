@@ -16,8 +16,12 @@ Name | Type | Description | Notes
 **responseFormat** | [**ChatInferenceRequestResponseFormat**](ChatInferenceRequestResponseFormat.md) |  | [optional] [default to undefined]
 **toolConfig** | [**ChatInferenceRequestToolConfig**](ChatInferenceRequestToolConfig.md) |  | [optional] [default to undefined]
 **sessionId** | **string** | Optional session ID for conversation continuity. Omit to use stateless mode, include to continue an existing session. | [optional] [default to undefined]
+**proposalIds** | **Array&lt;string&gt;** | Tool approval proposal ids this turn relates to. Forwarded to the AI API unchanged. | [optional] [default to undefined]
+**clientSessionId** | **string** | Client session id used by the AI API to scope tool approval grants. Forwarded unchanged. | [optional] [default to undefined]
 **async** | **boolean** | Enable async/durable execution mode. When true, returns 202 with pollUrl instead of waiting for completion. Use for long-running inference, client-executed tools, or operations &gt;30 seconds. | [optional] [default to false]
 **allowedTools** | **Array&lt;string&gt;** | Top-level convenience alias for toolConfig.allowedTools. Whitelists which tools can be auto-executed. | [optional] [default to undefined]
+**autoExecute** | [**ChatInferenceRequestAutoExecute**](ChatInferenceRequestAutoExecute.md) |  | [optional] [default to undefined]
+**maxToolIterations** | **number** | Maximum tool auto-execution iterations for this request | [optional] [default to undefined]
 **guardrails** | [**ChatInferenceRequestGuardrails**](ChatInferenceRequestGuardrails.md) |  | [optional] [default to undefined]
 **longContext** | **boolean** | Enable 1M context window support regardless of token estimation. Use when sending large payloads (&gt;200K tokens). | [optional] [default to false]
 
@@ -38,8 +42,12 @@ const instance: ChatInferenceRequest = {
     responseFormat,
     toolConfig,
     sessionId,
+    proposalIds,
+    clientSessionId,
     async,
     allowedTools,
+    autoExecute,
+    maxToolIterations,
     guardrails,
     longContext,
 };

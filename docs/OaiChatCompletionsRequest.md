@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **tools** | **Array&lt;object&gt;** | OpenAI function tool definitions | [optional] [default to undefined]
 **tool_choice** | **any** | auto | none | required | {type:function, function:{name}} | [optional] [default to undefined]
 **stream_options** | **object** | {include_usage: true} to emit a final usage chunk when streaming | [optional] [default to undefined]
+**reasoning_effort** | **string** | none or minimal turns off default thinking on models that allow it (Claude Haiku 5.5); ignored where it cannot be turned off | [optional] [default to undefined]
 
 ## Example
 
@@ -30,6 +31,7 @@ const instance: OaiChatCompletionsRequest = {
     tools,
     tool_choice,
     stream_options,
+    reasoning_effort,
 };
 ```
 

@@ -9,11 +9,12 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**listAIToolExecutions**](#listaitoolexecutions) | **GET** /api/v3/organizations/{organisation}/ai/tools/executions | List tool executions for monitoring and debugging|
 |[**listAIToolNames**](#listaitoolnames) | **GET** /api/v3/organizations/{organisation}/ai/tools/names | List tool names only (lightweight response)|
 |[**listAITools**](#listaitools) | **GET** /api/v3/organizations/{organisation}/ai/tools | List available built-in tools for function calling|
+|[**listMcpServers**](#listmcpservers) | **GET** /api/v3/organizations/{organisation}/ai/mcp-servers | List MCP servers with gateway URLs|
 
 # **getAIOrchestrationStatus**
 > GetAIOrchestrationStatus200Response getAIOrchestrationStatus()
 
-Retrieves the status and synthesized result of a multi-tool async execution orchestration.      *      * **Note:** This endpoint is for async tool execution polling (`/tools/orchestrations`).      * For durable batch processing orchestrations, see `GET /orchestrations` endpoints.      *      * **Orchestration Pattern:**      * When the AI requests multiple async tools simultaneously, an orchestration is created      * to track all tool executions and synthesize their results into a single coherent response.      *      * **Flow:**      * 1. AI requests multiple async tools (e.g., image generation + web search)      * 2. Chat API creates orchestration and returns orchestrationId      * 3. Tool Orchestrator Lambda polls all async tools      * 4. When all tools complete, Orchestrator synthesizes results using AI      * 5. Client polls this endpoint and receives final synthesized response      *      * **Status Values:**      * - pending: Orchestration created, tools not yet started      * - polling: Orchestrator is actively polling async tools      * - synthesizing: All tools complete, AI is synthesizing response      * - complete: Orchestration finished, synthesizedResponse available      * - failed: Orchestration failed, error available      *      * **Polling Recommendations:**      * - Poll every 2 seconds      * - Maximum poll time: 10 minutes      * - Orchestrator handles tool polling internally      *      * **Benefits over individual polling:**      * - Single poll endpoint for multiple async tools      * - AI synthesizes all results into coherent response      * - Answers the original user question, not just tool summaries
+Retrieves the status and synthesized result of a multi-tool async execution orchestration.      *      * **Note:** This endpoint is for async tool execution polling (`/tools/orchestrations`).      * For durable batch processing orchestrations, see `GET /orchestrations` endpoints.      *      * **Orchestration Pattern:**      * When the AI requests multiple async tools simultaneously, an orchestration is created      * to track all tool executions and synthesize their results into a single coherent response.      *      * **Flow:**      * 1. AI requests multiple async tools (e.g., web search + web fetch)      * 2. Chat API creates orchestration and returns orchestrationId      * 3. The tool orchestrator polls all async tools      * 4. When all tools complete, Orchestrator synthesizes results using AI      * 5. Client polls this endpoint and receives final synthesized response      *      * **Status Values:**      * - pending: Orchestration created, tools not yet started      * - polling: Orchestrator is actively polling async tools      * - synthesizing: All tools complete, AI is synthesizing response      * - complete: Orchestration finished, synthesizedResponse available      * - failed: Orchestration failed, error available      *      * **Polling Recommendations:**      * - Poll every 2 seconds      * - Maximum poll time: 10 minutes      * - Orchestrator handles tool polling internally      *      * **Benefits over individual polling:**      * - Single poll endpoint for multiple async tools      * - AI synthesizes all results into coherent response      * - Answers the original user question, not just tool summaries
 
 ### Example
 
@@ -70,7 +71,7 @@ const { status, data } = await apiInstance.getAIOrchestrationStatus(
 # **getAIToolExecutionStatus**
 > GetAIToolExecutionStatus200Response getAIToolExecutionStatus()
 
-Retrieves the status and result of an async tool execution. Used for polling long-running tools like image generation.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `generate_image`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for image generation      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Image generation (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
+Retrieves the status and result of an async tool execution. Used for polling long-running tools.      *      * **Async Tool Execution Pattern:**      * This endpoint enables a polling pattern for long-running tools that would otherwise hit API Gateway\'s 30-second timeout.      *      * **Flow:**      * 1. AI requests tool use (e.g., `fetch_web_content`)      * 2. Chat API returns `toolUse` with execution tracking info      * 3. Client starts polling this endpoint with the `executionId`      * 4. When `status === \'complete\'`, retrieve `result` and send back to AI      * 5. AI incorporates result into final response      *      * **Status Values:**      * - `pending`: Tool execution queued, not yet started      * - `running`: Tool is currently executing      * - `complete`: Tool execution finished successfully, `result` available      * - `failed`: Tool execution failed, `error` available      *      * **Polling Recommendations:**      * - Poll every 2-3 seconds for short-running tools      * - Exponential backoff for other tools (start 1s, max 5s)      * - Stop polling after 5 minutes (consider failed)      * - Auto-cleanup after 24 hours (TTL)      *      * **Use Cases:**      * - Web fetches and searches (10-15s typical runtime)      * - Video processing      * - Large file uploads/downloads      * - Complex database queries      * - External API calls with high latency
 
 ### Example
 
@@ -240,7 +241,7 @@ const { status, data } = await apiInstance.listAIToolNames(
 # **listAITools**
 > ListAITools200Response listAITools()
 
-Retrieves all available built-in tools that can be used with function calling. These tools can be included in `toolConfig` when making AI inference requests.      *      * **Available Built-in Tools:**      * - `get_weather`: Get current weather for a location using Open-Meteo API      * - `calculate`: Perform basic mathematical calculations (add, subtract, multiply, divide)      * - `search_web`: Search the web for information (mock implementation)      * - `generate_image`: Generate images with Amazon Nova Canvas (async execution, 10-15s typical runtime)      *      * **Use Cases:**      * - Discover available tools dynamically without hardcoding      * - Get complete tool specifications including input schemas      * - Build UI for tool selection      * - Validate tool names before sending requests      *      * **Dynamic Tool Discovery:**      * This endpoint enables clients to:      * 1. Fetch all available tools on page load      * 2. Display tool capabilities to users      * 3. Filter tools based on user permissions      * 4. Use `allowedTools` whitelist for security      *      * **Alternative Endpoint:**      * - `GET /ai/tools/names` - Returns only tool names (faster, lighter response)
+Retrieves all available built-in tools that can be used with function calling. These tools can be included in `toolConfig` when making AI inference requests.      *      * **Available Built-in Tools:**      * - `get_weather`: Get current weather for a location using Open-Meteo API      * - `calculate`: Perform basic mathematical calculations (add, subtract, multiply, divide)      * - `search_web`: Search the web for information (mock implementation)      *      * **Use Cases:**      * - Discover available tools dynamically without hardcoding      * - Get complete tool specifications including input schemas      * - Build UI for tool selection      * - Validate tool names before sending requests      *      * **Dynamic Tool Discovery:**      * This endpoint enables clients to:      * 1. Fetch all available tools on page load      * 2. Display tool capabilities to users      * 3. Filter tools based on user permissions      * 4. Use `allowedTools` whitelist for security      *      * **Alternative Endpoint:**      * - `GET /ai/tools/names` - Returns only tool names (faster, lighter response)
 
 ### Example
 
@@ -287,6 +288,59 @@ const { status, data } = await apiInstance.listAITools(
 |**200** | Available tools retrieved successfully |  -  |
 |**403** | Access denied |  -  |
 |**500** | Failed to fetch tools |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listMcpServers**
+> ListMcpServers200Response listMcpServers()
+
+Lists the organization\'s registered MCP servers for CLI sync (QuantCode). Each server\'s `url` is the FULL MCP gateway URL on the AI API host — clients connect there, never to the origin server. Credentials are never exposed.
+
+### Example
+
+```typescript
+import {
+    AIToolsApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AIToolsApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+
+const { status, data } = await apiInstance.listMcpServers(
+    organisation
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+
+
+### Return type
+
+**ListMcpServers200Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of MCP servers retrieved successfully |  -  |
+|**403** | Access denied |  -  |
+|**500** | Failed to fetch MCP servers |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

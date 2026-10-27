@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **filesystem** | [**ApplicationFilesystem**](ApplicationFilesystem.md) |  | [optional] [default to undefined]
 **cache** | [**ApplicationCache**](ApplicationCache.md) |  | [optional] [default to undefined]
 **composeDefinition** | [**Compose**](Compose.md) |  | [optional] [default to undefined]
+**metadata** | **{ [key: string]: string; }** | Free-form key/value metadata. Maximum 50 pairs. Keys are 1-128 characters, values 0-256 characters. Letters, digits, space and + - &#x3D; . _ : / @ only. Keys starting with \&#39;quant:\&#39; are reserved. | [optional] [default to undefined]
+**metadataAvailable** | **boolean** | Present on the detail response; false when metadata could not be read | [optional] [readonly] [default to undefined]
 **status** | **string** | Application status | [optional] [readonly] [default to undefined]
 **deploymentInformation** | [**Array&lt;ApplicationDeploymentInformationInner&gt;**](ApplicationDeploymentInformationInner.md) | Deployment history | [optional] [readonly] [default to undefined]
 **imageReference** | [**ApplicationImageReference**](ApplicationImageReference.md) |  | [optional] [default to undefined]
@@ -33,6 +35,8 @@ const instance: Application = {
     filesystem,
     cache,
     composeDefinition,
+    metadata,
+    metadataAvailable,
     status,
     deploymentInformation,
     imageReference,
