@@ -6,10 +6,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fileId** | **string** |  | [optional] [default to undefined]
-**s3Uri** | **string** | S3 URI (direct upload only) | [optional] [default to undefined]
+**s3Uri** | **string** | Object storage URI (direct upload only) | [optional] [default to undefined]
 **url** | **string** | Presigned download URL (direct upload only) | [optional] [default to undefined]
 **uploadUrl** | **string** | Presigned PUT URL (presigned upload only) | [optional] [default to undefined]
-**s3Key** | **string** | S3 object key (presigned upload only) | [optional] [default to undefined]
+**s3Key** | **string** | Object storage key (presigned upload only) | [optional] [default to undefined]
 **expiresIn** | **number** | URL expiry in seconds (presigned upload only) | [optional] [default to undefined]
 **filename** | **string** |  | [optional] [default to undefined]
 **contentType** | **string** |  | [optional] [default to undefined]

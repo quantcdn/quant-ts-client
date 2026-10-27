@@ -7,7 +7,7 @@ Tool execution result (only present when status=\'complete\' for sync auto-execu
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **images** | **Array&lt;string&gt;** | Base64 data URIs for images | [optional] [default to undefined]
-**s3Urls** | **Array&lt;string&gt;** | Signed S3 URLs for downloads | [optional] [default to undefined]
+**s3Urls** | **Array&lt;string&gt;** | Signed URLs for downloads | [optional] [default to undefined]
 
 ## Example
 

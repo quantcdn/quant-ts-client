@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **basic_auth_username** | **string** | Basic auth username | [optional] [default to undefined]
 **basic_auth_password** | **string** | Basic auth password | [optional] [default to undefined]
 **basic_auth_preview_only** | **boolean** | Apply basic auth to preview domain only | [optional] [default to false]
+**search_enabled** | **boolean** | Enable the project\&#39;s search index. Rejected when the organisation has no search subscription. | [optional] [default to undefined]
+**search_config** | [**V2SearchConfig**](V2SearchConfig.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -28,6 +30,8 @@ const instance: V2ProjectRequest = {
     basic_auth_username,
     basic_auth_password,
     basic_auth_preview_only,
+    search_enabled,
+    search_config,
 };
 ```
 

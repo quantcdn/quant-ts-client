@@ -6,7 +6,7 @@ Filesystem configuration
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**filesystemId** | **string** | EFS filesystem ID | [optional] [default to undefined]
+**filesystemId** | **string** | Shared filesystem ID | [optional] [default to undefined]
 **mountPath** | **string** | Default mount path in containers | [optional] [default to undefined]
 
 ## Example

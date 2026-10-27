@@ -10,7 +10,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 # **getAIModel**
 > GetAIModel200Response getAIModel()
 
-Retrieves detailed information about a specific Bedrock model from the catalog.      *      * **Features:**      * - Complete pricing breakdown (input/output per million tokens)      * - Context window and output token limits      * - Supported features (chat, vision, streaming, embeddings)      * - Model availability and deprecation status      * - Release date for version tracking      *      * **Example Model IDs:**      * - `amazon.nova-lite-v1:0` - Default multimodal model      * - `anthropic.claude-3-5-sonnet-20241022-v2:0` - Latest Claude      * - `amazon.titan-embed-text-v2:0` - Latest embeddings
+Retrieves detailed information about a specific model from the catalog.      *      * **Features:**      * - Complete pricing breakdown (input/output per million tokens)      * - Context window and output token limits      * - Supported features (chat, vision, streaming, embeddings)      * - Model availability and deprecation status      * - Release date for version tracking      *      * **Example Model IDs:**      * - `amazon.nova-lite-v1:0` - Default multimodal model      * - `anthropic.claude-3-5-sonnet-20241022-v2:0` - Latest Claude      * - `amazon.titan-embed-text-v2:0` - Latest embeddings
 
 ### Example
 

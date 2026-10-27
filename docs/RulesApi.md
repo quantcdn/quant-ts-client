@@ -6,6 +6,11 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |------------- | ------------- | -------------|
 |[**rulesAuthCreate**](#rulesauthcreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/rules/auth | Create an authentication rule|
 |[**rulesAuthDelete**](#rulesauthdelete) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/rules/auth/{rule} | Delete an authentication rule|
+|[**rulesAuthFunctionCreate**](#rulesauthfunctioncreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function | Create an auth function rule|
+|[**rulesAuthFunctionDelete**](#rulesauthfunctiondelete) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function/{rule} | Delete an auth function rule|
+|[**rulesAuthFunctionList**](#rulesauthfunctionlist) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function | List auth function rules|
+|[**rulesAuthFunctionRead**](#rulesauthfunctionread) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function/{rule} | Get details of an auth function rule|
+|[**rulesAuthFunctionUpdate**](#rulesauthfunctionupdate) | **PATCH** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function/{rule} | Update an auth function rule|
 |[**rulesAuthList**](#rulesauthlist) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/auth | List authentication rules|
 |[**rulesAuthRead**](#rulesauthread) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/auth/{rule} | Get details of an authentication rule|
 |[**rulesAuthUpdate**](#rulesauthupdate) | **PATCH** /api/v2/organizations/{organization}/projects/{project}/rules/auth/{rule} | Update an authentication rule|
@@ -24,6 +29,11 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**rulesCustomResponseList**](#rulescustomresponselist) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/custom-response | List custom response rules|
 |[**rulesCustomResponseRead**](#rulescustomresponseread) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Get details of a custom response rule|
 |[**rulesCustomResponseUpdate**](#rulescustomresponseupdate) | **PATCH** /api/v2/organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Update a custom response rule|
+|[**rulesErrorPageCreate**](#ruleserrorpagecreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/rules/error-page | Create a custom error page rule|
+|[**rulesErrorPageDelete**](#ruleserrorpagedelete) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/rules/error-page/{rule} | Delete a custom error page rule|
+|[**rulesErrorPageList**](#ruleserrorpagelist) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/error-page | List custom error page rules|
+|[**rulesErrorPageRead**](#ruleserrorpageread) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/error-page/{rule} | Get details of a custom error page rule|
+|[**rulesErrorPageUpdate**](#ruleserrorpageupdate) | **PATCH** /api/v2/organizations/{organization}/projects/{project}/rules/error-page/{rule} | Update a custom error page rule|
 |[**rulesFunctionCreate**](#rulesfunctioncreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/rules/function | Create an edge function rule|
 |[**rulesFunctionDelete**](#rulesfunctiondelete) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/rules/function/{rule} | Delete an edge function rule|
 |[**rulesFunctionList**](#rulesfunctionlist) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/function | List edge function rules|
@@ -106,6 +116,7 @@ const { status, data } = await apiInstance.rulesAuthCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -164,12 +175,311 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesAuthFunctionCreate**
+> V2RuleAuthFunction rulesAuthFunctionCreate(v2RuleAuthFunctionRequest)
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration,
+    V2RuleAuthFunctionRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let v2RuleAuthFunctionRequest: V2RuleAuthFunctionRequest; //
+
+const { status, data } = await apiInstance.rulesAuthFunctionCreate(
+    organization,
+    project,
+    v2RuleAuthFunctionRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **v2RuleAuthFunctionRequest** | **V2RuleAuthFunctionRequest**|  | |
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+
+
+### Return type
+
+**V2RuleAuthFunction**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_auth in this project. Checked on create and when fn_uuid changes. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesAuthFunctionDelete**
+> rulesAuthFunctionDelete()
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let rule: string; //Rule identifier (default to undefined)
+
+const { status, data } = await apiInstance.rulesAuthFunctionDelete(
+    organization,
+    project,
+    rule
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **rule** | [**string**] | Rule identifier | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**204** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesAuthFunctionList**
+> Array<V2RuleAuthFunction> rulesAuthFunctionList()
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+
+const { status, data } = await apiInstance.rulesAuthFunctionList(
+    organization,
+    project
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+
+
+### Return type
+
+**Array<V2RuleAuthFunction>**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesAuthFunctionRead**
+> V2RuleAuthFunction rulesAuthFunctionRead()
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let rule: string; //Rule identifier (default to undefined)
+
+const { status, data } = await apiInstance.rulesAuthFunctionRead(
+    organization,
+    project,
+    rule
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **rule** | [**string**] | Rule identifier | defaults to undefined|
+
+
+### Return type
+
+**V2RuleAuthFunction**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesAuthFunctionUpdate**
+> V2RuleAuthFunction rulesAuthFunctionUpdate(v2RuleAuthFunctionRequest)
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration,
+    V2RuleAuthFunctionRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let rule: string; //Rule identifier (default to undefined)
+let v2RuleAuthFunctionRequest: V2RuleAuthFunctionRequest; //
+
+const { status, data } = await apiInstance.rulesAuthFunctionUpdate(
+    organization,
+    project,
+    rule,
+    v2RuleAuthFunctionRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **v2RuleAuthFunctionRequest** | **V2RuleAuthFunctionRequest**|  | |
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **rule** | [**string**] | Rule identifier | defaults to undefined|
+
+
+### Return type
+
+**V2RuleAuthFunction**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_auth in this project. Checked on create and when fn_uuid changes. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rulesAuthList**
 > Array<V2RuleAuth> rulesAuthList()
 
+Lists basic authentication rules (username and password). Rules that run an auth function are listed at rules/auth-function.
 
 ### Example
 
@@ -339,6 +649,7 @@ const { status, data } = await apiInstance.rulesAuthUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -398,6 +709,7 @@ const { status, data } = await apiInstance.rulesBotChallengeCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -456,6 +768,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -631,6 +944,7 @@ const { status, data } = await apiInstance.rulesBotChallengeUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -690,6 +1004,8 @@ const { status, data } = await apiInstance.rulesContentFilterCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_filter or edge_function in this project. Checked on create and when fn_uuid changes. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -748,6 +1064,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -923,6 +1240,8 @@ const { status, data } = await apiInstance.rulesContentFilterUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_filter or edge_function in this project. Checked on create and when fn_uuid changes. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -982,6 +1301,7 @@ const { status, data } = await apiInstance.rulesCustomResponseCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1040,6 +1360,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1215,6 +1536,302 @@ const { status, data } = await apiInstance.rulesCustomResponseUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesErrorPageCreate**
+> V2RuleErrorPage rulesErrorPageCreate(v2RuleErrorPageRequest)
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration,
+    V2RuleErrorPageRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let v2RuleErrorPageRequest: V2RuleErrorPageRequest; //
+
+const { status, data } = await apiInstance.rulesErrorPageCreate(
+    organization,
+    project,
+    v2RuleErrorPageRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **v2RuleErrorPageRequest** | **V2RuleErrorPageRequest**|  | |
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+
+
+### Return type
+
+**V2RuleErrorPage**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesErrorPageDelete**
+> rulesErrorPageDelete()
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let rule: string; //Rule identifier (default to undefined)
+
+const { status, data } = await apiInstance.rulesErrorPageDelete(
+    organization,
+    project,
+    rule
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **rule** | [**string**] | Rule identifier | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**204** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesErrorPageList**
+> Array<V2RuleErrorPage> rulesErrorPageList()
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+
+const { status, data } = await apiInstance.rulesErrorPageList(
+    organization,
+    project
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+
+
+### Return type
+
+**Array<V2RuleErrorPage>**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesErrorPageRead**
+> V2RuleErrorPage rulesErrorPageRead()
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let rule: string; //Rule identifier (default to undefined)
+
+const { status, data } = await apiInstance.rulesErrorPageRead(
+    organization,
+    project,
+    rule
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **rule** | [**string**] | Rule identifier | defaults to undefined|
+
+
+### Return type
+
+**V2RuleErrorPage**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesErrorPageUpdate**
+> V2RuleErrorPage rulesErrorPageUpdate(v2RuleErrorPageRequest)
+
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration,
+    V2RuleErrorPageRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; //Organization identifier (default to undefined)
+let project: string; //Project identifier (default to undefined)
+let rule: string; //Rule identifier (default to undefined)
+let v2RuleErrorPageRequest: V2RuleErrorPageRequest; //
+
+const { status, data } = await apiInstance.rulesErrorPageUpdate(
+    organization,
+    project,
+    rule,
+    v2RuleErrorPageRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **v2RuleErrorPageRequest** | **V2RuleErrorPageRequest**|  | |
+| **organization** | [**string**] | Organization identifier | defaults to undefined|
+| **project** | [**string**] | Project identifier | defaults to undefined|
+| **rule** | [**string**] | Rule identifier | defaults to undefined|
+
+
+### Return type
+
+**V2RuleErrorPage**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The request has succeeded. |  -  |
+|**400** | The server could not understand the request due to invalid syntax. |  -  |
+|**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1274,6 +1891,8 @@ const { status, data } = await apiInstance.rulesFunctionCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_function in this project. Checked on create and when fn_uuid changes. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1332,6 +1951,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1507,6 +2127,8 @@ const { status, data } = await apiInstance.rulesFunctionUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_function in this project. Checked on create and when fn_uuid changes. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1566,6 +2188,7 @@ const { status, data } = await apiInstance.rulesHeadersCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1624,6 +2247,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1799,6 +2423,7 @@ const { status, data } = await apiInstance.rulesHeadersUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1858,6 +2483,7 @@ const { status, data } = await apiInstance.rulesProxyCreate(
 |**201** | The request has succeeded and a new resource has been created as a result. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1916,6 +2542,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2091,6 +2718,7 @@ const { status, data } = await apiInstance.rulesProxyUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2150,6 +2778,7 @@ const { status, data } = await apiInstance.rulesRedirectCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2208,6 +2837,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2383,6 +3013,7 @@ const { status, data } = await apiInstance.rulesRedirectUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2442,6 +3073,7 @@ const { status, data } = await apiInstance.rulesServeStaticCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2500,6 +3132,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2675,6 +3308,7 @@ const { status, data } = await apiInstance.rulesServeStaticUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

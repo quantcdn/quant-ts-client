@@ -425,6 +425,7 @@ const { status, data } = await apiInstance.crawlersRun(
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
 |**404** | The resource was not found. |  -  |
+|**409** | A run of this crawler is already active |  -  |
 |**500** | An unexpected error occurred. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

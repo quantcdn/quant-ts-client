@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **webhook_auth_header** | **string** | Authorization header for webhook | [optional] [default to undefined]
 **webhook_extra_vars** | **string** | Extra variables for webhook | [optional] [default to undefined]
 **browser_mode** | **boolean** | Browser mode enabled | [optional] [default to undefined]
+**tracking** | **boolean** | Content tracking enabled: the crawl reports progress and page status to the project tracking site | [optional] [default to undefined]
 **workers** | **number** | Number of concurrent workers | [optional] [default to undefined]
 **delay** | **number** | Delay between requests in seconds | [optional] [default to undefined]
 **depth** | **number** | Maximum crawl depth | [optional] [default to undefined]
@@ -33,6 +34,7 @@ Name | Type | Description | Notes
 **sitemap** | [**Array&lt;V2CrawlerSitemapInner&gt;**](V2CrawlerSitemapInner.md) | Sitemap configuration | [optional] [default to undefined]
 **allowed_domains** | **Array&lt;string&gt;** | Allowed domains | [optional] [default to undefined]
 **assets** | [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] [default to undefined]
+**browser_config** | [**V2CrawlerBrowserConfig**](V2CrawlerBrowserConfig.md) |  | [optional] [default to undefined]
 **created_at** | **string** | Creation timestamp | [optional] [default to undefined]
 **updated_at** | **string** | Last update timestamp | [optional] [default to undefined]
 **deleted_at** | **string** | Deletion timestamp | [optional] [default to undefined]
@@ -55,6 +57,7 @@ const instance: V2Crawler = {
     webhook_auth_header,
     webhook_extra_vars,
     browser_mode,
+    tracking,
     workers,
     delay,
     depth,
@@ -71,6 +74,7 @@ const instance: V2Crawler = {
     sitemap,
     allowed_domains,
     assets,
+    browser_config,
     created_at,
     updated_at,
     deleted_at,

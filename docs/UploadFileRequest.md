@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **content** | **string** | Base64-encoded file content (for direct upload). Required unless using requestUploadUrl. | [optional] [default to undefined]
-**requestUploadUrl** | **boolean** | Set to true to get a presigned S3 upload URL instead of uploading directly. | [optional] [default to false]
+**requestUploadUrl** | **boolean** | Set to true to get a presigned upload URL instead of uploading directly. | [optional] [default to false]
 **size** | **number** | File size in bytes. Optional but recommended for presigned uploads. | [optional] [default to undefined]
 **filename** | **string** | Original filename | [optional] [default to undefined]
 **contentType** | **string** | MIME type of the file | [default to undefined]

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **requestId** | **string** |  | [optional] [default to undefined]
 **executionArn** | **string** |  | [optional] [default to undefined]
 **status** | **string** |  | [optional] [default to undefined]
-**awsStatus** | **string** | Raw AWS Step Functions status | [optional] [default to undefined]
+**awsStatus** | **string** | Raw status reported by the underlying execution service | [optional] [default to undefined]
 **callbackId** | **string** | Present when status is waiting_callback - use with /chat/callback | [optional] [default to undefined]
 **pendingTools** | [**Array&lt;GetDurableExecutionStatus200ResponsePendingToolsInner&gt;**](GetDurableExecutionStatus200ResponsePendingToolsInner.md) | Present when status is waiting_callback - tools waiting for results | [optional] [default to undefined]
 **result** | [**GetDurableExecutionStatus200ResponseResult**](GetDurableExecutionStatus200ResponseResult.md) |  | [optional] [default to undefined]

@@ -1,12 +1,12 @@
 # ChatInferenceRequestGuardrails
 
-AWS Bedrock guardrails configuration for content filtering and safety.
+Guardrails configuration for content filtering and safety.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**guardrailIdentifier** | **string** | Guardrail identifier from AWS Bedrock | [optional] [default to undefined]
+**guardrailIdentifier** | **string** | Guardrail identifier | [optional] [default to undefined]
 **guardrailVersion** | **string** | Guardrail version | [optional] [default to undefined]
 **trace** | **string** | Enable guardrail trace output | [optional] [default to undefined]
 

@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **backupId** | **string** | The backup ID to restore (must match path param) | [default to undefined]
-**acknowledgeDataloss** | **boolean** | Must be true. tar extraction overwrites same-named files in the target EFS in place; pre-existing files not in the archive are preserved. | [default to undefined]
+**acknowledgeDataloss** | **boolean** | Must be true. tar extraction overwrites same-named files in the target shared filesystem in place; pre-existing files not in the archive are preserved. | [default to undefined]
 
 ## Example
 

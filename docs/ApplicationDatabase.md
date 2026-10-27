@@ -6,10 +6,10 @@ Database configuration
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rdsInstanceIdentifier** | **string** | RDS instance identifier | [optional] [default to undefined]
-**rdsInstanceEndpoint** | **string** | RDS instance endpoint address | [optional] [default to undefined]
+**rdsInstanceIdentifier** | **string** | Database instance identifier | [optional] [default to undefined]
+**rdsInstanceEndpoint** | **string** | Database instance endpoint address | [optional] [default to undefined]
 **rdsInstanceEngine** | **string** | Database engine | [optional] [default to undefined]
-**rdsInstanceStatus** | **string** | RDS instance status | [optional] [default to undefined]
+**rdsInstanceStatus** | **string** | Database instance status | [optional] [default to undefined]
 
 ## Example
 

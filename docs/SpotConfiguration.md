@@ -1,6 +1,6 @@
 # SpotConfiguration
 
-Spot instance strategy configuration for controlling cost vs reliability. Spot instances provide significant cost savings (~70%) but may be interrupted by AWS. Available for non-production environments.
+Spot instance strategy configuration for controlling cost vs reliability. Spot instances provide significant cost savings (~70%) but may be interrupted by the cloud provider. Available for non-production environments.
 
 ## Properties
 

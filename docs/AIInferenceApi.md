@@ -8,13 +8,12 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**chatInferenceStream**](#chatinferencestream) | **POST** /api/v3/organizations/{organisation}/ai/chat/stream | Chat inference via streaming endpoint (true HTTP streaming) with multimodal support|
 |[**embeddings**](#embeddings) | **POST** /api/v3/organizations/{organisation}/ai/embeddings | Generate text embeddings for semantic search and RAG applications|
 |[**getDurableExecutionStatus**](#getdurableexecutionstatus) | **GET** /api/v3/organizations/{organisation}/ai/chat/executions/{identifier} | Get Durable Execution Status|
-|[**imageGeneration**](#imagegeneration) | **POST** /api/v3/organizations/{organisation}/ai/image-generation | Generate images with Amazon Nova Canvas|
 |[**submitToolCallback**](#submittoolcallback) | **POST** /api/v3/organizations/{organisation}/ai/chat/callback | Submit Client Tool Results (Callback)|
 
 # **chatInference**
 > ChatInference200Response chatInference(chatInferenceRequest)
 
-Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Execution Modes:**      * - **Sync Mode** (default): Standard JSON response, waits for completion (200 response)      * - **Async Mode**: Set `async: true` for long-running tasks with polling (202 response)      *      * **Async/Durable Mode (`async: true`):**      * - Returns immediately with `requestId` and `pollUrl` (HTTP 202)      * - Uses AWS Lambda Durable Functions for long-running inference      * - Supports client-executed tools via `waiting_callback` state      * - Poll `/ai/chat/executions/{requestId}` for status      * - Submit client tool results via `/ai/chat/callback`      * - Ideal for complex prompts, large contexts, or client-side tools      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models (Multimodal):**      * - **Claude 4.5 Series**: Sonnet 4.5, Haiku 4.5, Opus 4.5 (images, up to 20 per request)      * - **Claude 3.5 Series**: Sonnet v1/v2 (images, up to 20 per request)      * - **Amazon Nova**: Lite, Pro, Micro (images, videos, documents)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
+Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.      *      * **Execution Modes:**      * - **Sync Mode** (default): Standard JSON response, waits for completion (200 response)      * - **Async Mode**: Set `async: true` for long-running tasks with polling (202 response)      *      * **Async/Durable Mode (`async: true`):**      * - Returns immediately with `requestId` and `pollUrl` (HTTP 202)      * - Uses durable execution for long-running inference      * - Supports client-executed tools via `waiting_callback` state      * - Poll `/ai/chat/executions/{requestId}` for status      * - Submit client tool results via `/ai/chat/callback`      * - Ideal for complex prompts, large contexts, or client-side tools      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models (Multimodal):**      * - **Claude 4.5 Series**: Sonnet 4.5, Haiku 4.5, Opus 4.5 (images, up to 20 per request)      * - **Claude 3.5 Series**: Sonnet v1/v2 (images, up to 20 per request)      * - **Amazon Nova**: Lite, Pro, Micro (images, videos, documents)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      *      * **Response Patterns:**      * - **Text-only**: Returns simple text response when no tools requested      * - **Single tool**: Returns `toolUse` object when AI requests one tool      * - **Multiple tools**: Returns `toolUse` array when AI requests multiple tools      * - **Auto-execute sync**: Automatically executes tool and returns final text response      * - **Auto-execute async**: Returns toolUse with `executionId` and `status` for polling
 
 ### Example
 
@@ -71,7 +70,7 @@ const { status, data } = await apiInstance.chatInference(
 # **chatInferenceStream**
 > string chatInferenceStream(chatInferenceStreamRequest)
 
-Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Execution Modes:**      * - **Streaming Mode** (default): Real-time SSE token-by-token responses      * - **Async Mode**: Set `async: true` for long-running tasks with polling (202 response)      *      * **Async/Durable Mode (`async: true`):**      * - Returns immediately with `requestId` and `pollUrl` (HTTP 202)      * - Uses AWS Lambda Durable Functions for long-running inference      * - Supports client-executed tools via `waiting_callback` state      * - Poll `/ai/chat/executions/{requestId}` for status      * - Submit client tool results via `/ai/chat/callback`      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models (Multimodal):**      * - **Claude 4.5 Series**: Sonnet 4.5, Haiku 4.5, Opus 4.5 (images, up to 20 per request)      * - **Claude 3.5 Series**: Sonnet v1/v2 (images, up to 20 per request)      * - **Amazon Nova**: Lite, Pro, Micro (images, videos, documents)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
+Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.      *      * **Execution Modes:**      * - **Streaming Mode** (default): Real-time SSE token-by-token responses      * - **Async Mode**: Set `async: true` for long-running tasks with polling (202 response)      *      * **Async/Durable Mode (`async: true`):**      * - Returns immediately with `requestId` and `pollUrl` (HTTP 202)      * - Uses durable execution for long-running inference      * - Supports client-executed tools via `waiting_callback` state      * - Poll `/ai/chat/executions/{requestId}` for status      * - Submit client tool results via `/ai/chat/callback`      *      * **Multimodal Support:**      * - **Text**: Simple string content      * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)      * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)      * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)      *      * **Supported Models (Multimodal):**      * - **Claude 4.5 Series**: Sonnet 4.5, Haiku 4.5, Opus 4.5 (images, up to 20 per request)      * - **Claude 3.5 Series**: Sonnet v1/v2 (images, up to 20 per request)      * - **Amazon Nova**: Lite, Pro, Micro (images, videos, documents)      *      * **Usage Tips:**      * - Use base64 encoding for images/videos < 5-10MB      * - Place media before text prompts for best results      * - Label multiple media files (e.g., \'Image 1:\', \'Image 2:\')      * - Maximum 25MB total payload size      * - Streaming works with all content types (text, image, video, document)
 
 ### Example
 
@@ -186,7 +185,7 @@ const { status, data } = await apiInstance.embeddings(
 # **getDurableExecutionStatus**
 > GetDurableExecutionStatus200Response getDurableExecutionStatus()
 
-Poll the status of an async/durable chat execution.      *      * **When to use:** After starting chat inference with `async: true`, poll this endpoint      * to check execution status and retrieve results when complete.      *      * **Identifier:** Accepts either:      * - `requestId` (recommended): The short ID returned from the async request      * - `executionArn`: The full AWS Lambda durable execution ARN (must be URL-encoded)      *      * **Statuses:**      * - `pending`: Execution is starting (retry shortly)      * - `running`: Execution is in progress      * - `waiting_callback`: Execution paused, waiting for client tool results      * - `complete`: Execution finished successfully      * - `failed`: Execution failed with error      *      * **Client Tool Callback:**      * When status is `waiting_callback`, submit tool results via `POST /ai/chat/callback`.      *      * **Polling Recommendations:**      * - Start with 1 second delay, exponential backoff up to 30 seconds      * - Stop polling after 15 minutes (consider failed)
+Poll the status of an async/durable chat execution.      *      * **When to use:** After starting chat inference with `async: true`, poll this endpoint      * to check execution status and retrieve results when complete.      *      * **Identifier:** Accepts either:      * - `requestId` (recommended): The short ID returned from the async request      * - `executionArn`: The full durable execution identifier (must be URL-encoded)      *      * **Statuses:**      * - `pending`: Execution is starting (retry shortly)      * - `running`: Execution is in progress      * - `waiting_callback`: Execution paused, waiting for client tool results      * - `complete`: Execution finished successfully      * - `failed`: Execution failed with error      *      * **Client Tool Callback:**      * When status is `waiting_callback`, submit tool results via `POST /ai/chat/callback`.      *      * **Polling Recommendations:**      * - Start with 1 second delay, exponential backoff up to 30 seconds      * - Stop polling after 15 minutes (consider failed)
 
 ### Example
 
@@ -237,64 +236,6 @@ const { status, data } = await apiInstance.getDurableExecutionStatus(
 |**404** | Execution not found |  -  |
 |**403** | Access denied |  -  |
 |**500** | Failed to retrieve execution status |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **imageGeneration**
-> ImageGeneration200Response imageGeneration(imageGenerationRequest)
-
-Generates images using Amazon Nova Canvas image generation model.      *      * **Region Restriction:** Nova Canvas is ONLY available in:      * - `us-east-1` (US East, N. Virginia)      * - `ap-northeast-1` (Asia Pacific, Tokyo)      * - `eu-west-1` (Europe, Ireland)      * ❌ NOT available in `ap-southeast-2` (Sydney)      *      * **Supported Task Types:**      * - **TEXT_IMAGE**: Basic text-to-image generation      * - **TEXT_IMAGE with Conditioning**: Layout-guided generation using edge detection or segmentation      * - **COLOR_GUIDED_GENERATION**: Generate images with specific color palettes      * - **IMAGE_VARIATION**: Create variations of existing images      * - **INPAINTING**: Fill masked areas in images      * - **OUTPAINTING**: Extend images beyond their borders      * - **BACKGROUND_REMOVAL**: Remove backgrounds from images      * - **VIRTUAL_TRY_ON**: Try on garments/objects on people      *      * **Quality Options:**      * - **standard**: Faster generation, lower cost      * - **premium**: Higher quality, slower generation      *      * **Timeout:** Image generation can take up to 5 minutes
-
-### Example
-
-```typescript
-import {
-    AIInferenceApi,
-    Configuration,
-    ImageGenerationRequest
-} from '@quantcdn/quant-client';
-
-const configuration = new Configuration();
-const apiInstance = new AIInferenceApi(configuration);
-
-let organisation: string; //The organisation ID (default to undefined)
-let imageGenerationRequest: ImageGenerationRequest; //Image generation request
-
-const { status, data } = await apiInstance.imageGeneration(
-    organisation,
-    imageGenerationRequest
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **imageGenerationRequest** | **ImageGenerationRequest**| Image generation request | |
-| **organisation** | [**string**] | The organisation ID | defaults to undefined|
-
-
-### Return type
-
-**ImageGeneration200Response**
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Image(s) generated successfully |  -  |
-|**400** | Invalid request parameters |  -  |
-|**403** | Access denied |  -  |
-|**500** | Failed to generate images |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

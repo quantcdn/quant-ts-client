@@ -9,6 +9,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**getEnvironment**](#getenvironment) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment} | Get a single environment|
 |[**getEnvironmentLogs**](#getenvironmentlogs) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/logs | Get the logs for an environment|
 |[**getEnvironmentMetrics**](#getenvironmentmetrics) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/metrics | Get the metrics for an environment|
+|[**getEnvironmentSlowQueries**](#getenvironmentslowqueries) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/slow-queries | Get MySQL slow queries for an environment|
 |[**listEnvironments**](#listenvironments) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments | Get all environments for an application|
 |[**listSyncOperations**](#listsyncoperations) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | List the sync operations for an environment|
 |[**syncToEnvironment**](#synctoenvironment) | **POST** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | Perform a sync operation from a source environment to the current environment|
@@ -191,7 +192,7 @@ const { status, data } = await apiInstance.getEnvironment(
 # **getEnvironmentLogs**
 > GetEnvironmentLogs200Response getEnvironmentLogs()
 
-Retrieves logs from CloudWatch for the specified environment with optional filtering by time range, container, and pattern matching. Supports pagination via nextToken.
+Retrieves platform logs for the specified environment with optional filtering by time range, container, and literal text. Newest-first by default; pass the nextToken from the previous response to fetch the next page.
 
 ### Example
 
@@ -210,9 +211,11 @@ let environment: string; //The environment ID (default to undefined)
 let startTime: string; //Start time for log retrieval (ISO 8601 format or Unix timestamp) (optional) (default to undefined)
 let endTime: string; //End time for log retrieval (ISO 8601 format or Unix timestamp) (optional) (default to undefined)
 let containerName: string; //Filter logs by specific container name (optional) (default to undefined)
-let filterPattern: string; //CloudWatch Logs filter pattern for searching log content (optional) (default to undefined)
-let limit: number; //Maximum number of log entries to return per page (optional) (default to undefined)
-let nextToken: string; //Pagination token from previous response for retrieving next page of results (optional) (default to undefined)
+let filterPattern: string; //Literal, case-sensitive text to match anywhere in the log message (optional) (default to undefined)
+let limit: number; //Maximum number of log entries to return per page (default 50) (optional) (default to 50)
+let nextToken: string; //Opaque pagination token from the previous response. Pass back unchanged to fetch the next page. (optional) (default to undefined)
+let order: 'asc' | 'desc'; //Sort order. desc returns newest first, asc returns oldest first. (optional) (default to 'desc')
+let includeTotal: boolean; //When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency. (optional) (default to false)
 
 const { status, data } = await apiInstance.getEnvironmentLogs(
     organisation,
@@ -223,7 +226,9 @@ const { status, data } = await apiInstance.getEnvironmentLogs(
     containerName,
     filterPattern,
     limit,
-    nextToken
+    nextToken,
+    order,
+    includeTotal
 );
 ```
 
@@ -237,9 +242,11 @@ const { status, data } = await apiInstance.getEnvironmentLogs(
 | **startTime** | [**string**] | Start time for log retrieval (ISO 8601 format or Unix timestamp) | (optional) defaults to undefined|
 | **endTime** | [**string**] | End time for log retrieval (ISO 8601 format or Unix timestamp) | (optional) defaults to undefined|
 | **containerName** | [**string**] | Filter logs by specific container name | (optional) defaults to undefined|
-| **filterPattern** | [**string**] | CloudWatch Logs filter pattern for searching log content | (optional) defaults to undefined|
-| **limit** | [**number**] | Maximum number of log entries to return per page | (optional) defaults to undefined|
-| **nextToken** | [**string**] | Pagination token from previous response for retrieving next page of results | (optional) defaults to undefined|
+| **filterPattern** | [**string**] | Literal, case-sensitive text to match anywhere in the log message | (optional) defaults to undefined|
+| **limit** | [**number**] | Maximum number of log entries to return per page (default 50) | (optional) defaults to 50|
+| **nextToken** | [**string**] | Opaque pagination token from the previous response. Pass back unchanged to fetch the next page. | (optional) defaults to undefined|
+| **order** | [**&#39;asc&#39; | &#39;desc&#39;**]**Array<&#39;asc&#39; &#124; &#39;desc&#39;>** | Sort order. desc returns newest first, asc returns oldest first. | (optional) defaults to 'desc'|
+| **includeTotal** | [**boolean**] | When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency. | (optional) defaults to false|
 
 
 ### Return type
@@ -260,6 +267,7 @@ const { status, data } = await apiInstance.getEnvironmentLogs(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The logs |  -  |
+|**400** | Invalid startTime or endTime |  -  |
 |**404** | The environment not found |  -  |
 |**422** | Validation error |  -  |
 
@@ -268,7 +276,7 @@ const { status, data } = await apiInstance.getEnvironmentLogs(
 # **getEnvironmentMetrics**
 > object getEnvironmentMetrics()
 
-Retrieves CloudWatch metrics for the specified environment with optional filtering by time range, container, and metric configuration.
+Retrieves platform metrics for the specified environment with optional filtering by time range, container, and metric configuration.
 
 ### Example
 
@@ -287,7 +295,7 @@ let environment: string; //The environment ID (default to undefined)
 let startTime: number; //Start time for metrics retrieval (Unix timestamp in milliseconds) (optional) (default to undefined)
 let endTime: number; //End time for metrics retrieval (Unix timestamp in milliseconds) (optional) (default to undefined)
 let period: number; //Period in seconds for metric aggregation (e.g., 60 for 1 minute, 300 for 5 minutes) (optional) (default to undefined)
-let statistics: string; //Comma-separated list of CloudWatch statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) (optional) (default to undefined)
+let statistics: string; //Comma-separated list of metric statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) (optional) (default to undefined)
 let containerName: string; //Filter metrics by specific container name (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getEnvironmentMetrics(
@@ -312,7 +320,7 @@ const { status, data } = await apiInstance.getEnvironmentMetrics(
 | **startTime** | [**number**] | Start time for metrics retrieval (Unix timestamp in milliseconds) | (optional) defaults to undefined|
 | **endTime** | [**number**] | End time for metrics retrieval (Unix timestamp in milliseconds) | (optional) defaults to undefined|
 | **period** | [**number**] | Period in seconds for metric aggregation (e.g., 60 for 1 minute, 300 for 5 minutes) | (optional) defaults to undefined|
-| **statistics** | [**string**] | Comma-separated list of CloudWatch statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) | (optional) defaults to undefined|
+| **statistics** | [**string**] | Comma-separated list of metric statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) | (optional) defaults to undefined|
 | **containerName** | [**string**] | Filter metrics by specific container name | (optional) defaults to undefined|
 
 
@@ -336,6 +344,77 @@ const { status, data } = await apiInstance.getEnvironmentMetrics(
 |**200** | The metrics |  -  |
 |**404** | The environment not found |  -  |
 |**422** | Validation error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getEnvironmentSlowQueries**
+> object getEnvironmentSlowQueries()
+
+Queries over 1 second from the environment\'s own database user. summary groups by query shape with literals replaced by ?. enabled=false means the slow query export is not turned on for this database.
+
+### Example
+
+```typescript
+import {
+    EnvironmentsApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new EnvironmentsApi(configuration);
+
+let organisation: string; // (default to undefined)
+let application: string; // (default to undefined)
+let environment: string; // (default to undefined)
+let startTime: string; //ISO 8601 or Unix epoch ms. Default: 24 hours before endTime. (optional) (default to undefined)
+let endTime: string; //ISO 8601 or Unix epoch ms. Default: now. Window max 30 days. (optional) (default to undefined)
+let view: 'summary' | 'entries'; // (optional) (default to 'summary')
+let limit: number; //entries: 1-500; summary: 1-100 shapes (optional) (default to 50)
+
+const { status, data } = await apiInstance.getEnvironmentSlowQueries(
+    organisation,
+    application,
+    environment,
+    startTime,
+    endTime,
+    view,
+    limit
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] |  | defaults to undefined|
+| **application** | [**string**] |  | defaults to undefined|
+| **environment** | [**string**] |  | defaults to undefined|
+| **startTime** | [**string**] | ISO 8601 or Unix epoch ms. Default: 24 hours before endTime. | (optional) defaults to undefined|
+| **endTime** | [**string**] | ISO 8601 or Unix epoch ms. Default: now. Window max 30 days. | (optional) defaults to undefined|
+| **view** | [**&#39;summary&#39; | &#39;entries&#39;**]**Array<&#39;summary&#39; &#124; &#39;entries&#39;>** |  | (optional) defaults to 'summary'|
+| **limit** | [**number**] | entries: 1-500; summary: 1-100 shapes | (optional) defaults to 50|
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Slow queries, or enabled&#x3D;false |  -  |
+|**404** | No MySQL database, or no database user for the environment |  -  |
+|**504** | Query took too long; use a shorter time range |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -518,7 +597,7 @@ const { status, data } = await apiInstance.syncToEnvironment(
 # **updateEnvironment**
 > updateEnvironment(updateEnvironmentRequest)
 
-Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the ECS service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
+Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the container service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
 
 ### Example
 
