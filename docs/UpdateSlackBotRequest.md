@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **guardrailPreset** | **string** | Guardrail preset name | [optional] [default to undefined]
 **filterPolicies** | **Array&lt;string&gt;** | Content filter policies | [optional] [default to undefined]
 **longContext** | **boolean** | Enable long context mode | [optional] [default to undefined]
+**reasoningEffort** | **string** | Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. null clears it. | [optional] [default to undefined]
 **sessionTtlDays** | **number** | Session TTL in days | [optional] [default to undefined]
 **allowedChannels** | **Array&lt;string&gt;** | Slack channel IDs the bot may respond in | [optional] [default to undefined]
 **allowedUsers** | **Array&lt;string&gt;** | Slack user IDs allowed to interact with the bot | [optional] [default to undefined]
@@ -47,6 +48,7 @@ const instance: UpdateSlackBotRequest = {
     guardrailPreset,
     filterPolicies,
     longContext,
+    reasoningEffort,
     sessionTtlDays,
     allowedChannels,
     allowedUsers,

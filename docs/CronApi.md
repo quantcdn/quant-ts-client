@@ -315,7 +315,7 @@ const { status, data } = await apiInstance.listCronJobRuns(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listCronJobs**
-> Cron listCronJobs()
+> Array<Cron> listCronJobs()
 
 
 ### Example
@@ -351,7 +351,7 @@ const { status, data } = await apiInstance.listCronJobs(
 
 ### Return type
 
-**Cron**
+**Array<Cron>**
 
 ### Authorization
 

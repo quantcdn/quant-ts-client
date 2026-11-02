@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **allowedTools** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **assignedSkills** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **longContext** | **boolean** |  | [optional] [default to undefined]
+**reasoningEffort** | **string** | Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. | [optional] [default to undefined]
 **guardrailPreset** | **string** |  | [optional] [default to undefined]
 **isGlobal** | **boolean** |  | [optional] [default to undefined]
 **hasOverlay** | **boolean** |  | [optional] [default to undefined]
@@ -37,6 +38,7 @@ const instance: ListAIAgents200ResponseAgentsInner = {
     allowedTools,
     assignedSkills,
     longContext,
+    reasoningEffort,
     guardrailPreset,
     isGlobal,
     hasOverlay,

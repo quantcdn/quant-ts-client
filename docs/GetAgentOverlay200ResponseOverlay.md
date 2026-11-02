@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **systemPromptAppend** | **string** |  | [optional] [default to undefined]
 **allowedCollections** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **guardrailPreset** | **string** |  | [optional] [default to undefined]
+**reasoningEffort** | **string** | Reasoning effort for this organisation. Overrides the global agent value. | [optional] [default to undefined]
 **version** | **number** |  | [optional] [default to undefined]
 
 ## Example
@@ -33,6 +34,7 @@ const instance: GetAgentOverlay200ResponseOverlay = {
     systemPromptAppend,
     allowedCollections,
     guardrailPreset,
+    reasoningEffort,
     version,
 };
 ```
