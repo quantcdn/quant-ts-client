@@ -6,7 +6,6 @@ Only while an upgrade keeps the format 1 table after the switch.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** |  | [default to undefined]
 **sizeBytes** | **number** |  | [default to undefined]
 
 ## Example
@@ -15,7 +14,6 @@ Name | Type | Description | Notes
 import { V2KvUsageRetainedTable } from '@quantcdn/quant-client';
 
 const instance: V2KvUsageRetainedTable = {
-    name,
     sizeBytes,
 };
 ```

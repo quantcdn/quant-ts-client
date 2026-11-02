@@ -44,6 +44,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**rulesHeadersList**](#rulesheaderslist) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/headers | List header rules|
 |[**rulesHeadersRead**](#rulesheadersread) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/headers/{rule} | Get details of a header rule|
 |[**rulesHeadersUpdate**](#rulesheadersupdate) | **PATCH** /api/v2/organizations/{organization}/projects/{project}/rules/headers/{rule} | Update a header rule|
+|[**rulesIndexList**](#rulesindexlist) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules | List all rules in edge order|
 |[**rulesProxyCreate**](#rulesproxycreate) | **POST** /api/v2/organizations/{organization}/projects/{project}/rules/proxy | Create a proxy rule|
 |[**rulesProxyDelete**](#rulesproxydelete) | **DELETE** /api/v2/organizations/{organization}/projects/{project}/rules/proxy/{rule} | Delete a proxy rule|
 |[**rulesProxyList**](#rulesproxylist) | **GET** /api/v2/organizations/{organization}/projects/{project}/rules/proxy | List proxy rules|
@@ -116,6 +117,7 @@ const { status, data } = await apiInstance.rulesAuthCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -175,6 +177,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -235,7 +238,7 @@ const { status, data } = await apiInstance.rulesAuthFunctionCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
-|**422** | fn_uuid does not name a published function of type edge_auth in this project. Checked on create and when fn_uuid changes. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_auth in this project. Checked on create and when fn_uuid changes. Or: The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -295,6 +298,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -471,7 +475,7 @@ const { status, data } = await apiInstance.rulesAuthFunctionUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
-|**422** | fn_uuid does not name a published function of type edge_auth in this project. Checked on create and when fn_uuid changes. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_auth in this project. Checked on create and when fn_uuid changes. Or: The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -649,6 +653,7 @@ const { status, data } = await apiInstance.rulesAuthUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -709,6 +714,7 @@ const { status, data } = await apiInstance.rulesBotChallengeCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -768,6 +774,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -944,6 +951,7 @@ const { status, data } = await apiInstance.rulesBotChallengeUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1004,7 +1012,7 @@ const { status, data } = await apiInstance.rulesContentFilterCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
-|**422** | fn_uuid does not name a published function of type edge_filter or edge_function in this project. Checked on create and when fn_uuid changes. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_filter or edge_function in this project. Checked on create and when fn_uuid changes. Or: The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1064,6 +1072,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1240,7 +1249,7 @@ const { status, data } = await apiInstance.rulesContentFilterUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
-|**422** | fn_uuid does not name a published function of type edge_filter or edge_function in this project. Checked on create and when fn_uuid changes. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_filter or edge_function in this project. Checked on create and when fn_uuid changes. Or: The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1301,6 +1310,7 @@ const { status, data } = await apiInstance.rulesCustomResponseCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1360,6 +1370,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1536,6 +1547,7 @@ const { status, data } = await apiInstance.rulesCustomResponseUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1596,6 +1608,7 @@ const { status, data } = await apiInstance.rulesErrorPageCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1655,6 +1668,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1831,6 +1845,7 @@ const { status, data } = await apiInstance.rulesErrorPageUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1891,7 +1906,7 @@ const { status, data } = await apiInstance.rulesFunctionCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
-|**422** | fn_uuid does not name a published function of type edge_function in this project. Checked on create and when fn_uuid changes. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_function in this project. Checked on create and when fn_uuid changes. Or: The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1951,6 +1966,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2127,7 +2143,7 @@ const { status, data } = await apiInstance.rulesFunctionUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
-|**422** | fn_uuid does not name a published function of type edge_function in this project. Checked on create and when fn_uuid changes. |  -  |
+|**422** | fn_uuid does not name a published function of type edge_function in this project. Checked on create and when fn_uuid changes. Or: The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2188,6 +2204,7 @@ const { status, data } = await apiInstance.rulesHeadersCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2247,6 +2264,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2423,7 +2441,63 @@ const { status, data } = await apiInstance.rulesHeadersUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rulesIndexList**
+> Array<RulesIndexList200ResponseInner> rulesIndexList()
+
+Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order) and `managed` (true when a template deploy owns the rule in this project). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
+
+### Example
+
+```typescript
+import {
+    RulesApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new RulesApi(configuration);
+
+let organization: string; // (default to undefined)
+let project: string; // (default to undefined)
+
+const { status, data } = await apiInstance.rulesIndexList(
+    organization,
+    project
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organization** | [**string**] |  | defaults to undefined|
+| **project** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**Array<RulesIndexList200ResponseInner>**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The request has succeeded. |  -  |
+|**403** | Access is forbidden. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2483,6 +2557,7 @@ const { status, data } = await apiInstance.rulesProxyCreate(
 |**201** | The request has succeeded and a new resource has been created as a result. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2542,6 +2617,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2718,6 +2794,7 @@ const { status, data } = await apiInstance.rulesProxyUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2778,6 +2855,7 @@ const { status, data } = await apiInstance.rulesRedirectCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2837,6 +2915,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3013,6 +3092,7 @@ const { status, data } = await apiInstance.rulesRedirectUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3073,6 +3153,7 @@ const { status, data } = await apiInstance.rulesServeStaticCreate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3132,6 +3213,7 @@ void (empty response body)
 |**204** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3308,6 +3390,7 @@ const { status, data } = await apiInstance.rulesServeStaticUpdate(
 |**200** | The request has succeeded. |  -  |
 |**400** | The server could not understand the request due to invalid syntax. |  -  |
 |**403** | Access is forbidden. |  -  |
+|**422** | The rule order cannot be kept (two rules managed in code leave no legal weight). Permanent until support repairs the order; do not retry. |  -  |
 |**409** | Another request is changing this project\&#39;s rules, or the rule is managed in code. Retry after a short delay; a managed rule changes only through a rules deploy. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

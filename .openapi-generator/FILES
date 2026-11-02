@@ -5,6 +5,7 @@ common.ts
 configuration.ts
 docs/AIAgentsApi.md
 docs/AIApi.md
+docs/AIAuditApi.md
 docs/AICustomToolsApi.md
 docs/AIFileStorageApi.md
 docs/AIFilterPoliciesApi.md
@@ -21,6 +22,11 @@ docs/AIToolApprovalApi.md
 docs/AIToolsApi.md
 docs/AIUsageApi.md
 docs/AIVectorDatabaseApi.md
+docs/AiAuditError.md
+docs/AiAuditRecordGet200Response.md
+docs/AiAuditRecordRow.md
+docs/AiAuditRecordSummary.md
+docs/AiAuditRecordsPage.md
 docs/AiSearchChatRequest.md
 docs/AiSearchDeletePagesRequest.md
 docs/AiSearchEnableRequest.md
@@ -131,6 +137,8 @@ docs/CreateSkill201Response.md
 docs/CreateSkillRequest.md
 docs/CreateSlackBot201Response.md
 docs/CreateSlackBotRequest.md
+docs/CreateSlackInteractionRequest.md
+docs/CreateSlackInteractionRequestActionsInner.md
 docs/CreateTask201Response.md
 docs/CreateTaskRequest.md
 docs/CreateVectorCollection201Response.md
@@ -139,6 +147,7 @@ docs/CreateVectorCollectionRequest.md
 docs/CreateVolumeRequest.md
 docs/Cron.md
 docs/CronApi.md
+docs/CronLastRun.md
 docs/CronRun.md
 docs/DNSCreateRecordRequest.md
 docs/DecideToolProposalRequest.md
@@ -147,6 +156,7 @@ docs/DeleteAISession200Response.md
 docs/DeleteAgentOverlay200Response.md
 docs/DeleteBackup200Response.md
 docs/DeleteCustomTool200Response.md
+docs/DeleteEnvironmentSecret200Response.md
 docs/DeleteFile200Response.md
 docs/DeleteSkill200Response.md
 docs/DeleteSkillCollection200Response.md
@@ -312,9 +322,13 @@ docs/PatchEnvironmentCompose202ResponseSpotConfiguration.md
 docs/PatchEnvironmentCompose400Response.md
 docs/PatchEnvironmentComposeRequest.md
 docs/PatchEnvironmentComposeRequestSpotConfiguration.md
+docs/PostSlackBotFile201Response.md
+docs/PostSlackBotFileRequest.md
 docs/PostSlackBotMessage201Response.md
 docs/PostSlackBotMessageRequest.md
 docs/ProjectsApi.md
+docs/ProjectsDelete409Response.md
+docs/ProjectsDelete503Response.md
 docs/PurgeApi.md
 docs/PurgeCreate200Response.md
 docs/PurgeCreateRequest.md
@@ -334,6 +348,7 @@ docs/RestoreFilesystem202Response.md
 docs/RestoreFilesystemRequest.md
 docs/RestoreManagementApi.md
 docs/RulesApi.md
+docs/RulesIndexList200ResponseInner.md
 docs/SSHAccessApi.md
 docs/ScalingPolicyApi.md
 docs/ScalingPolicyListResponse.md
@@ -341,6 +356,10 @@ docs/SearchSlackWorkspaceChannels200Response.md
 docs/SearchSlackWorkspaceChannels200ResponseResultsInner.md
 docs/SearchSlackWorkspaceUsers200Response.md
 docs/SearchSlackWorkspaceUsers200ResponseResultsInner.md
+docs/SecretError.md
+docs/SecretKey.md
+docs/SecretWriteResult.md
+docs/SecretsApi.md
 docs/SetIdleSleepRequest.md
 docs/SetScalingPolicyRequest.md
 docs/SpotConfiguration.md
@@ -363,6 +382,7 @@ docs/UpdateAISessionRequest.md
 docs/UpdateAISessionRequestNewMessagesInner.md
 docs/UpdateCronJobRequest.md
 docs/UpdateEnvironmentRequest.md
+docs/UpdateEnvironmentSecretRequest.md
 docs/UpdateEnvironmentStateRequest.md
 docs/UpdateEnvironmentVariableRequest.md
 docs/UpdateFilterPolicyRequest.md

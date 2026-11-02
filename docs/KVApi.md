@@ -644,7 +644,7 @@ const { status, data } = await apiInstance.kVEntriesDelete(
 # **kVEntriesPut**
 > V2KvEntryPutResponse kVEntriesPut(v2KvEntryPutRequest)
 
-value is any JSON value ({} stays an object). secret encrypts the value with KMS (lists show [ENCRYPTED]). ttl is 60 to 31,536,000 seconds; a write without ttl removes any expiry. Format 2 conditions: ifAbsent (201 on success) or ifVersion. A failed condition is 409 CONFLICT with reason and currentVersion. In a collection with a unique index, 409 UNIQUE_VIOLATION names index and existingKey. A ledger key is 400 LEDGER_IMMUTABLE. Not retried: a lost connection is 503 UNAVAILABLE with retryable false (the outcome is unknown; read the key before you write again).
+value is any JSON value ({} stays an object). secret encrypts the value with KMS. Secret values are write-only through the API: reads, lists and this answer show [ENCRYPTED]. ttl is 60 to 31,536,000 seconds; a write without ttl removes any expiry. Format 2 conditions: ifAbsent (201 on success) or ifVersion. A failed condition is 409 CONFLICT with reason and currentVersion. In a collection with a unique index, 409 UNIQUE_VIOLATION names index and existingKey. A ledger key is 400 LEDGER_IMMUTABLE. Not retried: a lost connection is 503 UNAVAILABLE with retryable false (the outcome is unknown; read the key before you write again).
 
 ### Example
 
