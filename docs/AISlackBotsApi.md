@@ -4,17 +4,79 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**cancelSlackInteraction**](#cancelslackinteraction) | **POST** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/interactions/{interactionId}/cancel | Cancel an unanswered Slack interaction|
 |[**createSlackBot**](#createslackbot) | **POST** /api/v3/organizations/{organisation}/ai/slack-bots | Create Slack Bot|
+|[**createSlackInteraction**](#createslackinteraction) | **POST** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/interactions | Ask for a single Slack button response|
 |[**deleteSlackBot**](#deleteslackbot) | **DELETE** /api/v3/organizations/{organisation}/ai/slack-bots/{botId} | Delete Slack Bot|
 |[**getSlackBot**](#getslackbot) | **GET** /api/v3/organizations/{organisation}/ai/slack-bots/{botId} | Get Slack Bot|
 |[**getSlackBotThread**](#getslackbotthread) | **GET** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/threads/{channel}/{threadTs} | Read a thread|
+|[**getSlackInteraction**](#getslackinteraction) | **GET** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/interactions/{interactionId} | Read an external Slack interaction|
 |[**listSlackBotChannelMessages**](#listslackbotchannelmessages) | **GET** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/channels/{channel}/messages | Read recent channel messages|
 |[**listSlackBots**](#listslackbots) | **GET** /api/v3/organizations/{organisation}/ai/slack-bots | List Slack Bots|
 |[**listSlackBotsApiEnabled**](#listslackbotsapienabled) | **GET** /api/v3/organizations/{organisation}/ai/slack-bots/api-enabled | List API-enabled Slack bots|
+|[**postSlackBotFile**](#postslackbotfile) | **POST** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/files | Post an image as the bot|
 |[**postSlackBotMessage**](#postslackbotmessage) | **POST** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/messages | Post a message as the bot|
 |[**searchSlackWorkspaceChannels**](#searchslackworkspacechannels) | **GET** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/workspace/channels | Search Slack Workspace Channels|
 |[**searchSlackWorkspaceUsers**](#searchslackworkspaceusers) | **GET** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/workspace/users | Search Slack Workspace Users|
 |[**updateSlackBot**](#updateslackbot) | **PUT** /api/v3/organizations/{organisation}/ai/slack-bots/{botId} | Update Slack Bot|
+
+# **cancelSlackInteraction**
+> cancelSlackInteraction()
+
+
+### Example
+
+```typescript
+import {
+    AISlackBotsApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AISlackBotsApi(configuration);
+
+let organisation: string; // (default to undefined)
+let botId: string; // (default to undefined)
+let interactionId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.cancelSlackInteraction(
+    organisation,
+    botId,
+    interactionId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] |  | defaults to undefined|
+| **botId** | [**string**] |  | defaults to undefined|
+| **interactionId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Cancelled; repeated cancellation is idempotent |  -  |
+|**409** | A response or expiry already won |  -  |
+|**404** | Unknown, foreign or disabled |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createSlackBot**
 > CreateSlackBot201Response createSlackBot(createSlackBotRequest)
@@ -71,6 +133,72 @@ const { status, data } = await apiInstance.createSlackBot(
 |**400** | Invalid request parameters |  -  |
 |**403** | Access denied |  -  |
 |**500** | Failed to create Slack bot |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createSlackInteraction**
+> createSlackInteraction(createSlackInteractionRequest)
+
+External-agent interaction, not a platform tool approval. Requires explicit ai:slack, verified email and use_ai_services. The caller owns the meaning of the response. Feature must be enabled on this environment.
+
+### Example
+
+```typescript
+import {
+    AISlackBotsApi,
+    Configuration,
+    CreateSlackInteractionRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AISlackBotsApi(configuration);
+
+let organisation: string; // (default to undefined)
+let botId: string; // (default to undefined)
+let idempotencyKey: string; // (default to undefined)
+let createSlackInteractionRequest: CreateSlackInteractionRequest; //
+
+const { status, data } = await apiInstance.createSlackInteraction(
+    organisation,
+    botId,
+    idempotencyKey,
+    createSlackInteractionRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createSlackInteractionRequest** | **CreateSlackInteractionRequest**|  | |
+| **organisation** | [**string**] |  | defaults to undefined|
+| **botId** | [**string**] |  | defaults to undefined|
+| **idempotencyKey** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | Card delivered; interaction awaits a response |  -  |
+|**202** | Read returned interactionId to obtain delivery or recorded response state |  -  |
+|**400** | Invalid request |  -  |
+|**403** | Access denied |  -  |
+|**422** | Idempotency key reused with a different request |  -  |
+|**503** | Audit persistence unavailable; retry with the same key |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -264,6 +392,65 @@ const { status, data } = await apiInstance.getSlackBotThread(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getSlackInteraction**
+> getSlackInteraction()
+
+Owner-bound to the creating org, bot, user and token. Recorded responses identify Slack workspace/user and actionId. Silence, expiry and intermediate states do not mean approval.
+
+### Example
+
+```typescript
+import {
+    AISlackBotsApi,
+    Configuration
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AISlackBotsApi(configuration);
+
+let organisation: string; // (default to undefined)
+let botId: string; // (default to undefined)
+let interactionId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getSlackInteraction(
+    organisation,
+    botId,
+    interactionId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organisation** | [**string**] |  | defaults to undefined|
+| **botId** | [**string**] |  | defaults to undefined|
+| **interactionId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Current state, immutable request, expiry and audited response when terminal |  -  |
+|**404** | Unknown, foreign or disabled |  -  |
+|**503** | Audit unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **listSlackBotChannelMessages**
 > ListSlackBotChannelMessages200Response listSlackBotChannelMessages()
 
@@ -443,6 +630,75 @@ const { status, data } = await apiInstance.listSlackBotsApiEnabled(
 |**404** | NOT_FOUND: the Slack bot API is not enabled |  -  |
 |**429** | RATE_LIMITED. See the Retry-After header. |  * Retry-After -  <br>  |
 |**502** | SLACK_ERROR |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **postSlackBotFile**
+> PostSlackBotFile201Response postSlackBotFile(postSlackBotFileRequest)
+
+The bot uploads one image in an allowed channel or thread, with an attribution line that shows your name. The type comes from the bytes: PNG, JPEG, GIF or WebP, at most 4 MiB decoded. Counts as one write. Needs the explicit `ai:slack` scope, `use_ai_services` and a verified email.
+
+### Example
+
+```typescript
+import {
+    AISlackBotsApi,
+    Configuration,
+    PostSlackBotFileRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new AISlackBotsApi(configuration);
+
+let organisation: string; //The organisation machine name (default to undefined)
+let botId: string; // (default to undefined)
+let postSlackBotFileRequest: PostSlackBotFileRequest; //
+let idempotencyKey: string; //8-128 visible ASCII characters. The same key and body within 10 minutes returns the first result and does not upload again. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.postSlackBotFile(
+    organisation,
+    botId,
+    postSlackBotFileRequest,
+    idempotencyKey
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **postSlackBotFileRequest** | **PostSlackBotFileRequest**|  | |
+| **organisation** | [**string**] | The organisation machine name | defaults to undefined|
+| **botId** | [**string**] |  | defaults to undefined|
+| **idempotencyKey** | [**string**] | 8-128 visible ASCII characters. The same key and body within 10 minutes returns the first result and does not upload again. | (optional) defaults to undefined|
+
+
+### Return type
+
+**PostSlackBotFile201Response**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | Uploaded |  -  |
+|**400** | INVALID_REQUEST: the body is not a JSON object, has an unknown field or a field that is not valid, the content is not a PNG, JPEG, GIF or WebP image or is larger than 4 MiB, or the Idempotency-Key is not valid |  -  |
+|**401** | Invalid or expired token |  -  |
+|**403** | SCOPE_REQUIRED, EMAIL_NOT_VERIFIED, IDENTITY_REQUIRED, CHANNEL_NOT_ALLOWED, USER_NOT_ALLOWED, PERMISSION_DENIED, or AI is off for the organisation |  -  |
+|**404** | BOT_NOT_FOUND, or NOT_FOUND when the Slack bot API is not enabled |  -  |
+|**409** | BOT_INACTIVE, or REQUEST_IN_PROGRESS (retryable) while the first call with this Idempotency-Key runs |  -  |
+|**422** | IDEMPOTENCY_KEY_MISMATCH: the Idempotency-Key was used with a different body |  -  |
+|**429** | RATE_LIMITED. See the Retry-After header. |  * Retry-After -  <br>  |
+|**502** | SLACK_ERROR. slackError carries the Slack error string. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

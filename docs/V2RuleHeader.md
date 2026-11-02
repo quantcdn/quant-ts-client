@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **name** | **string** | Rule name | [optional] [default to undefined]
 **uuid** | **string** | Rule UUID | [default to undefined]
 **rule_id** | **string** | Rule ID | [optional] [default to undefined]
-**weight** | **number** | Rule order. Must be 0 or greater; lower weights are processed first. If omitted on create, the rule is placed last. | [optional] [default to undefined]
+**weight** | **number** | Rule order. Must be 0 or greater; lower weights are processed first. If omitted on create, the rule is placed last. A reorder in the Quant dashboard changes this rule\&#39;s weight; if &#x60;weight&#x60; is set in configuration, the next plan shows the difference and apply restores the configured order. | [optional] [default to undefined]
 **url** | **Array&lt;string&gt;** | URL patterns | [optional] [default to undefined]
 **domain** | **Array&lt;string&gt;** | Exact hostnames the rule matches, or \&#39;any\&#39;. Wildcards are not supported. | [optional] [default to undefined]
 **disabled** | **boolean** | Whether rule is disabled | [default to false]

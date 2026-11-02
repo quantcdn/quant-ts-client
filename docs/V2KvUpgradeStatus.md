@@ -8,8 +8,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **phase** | **string** | The current upgrade phase. | [default to undefined]
 **dryRun** | **boolean** |  | [default to undefined]
-**v1Table** | **string** |  | [default to undefined]
-**v2Table** | **string** |  | [default to undefined]
 **startedAt** | **string** |  | [default to undefined]
 **frozenAt** | **string** | When writes were last frozen. | [optional] [default to undefined]
 **switchedAt** | **string** |  | [optional] [default to undefined]
@@ -28,8 +26,6 @@ import { V2KvUpgradeStatus } from '@quantcdn/quant-client';
 const instance: V2KvUpgradeStatus = {
     phase,
     dryRun,
-    v1Table,
-    v2Table,
     startedAt,
     frozenAt,
     switchedAt,

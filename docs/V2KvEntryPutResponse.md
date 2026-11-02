@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **key** | **string** |  | [default to undefined]
-**value** | **any** | The stored JSON value. | [optional] [default to undefined]
+**value** | **any** | The stored JSON value. For a secret write (secret true) it reads \&quot;[ENCRYPTED]\&quot;: secret values are write-only through the API. | [optional] [default to undefined]
 **status** | **string** |  | [default to undefined]
 **message** | **string** |  | [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
