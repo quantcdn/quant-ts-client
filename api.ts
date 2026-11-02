@@ -2706,6 +2706,12 @@ export interface CreateAIAgentRequest {
      */
     'longContext'?: boolean;
     /**
+     * Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default.
+     * @type {string}
+     * @memberof CreateAIAgentRequest
+     */
+    'reasoningEffort'?: CreateAIAgentRequestReasoningEffortEnum | null;
+    /**
      * Guardrail preset name
      * @type {string}
      * @memberof CreateAIAgentRequest
@@ -2719,6 +2725,15 @@ export interface CreateAIAgentRequest {
     'filterPolicies'?: Array<string>;
 }
 
+export const CreateAIAgentRequestReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type CreateAIAgentRequestReasoningEffortEnum = typeof CreateAIAgentRequestReasoningEffortEnum[keyof typeof CreateAIAgentRequestReasoningEffortEnum];
 export const CreateAIAgentRequestGuardrailPresetEnum = {
     Official: 'official',
     OfficialSensitive: 'official-sensitive',
@@ -3816,6 +3831,12 @@ export interface CreateSlackBotRequest {
      */
     'longContext'?: boolean;
     /**
+     * Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default.
+     * @type {string}
+     * @memberof CreateSlackBotRequest
+     */
+    'reasoningEffort'?: CreateSlackBotRequestReasoningEffortEnum | null;
+    /**
      * Session TTL in days
      * @type {number}
      * @memberof CreateSlackBotRequest
@@ -3877,6 +3898,15 @@ export const CreateSlackBotRequestSetupTypeEnum = {
 } as const;
 
 export type CreateSlackBotRequestSetupTypeEnum = typeof CreateSlackBotRequestSetupTypeEnum[keyof typeof CreateSlackBotRequestSetupTypeEnum];
+export const CreateSlackBotRequestReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type CreateSlackBotRequestReasoningEffortEnum = typeof CreateSlackBotRequestReasoningEffortEnum[keyof typeof CreateSlackBotRequestReasoningEffortEnum];
 
 /**
  * 
@@ -5310,6 +5340,12 @@ export interface GetAIAgent200ResponseAgent {
      */
     'longContext'?: boolean;
     /**
+     * Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default.
+     * @type {string}
+     * @memberof GetAIAgent200ResponseAgent
+     */
+    'reasoningEffort'?: GetAIAgent200ResponseAgentReasoningEffortEnum | null;
+    /**
      * Guardrail preset name
      * @type {string}
      * @memberof GetAIAgent200ResponseAgent
@@ -5346,6 +5382,17 @@ export interface GetAIAgent200ResponseAgent {
      */
     'updatedAt'?: string;
 }
+
+export const GetAIAgent200ResponseAgentReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type GetAIAgent200ResponseAgentReasoningEffortEnum = typeof GetAIAgent200ResponseAgentReasoningEffortEnum[keyof typeof GetAIAgent200ResponseAgentReasoningEffortEnum];
+
 /**
  * 
  * @export
@@ -5884,12 +5931,29 @@ export interface GetAgentOverlay200ResponseOverlay {
      */
     'guardrailPreset'?: string;
     /**
+     * Reasoning effort for this organisation. Overrides the global agent value.
+     * @type {string}
+     * @memberof GetAgentOverlay200ResponseOverlay
+     */
+    'reasoningEffort'?: GetAgentOverlay200ResponseOverlayReasoningEffortEnum | null;
+    /**
      * 
      * @type {number}
      * @memberof GetAgentOverlay200ResponseOverlay
      */
     'version'?: number;
 }
+
+export const GetAgentOverlay200ResponseOverlayReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type GetAgentOverlay200ResponseOverlayReasoningEffortEnum = typeof GetAgentOverlay200ResponseOverlayReasoningEffortEnum[keyof typeof GetAgentOverlay200ResponseOverlayReasoningEffortEnum];
+
 /**
  * 
  * @export
@@ -7369,6 +7433,12 @@ export interface GetSlackBot200ResponseBot {
      */
     'longContext'?: boolean;
     /**
+     * Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default.
+     * @type {string}
+     * @memberof GetSlackBot200ResponseBot
+     */
+    'reasoningEffort'?: GetSlackBot200ResponseBotReasoningEffortEnum | null;
+    /**
      * 
      * @type {number}
      * @memberof GetSlackBot200ResponseBot
@@ -7448,6 +7518,15 @@ export const GetSlackBot200ResponseBotStatusEnum = {
 } as const;
 
 export type GetSlackBot200ResponseBotStatusEnum = typeof GetSlackBot200ResponseBotStatusEnum[keyof typeof GetSlackBot200ResponseBotStatusEnum];
+export const GetSlackBot200ResponseBotReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type GetSlackBot200ResponseBotReasoningEffortEnum = typeof GetSlackBot200ResponseBotReasoningEffortEnum[keyof typeof GetSlackBot200ResponseBotReasoningEffortEnum];
 
 /**
  * 
@@ -8363,6 +8442,12 @@ export interface ListAIAgents200ResponseAgentsInner {
      */
     'longContext'?: boolean;
     /**
+     * Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default.
+     * @type {string}
+     * @memberof ListAIAgents200ResponseAgentsInner
+     */
+    'reasoningEffort'?: ListAIAgents200ResponseAgentsInnerReasoningEffortEnum | null;
+    /**
      * 
      * @type {string}
      * @memberof ListAIAgents200ResponseAgentsInner
@@ -8393,6 +8478,17 @@ export interface ListAIAgents200ResponseAgentsInner {
      */
     'updatedAt'?: string;
 }
+
+export const ListAIAgents200ResponseAgentsInnerReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type ListAIAgents200ResponseAgentsInnerReasoningEffortEnum = typeof ListAIAgents200ResponseAgentsInnerReasoningEffortEnum[keyof typeof ListAIAgents200ResponseAgentsInnerReasoningEffortEnum];
+
 /**
  * 
  * @export
@@ -9389,6 +9485,12 @@ export interface ListSlackBots200ResponseBotsInner {
      */
     'longContext'?: boolean;
     /**
+     * Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default.
+     * @type {string}
+     * @memberof ListSlackBots200ResponseBotsInner
+     */
+    'reasoningEffort'?: ListSlackBots200ResponseBotsInnerReasoningEffortEnum | null;
+    /**
      * 
      * @type {number}
      * @memberof ListSlackBots200ResponseBotsInner
@@ -9420,6 +9522,15 @@ export const ListSlackBots200ResponseBotsInnerStatusEnum = {
 } as const;
 
 export type ListSlackBots200ResponseBotsInnerStatusEnum = typeof ListSlackBots200ResponseBotsInnerStatusEnum[keyof typeof ListSlackBots200ResponseBotsInnerStatusEnum];
+export const ListSlackBots200ResponseBotsInnerReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type ListSlackBots200ResponseBotsInnerReasoningEffortEnum = typeof ListSlackBots200ResponseBotsInnerReasoningEffortEnum[keyof typeof ListSlackBots200ResponseBotsInnerReasoningEffortEnum];
 
 /**
  * 
@@ -11819,6 +11930,12 @@ export interface UpdateAIAgentRequest {
      */
     'longContext'?: boolean;
     /**
+     * Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. null clears it.
+     * @type {string}
+     * @memberof UpdateAIAgentRequest
+     */
+    'reasoningEffort'?: UpdateAIAgentRequestReasoningEffortEnum | null;
+    /**
      * Guardrail preset name
      * @type {string}
      * @memberof UpdateAIAgentRequest
@@ -11832,6 +11949,15 @@ export interface UpdateAIAgentRequest {
     'filterPolicies'?: Array<string>;
 }
 
+export const UpdateAIAgentRequestReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type UpdateAIAgentRequestReasoningEffortEnum = typeof UpdateAIAgentRequestReasoningEffortEnum[keyof typeof UpdateAIAgentRequestReasoningEffortEnum];
 export const UpdateAIAgentRequestGuardrailPresetEnum = {
     Official: 'official',
     OfficialSensitive: 'official-sensitive',
@@ -12348,6 +12474,12 @@ export interface UpdateSlackBotRequest {
      */
     'longContext'?: boolean;
     /**
+     * Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. null clears it.
+     * @type {string}
+     * @memberof UpdateSlackBotRequest
+     */
+    'reasoningEffort'?: UpdateSlackBotRequestReasoningEffortEnum | null;
+    /**
      * Session TTL in days
      * @type {number}
      * @memberof UpdateSlackBotRequest
@@ -12409,6 +12541,15 @@ export const UpdateSlackBotRequestStatusEnum = {
 } as const;
 
 export type UpdateSlackBotRequestStatusEnum = typeof UpdateSlackBotRequestStatusEnum[keyof typeof UpdateSlackBotRequestStatusEnum];
+export const UpdateSlackBotRequestReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type UpdateSlackBotRequestReasoningEffortEnum = typeof UpdateSlackBotRequestReasoningEffortEnum[keyof typeof UpdateSlackBotRequestReasoningEffortEnum];
 
 /**
  * 
@@ -12840,6 +12981,12 @@ export interface UpsertAgentOverlayRequest {
      */
     'guardrailPreset'?: UpsertAgentOverlayRequestGuardrailPresetEnum | null;
     /**
+     * Override the reasoning effort. Must be one of the levels the effective model lists in capabilities.effortLevels. Omit or null to use the global agent value.
+     * @type {string}
+     * @memberof UpsertAgentOverlayRequest
+     */
+    'reasoningEffort'?: UpsertAgentOverlayRequestReasoningEffortEnum | null;
+    /**
      * Current version for optimistic concurrency
      * @type {number}
      * @memberof UpsertAgentOverlayRequest
@@ -12854,6 +13001,15 @@ export const UpsertAgentOverlayRequestGuardrailPresetEnum = {
 } as const;
 
 export type UpsertAgentOverlayRequestGuardrailPresetEnum = typeof UpsertAgentOverlayRequestGuardrailPresetEnum[keyof typeof UpsertAgentOverlayRequestGuardrailPresetEnum];
+export const UpsertAgentOverlayRequestReasoningEffortEnum = {
+    Low: 'low',
+    Medium: 'medium',
+    High: 'high',
+    Xhigh: 'xhigh',
+    Max: 'max'
+} as const;
+
+export type UpsertAgentOverlayRequestReasoningEffortEnum = typeof UpsertAgentOverlayRequestReasoningEffortEnum[keyof typeof UpsertAgentOverlayRequestReasoningEffortEnum];
 
 /**
  * 
@@ -41476,7 +41632,7 @@ export const CronApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listCronJobs(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Cron>> {
+        async listCronJobs(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Cron>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listCronJobs(organisation, application, environment, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CronApi.listCronJobs']?.[localVarOperationServerIndex]?.url;
@@ -41584,7 +41740,7 @@ export const CronApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCronJobs(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): AxiosPromise<Cron> {
+        listCronJobs(organisation: string, application: string, environment: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Cron>> {
             return localVarFp.listCronJobs(organisation, application, environment, options).then((request) => request(axios, basePath));
         },
         /**
