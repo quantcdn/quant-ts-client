@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **guardrailPreset** | **string** |  | [optional] [default to undefined]
 **filterPolicies** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **longContext** | **boolean** |  | [optional] [default to undefined]
+**reasoningEffort** | **string** | Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. | [optional] [default to undefined]
 **sessionTtlDays** | **number** |  | [optional] [default to undefined]
 **allowedChannels** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **allowedUsers** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
@@ -55,6 +56,7 @@ const instance: GetSlackBot200ResponseBot = {
     guardrailPreset,
     filterPolicies,
     longContext,
+    reasoningEffort,
     sessionTtlDays,
     allowedChannels,
     allowedUsers,

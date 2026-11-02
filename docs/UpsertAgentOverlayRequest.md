@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **systemPromptAppend** | **string** | Text appended to base system prompt | [optional] [default to undefined]
 **allowedCollections** | **Array&lt;string&gt;** | Vector DB collections | [optional] [default to undefined]
 **guardrailPreset** | **string** | Guardrail preset | [optional] [default to undefined]
+**reasoningEffort** | **string** | Override the reasoning effort. Must be one of the levels the effective model lists in capabilities.effortLevels. Omit or null to use the global agent value. | [optional] [default to undefined]
 **version** | **number** | Current version for optimistic concurrency | [optional] [default to undefined]
 
 ## Example
@@ -33,6 +34,7 @@ const instance: UpsertAgentOverlayRequest = {
     systemPromptAppend,
     allowedCollections,
     guardrailPreset,
+    reasoningEffort,
     version,
 };
 ```

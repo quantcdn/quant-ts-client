@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **assignedSkills** | **Array&lt;string&gt;** | Skill IDs to assign to this agent | [optional] [default to undefined]
 **createdBy** | **string** | User identifier who created the agent | [optional] [default to undefined]
 **longContext** | **boolean** | Enable 1M context window support | [optional] [default to undefined]
+**reasoningEffort** | **string** | Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. | [optional] [default to undefined]
 **guardrailPreset** | **string** | Guardrail preset name | [optional] [default to undefined]
 **filterPolicies** | **Array&lt;string&gt;** | Filter policy IDs to apply to this agent\&#39;s inference requests | [optional] [default to undefined]
 
@@ -38,6 +39,7 @@ const instance: CreateAIAgentRequest = {
     assignedSkills,
     createdBy,
     longContext,
+    reasoningEffort,
     guardrailPreset,
     filterPolicies,
 };
