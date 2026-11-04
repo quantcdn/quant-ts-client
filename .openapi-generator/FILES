@@ -52,6 +52,7 @@ docs/BackupManagementApi.md
 docs/BulkSetEnvironmentVariablesRequest.md
 docs/BulkSetEnvironmentVariablesRequestEnvironmentInner.md
 docs/CDNMetricsApi.md
+docs/CIValuesApi.md
 docs/ChatInference200Response.md
 docs/ChatInference200ResponseResponse.md
 docs/ChatInference200ResponseResponseToolUse.md
@@ -89,6 +90,9 @@ docs/ChatWithAIAgent200ResponseResponse.md
 docs/ChatWithAIAgent200ResponseResponseUsage.md
 docs/ChatWithAIAgent202Response.md
 docs/ChatWithAIAgentRequest.md
+docs/CiValue.md
+docs/CiValueError.md
+docs/CiValueWriteResult.md
 docs/Command.md
 docs/CommandsApi.md
 docs/Compose.md
@@ -108,6 +112,7 @@ docs/CrawlersRun200Response.md
 docs/CrawlersRunRequest.md
 docs/CreateAIAgent201Response.md
 docs/CreateAIAgentRequest.md
+docs/CreateAIAgentRequestMcpServersInner.md
 docs/CreateAISession201Response.md
 docs/CreateAISessionRequest.md
 docs/CreateAISessionRequestInitialMessagesInner.md
@@ -194,6 +199,7 @@ docs/GetAIToolExecutionStatus404Response.md
 docs/GetAgentOverlay200Response.md
 docs/GetAgentOverlay200ResponseBase.md
 docs/GetAgentOverlay200ResponseOverlay.md
+docs/GetAgentOverlay200ResponseOverlayMcpServersInner.md
 docs/GetCustomTool200Response.md
 docs/GetCustomTool200ResponseTool.md
 docs/GetDependencyGraph200Response.md
@@ -225,6 +231,8 @@ docs/GetMyUsage200ResponseQuota.md
 docs/GetMyUsage200ResponseQuotaDailyLimit.md
 docs/GetMyUsage200ResponseQuotaMonthlyLimit.md
 docs/GetOrgResourceCredentials200Response.md
+docs/GetProjectEdgeEvents200Response.md
+docs/GetProjectEdgeEvents200ResponseEventsInner.md
 docs/GetProjectLogs200Response.md
 docs/GetProjectLogs200ResponseLogsInner.md
 docs/GetProjectLogs400Response.md
@@ -262,6 +270,7 @@ docs/KVLinkToProject200Response.md
 docs/KVLinkToProjectRequest.md
 docs/ListAIAgents200Response.md
 docs/ListAIAgents200ResponseAgentsInner.md
+docs/ListAIAgents200ResponseAgentsInnerMcpServersInner.md
 docs/ListAIModels200Response.md
 docs/ListAIModels200ResponseModelsInner.md
 docs/ListAIModels200ResponseModelsInnerCapabilities.md
@@ -277,6 +286,7 @@ docs/ListApplications503Response.md
 docs/ListBackups200Response.md
 docs/ListBackups200ResponseBackupsInner.md
 docs/ListBackups422Response.md
+docs/ListCiValues200Response.md
 docs/ListCustomTools200Response.md
 docs/ListCustomTools200ResponseToolsInner.md
 docs/ListFiles200Response.md
@@ -335,6 +345,7 @@ docs/PurgeCreateRequest.md
 docs/PurgeOrgResource200Response.md
 docs/PurgeOrgResourceRequest.md
 docs/PutApplicationMetadata400Response.md
+docs/PutCiValueRequest.md
 docs/QueryVectorCollection200Response.md
 docs/QueryVectorCollection200ResponsePagination.md
 docs/QueryVectorCollection200ResponseResultsInner.md
