@@ -2137,6 +2137,145 @@ export interface ChatWithAIAgentRequest {
 /**
  * 
  * @export
+ * @interface CiValue
+ */
+export interface CiValue {
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValue
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValue
+     */
+    'kind'?: CiValueKindEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValue
+     */
+    'scope'?: CiValueScopeEnum;
+    /**
+     * Lower-case owner/name. Present when scope is repo.
+     * @type {string}
+     * @memberof CiValue
+     */
+    'repo'?: string;
+    /**
+     * The branch rule. Absent when the value applies to every branch.
+     * @type {Array<string>}
+     * @memberof CiValue
+     */
+    'branches'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValue
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValue
+     */
+    'updatedBy'?: string;
+    /**
+     * Variables only. A secret value is never returned.
+     * @type {string}
+     * @memberof CiValue
+     */
+    'value'?: string;
+}
+
+export const CiValueKindEnum = {
+    Secret: 'secret',
+    Var: 'var'
+} as const;
+
+export type CiValueKindEnum = typeof CiValueKindEnum[keyof typeof CiValueKindEnum];
+export const CiValueScopeEnum = {
+    Org: 'org',
+    Repo: 'repo'
+} as const;
+
+export type CiValueScopeEnum = typeof CiValueScopeEnum[keyof typeof CiValueScopeEnum];
+
+/**
+ * 
+ * @export
+ * @interface CiValueError
+ */
+export interface CiValueError {
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValueError
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CiValueWriteResult
+ */
+export interface CiValueWriteResult {
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValueWriteResult
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValueWriteResult
+     */
+    'kind'?: CiValueWriteResultKindEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValueWriteResult
+     */
+    'scope'?: CiValueWriteResultScopeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValueWriteResult
+     */
+    'repo'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CiValueWriteResult
+     */
+    'branches'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CiValueWriteResult
+     */
+    'updatedAt'?: string;
+}
+
+export const CiValueWriteResultKindEnum = {
+    Secret: 'secret',
+    Var: 'var'
+} as const;
+
+export type CiValueWriteResultKindEnum = typeof CiValueWriteResultKindEnum[keyof typeof CiValueWriteResultKindEnum];
+export const CiValueWriteResultScopeEnum = {
+    Org: 'org',
+    Repo: 'repo'
+} as const;
+
+export type CiValueWriteResultScopeEnum = typeof CiValueWriteResultScopeEnum[keyof typeof CiValueWriteResultScopeEnum];
+
+/**
+ * 
+ * @export
  * @interface Command
  */
 export interface Command {
@@ -2718,6 +2857,12 @@ export interface CreateAIAgentRequest {
      */
     'guardrailPreset'?: CreateAIAgentRequestGuardrailPresetEnum | null;
     /**
+     * Registered MCP servers to attach. The agent gets the tools of each server in dashboard chat and in QuantCode. On update, an empty array removes every attachment.
+     * @type {Array<CreateAIAgentRequestMcpServersInner>}
+     * @memberof CreateAIAgentRequest
+     */
+    'mcpServers'?: Array<CreateAIAgentRequestMcpServersInner>;
+    /**
      * Filter policy IDs to apply to this agent\'s inference requests
      * @type {Array<string>}
      * @memberof CreateAIAgentRequest
@@ -2742,6 +2887,25 @@ export const CreateAIAgentRequestGuardrailPresetEnum = {
 
 export type CreateAIAgentRequestGuardrailPresetEnum = typeof CreateAIAgentRequestGuardrailPresetEnum[keyof typeof CreateAIAgentRequestGuardrailPresetEnum];
 
+/**
+ * 
+ * @export
+ * @interface CreateAIAgentRequestMcpServersInner
+ */
+export interface CreateAIAgentRequestMcpServersInner {
+    /**
+     * The registered server name
+     * @type {string}
+     * @memberof CreateAIAgentRequestMcpServersInner
+     */
+    'server': string;
+    /**
+     * Optional. Only these tools of the server. Omit for every tool the server allows; an empty array allows none.
+     * @type {Array<string>}
+     * @memberof CreateAIAgentRequestMcpServersInner
+     */
+    'tools'?: Array<string>;
+}
 /**
  * 
  * @export
@@ -5926,6 +6090,12 @@ export interface GetAgentOverlay200ResponseOverlay {
     'allowedCollections'?: Array<string>;
     /**
      * 
+     * @type {Array<GetAgentOverlay200ResponseOverlayMcpServersInner>}
+     * @memberof GetAgentOverlay200ResponseOverlay
+     */
+    'mcpServers'?: Array<GetAgentOverlay200ResponseOverlayMcpServersInner>;
+    /**
+     * 
      * @type {string}
      * @memberof GetAgentOverlay200ResponseOverlay
      */
@@ -5936,6 +6106,18 @@ export interface GetAgentOverlay200ResponseOverlay {
      * @memberof GetAgentOverlay200ResponseOverlay
      */
     'reasoningEffort'?: GetAgentOverlay200ResponseOverlayReasoningEffortEnum | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetAgentOverlay200ResponseOverlay
+     */
+    'longContext'?: boolean;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetAgentOverlay200ResponseOverlay
+     */
+    'filterPolicies'?: Array<string>;
     /**
      * 
      * @type {number}
@@ -5954,6 +6136,25 @@ export const GetAgentOverlay200ResponseOverlayReasoningEffortEnum = {
 
 export type GetAgentOverlay200ResponseOverlayReasoningEffortEnum = typeof GetAgentOverlay200ResponseOverlayReasoningEffortEnum[keyof typeof GetAgentOverlay200ResponseOverlayReasoningEffortEnum];
 
+/**
+ * 
+ * @export
+ * @interface GetAgentOverlay200ResponseOverlayMcpServersInner
+ */
+export interface GetAgentOverlay200ResponseOverlayMcpServersInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAgentOverlay200ResponseOverlayMcpServersInner
+     */
+    'server'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GetAgentOverlay200ResponseOverlayMcpServersInner
+     */
+    'tools'?: Array<string>;
+}
 /**
  * 
  * @export
@@ -6961,6 +7162,115 @@ export interface GetOrgResourceCredentials200Response {
      */
     'note'?: string;
 }
+/**
+ * 
+ * @export
+ * @interface GetProjectEdgeEvents200Response
+ */
+export interface GetProjectEdgeEvents200Response {
+    /**
+     * 
+     * @type {Array<GetProjectEdgeEvents200ResponseEventsInner>}
+     * @memberof GetProjectEdgeEvents200Response
+     */
+    'events'?: Array<GetProjectEdgeEvents200ResponseEventsInner>;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetProjectEdgeEvents200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200Response
+     */
+    'nextToken'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface GetProjectEdgeEvents200ResponseEventsInner
+ */
+export interface GetProjectEdgeEvents200ResponseEventsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'timestamp'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'type'?: GetProjectEdgeEvents200ResponseEventsInnerTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'level'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'function_uuid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'truncated'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'host'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'path'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'client_ip'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'rule_id'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetProjectEdgeEvents200ResponseEventsInner
+     */
+    'waf_mode'?: string | null;
+}
+
+export const GetProjectEdgeEvents200ResponseEventsInnerTypeEnum = {
+    Console: 'console',
+    Function: 'function',
+    WafHit: 'waf-hit',
+    StaticFailover: 'static-failover',
+    Other: 'other'
+} as const;
+
+export type GetProjectEdgeEvents200ResponseEventsInnerTypeEnum = typeof GetProjectEdgeEvents200ResponseEventsInnerTypeEnum[keyof typeof GetProjectEdgeEvents200ResponseEventsInnerTypeEnum];
+
 /**
  * 
  * @export
@@ -8911,6 +9221,19 @@ export interface ListBackups422Response {
      * @memberof ListBackups422Response
      */
     'error'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ListCiValues200Response
+ */
+export interface ListCiValues200Response {
+    /**
+     * 
+     * @type {Array<CiValue>}
+     * @memberof ListCiValues200Response
+     */
+    'values'?: Array<CiValue>;
 }
 /**
  * 
@@ -10881,6 +11204,45 @@ export interface PutApplicationMetadata400Response {
 /**
  * 
  * @export
+ * @interface PutCiValueRequest
+ */
+export interface PutCiValueRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof PutCiValueRequest
+     */
+    'kind': PutCiValueRequestKindEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof PutCiValueRequest
+     */
+    'value': string;
+    /**
+     * Owner/name. Lower-cased by the server. Leave out for an organisation value.
+     * @type {string}
+     * @memberof PutCiValueRequest
+     */
+    'repo'?: string;
+    /**
+     * Only jobs on these branches get the value. Leave out for every branch.
+     * @type {Array<string>}
+     * @memberof PutCiValueRequest
+     */
+    'branches'?: Array<string>;
+}
+
+export const PutCiValueRequestKindEnum = {
+    Secret: 'secret',
+    Var: 'var'
+} as const;
+
+export type PutCiValueRequestKindEnum = typeof PutCiValueRequestKindEnum[keyof typeof PutCiValueRequestKindEnum];
+
+/**
+ * 
+ * @export
  * @interface QueryVectorCollection200Response
  */
 export interface QueryVectorCollection200Response {
@@ -11942,6 +12304,12 @@ export interface UpdateAIAgentRequest {
      */
     'guardrailPreset'?: UpdateAIAgentRequestGuardrailPresetEnum | null;
     /**
+     * Registered MCP servers to attach. The agent gets the tools of each server in dashboard chat and in QuantCode. On update, an empty array removes every attachment.
+     * @type {Array<CreateAIAgentRequestMcpServersInner>}
+     * @memberof UpdateAIAgentRequest
+     */
+    'mcpServers'?: Array<CreateAIAgentRequestMcpServersInner>;
+    /**
      * Filter policy IDs to apply to this agent\'s inference requests
      * @type {Array<string>}
      * @memberof UpdateAIAgentRequest
@@ -12975,11 +13343,29 @@ export interface UpsertAgentOverlayRequest {
      */
     'allowedCollections'?: Array<string>;
     /**
+     * Registered MCP servers to attach. The agent gets the tools of each server in dashboard chat and in QuantCode. The overlay PUT replaces the whole overlay: omit the field or send an empty array to remove every attachment.
+     * @type {Array<CreateAIAgentRequestMcpServersInner>}
+     * @memberof UpsertAgentOverlayRequest
+     */
+    'mcpServers'?: Array<CreateAIAgentRequestMcpServersInner>;
+    /**
      * Guardrail preset
      * @type {string}
      * @memberof UpsertAgentOverlayRequest
      */
     'guardrailPreset'?: UpsertAgentOverlayRequestGuardrailPresetEnum | null;
+    /**
+     * Force the 1M context window on (true) or off (false) for this organisation. Omit or null to use the platform default.
+     * @type {boolean}
+     * @memberof UpsertAgentOverlayRequest
+     */
+    'longContext'?: boolean | null;
+    /**
+     * Filter policy IDs applied to this agent\'s requests for this organisation, with any organisation-wide mandatory policies
+     * @type {Array<string>}
+     * @memberof UpsertAgentOverlayRequest
+     */
+    'filterPolicies'?: Array<string>;
     /**
      * Override the reasoning effort. Must be one of the levels the effective model lists in capabilities.effortLevels. Omit or null to use the global agent value.
      * @type {string}
@@ -15808,7 +16194,7 @@ export const V2KvEntryPutResponseStatusEnum = {
 export type V2KvEntryPutResponseStatusEnum = typeof V2KvEntryPutResponseStatusEnum[keyof typeof V2KvEntryPutResponseStatusEnum];
 
 /**
- * Error body of every KV v2 route. A superset of V2Error. HTTP 400, 404, 409, 429 and 503 keep the KV service status, code and retryable. A KV service failure that the caller cannot act on is 500 INTERNAL. When retryable is true, the same request can be sent again (after Retry-After when present).  | code | status | retryable | meaning | |---|---|---|---| | VALIDATION | 400 | false | The request is not valid (body, parameter, key or value). | | LIMIT_EXCEEDED | 400 | false | A size or count limit is exceeded (item over 400 KB, batch, transact, value). | | CURSOR_INVALID | 400 | false | The cursor is not valid for this request. Start the list again. | | REQUIRES_FORMAT_2 | 400 | false | The operation needs a format 2 store. Upgrade the store first. | | INDEX_FIELD_ENCRYPTED | 400 | false | An indexed field is in a secret (encrypted) value. | | COUNT_WITH_TTL | 400 | false | A count index cannot include items that have a ttl. | | LEDGER_IMMUTABLE | 400 | false | A ledger entry cannot be changed or deleted. Use append. | | LEDGER_INDEX_KIND | 400 | false | This index kind is not allowed on a ledger collection. | | LEDGER_SUBJECT_REQUIRED | 400 | false | The ledger needs a subject field in each entry. | | LEDGER_DIRECTION | 400 | false | A ledger setting can only be raised, not lowered. | | CONFIRMATION_REQUIRED | 400 | false | confirm is missing or does not equal the store name. | | SCOPE_REQUIRED | 403 | false | The token does not list the scope that the route needs. | | PERMISSION_DENIED | 403 | false | The role of the token user does not have the permission. | | FORBIDDEN | 403 | false | The store is a system store and cannot be purged. | | KEY_NOT_FOUND | 404 | false | The key does not exist or has expired. | | STORE_NOT_FOUND | 404 | false | The store does not exist or is not in this project. | | EXPORT_NOT_FOUND | 404 | false | The store has no export. | | LEDGER_NOT_FOUND | 404 | false | The ledger does not exist. | | SUBJECT_NOT_FOUND | 404 | false | The ledger has no entries for the subject. | | VERIFICATION_NOT_FOUND | 404 | false | The verification run does not exist. | | SHRED_NOT_FOUND | 404 | false | The erasure record does not exist. | | INDEX_NOT_FOUND | 404 | false | The index does not exist. | | NOT_FOUND | 404 | false | No archive, tombstone or purge exists for the store or purge id. | | UPGRADE_CONFLICT | 409 | false | The upgrade action is not valid in the current upgrade state. | | CONFLICT | 409 | false | A condition (ifAbsent, ifVersion, check) failed. See reason, key and currentVersion. | | UNIQUE_VIOLATION | 409 | false | A unique index already has the value. See index and existingKey. | | EXPORT_IN_PROGRESS | 409 | false | An export of the store is already running. | | LEDGER_COLLECTION_NOT_EMPTY | 409 | false | The collection already has items, so it cannot become a ledger. | | LEDGER_RETAINED | 409 | false | The ledger is in its retention period. See retainUntil. | | LEDGER_PRESENT | 409 | false | A ledger blocks the action. See ledgers. | | STORE_NAME_RETAINED | 409 | false | The store name is held by a retained ledger archive. | | LEDGER_FORKED | 409 | false | The ledger chain does not agree with its archive or digest. See reason. | | LEDGER_DROPPED | 409 | false | The ledger was dropped. | | LEDGER_FORMAT_RETIRED | 409 | false | The ledger uses a retired subject format. Declare a new ledger. | | STORE_NOT_DELETED | 409 | false | The store still exists. Delete the store first. | | ARCHIVE_RETAINED | 409 | false | The archive is still locked or in its 24-hour quiet period. See retainedUntil. | | PURGE_IN_PROGRESS | 409 | false | Another purge of the store is running. See purgeId. | | PURGE_BLOCKED | 409 | false | The last purge is blocked and needs Quant support. See purgeId. | | PURGE_NOT_COMPLETE | 409 | false | The purge is not complete, so there is no receipt yet. See state. | | DIGEST_OWED | 409 | true | The last ledger entries are not in a signed digest yet. Send the delete again in a few minutes. | | CONTENTION | 409 | true | Another write changed the same data at the same time. Send again. | | INDEX_NOT_READY | 409 | true | The index is still building. Send again later. | | LEDGER_NOT_READY | 409 | true | The ledger is PENDING. Send again after activeAfter. | | RATE_LIMITED | 429 | true | Too many requests. Wait for Retry-After seconds. Also retryAfter (seconds) on a purge start. | | INTERNAL | 500 | false | The KV service failed. No detail is given. | | STORE_MIGRATING | 503 | true | The store is being upgraded. Wait for Retry-After seconds. | | UNAVAILABLE | 503 | true (false when the outcome of a write is unknown) | The KV service did not answer. With retryable false, read the data before you send the write again. |
+ * Error body of every KV v2 route. A superset of V2Error. HTTP 400, 404, 409, 429 and 503 keep the KV service status, code and retryable. A KV service failure that the caller cannot act on is 500 INTERNAL. When retryable is true, the same request can be sent again (after Retry-After when present).  | code | status | retryable | meaning | |---|---|---|---| | VALIDATION | 400 | false | The request is not valid (body, parameter, key or value). | | LIMIT_EXCEEDED | 400 | false | A size or count limit is exceeded (item over 400 KB, batch, transact, value). | | CURSOR_INVALID | 400 | false | The cursor is not valid for this request. Start the list again. | | REQUIRES_FORMAT_2 | 400 | false | The operation needs a format 2 store. Upgrade the store first. | | INDEX_FIELD_ENCRYPTED | 400 | false | An indexed field is in a secret (encrypted) value. | | COUNT_WITH_TTL | 400 | false | A count index cannot include items that have a ttl. | | LEDGER_IMMUTABLE | 400 | false | A ledger entry cannot be changed or deleted. Use append. | | LEDGER_INDEX_KIND | 400 | false | This index kind is not allowed on a ledger collection. | | LEDGER_SUBJECT_REQUIRED | 400 | false | The ledger needs a subject field in each entry. | | LEDGER_DIRECTION | 400 | false | A ledger setting can only be raised, not lowered. | | CONFIRMATION_REQUIRED | 400 | false | confirm is missing or does not equal the store name. | | SCOPE_REQUIRED | 403 | false | The token does not list the scope that the route needs. | | PERMISSION_DENIED | 403 | false | The role of the token user does not have the permission. | | FORBIDDEN | 403 | false | The store is a system store and cannot be purged, or it is linked from another project and only that project can delete or purge it. | | KEY_NOT_FOUND | 404 | false | The key does not exist or has expired. | | STORE_NOT_FOUND | 404 | false | The store does not exist or is not in this project. | | EXPORT_NOT_FOUND | 404 | false | The store has no export. | | LEDGER_NOT_FOUND | 404 | false | The ledger does not exist. | | SUBJECT_NOT_FOUND | 404 | false | The ledger has no entries for the subject. | | VERIFICATION_NOT_FOUND | 404 | false | The verification run does not exist. | | SHRED_NOT_FOUND | 404 | false | The erasure record does not exist. | | INDEX_NOT_FOUND | 404 | false | The index does not exist. | | NOT_FOUND | 404 | false | No archive, tombstone or purge exists for the store or purge id. | | UPGRADE_CONFLICT | 409 | false | The upgrade action is not valid in the current upgrade state. | | CONFLICT | 409 | false | A condition (ifAbsent, ifVersion, check) failed. See reason, key and currentVersion. | | UNIQUE_VIOLATION | 409 | false | A unique index already has the value. See index and existingKey. | | EXPORT_IN_PROGRESS | 409 | false | An export of the store is already running. | | LEDGER_COLLECTION_NOT_EMPTY | 409 | false | The collection already has items, so it cannot become a ledger. | | LEDGER_RETAINED | 409 | false | The ledger is in its retention period. See retainUntil. | | LEDGER_PRESENT | 409 | false | A ledger blocks the action. See ledgers. | | STORE_NAME_RETAINED | 409 | false | The store name is held by a retained ledger archive. | | LEDGER_FORKED | 409 | false | The ledger chain does not agree with its archive or digest. See reason. | | LEDGER_DROPPED | 409 | false | The ledger was dropped. | | LEDGER_FORMAT_RETIRED | 409 | false | The ledger uses a retired subject format. Declare a new ledger. | | STORE_NOT_DELETED | 409 | false | The store still exists. Delete the store first. | | ARCHIVE_RETAINED | 409 | false | The archive is still locked or in its 24-hour quiet period. See retainedUntil. | | PURGE_IN_PROGRESS | 409 | false | Another purge of the store is running. See purgeId. | | PURGE_BLOCKED | 409 | false | The last purge is blocked and needs Quant support. See purgeId. | | PURGE_NOT_COMPLETE | 409 | false | The purge is not complete, so there is no receipt yet. See state. | | DIGEST_OWED | 409 | true | The last ledger entries are not in a signed digest yet. Send the delete again in a few minutes. | | CONTENTION | 409 | true | Another write changed the same data at the same time. Send again. | | INDEX_NOT_READY | 409 | true | The index is still building. Send again later. | | LEDGER_NOT_READY | 409 | true | The ledger is PENDING. Send again after activeAfter. | | RATE_LIMITED | 429 | true | Too many requests. Wait for Retry-After seconds. Also retryAfter (seconds) on a purge start. | | INTERNAL | 500 | false | The KV service failed. No detail is given. | | STORE_MIGRATING | 503 | true | The store is being upgraded. Wait for Retry-After seconds. | | UNAVAILABLE | 503 | true (false when the outcome of a write is unknown) | The KV service did not answer. With retryable false, read the data before you send the write again. |
  * @export
  * @interface V2KvError
  */
@@ -39046,6 +39432,303 @@ export type GetMonthlyMetricsTimestampFormatEnum = typeof GetMonthlyMetricsTimes
 
 
 /**
+ * CIValuesApi - axios parameter creator
+ * @export
+ */
+export const CIValuesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Deletes one value. It answers 204 also when the value does not exist. Needs the cloud:write scope and the delete_applications permission.
+         * @summary Delete a CI secret or variable
+         * @param {string} organisation The organisation ID
+         * @param {string} name The name, such as DEPLOY_KEY
+         * @param {string} [repo] Delete the repository\&#39;s value of this name. Leave out for the organisation\&#39;s value. Lower-cased by the server.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCiValue: async (organisation: string, name: string, repo?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('deleteCiValue', 'organisation', organisation)
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('deleteCiValue', 'name', name)
+            const localVarPath = `/api/v3/organizations/{organisation}/ci/values/{name}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (repo !== undefined) {
+                localVarQueryParameter['repo'] = repo;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+         * @summary List the CI secrets and variables
+         * @param {string} organisation The organisation ID
+         * @param {string} [repo] Only the organisation\&#39;s values and this repository\&#39;s values. Lower-cased by the server.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listCiValues: async (organisation: string, repo?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('listCiValues', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ci/values`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (repo !== undefined) {
+                localVarQueryParameter['repo'] = repo;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Sets one value for the organisation, or for one repository when repo is set. The value is write-only for a secret: the response never carries it. The backend validates the name, the value and the limits and answers 400 with a message. Needs the cloud:write scope and the delete_applications permission.
+         * @summary Create or replace a CI secret or variable
+         * @param {string} organisation The organisation ID
+         * @param {string} name The name, such as DEPLOY_KEY
+         * @param {PutCiValueRequest} putCiValueRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        putCiValue: async (organisation: string, name: string, putCiValueRequest: PutCiValueRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('putCiValue', 'organisation', organisation)
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('putCiValue', 'name', name)
+            // verify required parameter 'putCiValueRequest' is not null or undefined
+            assertParamExists('putCiValue', 'putCiValueRequest', putCiValueRequest)
+            const localVarPath = `/api/v3/organizations/{organisation}/ci/values/{name}`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(putCiValueRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * CIValuesApi - functional programming interface
+ * @export
+ */
+export const CIValuesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CIValuesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Deletes one value. It answers 204 also when the value does not exist. Needs the cloud:write scope and the delete_applications permission.
+         * @summary Delete a CI secret or variable
+         * @param {string} organisation The organisation ID
+         * @param {string} name The name, such as DEPLOY_KEY
+         * @param {string} [repo] Delete the repository\&#39;s value of this name. Leave out for the organisation\&#39;s value. Lower-cased by the server.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteCiValue(organisation: string, name: string, repo?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCiValue(organisation, name, repo, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CIValuesApi.deleteCiValue']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+         * @summary List the CI secrets and variables
+         * @param {string} organisation The organisation ID
+         * @param {string} [repo] Only the organisation\&#39;s values and this repository\&#39;s values. Lower-cased by the server.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listCiValues(organisation: string, repo?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListCiValues200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listCiValues(organisation, repo, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CIValuesApi.listCiValues']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Sets one value for the organisation, or for one repository when repo is set. The value is write-only for a secret: the response never carries it. The backend validates the name, the value and the limits and answers 400 with a message. Needs the cloud:write scope and the delete_applications permission.
+         * @summary Create or replace a CI secret or variable
+         * @param {string} organisation The organisation ID
+         * @param {string} name The name, such as DEPLOY_KEY
+         * @param {PutCiValueRequest} putCiValueRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async putCiValue(organisation: string, name: string, putCiValueRequest: PutCiValueRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CiValueWriteResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.putCiValue(organisation, name, putCiValueRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CIValuesApi.putCiValue']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * CIValuesApi - factory interface
+ * @export
+ */
+export const CIValuesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CIValuesApiFp(configuration)
+    return {
+        /**
+         * Deletes one value. It answers 204 also when the value does not exist. Needs the cloud:write scope and the delete_applications permission.
+         * @summary Delete a CI secret or variable
+         * @param {string} organisation The organisation ID
+         * @param {string} name The name, such as DEPLOY_KEY
+         * @param {string} [repo] Delete the repository\&#39;s value of this name. Leave out for the organisation\&#39;s value. Lower-cased by the server.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCiValue(organisation: string, name: string, repo?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteCiValue(organisation, name, repo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+         * @summary List the CI secrets and variables
+         * @param {string} organisation The organisation ID
+         * @param {string} [repo] Only the organisation\&#39;s values and this repository\&#39;s values. Lower-cased by the server.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listCiValues(organisation: string, repo?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListCiValues200Response> {
+            return localVarFp.listCiValues(organisation, repo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Sets one value for the organisation, or for one repository when repo is set. The value is write-only for a secret: the response never carries it. The backend validates the name, the value and the limits and answers 400 with a message. Needs the cloud:write scope and the delete_applications permission.
+         * @summary Create or replace a CI secret or variable
+         * @param {string} organisation The organisation ID
+         * @param {string} name The name, such as DEPLOY_KEY
+         * @param {PutCiValueRequest} putCiValueRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        putCiValue(organisation: string, name: string, putCiValueRequest: PutCiValueRequest, options?: RawAxiosRequestConfig): AxiosPromise<CiValueWriteResult> {
+            return localVarFp.putCiValue(organisation, name, putCiValueRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * CIValuesApi - object-oriented interface
+ * @export
+ * @class CIValuesApi
+ * @extends {BaseAPI}
+ */
+export class CIValuesApi extends BaseAPI {
+    /**
+     * Deletes one value. It answers 204 also when the value does not exist. Needs the cloud:write scope and the delete_applications permission.
+     * @summary Delete a CI secret or variable
+     * @param {string} organisation The organisation ID
+     * @param {string} name The name, such as DEPLOY_KEY
+     * @param {string} [repo] Delete the repository\&#39;s value of this name. Leave out for the organisation\&#39;s value. Lower-cased by the server.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CIValuesApi
+     */
+    public deleteCiValue(organisation: string, name: string, repo?: string, options?: RawAxiosRequestConfig) {
+        return CIValuesApiFp(this.configuration).deleteCiValue(organisation, name, repo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+     * @summary List the CI secrets and variables
+     * @param {string} organisation The organisation ID
+     * @param {string} [repo] Only the organisation\&#39;s values and this repository\&#39;s values. Lower-cased by the server.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CIValuesApi
+     */
+    public listCiValues(organisation: string, repo?: string, options?: RawAxiosRequestConfig) {
+        return CIValuesApiFp(this.configuration).listCiValues(organisation, repo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Sets one value for the organisation, or for one repository when repo is set. The value is write-only for a secret: the response never carries it. The backend validates the name, the value and the limits and answers 400 with a message. Needs the cloud:write scope and the delete_applications permission.
+     * @summary Create or replace a CI secret or variable
+     * @param {string} organisation The organisation ID
+     * @param {string} name The name, such as DEPLOY_KEY
+     * @param {PutCiValueRequest} putCiValueRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CIValuesApi
+     */
+    public putCiValue(organisation: string, name: string, putCiValueRequest: PutCiValueRequest, options?: RawAxiosRequestConfig) {
+        return CIValuesApiFp(this.configuration).putCiValue(organisation, name, putCiValueRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * CommandsApi - axios parameter creator
  * @export
  */
@@ -50643,6 +51326,88 @@ export class OrganizationsApi extends BaseAPI {
 export const ProjectsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Output of the project\'s edge functions and content filters (console.* as type console, quantLog() as type function), WAF hits and static failover. Entries are returned oldest first, up to about 10 minutes behind, kept 31 days; pass nextToken from the previous response, with the same filters, to fetch the next page. A slow query can return an empty page with a nextToken. An edge function invocation keeps at most 100 console lines of up to 8 KB each.
+         * @summary Get edge events for a project
+         * @param {string} organization The organization machine name
+         * @param {string} project The project machine name
+         * @param {string} [type] Comma-separated event types: console, function, waf-hit, static-failover
+         * @param {string} [_function] Only events from this edge function (UUID)
+         * @param {GetProjectEdgeEventsLevelEnum} [level] Only console events at this level
+         * @param {string} [search] Case-insensitive substring of the message
+         * @param {number} [limit] Maximum number of events per page (default 100)
+         * @param {string} [startTime] Start of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [endTime] End of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [nextToken] Opaque pagination token from the previous response
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjectEdgeEvents: async (organization: string, project: string, type?: string, _function?: string, level?: GetProjectEdgeEventsLevelEnum, search?: string, limit?: number, startTime?: string, endTime?: string, nextToken?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organization' is not null or undefined
+            assertParamExists('getProjectEdgeEvents', 'organization', organization)
+            // verify required parameter 'project' is not null or undefined
+            assertParamExists('getProjectEdgeEvents', 'project', project)
+            const localVarPath = `/api/v2/organizations/{organization}/projects/{project}/edge-events`
+                .replace(`{${"organization"}}`, encodeURIComponent(String(organization)))
+                .replace(`{${"project"}}`, encodeURIComponent(String(project)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
+            }
+
+            if (_function !== undefined) {
+                localVarQueryParameter['function'] = _function;
+            }
+
+            if (level !== undefined) {
+                localVarQueryParameter['level'] = level;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (startTime !== undefined) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+
+            if (endTime !== undefined) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieves CDN access log entries for a project. Results are always scoped to the project; the optional filter can only narrow them. Entries are returned oldest first; pass nextToken from the previous response to fetch the next page. Logs are retained for 30 days. For QuantCDN (Fastly) projects, entries are up to about 30 minutes behind, and a slow query can return an empty page with a nextToken: call again with it to collect the entries.
          * @summary Get CDN access logs for a project
          * @param {string} organization The organization machine name
@@ -50946,6 +51711,28 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProjectsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Output of the project\'s edge functions and content filters (console.* as type console, quantLog() as type function), WAF hits and static failover. Entries are returned oldest first, up to about 10 minutes behind, kept 31 days; pass nextToken from the previous response, with the same filters, to fetch the next page. A slow query can return an empty page with a nextToken. An edge function invocation keeps at most 100 console lines of up to 8 KB each.
+         * @summary Get edge events for a project
+         * @param {string} organization The organization machine name
+         * @param {string} project The project machine name
+         * @param {string} [type] Comma-separated event types: console, function, waf-hit, static-failover
+         * @param {string} [_function] Only events from this edge function (UUID)
+         * @param {GetProjectEdgeEventsLevelEnum} [level] Only console events at this level
+         * @param {string} [search] Case-insensitive substring of the message
+         * @param {number} [limit] Maximum number of events per page (default 100)
+         * @param {string} [startTime] Start of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [endTime] End of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [nextToken] Opaque pagination token from the previous response
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getProjectEdgeEvents(organization: string, project: string, type?: string, _function?: string, level?: GetProjectEdgeEventsLevelEnum, search?: string, limit?: number, startTime?: string, endTime?: string, nextToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetProjectEdgeEvents200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProjectEdgeEvents(organization, project, type, _function, level, search, limit, startTime, endTime, nextToken, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProjectsApi.getProjectEdgeEvents']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Retrieves CDN access log entries for a project. Results are always scoped to the project; the optional filter can only narrow them. Entries are returned oldest first; pass nextToken from the previous response to fetch the next page. Logs are retained for 30 days. For QuantCDN (Fastly) projects, entries are up to about 30 minutes behind, and a slow query can return an empty page with a nextToken: call again with it to collect the entries.
          * @summary Get CDN access logs for a project
          * @param {string} organization The organization machine name
@@ -51047,6 +51834,25 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = ProjectsApiFp(configuration)
     return {
         /**
+         * Output of the project\'s edge functions and content filters (console.* as type console, quantLog() as type function), WAF hits and static failover. Entries are returned oldest first, up to about 10 minutes behind, kept 31 days; pass nextToken from the previous response, with the same filters, to fetch the next page. A slow query can return an empty page with a nextToken. An edge function invocation keeps at most 100 console lines of up to 8 KB each.
+         * @summary Get edge events for a project
+         * @param {string} organization The organization machine name
+         * @param {string} project The project machine name
+         * @param {string} [type] Comma-separated event types: console, function, waf-hit, static-failover
+         * @param {string} [_function] Only events from this edge function (UUID)
+         * @param {GetProjectEdgeEventsLevelEnum} [level] Only console events at this level
+         * @param {string} [search] Case-insensitive substring of the message
+         * @param {number} [limit] Maximum number of events per page (default 100)
+         * @param {string} [startTime] Start of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [endTime] End of the time range. ISO 8601 or Unix epoch milliseconds.
+         * @param {string} [nextToken] Opaque pagination token from the previous response
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjectEdgeEvents(organization: string, project: string, type?: string, _function?: string, level?: GetProjectEdgeEventsLevelEnum, search?: string, limit?: number, startTime?: string, endTime?: string, nextToken?: string, options?: RawAxiosRequestConfig): AxiosPromise<GetProjectEdgeEvents200Response> {
+            return localVarFp.getProjectEdgeEvents(organization, project, type, _function, level, search, limit, startTime, endTime, nextToken, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieves CDN access log entries for a project. Results are always scoped to the project; the optional filter can only narrow them. Entries are returned oldest first; pass nextToken from the previous response to fetch the next page. Logs are retained for 30 days. For QuantCDN (Fastly) projects, entries are up to about 30 minutes behind, and a slow query can return an empty page with a nextToken: call again with it to collect the entries.
          * @summary Get CDN access logs for a project
          * @param {string} organization The organization machine name
@@ -51129,6 +51935,27 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
  * @extends {BaseAPI}
  */
 export class ProjectsApi extends BaseAPI {
+    /**
+     * Output of the project\'s edge functions and content filters (console.* as type console, quantLog() as type function), WAF hits and static failover. Entries are returned oldest first, up to about 10 minutes behind, kept 31 days; pass nextToken from the previous response, with the same filters, to fetch the next page. A slow query can return an empty page with a nextToken. An edge function invocation keeps at most 100 console lines of up to 8 KB each.
+     * @summary Get edge events for a project
+     * @param {string} organization The organization machine name
+     * @param {string} project The project machine name
+     * @param {string} [type] Comma-separated event types: console, function, waf-hit, static-failover
+     * @param {string} [_function] Only events from this edge function (UUID)
+     * @param {GetProjectEdgeEventsLevelEnum} [level] Only console events at this level
+     * @param {string} [search] Case-insensitive substring of the message
+     * @param {number} [limit] Maximum number of events per page (default 100)
+     * @param {string} [startTime] Start of the time range. ISO 8601 or Unix epoch milliseconds.
+     * @param {string} [endTime] End of the time range. ISO 8601 or Unix epoch milliseconds.
+     * @param {string} [nextToken] Opaque pagination token from the previous response
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectsApi
+     */
+    public getProjectEdgeEvents(organization: string, project: string, type?: string, _function?: string, level?: GetProjectEdgeEventsLevelEnum, search?: string, limit?: number, startTime?: string, endTime?: string, nextToken?: string, options?: RawAxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).getProjectEdgeEvents(organization, project, type, _function, level, search, limit, startTime, endTime, nextToken, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Retrieves CDN access log entries for a project. Results are always scoped to the project; the optional filter can only narrow them. Entries are returned oldest first; pass nextToken from the previous response to fetch the next page. Logs are retained for 30 days. For QuantCDN (Fastly) projects, entries are up to about 30 minutes behind, and a slow query can return an empty page with a nextToken: call again with it to collect the entries.
      * @summary Get CDN access logs for a project
@@ -51215,6 +52042,17 @@ export class ProjectsApi extends BaseAPI {
     }
 }
 
+/**
+ * @export
+ */
+export const GetProjectEdgeEventsLevelEnum = {
+    Log: 'log',
+    Info: 'info',
+    Warn: 'warn',
+    Error: 'error',
+    Debug: 'debug'
+} as const;
+export type GetProjectEdgeEventsLevelEnum = typeof GetProjectEdgeEventsLevelEnum[keyof typeof GetProjectEdgeEventsLevelEnum];
 
 
 /**
