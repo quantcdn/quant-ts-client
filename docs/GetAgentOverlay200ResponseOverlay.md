@@ -14,8 +14,11 @@ Name | Type | Description | Notes
 **disabledTools** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **systemPromptAppend** | **string** |  | [optional] [default to undefined]
 **allowedCollections** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**mcpServers** | [**Array&lt;GetAgentOverlay200ResponseOverlayMcpServersInner&gt;**](GetAgentOverlay200ResponseOverlayMcpServersInner.md) |  | [optional] [default to undefined]
 **guardrailPreset** | **string** |  | [optional] [default to undefined]
 **reasoningEffort** | **string** | Reasoning effort for this organisation. Overrides the global agent value. | [optional] [default to undefined]
+**longContext** | **boolean** |  | [optional] [default to undefined]
+**filterPolicies** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **version** | **number** |  | [optional] [default to undefined]
 
 ## Example
@@ -33,8 +36,11 @@ const instance: GetAgentOverlay200ResponseOverlay = {
     disabledTools,
     systemPromptAppend,
     allowedCollections,
+    mcpServers,
     guardrailPreset,
     reasoningEffort,
+    longContext,
+    filterPolicies,
     version,
 };
 ```
