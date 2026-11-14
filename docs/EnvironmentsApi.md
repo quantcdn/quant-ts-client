@@ -13,6 +13,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 |[**listEnvironments**](#listenvironments) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments | Get all environments for an application|
 |[**listSyncOperations**](#listsyncoperations) | **GET** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | List the sync operations for an environment|
 |[**syncToEnvironment**](#synctoenvironment) | **POST** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | Perform a sync operation from a source environment to the current environment|
+|[**updateEnvironment**](#updateenvironment) | **PUT** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment} | Update Environment Compose Definition|
 |[**updateEnvironmentState**](#updateenvironmentstate) | **PUT** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/state | Update the state of an environment|
 
 # **createEnvironment**
@@ -590,6 +591,69 @@ const { status, data } = await apiInstance.syncToEnvironment(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The sync operation details |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateEnvironment**
+> updateEnvironment(updateEnvironmentRequest)
+
+Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the container service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
+
+### Example
+
+```typescript
+import {
+    EnvironmentsApi,
+    Configuration,
+    UpdateEnvironmentRequest
+} from '@quantcdn/quant-client';
+
+const configuration = new Configuration();
+const apiInstance = new EnvironmentsApi(configuration);
+
+let organisation: string; //The organisation ID (default to undefined)
+let application: string; //The application ID (default to undefined)
+let environment: string; //The environment ID (default to undefined)
+let updateEnvironmentRequest: UpdateEnvironmentRequest; //
+
+const { status, data } = await apiInstance.updateEnvironment(
+    organisation,
+    application,
+    environment,
+    updateEnvironmentRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateEnvironmentRequest** | **UpdateEnvironmentRequest**|  | |
+| **organisation** | [**string**] | The organisation ID | defaults to undefined|
+| **application** | [**string**] | The application ID | defaults to undefined|
+| **environment** | [**string**] | The environment ID | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**202** | Request accepted, compose definition update is processing. |  -  |
+|**400** | Invalid compose definition or validation failed. |  -  |
+|**404** | Application or environment not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
