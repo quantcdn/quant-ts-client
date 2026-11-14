@@ -2449,7 +2449,7 @@ const { status, data } = await apiInstance.rulesHeadersUpdate(
 # **rulesIndexList**
 > Array<RulesIndexList200ResponseInner> rulesIndexList()
 
-Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order) and `managed` (true when a template deploy owns the rule in this project). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
+Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order), `managed` (true when a template deploy owns the rule in this project) and, on a rule written by a deploy of `quant/edge-rules.json`, `deployment` (its namespace and id in that file). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
 
 ### Example
 

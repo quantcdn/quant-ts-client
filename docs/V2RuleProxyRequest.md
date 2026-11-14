@@ -43,7 +43,7 @@ Name | Type | Description | Notes
 **origin_timeout** | **string** | Origin timeout in milliseconds. Defaults to 30000 when omitted on create. | [optional] [default to undefined]
 **failover_mode** | **boolean** | Enable failover mode | [optional] [default to false]
 **failover_origin_ttfb** | **string** | Failover TTFB threshold in milliseconds | [optional] [default to '2000']
-**failover_origin_status_codes** | **Array&lt;string&gt;** | Origin status codes that trigger failover | [optional] [default to undefined]
+**failover_origin_status_codes** | **Array&lt;string&gt;** | Origin statuses that do not trigger failover. Any other origin status switches the rule to the static copy. With failover_mode true, a list left out gets the default 200, 301, 302, 304, 404, and an empty list is refused with 422. A PATCH replaces the list. | [optional] [default to undefined]
 **failover_lifetime** | **string** | Failover cache lifetime in seconds | [optional] [default to '300']
 **proxy_alert_enabled** | **boolean** | Proxy alert enabled | [optional] [default to false]
 **waf_enabled** | **boolean** | WAF enabled | [optional] [default to false]
