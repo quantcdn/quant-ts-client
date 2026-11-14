@@ -65,8 +65,9 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateContainer**
-> updateContainer(container2)
+> Container updateContainer(container2)
 
+Updates one container in the environment\'s compose definition and redeploys the environment. The fields in the request body replace the same fields of the container. Fields that the request body omits keep their current values. Other containers and the task-level settings do not change. To clear a field, send it as null. The container name in the body must match the name in the path: a container cannot be renamed. Container updates to one environment run one at a time. A compose change made at the same moment through another endpoint can still overwrite this update.
 
 ### Example
 
@@ -83,7 +84,7 @@ const apiInstance = new ContainersApi(configuration);
 let organisation: string; //The organisation ID (default to undefined)
 let application: string; //The application ID (default to undefined)
 let environment: string; //The environment ID (default to undefined)
-let container: string; //The container ID (default to undefined)
+let container: string; //The container name (default to undefined)
 let container2: Container; //
 
 const { status, data } = await apiInstance.updateContainer(
@@ -103,12 +104,12 @@ const { status, data } = await apiInstance.updateContainer(
 | **organisation** | [**string**] | The organisation ID | defaults to undefined|
 | **application** | [**string**] | The application ID | defaults to undefined|
 | **environment** | [**string**] | The environment ID | defaults to undefined|
-| **container** | [**string**] | The container ID | defaults to undefined|
+| **container** | [**string**] | The container name | defaults to undefined|
 
 
 ### Return type
 
-void (empty response body)
+**Container**
 
 ### Authorization
 
@@ -117,14 +118,19 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The updated container |  -  |
-|**404** | The container not found |  -  |
+|**200** | The updated container. The environment redeploys in the background. |  -  |
+|**400** | Quant Cloud refused the updated definition |  -  |
+|**403** | Permission or token scope missing |  -  |
+|**404** | The environment has no container with this name |  -  |
+|**409** | Another container update for this environment is in progress |  -  |
+|**422** | Invalid container definition, or the body name does not match the path name |  -  |
+|**502** | Quant Cloud did not accept the request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -26,6 +26,286 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
+ * @interface AIAutoModeConfig
+ */
+export interface AIAutoModeConfig {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AIAutoModeConfig
+     */
+    'enabled': boolean;
+    /**
+     * Empty when the setting was saved off without an orchestrator.
+     * @type {string}
+     * @memberof AIAutoModeConfig
+     */
+    'orchestratorModel': string;
+    /**
+     * 
+     * @type {AIAutoModeConfigGroup}
+     * @memberof AIAutoModeConfig
+     */
+    'group': AIAutoModeConfigGroup;
+    /**
+     * 
+     * @type {number}
+     * @memberof AIAutoModeConfig
+     */
+    'watcherIntervalMinutes': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AIAutoModeConfig
+     */
+    'maxParallelTasks'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AIAutoModeConfig
+     */
+    'enforcement': AIAutoModeConfigEnforcementEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AIAutoModeConfig
+     */
+    'autonomousDefault': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AIAutoModeConfig
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AIAutoModeConfig
+     */
+    'updatedBy'?: string;
+}
+
+export const AIAutoModeConfigEnforcementEnum = {
+    Default: 'default',
+    Required: 'required'
+} as const;
+
+export type AIAutoModeConfigEnforcementEnum = typeof AIAutoModeConfigEnforcementEnum[keyof typeof AIAutoModeConfigEnforcementEnum];
+
+/**
+ * 
+ * @export
+ * @interface AIAutoModeConfigGroup
+ */
+export interface AIAutoModeConfigGroup {
+    /**
+     * 
+     * @type {number}
+     * @memberof AIAutoModeConfigGroup
+     */
+    'revision': number;
+    /**
+     * 
+     * @type {AIAutoModeConfigGroupRoles}
+     * @memberof AIAutoModeConfigGroup
+     */
+    'roles': AIAutoModeConfigGroupRoles;
+}
+/**
+ * 
+ * @export
+ * @interface AIAutoModeConfigGroupRoles
+ */
+export interface AIAutoModeConfigGroupRoles {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AIAutoModeConfigGroupRoles
+     */
+    'fast': Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AIAutoModeConfigGroupRoles
+     */
+    'standard': Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AIAutoModeConfigGroupRoles
+     */
+    'deep': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface AIAutoModeEligibility
+ */
+export interface AIAutoModeEligibility {
+    /**
+     * 
+     * @type {AIModelEligibility}
+     * @memberof AIAutoModeEligibility
+     */
+    'orchestrator': AIModelEligibility | null;
+    /**
+     * 
+     * @type {AIAutoModeEligibilityRoles}
+     * @memberof AIAutoModeEligibility
+     */
+    'roles': AIAutoModeEligibilityRoles;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AIAutoModeEligibility
+     */
+    'usable': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface AIAutoModeEligibilityRoles
+ */
+export interface AIAutoModeEligibilityRoles {
+    /**
+     * 
+     * @type {Array<AIModelEligibility>}
+     * @memberof AIAutoModeEligibilityRoles
+     */
+    'fast': Array<AIModelEligibility>;
+    /**
+     * 
+     * @type {Array<AIModelEligibility>}
+     * @memberof AIAutoModeEligibilityRoles
+     */
+    'standard': Array<AIModelEligibility>;
+    /**
+     * 
+     * @type {Array<AIModelEligibility>}
+     * @memberof AIAutoModeEligibilityRoles
+     */
+    'deep': Array<AIModelEligibility>;
+}
+/**
+ * 
+ * @export
+ * @interface AIAutoModeInput
+ */
+export interface AIAutoModeInput {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AIAutoModeInput
+     */
+    'enabled': boolean;
+    /**
+     * Required when enabled is true. May be left out when enabled is false.
+     * @type {string}
+     * @memberof AIAutoModeInput
+     */
+    'orchestratorModel'?: string;
+    /**
+     * 
+     * @type {AIAutoModeInputGroup}
+     * @memberof AIAutoModeInput
+     */
+    'group': AIAutoModeInputGroup;
+    /**
+     * 
+     * @type {number}
+     * @memberof AIAutoModeInput
+     */
+    'watcherIntervalMinutes': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AIAutoModeInput
+     */
+    'maxParallelTasks'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AIAutoModeInput
+     */
+    'enforcement': AIAutoModeInputEnforcementEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AIAutoModeInput
+     */
+    'autonomousDefault': boolean;
+}
+
+export const AIAutoModeInputEnforcementEnum = {
+    Default: 'default',
+    Required: 'required'
+} as const;
+
+export type AIAutoModeInputEnforcementEnum = typeof AIAutoModeInputEnforcementEnum[keyof typeof AIAutoModeInputEnforcementEnum];
+
+/**
+ * 
+ * @export
+ * @interface AIAutoModeInputGroup
+ */
+export interface AIAutoModeInputGroup {
+    /**
+     * Revision from the last read. A stale value returns 409.
+     * @type {number}
+     * @memberof AIAutoModeInputGroup
+     */
+    'revision'?: number;
+    /**
+     * 
+     * @type {AIAutoModeConfigGroupRoles}
+     * @memberof AIAutoModeInputGroup
+     */
+    'roles': AIAutoModeConfigGroupRoles;
+}
+/**
+ * 
+ * @export
+ * @interface AIModelEligibility
+ */
+export interface AIModelEligibility {
+    /**
+     * 
+     * @type {string}
+     * @memberof AIModelEligibility
+     */
+    'modelId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AIModelEligibility
+     */
+    'resolvedId': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AIModelEligibility
+     */
+    'eligible': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AIModelEligibility
+     */
+    'reason'?: AIModelEligibilityReasonEnum;
+}
+
+export const AIModelEligibilityReasonEnum = {
+    Unknown: 'unknown',
+    NoTools: 'no_tools',
+    Policy: 'policy',
+    Residency: 'residency'
+} as const;
+
+export type AIModelEligibilityReasonEnum = typeof AIModelEligibilityReasonEnum[keyof typeof AIModelEligibilityReasonEnum];
+
+/**
+ * 
+ * @export
  * @interface AiAuditError
  */
 export interface AiAuditError {
@@ -680,6 +960,71 @@ export interface AiSlackBotApiMessageAllOfFiles {
      */
     'size'?: number;
 }
+/**
+ * 
+ * @export
+ * @interface AlertChannelError
+ */
+export interface AlertChannelError {
+    /**
+     * 
+     * @type {string}
+     * @memberof AlertChannelError
+     */
+    'error': string;
+}
+/**
+ * 
+ * @export
+ * @interface AlertChannelList
+ */
+export interface AlertChannelList {
+    /**
+     * 
+     * @type {Array<AlertChannelSummary>}
+     * @memberof AlertChannelList
+     */
+    'channels': Array<AlertChannelSummary>;
+}
+/**
+ * An alert channel as the public API returns it. The secret (webhook URL or address list) is never returned.
+ * @export
+ * @interface AlertChannelSummary
+ */
+export interface AlertChannelSummary {
+    /**
+     * The channel ID
+     * @type {string}
+     * @memberof AlertChannelSummary
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlertChannelSummary
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlertChannelSummary
+     */
+    'type': AlertChannelSummaryTypeEnum;
+    /**
+     * A masked hint of the destination
+     * @type {string}
+     * @memberof AlertChannelSummary
+     */
+    'hint': string;
+}
+
+export const AlertChannelSummaryTypeEnum = {
+    Slack: 'slack',
+    Email: 'email'
+} as const;
+
+export type AlertChannelSummaryTypeEnum = typeof AlertChannelSummaryTypeEnum[keyof typeof AlertChannelSummaryTypeEnum];
+
 /**
  * 
  * @export
@@ -4736,6 +5081,19 @@ export interface DeleteAgentOverlay200Response {
 /**
  * 
  * @export
+ * @interface DeleteAutoMode200Response
+ */
+export interface DeleteAutoMode200Response {
+    /**
+     * 
+     * @type {object}
+     * @memberof DeleteAutoMode200Response
+     */
+    'autoMode'?: object | null;
+}
+/**
+ * 
+ * @export
  * @interface DeleteBackup200Response
  */
 export interface DeleteBackup200Response {
@@ -6166,6 +6524,25 @@ export interface GetAgentOverlay200ResponseOverlayMcpServersInner {
      * @memberof GetAgentOverlay200ResponseOverlayMcpServersInner
      */
     'tools'?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface GetAutoMode200Response
+ */
+export interface GetAutoMode200Response {
+    /**
+     * 
+     * @type {AIAutoModeConfig}
+     * @memberof GetAutoMode200Response
+     */
+    'autoMode': AIAutoModeConfig | null;
+    /**
+     * 
+     * @type {AIAutoModeEligibility}
+     * @memberof GetAutoMode200Response
+     */
+    'eligible': AIAutoModeEligibility | null;
 }
 /**
  * 
@@ -11712,6 +12089,37 @@ export interface RulesIndexList200ResponseInner {
      * @memberof RulesIndexList200ResponseInner
      */
     'managed'?: boolean;
+    /**
+     * 
+     * @type {RulesIndexList200ResponseInnerDeployment}
+     * @memberof RulesIndexList200ResponseInner
+     */
+    'deployment'?: RulesIndexList200ResponseInnerDeployment;
+}
+/**
+ * Present only on a rule that a deploy of `quant/edge-rules.json` wrote, or a copy of one. `namespace` is the file\'s top-level namespace and `id` is the rule\'s id in that file; a later deploy matches its rules to stored rules by this pair. A copy in another project (an environment or a clone) can keep the marker but has `managed` false.
+ * @export
+ * @interface RulesIndexList200ResponseInnerDeployment
+ */
+export interface RulesIndexList200ResponseInnerDeployment {
+    /**
+     * The `namespace` of the edge-rules file that wrote the rule.
+     * @type {string}
+     * @memberof RulesIndexList200ResponseInnerDeployment
+     */
+    'namespace': string;
+    /**
+     * The `id` of the rule in that file.
+     * @type {string}
+     * @memberof RulesIndexList200ResponseInnerDeployment
+     */
+    'id': string;
+    /**
+     * Hash of the rule as the deploy last wrote it, used to detect changes by other paths.
+     * @type {string}
+     * @memberof RulesIndexList200ResponseInnerDeployment
+     */
+    'hash'?: string | null;
 }
 /**
  * 
@@ -12483,6 +12891,64 @@ export type UpdateAISessionRequestNewMessagesInnerRoleEnum = typeof UpdateAISess
 /**
  * 
  * @export
+ * @interface UpdateAutoMode200Response
+ */
+export interface UpdateAutoMode200Response {
+    /**
+     * 
+     * @type {AIAutoModeConfig}
+     * @memberof UpdateAutoMode200Response
+     */
+    'autoMode'?: AIAutoModeConfig;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateAutoMode400Response
+ */
+export interface UpdateAutoMode400Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAutoMode400Response
+     */
+    'error': string;
+    /**
+     * 
+     * @type {AIAutoModeEligibility}
+     * @memberof UpdateAutoMode400Response
+     */
+    'eligible'?: AIAutoModeEligibility | null;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateAutoMode409Response
+ */
+export interface UpdateAutoMode409Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAutoMode409Response
+     */
+    'error': string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateContainer400Response
+ */
+export interface UpdateContainer400Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateContainer400Response
+     */
+    'error'?: string;
+}
+/**
+ * 
+ * @export
  * @interface UpdateCronJobRequest
  */
 export interface UpdateCronJobRequest {
@@ -12516,31 +12982,6 @@ export interface UpdateCronJobRequest {
      * @memberof UpdateCronJobRequest
      */
     'isEnabled'?: boolean | null;
-}
-/**
- * 
- * @export
- * @interface UpdateEnvironmentRequest
- */
-export interface UpdateEnvironmentRequest {
-    /**
-     * 
-     * @type {Compose}
-     * @memberof UpdateEnvironmentRequest
-     */
-    'composeDefinition': Compose;
-    /**
-     * Optional. Minimum number of tasks for auto-scaling. If provided at root level, will be merged into composeDefinition.
-     * @type {number}
-     * @memberof UpdateEnvironmentRequest
-     */
-    'minCapacity'?: number | null;
-    /**
-     * Optional. Maximum number of tasks for auto-scaling. If provided at root level, will be merged into composeDefinition.
-     * @type {number}
-     * @memberof UpdateEnvironmentRequest
-     */
-    'maxCapacity'?: number | null;
 }
 /**
  * 
@@ -24284,7 +24725,7 @@ export interface V2RuleProxyAction {
      */
     'failover_origin_ttfb'?: string;
     /**
-     * Status codes for failover (default: 200,404,301,302,304)
+     * Origin statuses that do not trigger failover. Any other origin status switches the rule to the static copy. With failover_mode true, a list left out gets the default 200, 301, 302, 304, 404, and an empty list is refused with 422 (it would fail over on every response). A PATCH replaces the list.
      * @type {Array<string>}
      * @memberof V2RuleProxyAction
      */
@@ -24667,7 +25108,7 @@ export interface V2RuleProxyRequest {
      */
     'failover_origin_ttfb'?: string;
     /**
-     * Origin status codes that trigger failover
+     * Origin statuses that do not trigger failover. Any other origin status switches the rule to the static copy. With failover_mode true, a list left out gets the default 200, 301, 302, 304, 404, and an empty list is refused with 422. A PATCH replaces the list.
      * @type {Array<string>}
      * @memberof V2RuleProxyRequest
      */
@@ -28176,6 +28617,273 @@ export class AIAuditApi extends BaseAPI {
      */
     public aiAuditRecordsList(organisation: string, startDate: string, endDate: string, since?: string, until?: string, userId?: string, tokenId?: string, modelId?: string, recordType?: string, decision?: string, tool?: string, outcome?: string, _interface?: string, limit?: number, cursor?: string, options?: RawAxiosRequestConfig) {
         return AIAuditApiFp(this.configuration).aiAuditRecordsList(organisation, startDate, endDate, since, until, userId, tokenId, modelId, recordType, decision, tool, outcome, _interface, limit, cursor, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * AIAutoModeApi - axios parameter creator
+ * @export
+ */
+export const AIAutoModeApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Remove the auto mode setting for an organisation
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAutoMode: async (organisation: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('deleteAutoMode', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/auto-mode`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the auto mode setting for an organisation
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAutoMode: async (organisation: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('getAutoMode', 'organisation', organisation)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/auto-mode`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Save the auto mode setting for an organisation
+         * @param {string} organisation The organisation ID
+         * @param {AIAutoModeInput} aIAutoModeInput 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAutoMode: async (organisation: string, aIAutoModeInput: AIAutoModeInput, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('updateAutoMode', 'organisation', organisation)
+            // verify required parameter 'aIAutoModeInput' is not null or undefined
+            assertParamExists('updateAutoMode', 'aIAutoModeInput', aIAutoModeInput)
+            const localVarPath = `/api/v3/organizations/{organisation}/ai/auto-mode`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aIAutoModeInput, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AIAutoModeApi - functional programming interface
+ * @export
+ */
+export const AIAutoModeApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AIAutoModeApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Remove the auto mode setting for an organisation
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteAutoMode(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteAutoMode200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAutoMode(organisation, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIAutoModeApi.deleteAutoMode']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get the auto mode setting for an organisation
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAutoMode(organisation: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAutoMode200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAutoMode(organisation, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIAutoModeApi.getAutoMode']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Save the auto mode setting for an organisation
+         * @param {string} organisation The organisation ID
+         * @param {AIAutoModeInput} aIAutoModeInput 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateAutoMode(organisation: string, aIAutoModeInput: AIAutoModeInput, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateAutoMode200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAutoMode(organisation, aIAutoModeInput, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AIAutoModeApi.updateAutoMode']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AIAutoModeApi - factory interface
+ * @export
+ */
+export const AIAutoModeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AIAutoModeApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Remove the auto mode setting for an organisation
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAutoMode(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<DeleteAutoMode200Response> {
+            return localVarFp.deleteAutoMode(organisation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the auto mode setting for an organisation
+         * @param {string} organisation The organisation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAutoMode(organisation: string, options?: RawAxiosRequestConfig): AxiosPromise<GetAutoMode200Response> {
+            return localVarFp.getAutoMode(organisation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Save the auto mode setting for an organisation
+         * @param {string} organisation The organisation ID
+         * @param {AIAutoModeInput} aIAutoModeInput 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAutoMode(organisation: string, aIAutoModeInput: AIAutoModeInput, options?: RawAxiosRequestConfig): AxiosPromise<UpdateAutoMode200Response> {
+            return localVarFp.updateAutoMode(organisation, aIAutoModeInput, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AIAutoModeApi - object-oriented interface
+ * @export
+ * @class AIAutoModeApi
+ * @extends {BaseAPI}
+ */
+export class AIAutoModeApi extends BaseAPI {
+    /**
+     * 
+     * @summary Remove the auto mode setting for an organisation
+     * @param {string} organisation The organisation ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIAutoModeApi
+     */
+    public deleteAutoMode(organisation: string, options?: RawAxiosRequestConfig) {
+        return AIAutoModeApiFp(this.configuration).deleteAutoMode(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the auto mode setting for an organisation
+     * @param {string} organisation The organisation ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIAutoModeApi
+     */
+    public getAutoMode(organisation: string, options?: RawAxiosRequestConfig) {
+        return AIAutoModeApiFp(this.configuration).getAutoMode(organisation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Save the auto mode setting for an organisation
+     * @param {string} organisation The organisation ID
+     * @param {AIAutoModeInput} aIAutoModeInput 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AIAutoModeApi
+     */
+    public updateAutoMode(organisation: string, aIAutoModeInput: AIAutoModeInput, options?: RawAxiosRequestConfig) {
+        return AIAutoModeApiFp(this.configuration).updateAutoMode(organisation, aIAutoModeInput, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -37861,6 +38569,125 @@ export class AIVectorDatabaseApi extends BaseAPI {
 
 
 /**
+ * AlertChannelsApi - axios parameter creator
+ * @export
+ */
+export const AlertChannelsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Returns every alert channel of the organisation (channels are organisation-wide; the project segment lets a project-limited token call it). Each item has the ID, name, type and a masked hint only. Needs the alert-channels:read scope and the view_alert_channels permission.
+         * @summary List the organisation\'s alert channels
+         * @param {string} organisation The organisation machine name
+         * @param {string} project The project machine name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        alertChannelsList: async (organisation: string, project: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organisation' is not null or undefined
+            assertParamExists('alertChannelsList', 'organisation', organisation)
+            // verify required parameter 'project' is not null or undefined
+            assertParamExists('alertChannelsList', 'project', project)
+            const localVarPath = `/api/v3/organizations/{organisation}/projects/{project}/alert-channels`
+                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
+                .replace(`{${"project"}}`, encodeURIComponent(String(project)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AlertChannelsApi - functional programming interface
+ * @export
+ */
+export const AlertChannelsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AlertChannelsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Returns every alert channel of the organisation (channels are organisation-wide; the project segment lets a project-limited token call it). Each item has the ID, name, type and a masked hint only. Needs the alert-channels:read scope and the view_alert_channels permission.
+         * @summary List the organisation\'s alert channels
+         * @param {string} organisation The organisation machine name
+         * @param {string} project The project machine name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async alertChannelsList(organisation: string, project: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AlertChannelList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.alertChannelsList(organisation, project, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AlertChannelsApi.alertChannelsList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AlertChannelsApi - factory interface
+ * @export
+ */
+export const AlertChannelsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AlertChannelsApiFp(configuration)
+    return {
+        /**
+         * Returns every alert channel of the organisation (channels are organisation-wide; the project segment lets a project-limited token call it). Each item has the ID, name, type and a masked hint only. Needs the alert-channels:read scope and the view_alert_channels permission.
+         * @summary List the organisation\'s alert channels
+         * @param {string} organisation The organisation machine name
+         * @param {string} project The project machine name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        alertChannelsList(organisation: string, project: string, options?: RawAxiosRequestConfig): AxiosPromise<AlertChannelList> {
+            return localVarFp.alertChannelsList(organisation, project, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AlertChannelsApi - object-oriented interface
+ * @export
+ * @class AlertChannelsApi
+ * @extends {BaseAPI}
+ */
+export class AlertChannelsApi extends BaseAPI {
+    /**
+     * Returns every alert channel of the organisation (channels are organisation-wide; the project segment lets a project-limited token call it). Each item has the ID, name, type and a masked hint only. Needs the alert-channels:read scope and the view_alert_channels permission.
+     * @summary List the organisation\'s alert channels
+     * @param {string} organisation The organisation machine name
+     * @param {string} project The project machine name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertChannelsApi
+     */
+    public alertChannelsList(organisation: string, project: string, options?: RawAxiosRequestConfig) {
+        return AlertChannelsApiFp(this.configuration).alertChannelsList(organisation, project, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * ApplicationsApi - axios parameter creator
  * @export
  */
@@ -39528,7 +40355,7 @@ export const CIValuesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+         * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools. A workflow reads a secret as `${{ secrets.NAME }}` and a variable as `${{ vars.NAME }}`. Needs the cloud:read scope and the CI runners feature.
          * @summary List the CI secrets and variables
          * @param {string} organisation The organisation ID
          * @param {string} [repo] Only the organisation\&#39;s values and this repository\&#39;s values. Lower-cased by the server.
@@ -39644,7 +40471,7 @@ export const CIValuesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+         * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools. A workflow reads a secret as `${{ secrets.NAME }}` and a variable as `${{ vars.NAME }}`. Needs the cloud:read scope and the CI runners feature.
          * @summary List the CI secrets and variables
          * @param {string} organisation The organisation ID
          * @param {string} [repo] Only the organisation\&#39;s values and this repository\&#39;s values. Lower-cased by the server.
@@ -39695,7 +40522,7 @@ export const CIValuesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.deleteCiValue(organisation, name, repo, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+         * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools. A workflow reads a secret as `${{ secrets.NAME }}` and a variable as `${{ vars.NAME }}`. Needs the cloud:read scope and the CI runners feature.
          * @summary List the CI secrets and variables
          * @param {string} organisation The organisation ID
          * @param {string} [repo] Only the organisation\&#39;s values and this repository\&#39;s values. Lower-cased by the server.
@@ -39742,7 +40569,7 @@ export class CIValuesApi extends BaseAPI {
     }
 
     /**
-     * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+     * Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools. A workflow reads a secret as `${{ secrets.NAME }}` and a variable as `${{ vars.NAME }}`. Needs the cloud:read scope and the CI runners feature.
      * @summary List the CI secrets and variables
      * @param {string} organisation The organisation ID
      * @param {string} [repo] Only the organisation\&#39;s values and this repository\&#39;s values. Lower-cased by the server.
@@ -40452,12 +41279,12 @@ export const ContainersApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Updates one container in the environment\'s compose definition and redeploys the environment. The fields in the request body replace the same fields of the container. Fields that the request body omits keep their current values. Other containers and the task-level settings do not change. To clear a field, send it as null. The container name in the body must match the name in the path: a container cannot be renamed. Container updates to one environment run one at a time. A compose change made at the same moment through another endpoint can still overwrite this update.
          * @summary Update a container in an environment
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
-         * @param {string} container The container ID
+         * @param {string} container The container name
          * @param {Container} container2 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -40533,17 +41360,17 @@ export const ContainersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Updates one container in the environment\'s compose definition and redeploys the environment. The fields in the request body replace the same fields of the container. Fields that the request body omits keep their current values. Other containers and the task-level settings do not change. To clear a field, send it as null. The container name in the body must match the name in the path: a container cannot be renamed. Container updates to one environment run one at a time. A compose change made at the same moment through another endpoint can still overwrite this update.
          * @summary Update a container in an environment
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
-         * @param {string} container The container ID
+         * @param {string} container The container name
          * @param {Container} container2 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateContainer(organisation: string, application: string, environment: string, container: string, container2: Container, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async updateContainer(organisation: string, application: string, environment: string, container: string, container2: Container, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Container>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateContainer(organisation, application, environment, container, container2, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ContainersApi.updateContainer']?.[localVarOperationServerIndex]?.url;
@@ -40572,17 +41399,17 @@ export const ContainersApiFactory = function (configuration?: Configuration, bas
             return localVarFp.listContainers(organisation, application, environment, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Updates one container in the environment\'s compose definition and redeploys the environment. The fields in the request body replace the same fields of the container. Fields that the request body omits keep their current values. Other containers and the task-level settings do not change. To clear a field, send it as null. The container name in the body must match the name in the path: a container cannot be renamed. Container updates to one environment run one at a time. A compose change made at the same moment through another endpoint can still overwrite this update.
          * @summary Update a container in an environment
          * @param {string} organisation The organisation ID
          * @param {string} application The application ID
          * @param {string} environment The environment ID
-         * @param {string} container The container ID
+         * @param {string} container The container name
          * @param {Container} container2 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateContainer(organisation: string, application: string, environment: string, container: string, container2: Container, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        updateContainer(organisation: string, application: string, environment: string, container: string, container2: Container, options?: RawAxiosRequestConfig): AxiosPromise<Container> {
             return localVarFp.updateContainer(organisation, application, environment, container, container2, options).then((request) => request(axios, basePath));
         },
     };
@@ -40610,12 +41437,12 @@ export class ContainersApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Updates one container in the environment\'s compose definition and redeploys the environment. The fields in the request body replace the same fields of the container. Fields that the request body omits keep their current values. Other containers and the task-level settings do not change. To clear a field, send it as null. The container name in the body must match the name in the path: a container cannot be renamed. Container updates to one environment run one at a time. A compose change made at the same moment through another endpoint can still overwrite this update.
      * @summary Update a container in an environment
      * @param {string} organisation The organisation ID
      * @param {string} application The application ID
      * @param {string} environment The environment ID
-     * @param {string} container The container ID
+     * @param {string} container The container name
      * @param {Container} container2 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -43967,58 +44794,6 @@ export const EnvironmentsApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the container service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
-         * @summary Update Environment Compose Definition
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
-         * @param {UpdateEnvironmentRequest} updateEnvironmentRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateEnvironment: async (organisation: string, application: string, environment: string, updateEnvironmentRequest: UpdateEnvironmentRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organisation' is not null or undefined
-            assertParamExists('updateEnvironment', 'organisation', organisation)
-            // verify required parameter 'application' is not null or undefined
-            assertParamExists('updateEnvironment', 'application', application)
-            // verify required parameter 'environment' is not null or undefined
-            assertParamExists('updateEnvironment', 'environment', environment)
-            // verify required parameter 'updateEnvironmentRequest' is not null or undefined
-            assertParamExists('updateEnvironment', 'updateEnvironmentRequest', updateEnvironmentRequest)
-            const localVarPath = `/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}`
-                .replace(`{${"organisation"}}`, encodeURIComponent(String(organisation)))
-                .replace(`{${"application"}}`, encodeURIComponent(String(application)))
-                .replace(`{${"environment"}}`, encodeURIComponent(String(environment)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateEnvironmentRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * 
          * @summary Update the state of an environment
          * @param {string} organisation The organisation ID
@@ -44235,22 +45010,6 @@ export const EnvironmentsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the container service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
-         * @summary Update Environment Compose Definition
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
-         * @param {UpdateEnvironmentRequest} updateEnvironmentRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateEnvironment(organisation: string, application: string, environment: string, updateEnvironmentRequest: UpdateEnvironmentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEnvironment(organisation, application, environment, updateEnvironmentRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['EnvironmentsApi.updateEnvironment']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * 
          * @summary Update the state of an environment
          * @param {string} organisation The organisation ID
@@ -44402,19 +45161,6 @@ export const EnvironmentsApiFactory = function (configuration?: Configuration, b
          */
         syncToEnvironment(organisation: string, application: string, environment: string, type: SyncToEnvironmentTypeEnum, syncToEnvironmentRequest: SyncToEnvironmentRequest, options?: RawAxiosRequestConfig): AxiosPromise<SyncOperation> {
             return localVarFp.syncToEnvironment(organisation, application, environment, type, syncToEnvironmentRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the container service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
-         * @summary Update Environment Compose Definition
-         * @param {string} organisation The organisation ID
-         * @param {string} application The application ID
-         * @param {string} environment The environment ID
-         * @param {UpdateEnvironmentRequest} updateEnvironmentRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateEnvironment(organisation: string, application: string, environment: string, updateEnvironmentRequest: UpdateEnvironmentRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.updateEnvironment(organisation, application, environment, updateEnvironmentRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -44582,21 +45328,6 @@ export class EnvironmentsApi extends BaseAPI {
      */
     public syncToEnvironment(organisation: string, application: string, environment: string, type: SyncToEnvironmentTypeEnum, syncToEnvironmentRequest: SyncToEnvironmentRequest, options?: RawAxiosRequestConfig) {
         return EnvironmentsApiFp(this.configuration).syncToEnvironment(organisation, application, environment, type, syncToEnvironmentRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Replaces the entire task definition for the environment based on the provided multi-container compose definition. This will create a new task definition revision and update the container service, triggering a redeployment. Optionally accepts minCapacity and maxCapacity at the root level for convenience.
-     * @summary Update Environment Compose Definition
-     * @param {string} organisation The organisation ID
-     * @param {string} application The application ID
-     * @param {string} environment The environment ID
-     * @param {UpdateEnvironmentRequest} updateEnvironmentRequest 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvironmentsApi
-     */
-    public updateEnvironment(organisation: string, application: string, environment: string, updateEnvironmentRequest: UpdateEnvironmentRequest, options?: RawAxiosRequestConfig) {
-        return EnvironmentsApiFp(this.configuration).updateEnvironment(organisation, application, environment, updateEnvironmentRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -55158,7 +55889,7 @@ export const RulesApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order) and `managed` (true when a template deploy owns the rule in this project). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
+         * Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order), `managed` (true when a template deploy owns the rule in this project) and, on a rule written by a deploy of `quant/edge-rules.json`, `deployment` (its namespace and id in that file). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
          * @summary List all rules in edge order
          * @param {string} organization 
          * @param {string} project 
@@ -56512,7 +57243,7 @@ export const RulesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order) and `managed` (true when a template deploy owns the rule in this project). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
+         * Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order), `managed` (true when a template deploy owns the rule in this project) and, on a rule written by a deploy of `quant/edge-rules.json`, `deployment` (its namespace and id in that file). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
          * @summary List all rules in edge order
          * @param {string} organization 
          * @param {string} project 
@@ -57241,7 +57972,7 @@ export const RulesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.rulesHeadersUpdate(organization, project, rule, v2RuleHeaderRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order) and `managed` (true when a template deploy owns the rule in this project). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
+         * Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order), `managed` (true when a template deploy owns the rule in this project) and, on a rule written by a deploy of `quant/edge-rules.json`, `deployment` (its namespace and id in that file). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
          * @summary List all rules in edge order
          * @param {string} organization 
          * @param {string} project 
@@ -58002,7 +58733,7 @@ export class RulesApi extends BaseAPI {
     }
 
     /**
-     * Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order) and `managed` (true when a template deploy owns the rule in this project). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
+     * Returns every rule in the order the edge runs them. Each item has the fields of the per-type list for its rule type, plus `position` (0-based index in this order), `managed` (true when a template deploy owns the rule in this project) and, on a rule written by a deploy of `quant/edge-rules.json`, `deployment` (its namespace and id in that file). For a trial organisation without a payment method, the list is partial: it leaves out functions, content filters and auth functions, as their per-type lists refuse that caller (the same gate, with the same superadmin masquerade bypass), so `position` values can have gaps. Do not treat a partial list as a full mirror of the edge rules. One malformed stored rule fails the whole request, so a client never receives an order with a silent hole.
      * @summary List all rules in edge order
      * @param {string} organization 
      * @param {string} project 

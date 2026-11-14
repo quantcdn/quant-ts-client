@@ -69,7 +69,7 @@ void (empty response body)
 # **listCiValues**
 > ListCiValues200Response listCiValues()
 
-Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+Returns the organisation\'s CI values and, without the repo filter, every repository\'s values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation\'s runner pools. A workflow reads a secret as `${{ secrets.NAME }}` and a variable as `${{ vars.NAME }}`. Needs the cloud:read scope and the CI runners feature.
 
 ### Example
 
