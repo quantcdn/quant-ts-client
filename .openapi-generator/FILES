@@ -412,6 +412,7 @@ docs/UpdateAutoMode400Response.md
 docs/UpdateAutoMode409Response.md
 docs/UpdateContainer400Response.md
 docs/UpdateCronJobRequest.md
+docs/UpdateEnvironmentRequest.md
 docs/UpdateEnvironmentSecretRequest.md
 docs/UpdateEnvironmentStateRequest.md
 docs/UpdateEnvironmentVariableRequest.md
