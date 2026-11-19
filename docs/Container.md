@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **user** | **string** |  | [optional] [default to undefined]
 **originProtection** | **boolean** | Enable origin protection for all exposed ports on this container. Use originProtectionConfig for advanced options like IP allow lists. | [optional] [default to false]
 **originProtectionConfig** | [**ContainerOriginProtectionConfig**](ContainerOriginProtectionConfig.md) |  | [optional] [default to undefined]
+**loadBalancerHealthCheck** | [**ContainerLoadBalancerHealthCheck**](ContainerLoadBalancerHealthCheck.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -50,6 +51,7 @@ const instance: Container = {
     user,
     originProtection,
     originProtectionConfig,
+    loadBalancerHealthCheck,
 };
 ```
 

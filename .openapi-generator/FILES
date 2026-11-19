@@ -115,6 +115,7 @@ docs/ContainerDependsOnInner.md
 docs/ContainerEnvironmentInner.md
 docs/ContainerHealthCheck.md
 docs/ContainerImageReference.md
+docs/ContainerLoadBalancerHealthCheck.md
 docs/ContainerMountPointsInner.md
 docs/ContainerOriginProtectionConfig.md
 docs/ContainerSecretsInner.md
