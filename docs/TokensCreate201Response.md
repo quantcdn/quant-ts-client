@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **projects** | **Array&lt;number&gt;** |  | [optional] [default to undefined]
 **preset** | **string** |  | [optional] [default to undefined]
 **expires_at** | **string** |  | [optional] [default to undefined]
+**expiry_limited_by_parent** | **boolean** | True when expires_at was cut to the expiry of the token that made this request. A token cannot create a token that expires after it. | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -27,6 +28,7 @@ const instance: TokensCreate201Response = {
     projects,
     preset,
     expires_at,
+    expiry_limited_by_parent,
     created_at,
 };
 ```

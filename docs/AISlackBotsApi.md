@@ -705,7 +705,7 @@ const { status, data } = await apiInstance.postSlackBotFile(
 # **postSlackBotMessage**
 > PostSlackBotMessage201Response postSlackBotMessage(postSlackBotMessageRequest)
 
-The bot posts the text in an allowed channel, with an attribution line that shows your name. The bot does not answer the post. Mentions keep only the `<@U…>` form (at most 10 users); other control forms show as text. Needs the explicit `ai:slack` scope, `use_ai_services` and a verified email.
+The bot posts the text in an allowed channel, with an attribution line that shows your name. The bot does not answer the post. Mentions keep only the `<@U…>` form (at most 10 users); https links (`<https://…|label>`, a bare `https://` URL, or `[text](https://…)` in markdown) become links; broadcasts and other control forms show as text. With `format` `markdown`, the text is standard Markdown (headings, lists, tables, code blocks) in one Slack markdown block. Needs the explicit `ai:slack` scope, `use_ai_services` and a verified email.
 
 ### Example
 
