@@ -24807,6 +24807,12 @@ export interface V2RuleProxyAction {
      */
     'failover_lifetime'?: string;
     /**
+     * Failures (a status outside failover_origin_status_codes, a connection error or no first byte inside failover_origin_ttfb) within 10 seconds before failover starts. Null or 0 uses the default (3).
+     * @type {number}
+     * @memberof V2RuleProxyAction
+     */
+    'failover_threshold'?: number | null;
+    /**
      * Notification type (none, slack)
      * @type {string}
      * @memberof V2RuleProxyAction
@@ -25189,6 +25195,12 @@ export interface V2RuleProxyRequest {
      * @memberof V2RuleProxyRequest
      */
     'failover_lifetime'?: string;
+    /**
+     * Failures (a status outside failover_origin_status_codes, a connection error or no first byte inside failover_origin_ttfb) within 10 seconds before failover starts. Null or 0 uses the default (3).
+     * @type {number}
+     * @memberof V2RuleProxyRequest
+     */
+    'failover_threshold'?: number | null;
     /**
      * Proxy alert enabled
      * @type {boolean}
