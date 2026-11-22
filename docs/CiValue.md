@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **updatedAt** | **string** |  | [optional] [default to undefined]
 **updatedBy** | **string** |  | [optional] [default to undefined]
 **value** | **string** | Variables only. A secret value is never returned. | [optional] [default to undefined]
+**withheldReason** | **string** | Present on a repository value that jobs do not get. repo_identity_unproven: the value was saved before values were bound to repository IDs, and its repository was created after the value was last saved. Save the value again to fix this. | [optional] [default to undefined]
+**withheldAt** | **string** | When the value was first withheld. Present with withheldReason. | [optional] [default to undefined]
 
 ## Example
 
@@ -28,6 +30,8 @@ const instance: CiValue = {
     updatedAt,
     updatedBy,
     value,
+    withheldReason,
+    withheldAt,
 };
 ```
 

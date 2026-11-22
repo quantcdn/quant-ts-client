@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **traffic_source** | **string** | Traffic source condition type (traffic_source_is, traffic_source_is_not, any) | [optional] [default to undefined]
 **traffic_source_is** | **Array&lt;string&gt;** | Traffic sources to match (cloud, vpn, tor-exit, abuser, crawler) | [optional] [default to undefined]
 **traffic_source_is_not** | **Array&lt;string&gt;** | Traffic sources to exclude (cloud, vpn, tor-exit, abuser, crawler) | [optional] [default to undefined]
+**schedule** | [**V2RuleSchedule**](V2RuleSchedule.md) |  | [optional] [default to undefined]
 **country** | **string** | Country code | [optional] [default to undefined]
 **country_is** | **Array&lt;string&gt;** | Allowed countries | [optional] [default to undefined]
 **country_is_not** | **Array&lt;string&gt;** | Excluded countries | [optional] [default to undefined]
@@ -62,6 +63,7 @@ const instance: V2Rule = {
     traffic_source,
     traffic_source_is,
     traffic_source_is_not,
+    schedule,
     country,
     country_is,
     country_is_not,

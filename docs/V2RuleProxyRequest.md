@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **traffic_source** | **string** | Traffic source filter type (traffic_source_is, traffic_source_is_not, any). Invalid values return 422. | [optional] [default to undefined]
 **traffic_source_is** | **Array&lt;string&gt;** | Traffic sources to match. A PATCH replaces the list. | [optional] [default to undefined]
 **traffic_source_is_not** | **Array&lt;string&gt;** | Traffic sources to exclude. A PATCH replaces the list. | [optional] [default to undefined]
+**schedule** | [**V2RuleSchedule**](V2RuleSchedule.md) |  | [optional] [default to undefined]
 **cookie_name** | **string** | Write name of only_with_cookie: the rule applies only when this cookie is present. Empty string clears it. | [optional] [default to undefined]
 **to** | **string** | Target URL to proxy to | [default to undefined]
 **host** | **string** | Host header override | [optional] [default to undefined]
@@ -87,6 +88,7 @@ const instance: V2RuleProxyRequest = {
     traffic_source,
     traffic_source_is,
     traffic_source_is_not,
+    schedule,
     cookie_name,
     to,
     host,
