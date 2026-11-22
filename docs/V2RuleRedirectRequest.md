@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **traffic_source** | **string** | Traffic source filter type (traffic_source_is, traffic_source_is_not, any). Invalid values return 422. | [optional] [default to undefined]
 **traffic_source_is** | **Array&lt;string&gt;** | Traffic sources to match. A PATCH replaces the list. | [optional] [default to undefined]
 **traffic_source_is_not** | **Array&lt;string&gt;** | Traffic sources to exclude. A PATCH replaces the list. | [optional] [default to undefined]
+**schedule** | [**V2RuleSchedule**](V2RuleSchedule.md) |  | [optional] [default to undefined]
 **cookie_name** | **string** | Write name of only_with_cookie: the rule applies only when this cookie is present. Empty string clears it. | [optional] [default to undefined]
 **redirect_to** | **string** | Redirect destination URL | [default to undefined]
 **redirect_code** | **string** | HTTP status code for the redirect: 301, 302, 303, 307 or 308. Defaults to 301 when omitted on create. | [optional] [default to '301']
@@ -63,6 +64,7 @@ const instance: V2RuleRedirectRequest = {
     traffic_source,
     traffic_source_is,
     traffic_source_is_not,
+    schedule,
     cookie_name,
     redirect_to,
     redirect_code,

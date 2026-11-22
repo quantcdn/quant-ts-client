@@ -103,6 +103,15 @@ docs/ChatWithAIAgent200ResponseResponse.md
 docs/ChatWithAIAgent200ResponseResponseUsage.md
 docs/ChatWithAIAgent202Response.md
 docs/ChatWithAIAgentRequest.md
+docs/CiCacheDeleteRequest.md
+docs/CiCacheDeleteResult.md
+docs/CiCacheEntry.md
+docs/CiCacheList.md
+docs/CiCacheStats.md
+docs/CiRunnerPoolConfig.md
+docs/CiRunnerPoolConfigAlertsInner.md
+docs/CiRunnerPoolConfigBusinessHoursWarm.md
+docs/CiRunnerPoolConfigConnection.md
 docs/CiValue.md
 docs/CiValueError.md
 docs/CiValueWriteResult.md
@@ -361,6 +370,8 @@ docs/PurgeCreateRequest.md
 docs/PurgeOrgResource200Response.md
 docs/PurgeOrgResourceRequest.md
 docs/PutApplicationMetadata400Response.md
+docs/PutCiValue502Response.md
+docs/PutCiValue503Response.md
 docs/PutCiValueRequest.md
 docs/QueryVectorCollection200Response.md
 docs/QueryVectorCollection200ResponsePagination.md
@@ -411,7 +422,6 @@ docs/UpdateAISessionRequestNewMessagesInner.md
 docs/UpdateAutoMode200Response.md
 docs/UpdateAutoMode400Response.md
 docs/UpdateAutoMode409Response.md
-docs/UpdateContainer400Response.md
 docs/UpdateCronJobRequest.md
 docs/UpdateEnvironmentRequest.md
 docs/UpdateEnvironmentSecretRequest.md
@@ -630,6 +640,9 @@ docs/V2RuleRedirect.md
 docs/V2RuleRedirectAction.md
 docs/V2RuleRedirectRequest.md
 docs/V2RuleRequest.md
+docs/V2RuleSchedule.md
+docs/V2RuleScheduleOnceInner.md
+docs/V2RuleScheduleWeeklyInner.md
 docs/V2RuleServeStatic.md
 docs/V2RuleServeStaticAction.md
 docs/V2RuleServeStaticRequest.md

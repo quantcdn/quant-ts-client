@@ -179,6 +179,8 @@ const { status, data } = await apiInstance.putCiValue(
 |**400** | The name, the value or a limit is not valid |  -  |
 |**404** | The organisation does not have CI runners |  -  |
 |**422** | The request body has the wrong shape |  -  |
+|**502** | The CI values service failed |  -  |
+|**503** | GitHub is unavailable, so the repository of a repository value could not be checked. Nothing was saved. Try again after Retry-After seconds. |  * Retry-After - Seconds to wait before a retry <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

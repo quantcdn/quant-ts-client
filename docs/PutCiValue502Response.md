@@ -1,4 +1,4 @@
-# UpdateContainer400Response
+# PutCiValue502Response
 
 
 ## Properties
@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UpdateContainer400Response } from '@quantcdn/quant-client';
+import { PutCiValue502Response } from '@quantcdn/quant-client';
 
-const instance: UpdateContainer400Response = {
+const instance: PutCiValue502Response = {
     error,
 };
 ```
